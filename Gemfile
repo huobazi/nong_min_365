@@ -18,10 +18,13 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.3.0'
+  gem 'uglifier', '1.3.0'
+  gem 'compass-rails', '1.0.3'
+  gem 'compass-h5bp', '0.0.5'
 end
 
 gem 'jquery-rails', '2.1.2'
+gem 'html5-rails', '0.0.5'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.1'
