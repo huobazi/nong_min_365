@@ -1,6 +1,7 @@
 NongMin365::Application.routes.draw do
+  root :to => 'users#new'
 
-  get 'signup' => 'users#new', :as => signup
+  get 'signup' => 'users#new', :as => :signup
   resources :users, :only => [:create]
 
   # The priority is based upon order of creation:
