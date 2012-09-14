@@ -1,0 +1,26 @@
+<% content_for :sitemap do %><span class="current">加入社区</span><% end %>
+<div class="content">
+  <div class="box">
+    <%= simple_form_for(:session, :url => sessions_path) do |f| %>
+      <%= render "error_messages", :target => nil %>
+      <fieldset>
+        <legend>Login</legend>
+        <%= f.input :login, :input_html => { :style => "width:180px;" } %>
+        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
+        <div class="control-group checkbox optional">
+          <label class="checkbox optional control-label"></label>
+          <div class="controls">
+            <div class="inputs-list">
+              <label for="user_remember_me">
+                <%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.submit "Login", :class => "btn btn-primary", 'data-disable-with' => "Loading..." %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
