@@ -1,13 +1,19 @@
 <% errors_count = 0 %> 
 <% flash_count = 0 %> 
-<% if target && target.errors && target.errors.any?
-     errors_count = target.errors.count
-end %>
-<% if flash && flash.count > 0
-     flash_count = flash.count
-end %>
+<% 
+    if target && target.errors && target.errors.any?
+      errors_count = target.errors.count
+    end
+%>
+<% 
+    if flash && flash.alert && flash.alert.size > 0
+      flash_count = 1  
+    end
+%>
+
 <% all_message_count = errors_count + flash_count %>
-<% if errors_count + flash_count > 0 %>
+
+<% if all_message_count > 0 %>
   <div class="alert alert-block alert-error">
     <a class="close" data-dismiss='alert' href="#">×</a>
     <p><strong>有 <%= all_message_count %> 处问题导至无法提交:</strong></p>
@@ -18,9 +24,7 @@ end %>
         <% end %>
       <% end %>
       <% if flash_count > 0 %>
-        <% flash.each do |key, value| %>
-          <li><%= value %></li>
-        <% end %>
+        <li><%= flash.alert  %></li>
       <% end %>
     </ul>
   </div>

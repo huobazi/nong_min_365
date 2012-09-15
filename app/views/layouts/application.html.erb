@@ -4,20 +4,12 @@
 <%= render "head" %>
 <%= render_body_tag %>
 <%= render "header" %>
-<div id="main" role="main">
+<div class="container master-container">
+  <ul class="breadcrumb">
+    <%= yield :breadcrumb %>
+  </ul>
   <%= render "flashes" %>
-  <div class="container master-container">
-    <ul class="breadcrumb">
-      <%= yield :breadcrumb %>
-    </ul>
-    <% if notice %>
-      <div class="alert alert-success fade in" data-alert="alert">
-        <a class="close" data-dismiss='alert' href="#">×</a>
-        <p><%= notice %></p>
-      </div>
-    <% end %>
-    <%= yield %>
-  </div>
+  <%= yield %>
 </div>
 <%= render "footer" %>
 <%# Javascript at the bottom for fast page loading %>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
   root :to => 'users#new'
 

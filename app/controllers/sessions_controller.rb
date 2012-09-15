@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SessionsController < ApplicationController
 
   def new
@@ -16,12 +17,12 @@ class SessionsController < ApplicationController
       if user 
         format.html {
           sign_in_as user
-          redirect_to root_url, :notice => "Logged in!"
+          redirect_to root_url, :notice => "登陆成功!"
         }
         format.json { render json: @user, status: :created }
       else
         format.html {
-          flash.now.alert = "Invalid Login or Password"
+          flash.now.alert = "用户名或密码错误!"
           render action: "new"
         }
         format.json { render json: "errors", status: :unprocessable_entity }
@@ -34,7 +35,7 @@ class SessionsController < ApplicationController
   def destroy
     sign_out
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to root_url ,:notice => '退出成功!'}
       format.json { head :no_content }
     end
   end

@@ -1,24 +1,24 @@
-<% content_for :breadcrumb do %><span class="current">加入社区</span><% end %>
+<% content_for :breadcrumb do %><span class="current">用户登录</span><% end %>
 <div class="content">
   <div class="box">
     <%= simple_form_for(:session, :url => sessions_path) do |f| %>
       <%= render "error_messages", :target => nil %>
       <fieldset>
-        <legend>Login</legend>
-        <%= f.input :login, :input_html => { :style => "width:180px;" } %>
-        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
+        <legend>登录</legend>
+        <%= f.input :login, :label => "用户名",:input_html => { :value => ( params[:session][:login] if params[:session]), :style => "width:180px;" } %>
+        <%= f.input :password, :label => '密&nbsp;&nbsp;&nbsp;&nbsp;码', :input_html => { :style => "width:180px;" } %>
         <div class="control-group checkbox optional">
           <label class="checkbox optional control-label"></label>
           <div class="controls">
             <div class="inputs-list">
               <label for="user_remember_me">
-                <%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %>
+                <%= f.check_box :remember_me, :style => "width:auto;" %>记住登录
               </label>
             </div>
           </div>
         </div>
         <div class="form-actions">
-          <%= f.submit "Login", :class => "btn btn-primary", 'data-disable-with' => "Loading..." %>
+          <%= f.submit "登录", :class => "btn btn-primary", 'data-disable-with' => "Loading..." %>
         </div>
       </fieldset>
     <% end %>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module SessionsHelper
 
   protected
@@ -9,7 +10,6 @@ module SessionsHelper
   def sign_out
     session.delete(:user_id) 
     @current_user = nil
-    forget_me
   end
 
   def current_user=(user)

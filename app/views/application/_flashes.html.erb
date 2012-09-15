@@ -1,9 +1,7 @@
-<div id="flash">
-  <% flash.each do |key, value| %>
-    <div class="wrapper">
-      <div title="<%= key.to_s.humanize %>" class="<%= key %>">
-        <p><%= value %></p>
-      </div>
-    </div>
-  <% end %>
-</div>
+<% if notice %>
+  <div class="alert alert-success fade in" data-alert="alert">
+    <a class="close" data-dismiss='alert' href="#">×</a>
+    <p><%= notice %></p>
+  </div>
+<% end %>
+

@@ -5,9 +5,9 @@
       <%= render "error_messages", :target => @user %>
       <fieldset>
         <legend>注册</legend>
-        <%= f.input :username, :hint => "Beijing" %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
+        <%= f.input :username, :hint => "", :input_html => { :value => @user.username, :style => "width:180px;" } %>
+        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
+        <%= f.input :password_confirmation, :input_html => { :style => "width:180px;" } %>
         <div class="form-actions">
           <%= f.submit "提交注册信息", :class => "btn btn-primary", 'data-disable-with' => "Loading..."%>
         </div>

@@ -3,9 +3,9 @@ zh-CN:
     attributes:
       user:
         username: '用户名'
-        password_digest: '密码'
-        passowrd: '密码'
+        password: '密码'
         password_confirmation: '重复密码'
-        email: '电子邮件'
+        password_digest: '密码'
         qq: 'QQ'
+        email: '电子邮件'
         cellphone: '手机号码'

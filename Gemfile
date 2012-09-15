@@ -38,6 +38,7 @@ gem 'bcrypt-ruby', '3.0.1'
 
 group :development do
   gem 'annotate', '2.5.0'
+  gem 'magic_encoding', '0.0.2'
 end
 
 # To use Jbuilder templates for JSON
