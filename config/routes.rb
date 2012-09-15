@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
-  root :to => 'users#new'
+  root :to => 'home#index'
 
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
