@@ -22,6 +22,7 @@ group :assets do
   gem 'compass-rails', '1.0.3'
   gem 'compass-h5bp', '0.0.5'
   gem 'bootstrap-sass', '2.1.0.0'
+  gem 'font-awesome-rails', '0.4.1'
 end
 
 gem 'jquery-rails', '2.1.2'
