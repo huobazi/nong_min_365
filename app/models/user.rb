@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :cellphone, :password, :password_confirmation, :qq, :username 
   has_secure_password
 
+  before_save{ |user| user.email = email.downcase }
+
   validates :username, 
     :presence => true ,
     :uniqueness => { :case_sensitive => false },
