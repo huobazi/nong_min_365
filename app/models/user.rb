@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :cellphone, :password, :password_confirmation, :qq, :username 
   has_secure_password
 
-  before_save{ |user| user.email = email.downcase }
+  before_create { generate_token(:remember_token) }
+  before_save { |user| user.email = email.downcase if email && email.size > 0 }
 
   validates :username, 
     :presence => true ,
@@ -43,10 +44,10 @@ class User < ActiveRecord::Base
     :numericality => { :only_integer => true },
     :allow_blank => true
 
-#validates :qq,
-    #:length => { :in => 5..20 }, 
-    #:numericality => { :only_integer => true },
-    #:allow_blank => true
+  validates :qq,
+    :length => { :in => 5..20 }, 
+    :numericality => { :only_integer => true },
+    :allow_blank => true
 
   def self.authenticate_by_username(username, password)
     find_by_username(username).try(:authenticate, password)
@@ -58,5 +59,11 @@ class User < ActiveRecord::Base
   def self.authenticate_by_cellphone(cellphone, password)
     find_by_cellphone(cellphone).try(:authenticate, password)
   end
-end
 
+  protected
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+end

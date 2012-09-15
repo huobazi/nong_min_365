@@ -10,15 +10,17 @@ class SessionsController < ApplicationController
     sign_in_params = params[:session]
     login = sign_in_params[:login]
     password = sign_in_params[:password]
-    remember_me = sign_in_params[:remember_me]
+    remember_me = sign_in_params[:remember_me] == '1'
+    
     user = User.authenticate_by_username(login, password)
 
     respond_to do |format|
       if user 
-        format.html {
-          sign_in_as user
-          redirect_to root_url, :notice => "登陆成功!"
-        }
+        sign_in_as user
+        if remember_me
+          set_remember_me
+        end
+        format.html { redirect_to root_url, :notice => "登陆成功!"}
         format.json { render json: @user, status: :created }
       else
         format.html {
