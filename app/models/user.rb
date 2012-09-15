@@ -1,6 +1,20 @@
 # coding: utf-8
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string(255)
+#  email           :string(255)
+#  password_digest :string(255)
+#  cellphone       :string(255)
+#  qq              :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class User < ActiveRecord::Base
-  attr_accessible :email, :cellphone, :password, :qq, :username, :password_confirmation
+  attr_accessible :email, :cellphone, :password, :password_confirmation, :qq, :username 
   has_secure_password
 
   validates :username, 
@@ -12,6 +26,8 @@ class User < ActiveRecord::Base
     :presence => true, 
     :length => { :in => 6..36 },
     :confirmation => true 
+
+  validates :password_confirmation, :presence => true
 
   validates :email, 
     :uniqueness => { :case_sensitive => false },
@@ -41,3 +57,4 @@ class User < ActiveRecord::Base
     find_by_cellphone(cellphone).try(:authenticate, password)
   end
 end
+

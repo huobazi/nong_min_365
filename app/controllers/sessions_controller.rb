@@ -6,9 +6,10 @@ class SessionsController < ApplicationController
   # POST /sessions
   # POST /sessions.json
   def create
-    login = params[:login]
-    password = params[:password]
-    remember_me = params[:remember_me]
+    sign_in_params = params[:session]
+    login = sign_in_params[:login]
+    password = sign_in_params[:password]
+    remember_me = sign_in_params[:remember_me]
     user = User.authenticate_by_username(login, password)
 
     respond_to do |format|
@@ -37,4 +38,6 @@ class SessionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
+

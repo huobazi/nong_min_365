@@ -6,7 +6,7 @@ NongMin365::Application.routes.draw do
   delete 'signout' => 'sessions#destroy', :as => :signout
 
   resources :users, :only => [:create]
-  resources :sessions, :only =>[ :create]
+  resources :sessions, :only =>[:create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

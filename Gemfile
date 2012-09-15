@@ -35,6 +35,11 @@ gem 'rails-i18n', '0.6.6'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 
+
+group :development do
+  gem 'annotate', '2.5.0'
+end
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

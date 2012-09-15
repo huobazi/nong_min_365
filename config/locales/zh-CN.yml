@@ -1,0 +1,11 @@
+zh-CN:
+  activerecord:
+    attributes:
+      user:
+        username: '用户名'
+        password_digest: '密码'
+        passowrd: '密码'
+        password_confirmation: '重复密码'
+        email: '电子邮件'
+        qq: 'QQ'
+        cellphone: '手机号码'
