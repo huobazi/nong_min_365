@@ -23,6 +23,8 @@ group :assets do
   gem 'compass-h5bp', '0.0.5'
   gem 'bootstrap-sass', '2.1.0.0'
   gem 'font-awesome-rails', '0.4.1'
+  gem 'will_paginate', '3.0.3'
+  gem 'bootstrap-will_paginate', '0.0.8'
 end
 
 gem 'jquery-rails', '2.1.2'

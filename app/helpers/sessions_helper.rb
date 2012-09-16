@@ -14,8 +14,12 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= (User.find(session[:user_id]) if session[:user_id]) 
-    @current_user ||= (User.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token])
+    @current_user ||= ( User.find(session[:user_id]) if session[:user_id] ) 
+    if !@current_user
+      @current_user ||= ( User.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token] )
+      sign_in_as(@current_user) if @current_user
+    end
+    @current_user
   end
 
   def signed_in?
@@ -28,4 +32,5 @@ module SessionsHelper
       :expires => 2.weeks.from_now
     }
   end
+
 end
