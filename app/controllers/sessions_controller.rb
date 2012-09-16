@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class SessionsController < ApplicationController
+  before_filter :require_login, :only => [:destroy]
+  before_filter :require_not_login, :only => [:new, :create]
 
   def new
   end
@@ -11,7 +13,7 @@ class SessionsController < ApplicationController
     login = sign_in_params[:login]
     password = sign_in_params[:password]
     remember_me = sign_in_params[:remember_me] == '1'
-    
+
     user = User.authenticate_by_username(login, password)
 
     respond_to do |format|

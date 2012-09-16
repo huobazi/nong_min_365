@@ -10,13 +10,13 @@ module SessionsHelper
   def sign_out
     @current_user = nil
     session.delete(:user_id) 
-    cookies.delete(:remember_token)
+    cookies.signed[:_remember_token] = nil
   end
 
   def current_user
     @current_user ||= ( User.find(session[:user_id]) if session[:user_id] ) 
     if !@current_user
-      @current_user ||= ( User.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token] )
+      @current_user ||= ( User.find_by_remember_token(cookies.signed[:_remember_token]) if cookies.signed[:_remember_token] )
       sign_in_as(@current_user) if @current_user
     end
     @current_user
@@ -26,8 +26,26 @@ module SessionsHelper
     !!current_user
   end
 
+  def require_login
+    if !signed_in?
+      respond_to do |format|
+        format.html { redirect_to signin_path }
+        format.json { head(:unauthorized) }
+      end
+    end
+  end
+
+  def require_not_login
+    if signed_in?
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.json { head(:unauthorized) }
+      end
+    end
+  end
+
   def set_remember_me
-    cookies[:remember_token] = {
+    cookies.signed[:_remember_token] = {
       :value => @current_user.remember_token,
       :expires => 2.weeks.from_now
     }
