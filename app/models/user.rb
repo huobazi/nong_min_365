@@ -11,8 +11,10 @@
 #  qq              :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  remember_token  :string(255)
 #
 
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   attr_accessible :email, :cellphone, :password, :password_confirmation, :qq, :username 
   has_secure_password
