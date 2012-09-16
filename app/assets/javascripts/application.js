@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require h5bp
+//= require h5bp
 //= require bootstrap
 //= require rails.validations
 //
 //= require users
+//= require home 

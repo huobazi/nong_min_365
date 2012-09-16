@@ -11,12 +11,12 @@
 // Imports
 //-----------------------------------------
 // @import "compass/css3"
-// @import "h5bp";
+@import "h5bp";
 
 //-----------------------------------------
 // Prepend includes
 //-----------------------------------------
-// @include h5bp-normalize;
+@include h5bp-normalize;
 
 //-----------------------------------------
 // Custom application partials
@@ -28,8 +28,8 @@
 //-----------------------------------------
 // Append includes
 //-----------------------------------------
-//@include h5bp-helpers;
-//@include h5bp-media;
+@include h5bp-helpers;
+@include h5bp-media;
 
 //-----------------------------------------
 // Import Twitter bootstrap
@@ -39,14 +39,13 @@
 // For mobile device
 @import "bootstrap-responsive";
 
-
 //-----------------------------------------
 // Import 
 //-----------------------------------------
 @Imports "font-awesome";
 
-
 //-----------------------------------------
 // Imports biz
 //-----------------------------------------
+@import "home";
 @import "users";
