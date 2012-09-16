@@ -16,7 +16,9 @@
 
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
-  attr_accessible :email, :cellphone, :password, :password_confirmation, :qq, :username 
+
+  attr_accessor :current_password
+  attr_accessible  :username, :email, :qq, :cellphone, :password, :password_confirmation, :current_password
   has_secure_password
 
   before_create { generate_token(:remember_token) }
@@ -33,6 +35,7 @@ class User < ActiveRecord::Base
     :confirmation => true 
 
   validates :password_confirmation, :presence => true
+  validates :current_password, :presence => true, :on => :update_password
 
   validates :email, 
     :uniqueness => { :case_sensitive => false },
@@ -51,9 +54,20 @@ class User < ActiveRecord::Base
     :numericality => { :only_integer => true },
     :allow_blank => true
 
+  #def update_with_password(params, *options)
+    #params.delete(:current_password)
+    #super(params)
+  #end
+
+  #def update_without_password(params={})
+    #params.delete(:current_password)
+    #super(params)
+  #end
+
   def self.authenticate_by_username(username, password)
     find_by_username(username).try(:authenticate, password)
   end
+  
   def self.authenticate_by_email(email, password)
     find_by_email(emaill).try(:authenticate, password)
   end

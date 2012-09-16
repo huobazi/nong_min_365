@@ -6,10 +6,16 @@ NongMin365::Application.routes.draw do
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
 
-  resources :users, :only => [:create]
+  resources :users, :only => [:create], :path => 'account' do
+    collection do
+      get 'password' => 'users#change_password', :as => :change_password
+      put 'update_password'
+    end
+  end
+
   resources :sessions, :only =>[:create]
 
-  # The priority is based upon order of creation:
+  # The priority is based upon ordecurrent_passwordr of creation:
   # first created -> highest priority.
 
   # Sample of regular route:

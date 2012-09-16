@@ -4,7 +4,8 @@ zh-CN:
       user:
         username: '用户名'
         password: '密码'
-        password_confirmation: '重复密码'
+        password_confirmation: '确认密码'
+        current_password: '当前密码'
         password_digest: '密码'
         qq: 'QQ'
         email: '电子邮件'
