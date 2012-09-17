@@ -29,7 +29,7 @@ module SessionsHelper
   def require_login
     if !signed_in?
       respond_to do |format|
-        format.html { redirect_to signin_path }
+        format.html { redirect_to main_app.signin_path }
         format.json { head(:unauthorized) }
       end
     end

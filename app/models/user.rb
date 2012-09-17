@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     :numericality => { :only_integer => true },
     :allow_blank => true
 
+  def admin?
+    true 
+  end
+
   #def update_with_password(params, *options)
     #params.delete(:current_password)
     #super(params)
@@ -82,4 +86,5 @@ class User < ActiveRecord::Base
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
   end
+
 end

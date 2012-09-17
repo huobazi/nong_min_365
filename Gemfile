@@ -23,8 +23,8 @@ group :assets do
   gem 'compass-h5bp', '0.0.5'
   gem 'bootstrap-sass', '2.1.0.0'
   gem 'font-awesome-rails', '0.4.1'
-  gem 'will_paginate', '3.0.3'
-  gem 'bootstrap-will_paginate', '0.0.8'
+
+  gem 'kaminari-bootstrap', '0.1.3'
 end
 
 gem 'jquery-rails', '2.1.2'
@@ -33,6 +33,7 @@ gem 'simple_form', '2.0.2'
 gem 'bootstrap_helper', '2.1.0'
 gem 'client_side_validations', '3.1.4'
 
+gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'
 gem 'rails_admin', '0.0.5'
 

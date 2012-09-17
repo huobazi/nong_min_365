@@ -1,22 +1,35 @@
+# -*- encoding : utf-8 -*-
 # RailsAdmin config file. Generated on September 17, 2012 15:45
 # See github.com/sferik/rails_admin for more informations
 
 RailsAdmin.config do |config|
 
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
-  # require 'i18n'
-  # I18n.default_locale = :de
+  #require 'i18n'
+  #I18n.default_locale = :en 
 
-  config.current_user_method { current_user } # auto-generated
+  config.current_user_method {
+    current_user
+  } # auto-generated
+  
+  #config.authorize_with :cancan
+  config.authenticate_with{
+    #require_login
+    unless current_user.username == 'huobazi'
+      redirect_to main_app.root_path, :alert => "您未被授权访问此页面!"
+    end
+  }
 
-  # If you want to track changes on your models:
-  # config.audit_with :history, RailsAdminUser
+
+  config.audit_with :history, User
+
 
   # Or with a PaperTrail: (you need to install it first)
-  # config.audit_with :paper_trail, RailsAdminUser
+  #config.audit_with :paper_trail, User
 
   # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
-  config.main_app_name = ['NongMin365.com', 'Admin']
+  config.main_app_name = ['NongMin365', 'Admin']
+
   # or for a dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
@@ -99,3 +112,4 @@ RailsAdmin.config do |config|
   #   update do; end
   # end
 end
+
