@@ -33,6 +33,9 @@ gem 'simple_form', '2.0.2'
 gem 'bootstrap_helper', '2.1.0'
 gem 'client_side_validations', '3.1.4'
 
+gem 'cancan', '1.6.8'
+gem 'rails_admin', '0.0.5'
+
 gem 'rails-i18n', '0.6.6'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
@@ -54,3 +57,6 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+
+gem "devise"
