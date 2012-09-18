@@ -42,11 +42,10 @@ gem 'rails-i18n', '0.6.6'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 
-gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
-
 group :development do
   gem 'annotate', '2.5.0'
   gem 'magic_encoding', '0.0.2'
+  gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
 end
 
 # To use Jbuilder templates for JSON
