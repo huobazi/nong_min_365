@@ -38,9 +38,11 @@ gem 'cancan', '1.6.8'
 gem 'rails_admin', '0.0.5'
 
 gem 'rails-i18n', '0.6.6'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 
+gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
 
 group :development do
   gem 'annotate', '2.5.0'

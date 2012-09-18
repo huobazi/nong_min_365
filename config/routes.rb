@@ -16,6 +16,10 @@ NongMin365::Application.routes.draw do
 
   resources :sessions, :only =>[:create]
 
+  namespace :admincp do
+    root :to => "dashboard#index"
+    resources :dashboard, :only => [:index]
+  end
   # The priority is based upon ordecurrent_passwordr of creation:
   # first created -> highest priority.
 
