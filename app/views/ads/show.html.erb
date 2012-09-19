@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @ad.title %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @ad.amount %>
+</p>
+
+<p>
+  <b>Xtype:</b>
+  <%= @ad.xtype %>
+</p>
+
+<p>
+  <b>Contact name:</b>
+  <%= @ad.contact_name %>
+</p>
+
+<p>
+  <b>Contact phone:</b>
+  <%= @ad.contact_phone %>
+</p>
+
+<p>
+  <b>Contact qq:</b>
+  <%= @ad.contact_qq %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @ad.body %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @ad.password %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @ad.category %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @ad.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_ad_path(@ad) %> |
+<%= link_to 'Back', ads_path %>

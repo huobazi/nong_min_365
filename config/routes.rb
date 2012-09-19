@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
+  resources :ads
+
   mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
   root :to => 'home#index'
 

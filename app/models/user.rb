@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
     :numericality => { :only_integer => true },
     :allow_blank => true
 
+  has_many :ads
+  
   def admin?
     true 
   end

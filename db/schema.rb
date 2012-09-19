@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919025459) do
+ActiveRecord::Schema.define(:version => 20120919094733) do
+
+  create_table "ads", :force => true do |t|
+    t.string   "title"
+    t.string   "amount"
+    t.string   "xtype"
+    t.string   "region_code"
+    t.string   "contact_name"
+    t.string   "contact_phone"
+    t.string   "contact_qq"
+    t.text     "body"
+    t.string   "password"
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "ads", ["category_id"], :name => "index_ads_on_category_id"
+  add_index "ads", ["region_code"], :name => "index_ads_on_region_code"
+  add_index "ads", ["user_id"], :name => "index_ads_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -19,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20120919025459) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "categories", ["id"], :name => "index_categories_on_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
