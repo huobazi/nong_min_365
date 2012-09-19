@@ -23,4 +23,6 @@ class Ad < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   attr_accessible :amount, :body, :contact_name, :contact_phone, :contact_qq, :password, :title, :xtype, :region_code
+
+  belongs_to :chinese_region, :foreign_key => 'region_code'
 end

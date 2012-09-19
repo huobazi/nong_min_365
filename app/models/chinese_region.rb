@@ -21,4 +21,6 @@ class ChineseRegion < ActiveRecord::Base
   validates :name, :presence => true
   validates :level, :presence => true
 
+  has_many :ads, :foreign_key => 'region_code'
+
 end
