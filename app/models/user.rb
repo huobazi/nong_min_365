@@ -14,7 +14,6 @@
 #  remember_token  :string(255)
 #
 
-# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
   attr_accessor :current_password

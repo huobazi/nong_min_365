@@ -31,8 +31,9 @@ class UsersController < ApplicationController
     if @user.authenticate(current_password) 
       respond_to do |format|
         if @user.update_attributes(post_params)
+          @user.generate_token(:remember_token)
+          sign_out
           format.html{
-            sign_out
             redirect_to root_path, :notice => '您已经修改了密码,请使用新密码重新登录!'
           }
           format.json { render json: @user, status: :created }

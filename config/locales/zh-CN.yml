@@ -10,3 +10,19 @@ zh-CN:
         qq: 'QQ'
         email: '电子邮件'
         cellphone: '手机号码'
+      category:
+        name: '名称'
+        slug: 'Slug'
+
+  web-app-theme: 
+    save: '保存' 
+    cancel: '取消'
+    list: '列表' 
+    edit: '编辑' 
+    new: '新建' 
+    show: '查看' 
+    delete: '删除' 
+    confirm: '警告！此动作无法撤销，确定要删除么?'
+    created_at: '创建与' 
+    all: '所以' 
+    or: '或'

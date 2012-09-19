@@ -14,23 +14,31 @@
           <ul class="wat-cf">
             <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
             <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
+            <li><%= link_to "后台(*)", rails_admin_path %></li>
             <li>
             <%= link_to t("web-app-theme.logout", :default => "退出"), signout_path, method: "delete" , class: "logout"%>
             </li>
           </ul>
         </div>
         <div id="main-navigation">
-          <ul class="wat-cf"></ul>
+          <ul class="wat-cf"> <li class="<%= controller.controller_path == 'admincp/categories' ? 'active' : '' %>"><a href="<%= admincp_categories_path %>">分类管理</a></li> <li class="<%= controller.controller_path == 'admincp/users' ? 'active' : '' %>"><a href="<%= admincp_users_path %>">用户管理</a></li></ul>
         </div>
       </div>
       <div id="wrapper" class="wat-cf">
-        <div class="flash">
-          <% flash.each do |type, message| -%>
-            <div class="message <%= type %>">
-              <p><%= message %></p>
-            </div>
-          <% end -%>
-        </div>
+        <div class="flash">  
+          <% add_errors_to_flash_now %>  
+          <% flash.each do |type, message| -%>  
+            <div class="message <%= type %>">  
+              <% if message.instance_of? Array %>  
+                <% message.each do |msg| %>  
+                  <p><%= msg %></p>  
+                <% end %>  
+              <% else %>  
+                <p><%= message %></p>  
+              <% end %>  
+            </div>  
+          <% end -%>  
+        </div>  
         <div id="main">
           <%= yield %>
           <div id="footer">

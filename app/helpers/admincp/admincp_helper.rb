@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
-module ApplicationHelper
+module Admincp::AdmincpHelper
 
   def add_errors_to_flash_now  
-    model_name = controller_name[0...-1]  
+    model_name = controller_name.singularize 
     model = nil  
     eval("model = @#{model_name}")  
     if model.class.method_defined? :errors  
@@ -14,5 +14,5 @@ module ApplicationHelper
       end  
     end  
   end 
-  
+
 end
