@@ -1,18 +1,18 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
-  resources :ads
 
-  mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
   root :to => 'home#index'
-
+  mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
 
+  post 'ajax/regions' => 'ajax#regions', :as => :regions_ajax
+
   resources :users, :only => [:create], :path => 'account' do
     collection do
       get 'password' => 'users#change_password', :as => :change_password
-      put 'update_password'
+      put :update_password
     end
   end
 
