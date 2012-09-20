@@ -26,8 +26,8 @@ class AdsController < ApplicationController
   # GET /ads/new.json
   def new
     @ad = Ad.new
-    @categories = Category.all
-
+    @categories = Category.select('id, name').collect {|item| [item.name, item.name]}
+    @provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @ad }

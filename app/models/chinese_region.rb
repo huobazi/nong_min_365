@@ -23,4 +23,5 @@ class ChineseRegion < ActiveRecord::Base
 
   has_many :ads, :foreign_key => 'region_code'
 
+  scope :provinces, select("code,name").where(:level => 1)
 end
