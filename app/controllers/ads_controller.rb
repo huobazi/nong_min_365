@@ -26,6 +26,7 @@ class AdsController < ApplicationController
   # GET /ads/new.json
   def new
     @ad = Ad.new
+    @categories = Category.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,17 +43,24 @@ class AdsController < ApplicationController
   # POST /ads.json
   def create
     @ad = Ad.new(params[:ad])
+    @ad.user_id = 0
+
+    if signed_in?
+      @ad.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @ad.save
         format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
         format.json { render json: @ad, status: :created, location: @ad }
       else
+        @categories = Category.all
         format.html { render action: "new" }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # PUT /ads/1
   # PUT /ads/1.json

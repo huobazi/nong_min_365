@@ -1,57 +1,21 @@
-<%= form_for(@ad) do |f| %>
-  <% if @ad.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h2>
-
-      <ul>
-      <% @ad.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@ad, :html => {:class => 'form-horizontal' })  do |f| %>
+  <%= render "error_messages", :target => @ad %>
+  <fieldset>
+    <legend><%= @ad.new_record? ? '发布信息' : '编辑信息' %></legend>
+    <%= f.input :title %>
+    <%= f.input :amount, :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)"%>
+    <%= f.association :category, :prompt => '请选择一个分类', :hint => '请选择正确分类，否则有可能被视作违规信息而删除' %>
+    <%= f.input :xtype, :collection => [['1','供应'], ['2','求购']], :label_method => :last, :value_method => :first, :as => :radio_buttons, :item_wrapper_class => 'inline'%>
+    <%= f.input :body, :as => :text, :input_html => { :class => "ad_editor closewarning xxlarge", :style => "height:200px" }%>
+    <%= f.input :contact_name %>
+    <%= f.input :contact_phone %>
+    <%= f.input :contact_qq %>
+    <% if !signed_in? %>
+      <%= f.input :password, :required => true %>
+    <% end %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= link_to(t("common.cancel"), @ad.id.blank? ? root_path : ad_path(@id), :class => "btn")%>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :xtype %><br />
-    <%= f.text_field :xtype %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_name %><br />
-    <%= f.text_field :contact_name %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_phone %><br />
-    <%= f.text_field :contact_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_qq %><br />
-    <%= f.text_field :contact_qq %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br />
-    <%= f.text_field :category %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </fieldset>
 <% end %>

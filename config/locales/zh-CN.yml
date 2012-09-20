@@ -1,5 +1,8 @@
 zh-CN:
   activerecord:
+    errors:
+      messages:
+        blank: "不能为空"  
     attributes:
       user:
         username: '用户名'
@@ -13,6 +16,19 @@ zh-CN:
       category:
         name: '名称'
         slug: 'Slug'
+      ad:
+        category: '分类'
+        category_id: '分类'
+        amount: '数量'
+        body: '内容'
+        contact_name: '联系人'
+        contact_phone: '联系电话'
+        contact_qq: '联系QQ'
+        password: '密码'
+        title: '标题'
+        xtype: '类型'
+        region_code: '所在地'
+
 
   web-app-theme: 
     save: '保存' 
@@ -26,3 +42,7 @@ zh-CN:
     created_at: '创建与' 
     all: '所以' 
     or: '或'
+  common:
+    save: '保存'
+    saving: '正在保存'
+    cancel: '取消'
