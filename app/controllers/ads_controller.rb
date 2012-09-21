@@ -26,7 +26,6 @@ class AdsController < ApplicationController
   # GET /ads/new.json
   def new
     @ad = Ad.new
-    @categories = Category.select('id, name').collect {|item| [item.name, item.name]}
     @provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +53,7 @@ class AdsController < ApplicationController
         format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
         format.json { render json: @ad, status: :created, location: @ad }
       else
-        @categories = Category.all
+        @provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
         format.html { render action: "new" }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
       end

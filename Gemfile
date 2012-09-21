@@ -25,13 +25,16 @@ group :assets do
   gem 'font-awesome-rails', '0.4.1'
 
   gem 'kaminari-bootstrap', '0.1.3'
+  gem 'chosen-rails', '0.9.8.3'
 end
 
 gem 'jquery-rails', '2.1.2'
 gem 'html5-rails', '0.0.5'
-gem 'simple_form', '2.0.2'
 gem 'bootstrap_helper', '2.1.0'
-gem 'client_side_validations', '3.1.4'
+gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => 'master'
+
+gem 'simple_form', '2.0.2'
+gem 'client_side_validations-simple_form'
 
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'

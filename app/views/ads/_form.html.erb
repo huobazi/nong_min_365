@@ -1,23 +1,34 @@
-<%= simple_form_for(@ad, :html => {:class => 'form-horizontal' })  do |f| %>
+<%= simple_form_for(@ad, :html => {:class => 'form-horizontal' }, :validate => true )  do |f| %>
   <%= render "error_messages", :target => @ad %>
   <fieldset>
     <legend><%= @ad.new_record? ? '发布信息' : '编辑信息' %></legend>
     <%= f.input :title %>
-    <%= f.input :amount, :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)"%>
-    <%= f.input :category_id, :collection => @categories, :prompt => '请选择一个分类', :hint => '请选择正确分类，否则有可能被视作违规信息而删除' %>
-    <%= f.input :xtype, :collection => [['1','供应'], ['2','求购']], :label_method => :last, :value_method => :first, :as => :radio_buttons, :item_wrapper_class => 'inline'%>
-    <div class="control-group select required">
-      <label class="select required control-label" for="region_provincee">
-       <abbr title="required">*</abbr>地区
-        </label>
-        <div class="controls">
-          <%= select_tag :region_provincee, options_for_select( @provinces ), :prompt => '所在省', :class => 'regions', 'data-level' => '1', 'data-url' => regions_ajax_path %>
-<span>省</span>
-      </div>
-    </div>
-    <%= f.input :body, :as => :text, :input_html => { :class => "ad_editor closewarning xxlarge", :style => "height:200px" }%>
+    <%= f.input :amount, 
+      :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)" %>
+    <%= f.association :category, 
+      :hint => '请选择正确分类，否则有可能被视作违规信息而删除',
+      :input_html => {:class => 'chosen'},
+      :prompt => '请选择一个分类'  %>
+    <%= f.input :xtype, :collection => [['1','供应'], ['2','求购']], 
+      :label_method => :last, 
+      :value_method => :first, 
+      :as => :radio_buttons, 
+      :item_wrapper_class => 'inline'%>
+    <%= f.input :region_code, 
+      :collection => @provinces, 
+      :input_html => {
+        :class => 'province regions',
+        'data-level' => '1', 
+        'data-url' => regions_ajax_path
+      },
+      :prompt => '所在省份' %>
+    <%= f.input :body, 
+      :input_html => { 
+      :class => "body_editor closewarning xxlarge",
+      :style => "height:200px" },
+      :as => :text %>
     <%= f.input :contact_name %>
-    <%= f.input :contact_phone %>
+    <%= f.input :contact_phone %> 
     <%= f.input :contact_qq %>
     <% if !signed_in? %>
       <%= f.input :password, :required => true %>
@@ -29,28 +40,4 @@
   </fieldset>
 <% end %>
 <% content_for :javascripts do %>
-  <script>
-    $(document).ready(function(){
-
-      $('select.regions').live('change',function(){
-        var el = $(this);
-        el.next().nextAll().remove();
-        if( el.val().length <=0 || parseInt(el.attr('data-level')) >= 5 ){
-          return ;
-        }
-        console.log('current_element_id: ' + $(this).attr('id'));
-        var remote_url = el.attr('data-url');
-        $.ajax(
-        {
-          type:'POST',
-          url: remote_url,
-          data: { code:el.val(), parent_id:el.attr('id'), css: el.attr('class') },
-          dataType: 'script'
-        }
-        );
-
-      });
-
-    });
-  </script>
 <% end %>
