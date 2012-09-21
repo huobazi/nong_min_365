@@ -2,16 +2,15 @@
 class AjaxController < ApplicationController
   def regions
 
-    begin
-      raise 'A test exception.'
-    rescue Exception => e
-      puts e.message
-      puts e.backtrace.inspect
-    else
-      # other exception
-    ensure
-      # always executed
-    end
+    #begin
+    #rescue Exception => e
+      #puts e.message
+      #puts e.backtrace.inspect
+    #else
+       #other exception
+    #ensure
+       #always executed
+    #end
 
     ary = ['nil', '0000000000', '00000000', '000000', '000']
     code = params[:code]
@@ -21,27 +20,22 @@ class AjaxController < ApplicationController
       level = 1
       code_prefix = code.chomp(ary[1])
       @children_level = level + 1
-      @level_name = '市'
     elsif code.end_with? ary[2] 
       level = 2 
       code_prefix = code.chomp(ary[2])
       @children_level = level + 1
-      @level_name = '县'
     elsif code.end_with? ary[3] 
       level = 3
       code_prefix = code.chomp(ary[3])
       @children_level = level + 1
-      @level_name = '乡'
     elsif code.end_with? ary[4]
       level = 4
       code_prefix = code.chomp(ary[4])
       @children_level = level + 1
-      @level_name = '村'
     else
       level = 5
       code_prefix = code.chomp(ary[5])
       @children_level = level + 1
-      @level_name = ''
     end
     code_like = "#{code_prefix}%"
 

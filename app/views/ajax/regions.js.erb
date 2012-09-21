@@ -4,4 +4,4 @@ region_options = "<option value=\"\">请选择</option>"
   region_options << "<option value=\"#{r.code}\">#{r.name}</option>"
 end %>
 
-$('#<%= @parent_id %>').next().after('<select id="regions_<%= @children_level%>" name ="regions_<%= @children_level%>" class="<%= @parent_css %>" data-level="<%= @children_level %>" data-url="<%= regions_ajax_path %>" ><%= raw region_options %></select><span><%= @level_name %></span>');
+$('#<%= @parent_id %>').after('<select id="regions_<%= @children_level%>" name ="regions_<%= @children_level%>" class="<%= @parent_css %>" data-level="<%= @children_level %>" data-url="<%= regions_ajax_path %>" ><%= raw region_options %></select>');

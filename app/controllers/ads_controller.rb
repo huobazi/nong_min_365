@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class AdsController < ApplicationController
+  respond_to :js, :only => [:create, :update, :destroy]
+
   # GET /ads
   # GET /ads.json
   def index
@@ -23,13 +25,11 @@ class AdsController < ApplicationController
   end
 
   # GET /ads/new
-  # GET /ads/new.json
   def new
     @ad = Ad.new
     @provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @ad }
     end
   end
 
@@ -50,12 +50,14 @@ class AdsController < ApplicationController
 
     respond_to do |format|
       if @ad.save
-        format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
-        format.json { render json: @ad, status: :created, location: @ad }
+        #format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
+        #format.json { render json: @ad, status: :created, location: @ad }
+        format.js{render :layout => false }
       else
-        @provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
-        format.html { render action: "new" }
-        format.json { render json: @ad.errors, status: :unprocessable_entity }
+        #@provinces = ChineseRegion.provinces.collect {|item| [item.name, item.code]}
+        #format.html { render action: "new" }
+        #format.json { render json: @ad.errors, status: :unprocessable_entity }
+        format.js{ render :layout => false }
       end
     end
   end

@@ -25,16 +25,16 @@ class Ad < ActiveRecord::Base
   belongs_to :region, :class_name => 'ChineseRegion', :foreign_key => 'region_code'
   attr_accessible :category_id, :amount, :body, :contact_name, :contact_phone, :contact_qq, :password, :title, :xtype, :region_code
 
-  validates :title, :presence => true
+  validates :title, :presence => true, :length => { :in => 6..30 }
   validates :amount, :presence => true
   validates :category_id, :presence => { :message => '必须选择' }
   validates :xtype, :presence => { :message => '必须选择' }
   validates :region_code, :presence => true
   validates :contact_name, :presence => true
-  validates :contact_phone, :presence => true, :numericality => { :only_integer => true }
+  validates :contact_phone, :presence => true, :length => { :in => 7..20 }, :numericality => { :only_integer => true }
   validates :contact_qq, :presence => true, :length => { :in => 5..20 }, :numericality => { :only_integer => true }
   validates :body, :presence => true
-  validates :password, :presence =>true, :length => { :in => 6..20 }, :if => :require_password?
+  validates :password, :presence => true, :length => { :in => 6..20 }, :if => :require_password?
 
   def require_password?
     user_id == 0

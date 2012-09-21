@@ -1,0 +1,19 @@
+console.log('ajax loaded');
+
+$('div.error').removeClass('error');
+$('span.error-message').remove();
+<% unless @ad.errors.any? %>
+
+<% else %>
+  <% @ad.errors.each do |k,msg| %>
+$('#ad_<%=k%>').parent().parent().addClass('error');
+if( $('#error_span_<%=k%>').length ){
+  $('#error_span_<%=k%>').html('<%= msg %>' );
+}
+else{
+  $('#ad_<%=k%>').after('<span id="error_span_<%=k%>" class="help-inline error-message"><%= msg %></span>');
+}
+  <% end %>
+
+window.setTimeout( function(){ $('#ad_<%= @ad.errors.keys[0]%>').trigger('foucs'); }, 10 );
+<% end %>

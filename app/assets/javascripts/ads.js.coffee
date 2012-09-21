@@ -3,10 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
 $(document).ready ->
-  $('select.province').after('<span>省</span>')
+  #$('select.province').after('<span>省</span>')
   $('select.regions').live 'change',() ->
     el = $(this)
-    el.next().nextAll().remove()
+    el.nextAll().remove()
     remote_url = el.data('url')
     if( el.val().trim().length <=0 || parseInt(el.data('level')) >= 5 )
       return

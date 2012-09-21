@@ -4,14 +4,25 @@
       <%= render "error_messages", :target => @user %>
       <fieldset>
         <legend>注册</legend>
-        <%= f.input :username, :hint => "", :input_html => { :value => @user.username, :style => "width:180px;" } %>
+        <%= f.input :username, :input_html => { :value => @user.username, :style => "width:180px;" } %>
         <%= f.input :password, :input_html => { :style => "width:180px;" } %>
         <%= f.input :password_confirmation, :input_html => { :style => "width:180px;" } %>
         <div class="form-actions">
-          <%= f.submit "提交注册信息", :class => "btn btn-primary", 'data-disable-with' => "Loading..."%>
+          <%= f.submit "提交注册信息", 
+            :id => 'btnSubmit',
+            :class => "btn btn-primary" %>
         </div>
       </fieldset>
     <% end %>
   </div>
 </div>
-
+<% content_for :javascripts do%>
+  <script> 
+    <%#window.ClientSideValidations.callbacks.form.fail = function(form, eventData) {%>
+      <%#$('#btnSubmit').removeAttr('data-disable-with');%>
+    <%#}%>
+    <%#window.ClientSideValidations.callbacks.form.pass = function(form, eventData) {%>
+      <%#$('#btnSubmit').data('disable-with', 'Loading');%>
+    <%#}%>
+  </script>
+<% end %>

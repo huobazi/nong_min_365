@@ -1,5 +1,7 @@
-<%= simple_form_for(@ad, :html => {:class => 'form-horizontal' }, :validate => true )  do |f| %>
-  <%= render "error_messages", :target => @ad %>
+<%= simple_form_for @ad,
+  :remote => true,
+  :validate => false,
+  :html => { :class => 'form-horizontal' }   do |f| %>
   <fieldset>
     <legend><%= @ad.new_record? ? '发布信息' : '编辑信息' %></legend>
     <%= f.input :title %>
@@ -24,9 +26,8 @@
       :prompt => '所在省份' %>
     <%= f.input :body, 
       :input_html => { 
-      :class => "body_editor closewarning xxlarge",
-      :style => "height:200px" },
-      :as => :text %>
+      :class => "body_editor closewarning xxlarge" },
+      :as => :text %> 
     <%= f.input :contact_name %>
     <%= f.input :contact_phone %> 
     <%= f.input :contact_qq %>
