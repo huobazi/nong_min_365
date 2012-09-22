@@ -21,5 +21,5 @@ class Category < ActiveRecord::Base
 
   before_save { |category| category.slug = ::PinYin.permlink( category.name ) }
 
-  has_many :ads
+  has_many :items
 end

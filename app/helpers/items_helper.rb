@@ -1,3 +1,3 @@
 # -*- encoding : utf-8 -*-
-module AdsHelper
+module ItemsHelper
 end

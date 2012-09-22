@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 # == Schema Information
 #
-# Table name: ads
+# Table name: items
 #
 #  id            :integer          not null, primary key
 #  title         :string(255)
@@ -19,7 +19,7 @@
 #  updated_at    :datetime         not null
 #
 
-class Ad < ActiveRecord::Base
+class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   belongs_to :region, :class_name => 'ChineseRegion', :foreign_key => 'region_code'

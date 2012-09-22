@@ -16,7 +16,7 @@ zh-CN:
       category:
         name: '名称'
         slug: 'Slug'
-      ad:
+      item:
         category: '分类'
         category_id: '分类'
         amount: '数量'

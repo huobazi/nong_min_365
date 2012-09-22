@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20120920175319) do
 
-  create_table "ads", :force => true do |t|
+  create_table "items", :force => true do |t|
     t.string   "title"
     t.string   "amount"
     t.string   "xtype"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(:version => 20120920175319) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "ads", ["category_id"], :name => "index_ads_on_category_id"
-  add_index "ads", ["region_code"], :name => "index_ads_on_region_code"
-  add_index "ads", ["user_id"], :name => "index_ads_on_user_id"
+  add_index "items", ["category_id"], :name => "index_items_on_category_id"
+  add_index "items", ["region_code"], :name => "index_items_on_region_code"
+  add_index "items", ["user_id"], :name => "index_items_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"

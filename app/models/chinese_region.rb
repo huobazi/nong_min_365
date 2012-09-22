@@ -21,7 +21,7 @@ class ChineseRegion < ActiveRecord::Base
   validates :name, :presence => true
   validates :level, :presence => true
 
-  has_many :ads, :foreign_key => 'region_code'
+  has_many :items, :foreign_key => 'region_code'
 
   scope :provinces, select("code, name").where(:level => 1)
 end

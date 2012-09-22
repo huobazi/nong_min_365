@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   attr_accessible  :username, :email, :qq, :cellphone, :password, :password_confirmation, :current_password
   has_secure_password
 
-  has_many :ads
+  has_many :items
 
   before_create { generate_token(:remember_token) }
   before_save { |user| user.email = email.downcase if email && email.size > 0 }

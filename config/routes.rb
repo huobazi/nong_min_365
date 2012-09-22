@@ -17,7 +17,7 @@ NongMin365::Application.routes.draw do
   end
 
   resources :sessions, :only =>[:create]
-  resources :ads
+  resources :items
 
   namespace :admincp do
     root :to => "dashboard#index"

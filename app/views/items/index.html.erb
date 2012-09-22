@@ -1,0 +1,41 @@
+<h1>Listing Items</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Amount</th>
+    <th>Xtype</th>
+    <th>Contact name</th>
+    <th>Contact phone</th>
+    <th>Contact qq</th>
+    <th>Body</th>
+    <th>Password</th>
+    <th>Category</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.title %></td>
+    <td><%= item.amount %></td>
+    <td><%= item.xtype %></td>
+    <td><%= item.contact_name %></td>
+    <td><%= item.contact_phone %></td>
+    <td><%= item.contact_qq %></td>
+    <td><%= item.body %></td>
+    <td><%= item.password %></td>
+    <td><%= item.category %></td>
+    <td><%= item.user %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_ad_path(item) %></td>
+    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

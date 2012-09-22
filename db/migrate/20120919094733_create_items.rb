@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CreateAds < ActiveRecord::Migration
   def change
-    create_table :ads do |t|
+    create_table :items do |t|
       t.string :title
       t.string :amount
       t.string :xtype
@@ -16,8 +16,8 @@ class CreateAds < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :ads, :category_id
-    add_index :ads, :user_id
-    add_index :ads, :region_code
+    add_index :items, :category_id
+    add_index :items, :user_id
+    add_index :items, :region_code
   end
 end

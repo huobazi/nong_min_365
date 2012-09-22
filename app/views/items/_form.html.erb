@@ -1,9 +1,9 @@
-<%= simple_form_for @ad,
+<%= simple_form_for @item,
   :remote => true,
   :validate => false,
   :html => { :class => 'form-horizontal' }   do |f| %>
   <fieldset>
-    <legend><%= @ad.new_record? ? '发布信息' : '编辑信息' %></legend>
+    <legend><%= @item.new_record? ? '发布信息' : '编辑信息' %></legend>
     <%= f.input :title %>
     <%= f.input :amount, 
       :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)" %>
@@ -36,9 +36,10 @@
     <% end %>
     <div class="form-actions">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to(t("common.cancel"), @ad.id.blank? ? root_path : ad_path(@id), :class => "btn")%>
+      <%= link_to(t("common.cancel"), @item.id.blank? ? root_path : item_path(@id), :class => "btn")%>
     </div>
   </fieldset>
 <% end %>
 <% content_for :javascripts do %>
+    <script>$('#item_title').focus();</script>
 <% end %>
