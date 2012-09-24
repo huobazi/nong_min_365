@@ -18,6 +18,5 @@ class CreateAds < ActiveRecord::Migration
     end
     add_index :items, :category_id
     add_index :items, :user_id
-    add_index :items, :region_code
   end
 end

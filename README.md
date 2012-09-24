@@ -26,4 +26,4 @@ CREATE INDEX index_chinese_regions_on_code
   (code COLLATE pg_catalog."C" );
 
 
-同时 items 的 region_code 也同眼修改
+同时 items 的 province city county town village 这几个 code 也同眼修改

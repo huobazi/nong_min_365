@@ -7,7 +7,7 @@
 #  title         :string(255)
 #  amount        :string(255)
 #  xtype         :string(255)
-#  region_code   :string(255)
+#  province_code :string(255)
 #  contact_name  :string(255)
 #  contact_phone :string(255)
 #  contact_qq    :string(255)
@@ -17,8 +17,13 @@
 #  user_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  city_code     :string(255)
+#  county_code   :string(255)
+#  town_code     :string(255)
+#  village_code  :string(255)
 #
 
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
