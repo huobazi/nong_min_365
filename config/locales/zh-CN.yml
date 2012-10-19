@@ -27,7 +27,7 @@ zh-CN:
         password: '密码'
         title: '标题'
         xtype: '类型'
-        region_code: '所在地'
+        province_code: '所在地'
 
 
   web-app-theme: 

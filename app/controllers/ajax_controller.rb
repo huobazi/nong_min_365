@@ -13,6 +13,7 @@ class AjaxController < ApplicationController
     #end
 
     ary = ['nil', '0000000000', '00000000', '000000', '000']
+    column_ary = ['nil', 'province_code', 'city_code', 'county_code', 'town_code', 'village_code']
     code = params[:code]
     @parent_id = params[:parent_id]
     @parent_css = params[:css]
@@ -37,6 +38,10 @@ class AjaxController < ApplicationController
       code_prefix = code.chomp(ary[5])
       @children_level = level + 1
     end
+
+    @client_element_id = "item_#{column_ary[@children_level]}"
+    @client_element_name = "item[#{column_ary[@children_level]}]"
+
     code_like = "#{code_prefix}%"
 
     if level <= 5
