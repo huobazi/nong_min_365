@@ -25,7 +25,8 @@
 
 class Item < ActiveRecord::Base
   belongs_to :category, :counter_cache => :items_count
-  belongs_to :user
+  belongs_to :user, :counter_cache => :items_count
+
 
   belongs_to :province , :class_name => 'ChineseRegion' , :foreign_key => 'province_code' , :inverse_of => :province_items , :counter_cache => :province_items_count
   belongs_to :city     , :class_name => 'ChineseRegion' , :foreign_key => 'city_code'     , :inverse_of => :city_items     , :counter_cache => 'city_items_count'

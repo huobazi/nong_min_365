@@ -12,6 +12,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  remember_token  :string(255)
+#  items_count     :integer          default(0)
 #
 
 class User < ActiveRecord::Base
