@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924145643) do
+ActiveRecord::Schema.define(:version => 20121019062012) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -26,8 +26,13 @@ ActiveRecord::Schema.define(:version => 20120924145643) do
     t.string   "code"
     t.string   "name"
     t.integer  "level"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "province_items_count", :default => 0
+    t.integer  "city_items_count",     :default => 0
+    t.integer  "county_items_count",   :default => 0
+    t.integer  "town_items_count",     :default => 0
+    t.integer  "village_items_count",  :default => 0
   end
 
   add_index "chinese_regions", ["code"], :name => "index_chinese_regions_on_code"

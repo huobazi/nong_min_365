@@ -23,16 +23,15 @@
 #  village_code  :string(255)
 #
 
-# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  belongs_to :province , :class_name => 'ChineseRegion' , :foreign_key => 'province_code' # , :inverse_of => :province_items
-  belongs_to :city     , :class_name => 'ChineseRegion' , :foreign_key => 'city_code'     # , :inverse_of => :city_items
-  belongs_to :county   , :class_name => 'ChineseRegion' , :foreign_key => 'county_code'   # , :inverse_of => :county_items
-  belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     # , :inverse_of => :town_items
-  belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  # , :inverse_of => :village_items
+  belongs_to :province , :class_name => 'ChineseRegion' , :foreign_key => 'province_code' , :inverse_of => :province_items , :counter_cache => :province_items_count
+  belongs_to :city     , :class_name => 'ChineseRegion' , :foreign_key => 'city_code'     , :inverse_of => :city_items     , :counter_cache => 'city_items_count'
+  belongs_to :county   , :class_name => 'ChineseRegion' , :foreign_key => 'county_code'   , :inverse_of => :county_items   , :counter_cache => 'county_items_count'
+  belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
+  belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
 
   attr_accessible :category_id, :amount, :body, :contact_name, 

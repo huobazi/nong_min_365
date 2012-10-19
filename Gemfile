@@ -31,7 +31,8 @@ end
 gem 'jquery-rails', '2.1.2'
 gem 'html5-rails', '0.0.5'
 gem 'bootstrap_helper', '2.1.0'
-gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => 'master'
+#gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => 'master'
+gem 'client_side_validations', '3.2.0'
 
 gem 'simple_form', '2.0.2'
 gem 'client_side_validations-simple_form'
