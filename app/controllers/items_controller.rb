@@ -43,6 +43,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
     @item.user_id = 0
+    @item.ip = request.remote_ip
 
     if signed_in?
       @item.user_id = current_user.id

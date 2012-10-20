@@ -21,12 +21,18 @@
 #  county_code   :string(255)
 #  town_code     :string(255)
 #  village_code  :string(255)
+#  province_name :string(255)
+#  city_name     :string(255)
+#  county_name   :string(255)
+#  town_name     :string(255)
+#  village_name  :string(255)
+#  ip            :string(255)
 #
 
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count
-
 
   belongs_to :province , :class_name => 'ChineseRegion' , :foreign_key => 'province_code' , :inverse_of => :province_items , :counter_cache => :province_items_count
   belongs_to :city     , :class_name => 'ChineseRegion' , :foreign_key => 'city_code'     , :inverse_of => :city_items     , :counter_cache => 'city_items_count'
@@ -34,6 +40,7 @@ class Item < ActiveRecord::Base
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
+  before_save :populate_region_name
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
     :contact_phone, :contact_qq, :password, :title, :xtype,
@@ -56,5 +63,18 @@ class Item < ActiveRecord::Base
 
   def require_password?
     user_id == 0
+  end
+
+  def region_name
+   [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  
+  end
+
+  private
+  def populate_region_name
+   self.province_name = self.province.name
+   self.city_name     = self.city.name
+   self.county_name   = self.county.name
+   self.town_name     = self.town.name
+   self.village_name  = self.village.name
   end
 end

@@ -21,6 +21,6 @@
 //= require front
 //= require users
 //= require home 
-//= require ads
+//= require items 
 
 

@@ -3,7 +3,7 @@ console.log('ajax loaded');
 $('div.error').removeClass('error');
 $('span.error-message').remove();
 <% unless @item.errors.any? %>
-
+  window.location = '<%= item_path(@item)%>'
 <% else %>
   <% @item.errors.each do |k,msg| %>
 $('#item_<%=k%>').parent().parent().addClass('error');
