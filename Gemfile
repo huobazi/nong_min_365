@@ -33,9 +33,11 @@ gem 'html5-rails', '0.0.5'
 gem 'bootstrap_helper', '2.1.0'
 #gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => 'master'
 gem 'client_side_validations', '3.2.0'
-
 gem 'simple_form', '2.0.2'
 gem 'client_side_validations-simple_form'
+
+# Google Analytics performance 
+gem 'garelic', '0.1.1'
 
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'
