@@ -37,7 +37,7 @@ gem 'simple_form', '2.0.2'
 gem 'client_side_validations-simple_form'
 
 # Google Analytics performance 
-#gem 'garelic', '0.1.1'
+gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
 
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'

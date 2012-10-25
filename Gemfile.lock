@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/jsuchal/garelic.git
+  revision: dc63b081bf3e954c369ef99744652a3c4a9f9970
+  branch: master
+  specs:
+    garelic (0.1.1)
+
+GIT
   remote: git://github.com/pilu/web-app-theme.git
   revision: b7310fe5001ed03b965049f293fce3527ae98dae
   specs:
@@ -193,6 +200,7 @@ DEPENDENCIES
   compass-h5bp (= 0.0.5)
   compass-rails (= 1.0.3)
   font-awesome-rails (= 0.4.1)
+  garelic!
   html5-rails (= 0.0.5)
   jquery-rails (= 2.1.2)
   kaminari (= 0.14.1)
