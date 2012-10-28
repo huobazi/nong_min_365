@@ -1,13 +1,25 @@
-<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
-  <%%= f.error_notification %>
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
 
-  <div class="form-inputs">
-  <%- attributes.each do |attribute| -%>
-    <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
-  <%- end -%>
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+
+<% attributes.each do |attribute| -%>
+  <div class="control-group">
+    <%%= f.label :<%= attribute.name %>, :class => "control-label" %>
+    <div class="controls">
+       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+    </div>
   </div>
-
+<% end -%>
   <div class="form-actions">
-    <%%= f.button :submit %>
+    <%%= f.submit :class => "btn btn-primary" %>
   </div>
 <%% end %>

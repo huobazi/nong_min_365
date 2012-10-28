@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jsuchal/garelic.git
-  revision: dc63b081bf3e954c369ef99744652a3c4a9f9970
+  revision: 3175759e83ad9faddc68b3c0dcb6a7c381636cde
   branch: master
   specs:
     garelic (0.1.1)
