@@ -54,6 +54,9 @@ group :development do
   gem 'magic_encoding', '0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
 end
+group :development, :test do
+  gem "rspec-rails", "~> 2.11.4"
+end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
