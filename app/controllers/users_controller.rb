@@ -9,13 +9,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(get_create_params) 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to root_url, :notice => "注册成功！" }
-        format.json { render json: @user, status: :created }
-      else
-        format.html { render 'new' }
-      end
+    if @user.save
+      redirect_to root_url, :notice => "注册成功！" 
+    else
+      render 'new' 
     end
   end
 
@@ -29,25 +26,16 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.authenticate(current_password) 
-      respond_to do |format|
-        if @user.update_attributes(post_params)
-          @user.generate_token(:remember_token)
-          sign_out
-          format.html{
-            redirect_to root_path, :notice => '您已经修改了密码,请使用新密码重新登录!'
-          }
-          format.json { render json: @user, status: :created }
-        else
-          format.html { render "change_password" }
-          format.json { render json: "errors", status: :unprocessable_entity }
-        end
+      if @user.update_attributes(post_params)
+        @user.generate_token(:remember_token)
+        sign_out
+        redirect_to root_path, :notice => '您已经修改了密码,请使用新密码重新登录!'
+      else
+        render "change_password" 
       end
     else
       @user.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-      respond_to do |format|
-        format.html { render "change_password" ,:notice => '当前密码输入错误!'}
-        format.json { render json: "errors", status: :unprocessable_entity }
-      end
+      render "change_password" ,:notice => '当前密码输入错误!'
     end
   end
 

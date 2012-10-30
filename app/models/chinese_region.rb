@@ -35,4 +35,38 @@ class ChineseRegion < ActiveRecord::Base
   has_many :village_items  , :class_name => 'Item' , :foreign_key => 'village_code'  , :inverse_of => :village
 
   scope :provinces, select('code, name').where(:level => 1)
+
+  def self.children(code)
+    ary = ['nil', '0000000000', '00000000', '000000', '000']
+    if code.end_with? ary[1] 
+      level = 1
+      code_prefix = code.chomp(ary[1])
+    elsif code.end_with? ary[2] 
+      level = 2 
+      code_prefix = code.chomp(ary[2])
+    elsif code.end_with? ary[3] 
+      level = 3
+      code_prefix = code.chomp(ary[3])
+    elsif code.end_with? ary[4]
+      level = 4
+      code_prefix = code.chomp(ary[4])
+    else
+      level = 5
+      code_prefix = code.chomp(ary[5])
+    end
+
+    code_like = "#{code_prefix}%"
+    children_level = level + 1
+
+    if level <= 5
+      regions = self.select('code, name').where(
+        "level = :level and code like :code_like", 
+        {:level => children_level, :code_like => code_like}
+      )
+    end
+
+    return children_level,regions
+
+  end
+ 
 end
