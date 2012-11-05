@@ -23,9 +23,9 @@ group :assets do
   gem 'compass-h5bp', '0.0.5'
   gem 'bootstrap-sass', '2.1.0.0'
   gem 'font-awesome-rails', '0.4.1'
-
   gem 'kaminari-bootstrap', '0.1.3'
   gem 'chosen-rails', '0.9.8.3'
+  gem 'jquery_mobile_rails', '1.2.0'
 end
 
 gem 'jquery-rails', '2.1.2'
@@ -42,18 +42,22 @@ gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'maste
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'
 gem 'rails_admin', '0.0.5'
-
 gem 'rails-i18n', '0.6.6'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 gem 'ruby-pinyin', '0.1.0'
+gem 'default_value_for', '2.0.1'
+
+# For mobile devise
+gem 'mobylette', '3.3.1'
 
 group :development do
   gem 'annotate', '2.5.0'
   gem 'magic_encoding', '0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
 end
+
 group :development, :test do
   gem "rspec-rails", "~> 2.11.4"
 end

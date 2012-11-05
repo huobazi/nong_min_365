@@ -1,0 +1,32 @@
+<% errors_count = 0 %> 
+<% flash_count = 0 %> 
+<% 
+    if target && target.errors && target.errors.any?
+      errors_count = target.errors.count
+    end
+%>
+<%# 
+    if flash && flash.alert && flash.alert.size > 0
+      flash_count = 1  
+    end
+%>
+
+<% all_message_count = errors_count + flash_count %>
+
+<% if all_message_count > 0 %>
+  <div class="alert alert-block alert-error">
+    <a class="close" data-dismiss='alert' href="#">xxx×</a>
+    <p><strong>有<%= all_message_count %> 处问题导至无法提交:</strong></p>
+    <ul>
+      <% if errors_count > 0 %>
+        <% target.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      <% end %>
+      <% if flash_count > 0 %>
+        <li><%= flash.alert  %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+

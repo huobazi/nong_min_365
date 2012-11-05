@@ -30,6 +30,7 @@ module SessionsHelper
     if !signed_in?
       respond_to do |format|
         format.html { redirect_to main_app.signin_path }
+        format.mobile { redirect_to main_app.signin_path }
         format.json { head(:unauthorized) }
       end
     end
@@ -39,6 +40,7 @@ module SessionsHelper
     if signed_in?
       respond_to do |format|
         format.html { redirect_to root_path }
+        format.mobile { redirect_to root_path }
         format.json { head(:unauthorized) }
       end
     end
@@ -49,12 +51,11 @@ module SessionsHelper
     if !current_user.admin?
       respond_to do |format|
         format.html { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
+        format.mobile { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
         format.json { head(:unauthorized) }
       end
     end
   end
-
-
 
   def set_remember_me
     cookies.signed[:_remember_token] = {

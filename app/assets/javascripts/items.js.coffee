@@ -8,7 +8,7 @@ $(document).ready ->
     el = $(this)
     el.nextAll().remove()
     remote_url = el.data('url')
-    if( el.val().trim().length <=0 || parseInt(el.data('level')) >= 5 )
+    if( el.val().trim().length <= 0 || parseInt(el.data('level')) >= 5 )
       return
     $.ajax
       type: 'POST'
