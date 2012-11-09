@@ -73,7 +73,3 @@ SITE_NAME = "NongMin365.COM"
 
 I18n.locale = 'zh-CN'
 
-#mobilette config
-mobylette_config do |config|
-  config[:skip_xhr_requests] = false
-end

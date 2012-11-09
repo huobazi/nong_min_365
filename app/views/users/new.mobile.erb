@@ -1,7 +1,7 @@
 <div id="header-bar" data-role="header" data-theme="b" >
   <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
   <h1><%= @title || 'NongMing365' %></h1>
-  <%= link_to '注册', signup_path, "class" => "ui-btn-right" %>
+  <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
 </div>
 <div data-role="content">
   <%= form_for @user, :url => users_path, :method => :post do |f| %>

@@ -4,7 +4,7 @@
   <%= link_to '注册', signup_path, "class" => "ui-btn-right" %>
 </div>
 <div data-role="content">
-  <%= form_for(:session, :url => sessions_path) do |f| %>
+  <%= form_for :session, :url => sessions_path do |f| %>
   <%= render "error_messages", :target => nil %>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
