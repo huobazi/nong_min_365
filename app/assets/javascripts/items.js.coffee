@@ -18,5 +18,6 @@ $(document).ready ->
         parent_id: el.attr('id')
         css: el.attr('class')
         dataType: 'script'
+        skip_mobile: true
 
 

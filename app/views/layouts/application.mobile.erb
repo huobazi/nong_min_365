@@ -16,7 +16,6 @@
     <title><%= h(yield(:title) || "NongMing365.com") %>触屏版</title>
     <%= stylesheet_link_tag "application.mobile.css" %>
     <%= javascript_include_tag "application.mobile.js" %>
-    <script>
       //App custom javascript
       <%# Looks for google_account_id first in ENV['GOOGLE_ACCOUNT_ID'] then in config/html5_rails.yml %>
       <% if !google_account_id.blank? %>
@@ -34,7 +33,6 @@
         //]]>
       </script>
       <% end %>
-    </script>
     <%= csrf_meta_tags %>
   </head>
   <body>
