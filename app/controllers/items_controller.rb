@@ -40,11 +40,14 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.js{ render :layout => false }
+        format.js { render :layout => false }
+        format.mobile{ redirect_to root_url, :notice => "注册成功！" }
       else
-        format.js{ render :layout => false }
+        format.mobile{ render 'new' }
+        format.js { render :layout => false }
       end
     end
+
   end
 
   # PUT /items/1

@@ -7,3 +7,5 @@
 #
 # This is very important, don't forget!
 # :mobile is already registered!
+
+Mime::Type.register_alias "text/javascript", :mobilejs

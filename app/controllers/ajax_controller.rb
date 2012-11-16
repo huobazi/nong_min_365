@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class AjaxController < ApplicationController
   def regions
-
     column_ary = ['nil', 'province_code', 'city_code', 
                   'county_code', 'town_code', 'village_code']
 
@@ -16,6 +15,7 @@ class AjaxController < ApplicationController
 
     respond_to do |format|
       format.js { render :layout => false }
+      format.mobilejs { render :layout => false }
     end
   end  
 end

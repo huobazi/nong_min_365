@@ -1,69 +1,67 @@
-<%= form_for @item, :remote => true, :validate => false do |f| %>
+<%= form_for @item, :remote => false do |f| %>
   <%= render "error_messages", :target => @item %>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_field :title, :placeholder=>'标题', :value=> @item.title %>
+      <%= f.text_field :title, :required => true ,:placeholder=>'标题', :value=> @item.title %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_field :amount, :placeholder=>'数量,例:30亩,10000斤', :value=> @item.amount %>
+      <%= f.text_field :amount, :required => true ,:placeholder=>'数量,例:30亩,10000斤', :value=> @item.amount %>
     </fieldset>
   </div>
   <div data-role="fieldcontain" >
     <fieldset data-role="controlgroup">
-      <%= f.select :category_id, Category.all.collect {|x| [ x.name, x.id ]}, options = {:prompt => '请选择一个分类'}%>
+      <%= f.select :category_id, Category.all.collect {|x| [ x.name, x.id ]}, options = {:prompt => '请选择一个分类'} , :value=> @item.category_id %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.select(:xtype, [['供应','1'], ['求购','2']]) %> 
+      <%= f.select(:xtype, [['供应','1'], ['求购','2']], :value => @item.xtype) %> 
     </fieldset>
   </div>
-  <div data-role="fieldcontain" id="item_province_code_div">
+  <div data-role="fieldcontain" id="item_province_code_div" >
     <fieldset data-role="controlgroup">
-      <%= collection_select(:item, :province_code, @provinces, :code, :name, options = {:prompt => '所在省份'},:class => 'province regions' ,'data-level' => '1', 'data-url' => regions_ajax_path) %>
+      <%= collection_select(:item, :province_code, @provinces, :code, :name, options = {:prompt => '所在省份'},:class => 'province regions' ,'data-level' => '1', 'data-url' => regions_ajax_path, :value => @item.province_code) %>
       <% if @cities and @counties and @towns and @villages %>
-        <%= collection_select(:item, :city_code, @cities, :code, :name, options = {:prompt => '所在城市'},:class => 'province regions' ,'data-level' => '2', 'data-url' => regions_ajax_path) %>
-        <%= collection_select(:item, :county_code, @counties, :code, :name, options = {:prompt => '所在区县'},:class => 'province regions' ,'data-level' => '3', 'data-url' => regions_ajax_path) %>
-        <%= collection_select(:item, :town_code, @towns, :code, :name, options = {:prompt => '所在乡镇'},:class => 'province regions' ,'data-level' => '4', 'data-url' => regions_ajax_path) %>
-        <%= collection_select(:item, :village_code, @villages, :code, :name, options = {:prompt => '所在村'},:class => 'province regions' ,'data-level' => '5', 'data-url' => regions_ajax_path) %>
+        <%= collection_select(:item, :city_code, @cities, :code, :name, options = {:prompt => '所在城市'},:class => 'province regions' ,'data-level' => '2', 'data-url' => regions_ajax_path, :value => @item.city_code) %>
+        <%= collection_select(:item, :county_code, @counties, :code, :name, options = {:prompt => '所在区县'},:class => 'province regions' ,'data-level' => '3', 'data-url' => regions_ajax_path, :vallue => @item.county>_code ) %>
+        <%= collection_select(:item, :town_code, @towns, :code, :name, options = {:prompt => '所在乡镇'},:class => 'province regions' ,'data-level' => '4', 'data-url' => regions_ajax_path, :value=> @item.town_code ) %>
+        <%= collection_select(:item, :village_code, @villages, :code, :name, options = {:prompt => '所在村'},:class => 'province regions' ,'data-level' => '5', 'data-url' => regions_ajax_path, :value => @item.village_code ) %>
       <% end %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_area :body %> 
+      <%= f.text_area :body, :required => true, :placeholder=>'内容' , :value => @item.body %> 
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_field :contact_name %>
+      <%= f.text_field :contact_name , :required => true ,:placeholder=>'联系人', :value => @item.contact_name %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.phone_field :contact_phone %> 
+      <%= f.phone_field :contact_phone , :required => true ,:placeholder=>'联系人电话', :value => @item.contact_phone %> 
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.number_field :contact_qq %>
+      <%= f.number_field :contact_qq , :required => true ,:placeholder=>'联系QQ', :value => @item.contact_qq %>
     </fieldset>
   </div>
   <% if !signed_in? %>
     <div data-role="fieldcontain">
       <fieldset data-role="controlgroup">
-        <%= f.password_field :password, :required => true %>
+        <%= f.password_field :password, :required => true , :placeholder=>'密码'%>
       </fieldset>
     </div>
   <% end %>
   <div class="form-actions">
-    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    <%= link_to(t("common.cancel"), @item.id.blank?? root_path : item_path(@item.id), :class => "btn")%>
+    <%= link_to(t("common.cancel"), @item.id.blank?? root_path : item_path(@item.id), 'data-role' => "button",'data-icon'=> 'back')%>
+    <input type="submit" data-icon="forward" data-iconpos="right" value="保存" />
   </div>
-</fieldset>
 <% end %>
 <% content_for :javascripts do %>
-  <script>$('#item_title').focus();</script>
 <% end %>

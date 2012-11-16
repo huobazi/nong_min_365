@@ -3,10 +3,6 @@ region_options = "<option value=\"\">请选择</option>"
 @regions.each  do |r| 
   region_options << "<option value=\"#{r.code}\">#{r.name}</option>"
 end %>
-<% if is_mobile_request? %>
-  $('#<%= @parent_id %>_div').after('<div id="<%= @client_element_id %>_div" data-role="fieldcontain"> <fieldset data-role="controlgroup"> <select id="<%= @client_element_id %>" name ="<%= @client_element_name %>" class="<%= @parent_css %>" data-level="<%= @children_level %>" data-url="<%= regions_ajax_path %>" ><%= raw region_options %></select></fieldset></div>');
-  $('#page').page();
-  $('#<%= @client_element_id %>').selectmenu();
-<% else %>
+
+$('#<%= @parent_id %>').nextAll().remove();
 $('#<%= @parent_id %>').after('<select id="<%= @client_element_id %>" name ="<%= @client_element_name %>" class="<%= @parent_css %>" data-level="<%= @children_level %>" data-url="<%= regions_ajax_path %>" ><%= raw region_options %></select>');
-<% end %>

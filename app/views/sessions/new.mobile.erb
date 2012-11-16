@@ -8,12 +8,12 @@
   <%= render "error_messages", :target => nil %>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_field :login, :placeholder=>'用户名' %>
+      <%= f.text_field :login, :placeholder=>'用户名', :required => true %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.password_field :password, :placeholder=>'密码' %>
+      <%= f.password_field :password, :placeholder=>'密码', :required => true %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">

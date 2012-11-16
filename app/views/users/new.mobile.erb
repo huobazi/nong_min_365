@@ -8,17 +8,17 @@
   <%= render "error_messages", :target => @user %>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.text_field :username, :placeholder=>'用户名', :value=> @user.username %>
+      <%= f.text_field :username, :required => true, :placeholder=>'用户名', :value=> @user.username %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.password_field :password, :placeholder=>'密码' %>
+      <%= f.password_field :password, :required => true, :placeholder=>'密码' %>
     </fieldset>
   </div>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
-      <%= f.password_field :password_confirmation, :placeholder=>'确认密码' %>
+      <%= f.password_field :password_confirmation, :required => true, :placeholder=>'确认密码' %>
     </fieldset>
   </div>
   <input type="submit" data-icon="forward" data-iconpos="right" value="登录" />

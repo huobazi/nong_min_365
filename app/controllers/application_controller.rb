@@ -1,12 +1,24 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  include SessionsHelper
   include Mobylette::RespondToMobileRequests
+  include SessionsHelper
 
+  protect_from_forgery
+
+  before_filter :adjust_mobilejs_format
 
   #mobilette config
   mobylette_config do |config|
+    config[:skip_user_agents] = [:ipad]
     config[:skip_xhr_requests] = false
   end
+
+  private 
+
+  def adjust_mobilejs_format
+    if is_mobile_request? &&  request.format == :js
+      request.format = :mobilejs
+    end
+  end
+
 end
