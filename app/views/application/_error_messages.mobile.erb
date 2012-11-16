@@ -5,7 +5,7 @@
       errors_count = target.errors.count
     end
 %>
-<%# 
+<% 
     if flash && flash.alert && flash.alert.size > 0
       flash_count = 1  
     end
@@ -15,7 +15,7 @@
 
 <% if all_message_count > 0 %>
   <div class="alert alert-block alert-error">
-    <a class="close" data-dismiss='alert' href="#">xxx×</a>
+    <a id="close-flash" class="close" data-dismiss='alert' href="#">×</a>
     <p><strong>有<%= all_message_count %> 处问题导至无法提交:</strong></p>
     <ul>
       <% if errors_count > 0 %>

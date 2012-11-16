@@ -4,10 +4,12 @@ class SessionsController < ApplicationController
   before_filter :require_not_login, :only => [:new, :create]
 
   def new
+    @title = '用户登录'
   end
 
   # POST /sessions
   def create
+    @title = '用户登录'
     sign_in_params = params[:session]
     login = sign_in_params[:login]
     password = sign_in_params[:password]

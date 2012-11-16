@@ -8,8 +8,7 @@
 //= require jquery_ujs
 //= require jquery.mobile
 //
-//= require users
-//= require home 
+//= require home.mobile
 //= require items 
 
 
@@ -288,3 +287,4 @@ function closestEnabledButton( element ) {
 
 	
 })(jQuery);
+

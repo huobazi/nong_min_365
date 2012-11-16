@@ -4,10 +4,12 @@ class UsersController < ApplicationController
   before_filter :require_login, :only => [:change_password, :update_password]
 
   def new
+    @title = '用户注册'
     @user = User.new
   end
 
   def create
+    @title = '用户注册'
     @user = User.new(get_create_params) 
     if @user.save
       redirect_to root_url, :notice => "注册成功！" 
