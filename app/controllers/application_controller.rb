@@ -9,8 +9,12 @@ class ApplicationController < ActionController::Base
 
   #mobilette config
   mobylette_config do |config|
-    config[:skip_user_agents] = [:ipad]
     config[:skip_xhr_requests] = false
+    config[:skip_user_agents] = [:ipad]
+    config[:fallback_chains] = {
+      mobile: [:mobile, :html],
+      iphone: [:iphone, :mobile, :html]
+    }
   end
 
   private 
