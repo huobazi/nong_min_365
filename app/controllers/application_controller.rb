@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :adjust_mobilejs_format
+  before_filter :adjust_mobilejs_format_for_mobile_devise
 
   #mobilette config
   mobylette_config do |config|
@@ -13,14 +13,15 @@ class ApplicationController < ActionController::Base
     config[:skip_user_agents] = [:ipad]
     config[:fallback_chains] = {
       mobile: [:mobile, :html],
-      iphone: [:iphone, :mobile, :html]
+      iphone: [:iphone, :mobile, :html],
+      android: [:android, :mobile, :html]
     }
   end
 
   private 
 
-  def adjust_mobilejs_format
-    if is_mobile_request? &&  request.format == :js
+  def adjust_mobilejs_format_for_mobile_devise
+    if is_mobile_request? &&  request.accepts.include?("text/javascript")
       request.format = :mobilejs
     end
   end

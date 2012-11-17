@@ -16,4 +16,3 @@ $(document).ready ->
         code: el.val()
         parent_id: el.attr('id')
         css: el.attr('class')
-        skip_mobile: true
