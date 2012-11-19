@@ -18,6 +18,7 @@ NongMin365::Application.routes.draw do
 
   resources :sessions, :only =>[:create]
   resources :items
+  #match 'items/(category/:category_id)/(xtype/:xtype)/(area/:area_code)' => 'items#index'
 
   namespace :admincp do
     root :to => "dashboard#index"
@@ -25,6 +26,7 @@ NongMin365::Application.routes.draw do
     resources :users
     resources :categories
   end
+
   # The priority is based upon ordecurrent_passwordr of creation:
   # first created -> highest priority.
 

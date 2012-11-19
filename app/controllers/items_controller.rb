@@ -4,6 +4,10 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
+    @category_id = params[:category]
+    @xtype = params[:xtype]
+    @area_code = params[:area]
+
     @items = Item.all
   end
 
