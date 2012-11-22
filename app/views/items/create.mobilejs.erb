@@ -1,8 +1,0 @@
-<% unless @item.errors.any? %>
-  window.location = '<%= item_path(@item)%>'
-<% else %>
-
-  <% @item.errors.each do |k,msg| %>
-  <% end %>
-
-<% end %>

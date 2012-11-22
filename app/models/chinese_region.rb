@@ -36,8 +36,8 @@ class ChineseRegion < ActiveRecord::Base
 
   scope :provinces, select('code, name').where(:level => 1)
 
-  def self.children(code)
-    ary = ['nil', '0000000000', '00000000', '000000', '000']
+  def self.get_level_and_prefix(code)
+     ary = ['nil', '0000000000', '00000000', '000000', '000']
     if code.end_with? ary[1] 
       level = 1
       code_prefix = code.chomp(ary[1])
@@ -55,7 +55,12 @@ class ChineseRegion < ActiveRecord::Base
       code_prefix = code.chomp(ary[5])
     end
 
-    code_like = "#{code_prefix}%"
+    return level,code_prefix
+  end
+
+  def self.children(code)
+    level, prefix = self.get_level_and_prefix(code)
+    code_like = "#{prefix}%"
     children_level = level + 1
 
     if level <= 5
@@ -66,7 +71,6 @@ class ChineseRegion < ActiveRecord::Base
     end
 
     return children_level,regions
-
   end
  
 end
