@@ -1,55 +1,6 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %
+<%= link_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %>
 <p>
   <b>Title:</b>
   <%= @item.title %>
 </p>
 
-<p>
-  <b>Amount:</b>
-  <%= @item.amount %>
-</p>
-
-<p>
-  <b>Xtype:</b>
-  <%= @item.xtype %>
-</p>
-
-<p>
-  <b>Contact name:</b>
-  <%= @item.contact_name %>
-</p>
-
-<p>
-  <b>Contact phone:</b>
-  <%= @item.contact_phone %>
-</p>
-
-<p>
-  <b>Contact qq:</b>
-  <%= @item.contact_qq %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @item.body %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%= @item.password %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @item.category %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @item.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>

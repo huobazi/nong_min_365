@@ -1,6 +1,12 @@
-<div id="page" data-role="page">
+<div id="page" data-role="page"
+  <% if not request.referer.to_s.empty? %>
+    data-add-back-btn="true" data-back-btn-text="返回"
+  <% end %>
+  >
   <div id="header-bar" data-role="header" data-theme="b" >
-    <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
+    <% if request.referer.to_s.empty? %>
+      <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
+    <% end %>
     <h1><%= @title || 'NongMing365' %></h1>
     <% unless signed_in? %>
       <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
@@ -9,6 +15,5 @@
     <% end %>
   </div>
   <div data-role="content">
-    <%= render 'form' %>
   </div>
 </div>

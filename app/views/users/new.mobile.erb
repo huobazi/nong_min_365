@@ -1,27 +1,28 @@
-<div id="header-bar" data-role="header" data-theme="b" >
-  <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
-  <h1><%= @title || 'NongMing365' %></h1>
-  <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
+<div id="page" data-role="page">
+  <div id="header-bar" data-role="header" data-theme="b" >
+    <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
+    <h1><%= @title || 'NongMing365' %></h1>
+    <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
+  </div>
+  <div data-role="content">
+    <%= form_for @user, :url => users_path, :method => :post do |f| %>
+      <%= render "error_messages", :target => @user %>
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup">
+          <%= f.text_field :username, :required => true, :placeholder=>'用户名', :value=> @user.username %>
+        </fieldset>
+      </div>
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup">
+          <%= f.password_field :password, :required => true, :placeholder=>'密码' %>
+        </fieldset>
+      </div>
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup">
+          <%= f.password_field :password_confirmation, :required => true, :placeholder=>'确认密码' %>
+        </fieldset>
+      </div>
+      <input type="submit" data-icon="forward" data-iconpos="right" value="登录" />
+    <% end %>
+  </div>
 </div>
-<div data-role="content">
-  <%= form_for @user, :url => users_path, :method => :post do |f| %>
-  <%= render "error_messages", :target => @user %>
-  <div data-role="fieldcontain">
-    <fieldset data-role="controlgroup">
-      <%= f.text_field :username, :required => true, :placeholder=>'用户名', :value=> @user.username %>
-    </fieldset>
-  </div>
-  <div data-role="fieldcontain">
-    <fieldset data-role="controlgroup">
-      <%= f.password_field :password, :required => true, :placeholder=>'密码' %>
-    </fieldset>
-  </div>
-  <div data-role="fieldcontain">
-    <fieldset data-role="controlgroup">
-      <%= f.password_field :password_confirmation, :required => true, :placeholder=>'确认密码' %>
-    </fieldset>
-  </div>
-  <input type="submit" data-icon="forward" data-iconpos="right" value="登录" />
-  <% end %>
-</div>
-

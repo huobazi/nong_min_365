@@ -9,6 +9,14 @@
     <% end %>
   </div>
   <div data-role="content">
-    <%= render 'form' %>
+    <ul data-role="listview" data-divider-theme="b" data-inset="false">
+      <% @items.each do |item| %>
+        <li data-theme="c">
+          <a href="<%= item_path(item) %>" data-transition="slide">
+            <%= item.title %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
