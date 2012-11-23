@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020070101) do
+ActiveRecord::Schema.define(:version => 20121123051950) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20121020070101) do
   create_table "items", :force => true do |t|
     t.string   "title"
     t.string   "amount"
-    t.string   "xtype"
     t.string   "province_code"
     t.string   "contact_name"
     t.string   "contact_phone"
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20121020070101) do
     t.string   "town_name"
     t.string   "village_name"
     t.string   "ip"
+    t.integer  "xtype"
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121020070101) do
   add_index "items", ["town_code"], :name => "index_items_on_town_code"
   add_index "items", ["user_id"], :name => "index_items_on_user_id"
   add_index "items", ["village_code"], :name => "index_items_on_village_code"
+  add_index "items", ["xtype"], :name => "index_items_on_xtype"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

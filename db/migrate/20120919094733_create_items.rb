@@ -4,7 +4,7 @@ class CreateAds < ActiveRecord::Migration
     create_table :items do |t|
       t.string :title
       t.string :amount
-      t.string :xtype
+      t.integer :xtype
       t.string :region_code
       t.string :contact_name
       t.string :contact_phone

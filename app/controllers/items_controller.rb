@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
 
     items_scope = Item.where(' 1 = 1 ')
     items_scope = items_scope.where('category_id = ?', category_id) if category_id > 0 
-    items_scope = items_scope.where('xtype = ?', xtype) if not xtype > 0
+    items_scope = items_scope.where('xtype = ?', xtype) if xtype > 0 
 
     if not area_code.empty?
       code_name_ary = %w(province_code city_code county_code town_code village_code)
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     end
 
     #@items = items_scope.includes(:category,:user)
-    @items = items_scope
+    @items = items_scope.page params[:page]
   end
 
   # GET /items/1

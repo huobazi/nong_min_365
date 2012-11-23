@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>

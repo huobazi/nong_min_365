@@ -17,7 +17,11 @@ NongMin365::Application.routes.draw do
   end
 
   resources :sessions, :only =>[:create]
-  resources :items
+  resources :items do
+    collection do
+      get '(category/:category_id)/(xtype/:xtype)/(area/:area)/(page/:page)', :action => :index
+    end
+  end
   #match 'items/(category/:category_id)/(xtype/:xtype)/(area/:area_code)' => 'items#index'
 
   namespace :admincp do

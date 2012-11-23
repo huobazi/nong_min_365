@@ -6,7 +6,6 @@
 #  id            :integer          not null, primary key
 #  title         :string(255)
 #  amount        :string(255)
-#  xtype         :string(255)
 #  province_code :string(255)
 #  contact_name  :string(255)
 #  contact_phone :string(255)
@@ -27,8 +26,10 @@
 #  town_name     :string(255)
 #  village_name  :string(255)
 #  ip            :string(255)
+#  xtype         :integer
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :category, :counter_cache => :items_count
