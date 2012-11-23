@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %
 <p>
   <b>Title:</b>
   <%= @item.title %>
