@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: nongmin365_development
   pool: 5
-  username: postgres_user 
+  username: postgres 
   password: 8922222
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test:
   encoding: unicode
   database: nongmin365_test
   pool: 5
-  username: postgres_user
+  username: postgres
   password: 8922222
   host: localhost
   port: 5432
@@ -54,7 +54,7 @@ production:
   encoding: unicode
   database: nongmin365_production
   pool: 5
-  username: postgres_user
+  username: postgres
   password: 8922222
   host: localhost
   port: 5432

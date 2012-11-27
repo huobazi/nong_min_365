@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -53,6 +53,7 @@ gem 'default_value_for', '2.0.1'
 gem 'mobylette', '3.3.1'
 
 group :development do
+  gem 'pry', '0.9.10'
   gem 'annotate', '2.5.0'
   gem 'magic_encoding', '0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 

@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20121123051950) do
   create_table "items", :force => true do |t|
     t.string   "title"
     t.string   "amount"
+    t.integer  "xtype"
     t.string   "province_code"
     t.string   "contact_name"
     t.string   "contact_phone"
@@ -62,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20121123051950) do
     t.string   "town_name"
     t.string   "village_name"
     t.string   "ip"
-    t.integer  "xtype"
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
