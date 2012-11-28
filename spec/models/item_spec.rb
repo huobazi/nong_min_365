@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require "spec_helper"
 
 describe Item do
@@ -20,7 +21,5 @@ describe Item do
     it {should belong_to :county}
     it {should belong_to :town}
     it {should belong_to :village}
-
-
   end
 end
