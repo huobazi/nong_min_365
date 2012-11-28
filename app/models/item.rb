@@ -29,8 +29,6 @@
 #  xtype         :integer
 #
 
-# -*- encoding : utf-8 -*-
-# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count

@@ -63,6 +63,15 @@ group :development, :test do
   gem "rspec-rails", "~> 2.11.4"
 end
 
+group :test do
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  #gem 'capybara-webkit'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
+end
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
