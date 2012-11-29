@@ -19,4 +19,8 @@
       <% end %>
     </ul>
   </div>
+  <div id="pager-bar" class="text-align-center"  >
+    <%= link_to_previous_page @items, '上一页', "data-role"=>"button", "data-inline" => true, "data-icon" =>"arrow-l" %>
+    <%= link_to_next_page @items, '下一页', "data-role"=>"button", "data-inline" => true, "data-icon" =>"arrow-r", "data-iconpos" => "right" %>
+  </div>
 </div>

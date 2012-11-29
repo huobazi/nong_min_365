@@ -30,6 +30,9 @@
 #
 
 class Item < ActiveRecord::Base
+  
+  default_scope order('id desc')
+
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count
 

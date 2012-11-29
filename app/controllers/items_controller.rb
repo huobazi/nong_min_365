@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     xtype       = params[:xtype].to_i
     area_code   = params[:area] || ''
 
-    items_scope = Item.where(' 1 = 1 ')
+    items_scope = Item
     items_scope = items_scope.where('category_id = ?', category_id) if category_id > 0 
     items_scope = items_scope.where('xtype = ?', xtype) if xtype > 0 
 
@@ -19,7 +19,11 @@ class ItemsController < ApplicationController
     end
 
     #@items = items_scope.includes(:category,:user)
-    @items = items_scope.page params[:page]
+    respond_to do |format|
+      format.html { @page_size = 1 }
+      format.mobile { @page_size = 1 }
+    end
+    @items = items_scope.page(params[:page]).per(@page_size)
   end
 
   # GET /items/1
