@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 
   validates :cellphone,
     :uniqueness => true,
-    :length => { :is => 13 },
+    :length => { :is => 11 },
     :numericality => { :only_integer => true },
     :allow_blank => true
 

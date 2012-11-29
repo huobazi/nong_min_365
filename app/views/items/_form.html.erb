@@ -17,12 +17,18 @@
       :as => :radio_buttons, 
       :item_wrapper_class => 'inline'%>
     <%= f.input :province_code do %>
-      <%= collection_select(:item, :province_code, @provinces, :code, :name, options = {:prompt => '所在省份'},:class => 'province regions' ,'data-level' => '1', 'data-url' => regions_ajax_path)%>
+      <%= collection_select(:item, :province_code, @provinces, :code, :name, options = {:prompt => '所在省份'},:class => 'province regions' ,'data-level' => '1', 'data-url' => regions_ajax_path, :value => @item.province_code )%>
+      <% if @cities  %>
+        <%= collection_select(:item, :city_code, @cities, :code, :name, options = {:prompt => '所在城市'},:class => 'province regions' ,'data-level' => '2', 'data-url' => regions_ajax_path, :value => @item.city_code )%>
+      <% end %>
+      <% if @cities and @counties  %>
+        <%= collection_select(:item, :county_code, @counties, :code, :name, options = {:prompt => '所在区县'},:class => 'province regions' ,'data-level' => '3', 'data-url' => regions_ajax_path, :value => @item.county_code )%>
+      <% end %>
+      <% if @cities and @counties and @towns  %>
+        <%= collection_select(:item, :town_code, @towns, :code, :name, options = {:prompt => '所在乡镇'},:class => 'province regions' ,'data-level' => '4', 'data-url' => regions_ajax_path, :value => @item.town_code )%>
+      <% end %>
       <% if @cities and @counties and @towns and @villages %>
-        <%= collection_select(:item, :city_code, @cities, :code, :name, options = {:prompt => '所在城市'},:class => 'province regions' ,'data-level' => '2', 'data-url' => regions_ajax_path)%>
-        <%= collection_select(:item, :county_code, @counties, :code, :name, options = {:prompt => '所在区县'},:class => 'province regions' ,'data-level' => '3', 'data-url' => regions_ajax_path)%>
-        <%= collection_select(:item, :town_code, @towns, :code, :name, options = {:prompt => '所在乡镇'},:class => 'province regions' ,'data-level' => '4', 'data-url' => regions_ajax_path)%>
-        <%= collection_select(:item, :village_code, @villages, :code, :name, options = {:prompt => '所在村'},:class => 'province regions' ,'data-level' => '5', 'data-url' => regions_ajax_path)%>
+        <%= collection_select(:item, :village_code, @villages, :code, :name, options = {:prompt => '所在村'},:class => 'province regions' ,'data-level' => '5', 'data-url' => regions_ajax_path, :value => @item.village_code )%>
       <% end %>
     <% end %>
     <%= f.input :body, 

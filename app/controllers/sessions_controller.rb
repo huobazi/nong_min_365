@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       redirect_to root_url, :notice => "登陆成功!"
     else
       flash.now.alert = "用户名或密码错误!"
-      render action: "new"
+      render "new"
     end
   end
 

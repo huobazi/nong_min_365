@@ -9,4 +9,3 @@
 # :mobile is already registered!
 
 Mime::Type.register_alias "text/javascript", :mobilejs
-Mime::Type.register_alias 'text/html', :iphone

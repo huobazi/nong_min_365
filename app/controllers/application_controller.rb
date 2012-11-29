@@ -12,9 +12,7 @@ class ApplicationController < ActionController::Base
     config[:skip_xhr_requests] = false
     config[:skip_user_agents] = [:ipad]
     config[:fallback_chains] = {
-      mobile: [:mobile, :html],
-      iphone: [:iphone, :mobile, :html],
-      android: [:android, :mobile, :html]
+      mobile: [:mobile, :html]
     }
   end
 

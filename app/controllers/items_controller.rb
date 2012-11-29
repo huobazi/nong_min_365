@@ -57,10 +57,17 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.js { render :layout => false }
-        format.mobile{ redirect_to @item, :notice => "创建成功！" }
+        format.mobile { redirect_to(@item)  }
       else
         format.js { render :layout => false }
-        format.mobile{ render 'new' }
+        format.mobile {
+          @provinces = ChineseRegion.provinces
+          children_level, @cities = ChineseRegion.children(@item.province_code)
+          children_level, @counties = ChineseRegion.children(@item.city_code)
+          children_level, @towns = ChineseRegion.children(@item.county_code)
+          children_level, @villages = ChineseRegion.children(@item.town_code)
+          render 'new'
+        }
       end
     end
 
