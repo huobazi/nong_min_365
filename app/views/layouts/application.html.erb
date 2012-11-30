@@ -3,18 +3,17 @@
 <%= html_tag :class => "no-js", :lang => "en" %>
 <%= render "head" %>
 <%= render_body_tag %>
-<%= render "header" %>
+<%= render "top_navbar" %>
 <div class="container master-container">
+  <%= render "header" %>
   <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
     <%= render_breadcrumb %>
   </div>
   <div id="main" role="main" class="container-fluid">
-    <%= render "flashes" %>
     <%= yield %>
   </div>
 </div>
 <%= render "footer" %>
-<%# Javascript at the bottom for fast page loading %>
-<%= render "javascripts" %>
+<%= render "javascripts" %><%# Javascript at the bottom for fast page loading %>
   </body>
 </html>

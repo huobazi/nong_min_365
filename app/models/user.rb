@@ -16,10 +16,10 @@
 #
 
 class User < ActiveRecord::Base
+  has_secure_password
 
   attr_accessor :current_password
   attr_accessible  :username, :email, :qq, :cellphone, :password, :password_confirmation, :current_password
-  has_secure_password
 
   has_many :items
 
@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     :confirmation => true 
 
   validates :password_confirmation, :presence => true
+  
   validates :current_password, :presence => true, :on => :update_password
 
   validates :email, 

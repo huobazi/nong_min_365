@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require h5bp
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
 // require chosen-jquery
+//
+//= require plugin 
 //
 //= require front
 //= require users

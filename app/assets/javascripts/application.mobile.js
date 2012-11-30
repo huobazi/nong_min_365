@@ -8,6 +8,8 @@
 //= require jquery_ujs
 //= require jquery.mobile
 //
+//= require plugin 
+//
 //= require home.mobile
 //= require items 
 
