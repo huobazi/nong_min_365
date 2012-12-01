@@ -1,5 +1,5 @@
-<div class="content">
-  <div class="box">
+<div class="row-fluid">
+  <div class="span7">
     <%= simple_form_for @user, :validate => true, :url => users_path, :method => :post do |f| %>
       <%= render "error_messages", :target => @user %>
       <fieldset>
@@ -15,14 +15,14 @@
       </fieldset>
     <% end %>
   </div>
+  <div class="span5">
+    <div class="hero-unit bg-white">
+      <p>已有本站账号？</p>
+      <p>
+        <%= link_to  '点这里去登录', signin_path, :class=>"btn btn-primary btn-large" %>
+      </p>
+    </div>
+  </div>
 </div>
 <% content_for :javascripts do%>
-  <script> 
-    <%#window.ClientSideValidations.callbacks.form.fail = function(form, eventData) {%>
-      <%#$('#btnSubmit').removeAttr('data-disable-with');%>
-    <%#}%>
-    <%#window.ClientSideValidations.callbacks.form.pass = function(form, eventData) {%>
-      <%#$('#btnSubmit').data('disable-with', 'Loading');%>
-    <%#}%>
-  </script>
 <% end %>
