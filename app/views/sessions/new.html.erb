@@ -4,8 +4,8 @@
       <%= render "error_messages", :target => nil %>
       <fieldset>
         <legend>登录</legend>
-        <%= f.input :login, :label => "用户名",:input_html => { :value => ( params[:session][:login] if params[:session]), :style => "width:180px;" } %>
-        <%= f.input :password, :label => '密&nbsp;&nbsp;&nbsp;&nbsp;码', :input_html => { :style => "width:180px;" } %>
+        <%= f.input :login, :label => "用户名",:input_html => { :value => ( params[:session][:login] if params[:session]) } %>
+        <%= f.input :password, :label => '密&nbsp;&nbsp;&nbsp;&nbsp;码', :input_html => {  } %>
         <div class="control-group checkbox optional">
           <label class="checkbox optional control-label"></label>
           <div class="controls">
@@ -13,12 +13,12 @@
               <label for="user_remember_me">
                 <%= f.check_box :remember_me, :wrapper => :inline_checkbox, :style => "width:auto;" %>
                 两周内自动登录
-              </labelk>
-            </div>
+              </label>
+            <div>
           </div>
         </div>
         <div class="form-actions">
-          <%= f.submit "登    录", :class => "btn btn-primary", 'data-disable-with' => "Loading..." %>
+          <%= f.submit "登    录", :class => "btn btn-primary", 'data-disable-with' => "请稍后..." %>
         </div>
       </fieldset>
     <% end %>

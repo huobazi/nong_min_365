@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   validates :username, 
     :presence => true ,
     :uniqueness => { :case_sensitive => false },
-    :length => { :in => 3..20 }
+    :length => { :in => 6..20 }
 
   validates :password, 
     :presence => true, 
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   validates :password_confirmation, :presence => true
   
-  validates :current_password, :presence => true, :on => :update_password
+  validates :current_password, :presence => true, :on => [:update_password, :change_password]
 
   validates :email, 
     :uniqueness => { :case_sensitive => false },
