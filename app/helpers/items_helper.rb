@@ -12,7 +12,7 @@ module ItemsHelper
     the_hash[:category] = category_id 
     link_text = category_name
 
-    link_to link_text, items_path(the_hash)
+    link_to link_text, condition_list_items_path(the_hash), :class => (category_id == category ? "current" : "" )
   end
 
   def build_items_list_condition_area_link(area_code, area_name)
@@ -27,7 +27,7 @@ module ItemsHelper
     the_hash[:area] = area_code 
     link_text = area_name
 
-    link_to link_text, items_path(the_hash)
+    link_to link_text, condition_list_items_path(the_hash), :class => (area_code == area ? "current" : "" )
   end
 
   def build_items_list_condition_xtype_link(xtype_value, xtype_name)
@@ -42,7 +42,7 @@ module ItemsHelper
     the_hash[:xtype] = xtype_value 
     link_text = xtype_name
 
-    link_to link_text, items_path(the_hash)
+    link_to link_text, condition_list_items_path(the_hash), :class => (xtype_value == xtype ? "current" : "" )
   end
 
 

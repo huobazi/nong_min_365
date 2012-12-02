@@ -19,7 +19,7 @@ NongMin365::Application.routes.draw do
   resources :sessions, :only =>[:create]
   resources :items do
     collection do
-      get '(category/:category_id)/(xtype/:xtype)/(area/:area)/(page/:page)', :action => :index
+      get '/(c:category)/(a:area)/(t:xtype)/(p:page)', :action => :index, :as => 'condition_list'
     end
   end
   #match 'items/(category/:category_id)/(xtype/:xtype)/(area/:area_code)' => 'items#index'
