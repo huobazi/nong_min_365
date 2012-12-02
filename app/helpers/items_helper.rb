@@ -1,7 +1,52 @@
 # -*- encoding : utf-8 -*-
 module ItemsHelper
-  def build_items_list_area_link(item)
+  def build_items_list_condition_category_link(category_id, category_name)
+    the_hash = {}
+    category = params[:category].to_i
+    xtype = params[:xtype].to_i
+    area = params[:area] || ''
 
+    the_hash[:xtype] = xtype if xtype > 0
+    the_hash[:area] = area if not area.empty?
+
+    the_hash[:category] = category_id 
+    link_text = category_name
+
+    link_to link_text, items_path(the_hash)
+  end
+
+  def build_items_list_condition_area_link(area_code, area_name)
+    the_hash = {}
+    category = params[:category].to_i
+    xtype = params[:xtype].to_i
+    area = params[:area] || ''
+
+    the_hash[:category] = category if category > 0
+    the_hash[:xtype] = xtype if xtype > 0
+
+    the_hash[:area] = area_code 
+    link_text = area_name
+
+    link_to link_text, items_path(the_hash)
+  end
+
+  def build_items_list_condition_xtype_link(xtype_value, xtype_name)
+    the_hash = {}
+    category = params[:category].to_i
+    xtype = params[:xtype].to_i
+    area = params[:area] || ''
+
+    the_hash[:category] = category if category > 0
+    the_hash[:area] = area if not area.empty?
+
+    the_hash[:xtype] = xtype_value 
+    link_text = xtype_name
+
+    link_to link_text, items_path(the_hash)
+  end
+
+
+  def build_items_list_area_link(item)
     the_hash = {}
     category = params[:category].to_i
     xtype = params[:xtype].to_i

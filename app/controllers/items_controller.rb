@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
+    page_size = 1
     category_id = params[:category].to_i
     xtype       = params[:xtype].to_i
     area_code   = params[:area] || ''
@@ -20,10 +21,18 @@ class ItemsController < ApplicationController
 
     #@items = items_scope.includes(:category,:user)
     respond_to do |format|
-      format.html { @page_size = 1 }
-      format.mobile { @page_size = 1 }
+      format.html { }
+      format.mobile { page_size = 1 }
     end
-    @items = items_scope.page(params[:page]).per(@page_size)
+
+    @categories = Category.all  
+    if area_code.empty?
+      @regions = ChineseRegion.provinces 
+    else
+     level, @regions =  ChineseRegion.children(area_code)
+    end
+    @items = items_scope.page(params[:page]).per(page_size)
+    
   end
 
   # GET /items/1

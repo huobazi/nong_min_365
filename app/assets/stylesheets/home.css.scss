@@ -1,3 +1,89 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.map-section {
+  border-top: 2px solid #70A50F;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  dl {
+    color: #000;
+    float: left;
+    margin-right: 2px;
+    margin-top: 1px;
+    opacity: 0.9;
+    overflow: hidden;
+    width: 118px;
+  }
+  dt {
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+  }
+  dd {
+    border-bottom: 1px dotted #CCC;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+    a {
+      color: #000;
+      display: block;
+      height: 100%;
+      text-align: center;
+    }
+    dd a:hover {
+      color: #FF6600;
+    }
+  }
+  dl.huabei {
+    background-color: #F8E8E8;
+    dt {
+      background-color: #F2CACA;
+      background-position: 0 0;
+    }
+  }
+  dl.huadong {
+    background-color: #FFF7EC;
+    width: 150px;
+    dt {
+      background-color: #F4E2CA;
+      background-position: 0 -30px;
+    }
+  }
+  dl.huanan {
+    background-color: #FFFEE5;
+    dt {
+      background-color: #F9F6AF;
+      background-position: 0 -60px;
+    }
+  }
+  dl.huazhong {
+    background-color: #F9FDEC;
+    dt {
+      background-color: #D8ECA7;
+      background-position: 0 -90px;
+    }
+  }
+  dl.xibei {
+    background-color: #E8FBF5;
+    dt {
+      background-color: #BDF0DF;
+      background-position: 0 -120px;
+    }
+  }
+  dl.xinan {
+    background-color: #ECF9FF;
+    dt {
+      background-color: #CCE8F3;
+      background-position: 0 -150px;
+    }
+  }
+  dl.dongbei {
+    background-color: #F0F2FE;
+    dt {
+      background-color: #D5DCF6;
+      background-position: 0 -180px;
+    }
+  }
+}

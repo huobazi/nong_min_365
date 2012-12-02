@@ -1,0 +1,33 @@
+<div class="row">
+  <div>
+    <dl>
+      <dt>分类</dt>
+      <dd>
+      <ul>
+        <% @categories.each do |c| %>
+          <li><%= build_items_list_condition_category_link(c.id, c.name) %></li>
+        <% end %>
+      </ul>
+      </dd> 
+    </dl> 
+    <dl>
+      <dt>地区</dt>
+      <dd>
+      <ul>
+        <% @regions.each do |r| %>
+          <li><%= build_items_list_condition_area_link(r.code, r.name) %></li>
+        <% end %>
+      </ul>
+      </dd> 
+    </dl> 
+    <dl>
+      <dt>类型</dt>
+      <dd>
+      <ul>
+        <li><%= build_items_list_condition_xtype_link(1,'供应')%></li>
+        <li><%= build_items_list_condition_xtype_link(2,'求购')%></li>
+      </ul>
+      </dd> 
+    </dl> 
+  </div>
+</div>
