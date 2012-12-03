@@ -1,12 +1,16 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "home_categories_map";
+
 .map-section {
   border-top: 2px solid #70A50F;
   margin: 0 auto;
-  position: relative;
+  text-align:center;
   width: 100%;
   dl {
+    width: 14%;
     color: #000;
     float: left;
     margin-right: 2px;
@@ -41,12 +45,20 @@
       background-color: #F2CACA;
       background-position: 0 0;
     }
+    dd {
+      height: 30px;
+      line-height: 30px;
+    }
   }
   dl.huadong {
     background-color: #FFF7EC;
     dt {
       background-color: #F4E2CA;
       background-position: 0 -30px;
+    }
+    dd{
+      height: 21px;
+      line-height: 21px;
     }
   }
   dl.huanan {
@@ -55,12 +67,20 @@
       background-color: #F9F6AF;
       background-position: 0 -60px;
     }
+    dd {
+      height: 50px;
+      line-height:50px; 
+    }
   }
   dl.huazhong {
     background-color: #F9FDEC;
     dt {
       background-color: #D8ECA7;
       background-position: 0 -90px;
+    }
+    dd {
+      height: 50px;
+      line-height:50px; 
     }
   }
   dl.xibei {
@@ -69,6 +89,10 @@
       background-color: #BDF0DF;
       background-position: 0 -120px;
     }
+    dd {
+      height: 30px;
+      line-height: 30px;
+    }
   }
   dl.xinan {
     background-color: #ECF9FF;
@@ -76,12 +100,20 @@
       background-color: #CCE8F3;
       background-position: 0 -150px;
     }
+    dd {
+      height: 30px;
+      line-height: 30px;
+    }
   }
   dl.dongbei {
     background-color: #F0F2FE;
     dt {
       background-color: #D5DCF6;
       background-position: 0 -180px;
+    }
+    dd {
+      height: 50px;
+      line-height:50px; 
     }
   }
 }
