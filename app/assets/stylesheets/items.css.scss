@@ -15,10 +15,67 @@
 }
 
 .items-controller , .index-action{
-  .condition-list{
+  #condition-list{
+    background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
+    border: 1px solid #DDDDDD;
+    padding-top: 5px;
+    padding-left: 16px;
+    div.bottom{
+      background: none repeat scroll 0 0 transparent;
+    }
+    div{
+      padding-bottom: 20px;
+      background: url("icons/p-filer-bg-dotted.gif") repeat-x scroll left bottom transparent;
+      vertical-align: middle;
+    }
     dl{
-      clear:both;
-      dd a.current{background: none repeat scroll 0 0 #4598D2;}
+      clear: both;
+      content: ".";
+      display: block;
+      height: 0;
+      dt{
+        float: left;
+        display: inline;
+      }
+      dd{
+        a.current{background: none repeat scroll 0 0 #4598D2;}
+        ul.current-condition{
+          li{
+            a{
+              display: inline;
+              background: none repeat scroll 0 0 #FFFFFF;
+              border: 1px solid #CCCCCC;
+              border-radius: 2px 2px 2px 2px;
+              height: 18px;
+              line-height: 18px;
+              margin-right: 8px;
+              padding: 0 22px 0 8px;
+              position: relative;
+              cursor: pointer;
+              white-space: nowrap;
+              text-decoration: none;
+              span {
+                position: absolute;
+                right: 0;
+                top: -1px;
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+                background: url("icons/allIcon.gif") no-repeat scroll 0 0 transparent;
+                background-position: left -99px;
+              }
+            }
+            a:hover {
+              text-decoration: none;
+              border: 1px solid #E5004F;
+            }
+            a:hover span {
+              text-decoration: none;
+              background-position: left -81px;
+            }
+          }
+        }
+      } 
       li {
         list-style: none outside none;
         float:left; 
@@ -26,6 +83,22 @@
           padding: 2px 5px;
         }
       }
+    }
+  }
+  #items-list{
+    background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
+    border: 1px solid #DDDDDD;
+    padding-left: 16px;
+    padding-top: 5px;
+    table.list{
+      th{ text-align:left;font-weight:bold; }
+      th.area{width: 120px;}
+      th.title{}
+      th.amount{width: 100px;}
+      th.xtype{width: 80px;}
+      th.contact{width: 120px;}
+      th.created{width: 120px;}
+      td{height: 38px;}
     }
   }
 }

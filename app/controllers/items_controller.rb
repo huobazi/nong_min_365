@@ -17,22 +17,33 @@ class ItemsController < ApplicationController
       code_name_ary = %w(province_code city_code county_code town_code village_code)
       code_level, code_prefix = ChineseRegion.get_level_and_prefix(area_code)
       items_scope = items_scope.where(" #{code_name_ary[code_level -1]} = ?", area_code)
+      @current_areas = ChineseRegion.get_parents(area_code)
     end
 
-    #@items = items_scope.includes(:category,:user)
+    @categories = Category.all  
+
+    @current_category_name = ''
+    if category_id > 0
+      @current_category_name = @categories.find(category_id).first.name
+    end
+    
+    @current_xtype_name = ''
+    if xtype > 0
+      @current_xtype_name = xtype == 1 ? "供应" : "求购"
+    end
+
+    if area_code.empty?
+      @regions = ChineseRegion.provinces 
+    else
+      temp_level, @regions =  ChineseRegion.children(area_code)
+    end
+
+    @items = items_scope.page(params[:page]).per(page_size)
+
     respond_to do |format|
       format.html { }
       format.mobile { page_size = 1 }
     end
-
-    @categories = Category.all  
-    if area_code.empty?
-      @regions = ChineseRegion.provinces 
-    else
-     level, @regions =  ChineseRegion.children(area_code)
-    end
-    @items = items_scope.page(params[:page]).per(page_size)
-    
   end
 
   # GET /items/1

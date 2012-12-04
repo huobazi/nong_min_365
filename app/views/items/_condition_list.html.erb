@@ -1,40 +1,74 @@
-<div class="span12 condition-list">
-  <dl>
-    <dt>已选</dt>
-    <dd>
-    <ul>
-      <li><%= build_items_list_condition_xtype_link(1,'供应')%></li>
-      <li><%= build_items_list_condition_xtype_link(2,'求购')%></li>
-    </ul>
-    </dd> 
-  </dl> 
-  <dl>
-    <dt>分类</dt>
-    <dd>
-    <ul>
-      <% @categories.each do |c| %>
-        <li><%= build_items_list_condition_category_link(c.id, c.name) %></li>
-      <% end %>
-    </ul>
-    </dd> 
-  </dl> 
-  <dl>
-    <dt>地区</dt>
-    <dd>
-    <ul>
-      <% @regions.each do |r| %>
-        <li><%= build_items_list_condition_area_link(r.code, r.name) %></li>
-      <% end %>
-    </ul>
-    </dd> 
-  </dl> 
-  <dl>
-    <dt>类型</dt>
-    <dd>
-    <ul>
-      <li><%= build_items_list_condition_xtype_link(1,'供应')%></li>
-      <li><%= build_items_list_condition_xtype_link(2,'求购')%></li>
-    </ul>
-    </dd> 
-  </dl> 
+<div id="condition-list">
+  <div>
+    <% if @current_areas or (@current_category_name.size > 0) or (@current_xtype_name.size > 0) %>
+      <dl>
+        <dt>已选</dt>
+        <dd>
+        <ul class="current-condition">
+          <% if @current_areas %>
+            <% @current_areas.each do |a| %>
+              <li>
+                <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_area_path(a.code) %>" >
+                  <%= a.name %>
+                  <span></span>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
+          <% if @current_category_name.size > 0 %>
+            <li>
+              <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_category_path %>" >
+                <%= @current_category_name %>
+                <span></span>
+              </a>
+            </li>
+          <% end%>
+          <% if @current_xtype_name.size > 0 %>
+            <li>
+              <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_xtype_path %>" >
+                <%= @current_xtype_name %>
+                <span></span>
+              </a>
+            </li>
+          <% end%>
+        </ul>
+        </dd> 
+      </dl> 
+    <% end %>
+  </div>
+  <div>
+    <dl>
+      <dt>分类</dt>
+      <dd>
+      <ul>
+        <% @categories.each do |c| %>
+          <li><%= build_items_list_condition_category_link(c.id, c.name) %></li>
+        <% end %>
+      </ul>
+      </dd> 
+    </dl> 
+  </div>
+  <div>
+    <dl>
+      <dt>类型</dt>
+      <dd>
+      <ul>
+        <li><%= build_items_list_condition_xtype_link(1,'供应')%></li>
+        <li><%= build_items_list_condition_xtype_link(2,'求购')%></li>
+      </ul>
+      </dd> 
+    </dl> 
+  </div>
+  <div class="bottom">
+    <dl>
+      <dt><%= @current_areas.nil? ? "地区" : "下辖地区" %></dt>
+      <dd>
+      <ul>
+        <% @regions.each do |r| %>
+          <li><%= build_items_list_condition_area_link(r.code, r.name) %></li>
+        <% end %>
+      </ul>
+      </dd> 
+    </dl> 
+  </div>
 </div>

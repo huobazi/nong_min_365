@@ -1,12 +1,11 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
+  mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
 
   root :to => 'home#index'
-  mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
-
   post 'ajax/regions' => 'ajax#regions', :as => :regions_ajax
 
   resources :users, :only => [:create], :path => 'account' do
@@ -19,10 +18,10 @@ NongMin365::Application.routes.draw do
   resources :sessions, :only =>[:create]
   resources :items do
     collection do
-      get '/(c:category)/(a:area)/(t:xtype)/(p:page)', :action => :index, :as => 'condition_list'
+      #get '(c:category)/(a:area)/(t:xtype)/(p:page)', :action => :index, :as => :condition_list
+      get '(c:category)/(a:area)/(t:xtype)/(p:page)' => 'items#index', :as => :condition_list
     end
   end
-  #match 'items/(category/:category_id)/(xtype/:xtype)/(area/:area_code)' => 'items#index'
 
   namespace :admincp do
     root :to => "dashboard#index"

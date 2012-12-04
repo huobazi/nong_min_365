@@ -1,18 +1,27 @@
 <%= render "condition_list" %>
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tbody>
-    <% @items.each do |item| %>
+<div id="items-list">
+  <table class="list" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tbody>
       <tr>
-        <td><%= build_items_list_area_link item %></td>
-        <td><%= link_to item.title, item_path(item) %></td>
-        <td><%= item.amount %></td>
-        <td><%= item.xtype %></td>
-        <td><%= item.contact_name %></td>
-        <td><%= item.created_at %></td>
+        <th class="area">地区</th>
+        <th class="title">标题</th>
+        <th class="amount">数量</th>
+        <th class="xtype">类型</th>
+        <th class="contact">联系人</th>
+        <th class="created">日期</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @items %>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= build_items_list_area_link item %></td>
+          <td><%= link_to item.title, item_path(item) %></td>
+          <td><%= item.amount %></td>
+          <td><%= item.xtype == 1 ? '供应' : '求购' %></td>
+          <td><%= item.contact_name %></td>
+          <td><%= item.created_at.strftime('%Y-%m-%d') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @items %>
+</div>
 

@@ -18,6 +18,7 @@
 
 class ChineseRegion < ActiveRecord::Base
   self.primary_key = 'code'
+  CODE_LENGTH = 12
 
   attr_accessible :code, :level, :name
 
@@ -52,7 +53,7 @@ class ChineseRegion < ActiveRecord::Base
       code_prefix = code.chomp(ary[4])
     else
       level = 5
-      code_prefix = code.chomp(ary[5])
+      code_prefix = code
     end
 
     return level,code_prefix
@@ -71,6 +72,21 @@ class ChineseRegion < ActiveRecord::Base
     end
 
     return children_level,regions
+  end
+  
+  def self.get_parents(code)
+    ary = ['0000000000', '00000000', '000000', '000']
+    level, prefix = self.get_level_and_prefix(code)
+    id_ary = []
+    ( 0 .. (level -1) ).each do |index|
+      id_ary[index] = prefix[0,2] + ary[0] if index == 0
+      id_ary[index] = prefix[0,4] + ary[1] if index == 1
+      id_ary[index] = prefix[0,6] + ary[2] if index == 2
+      id_ary[index] = prefix[0,9] + ary[3] if index == 3
+      id_ary[index] = code if index == 4
+    end
+
+    self.select('code, name, level').where(:code => id_ary).order(:level)
   end
  
 end
