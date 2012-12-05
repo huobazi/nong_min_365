@@ -54,6 +54,8 @@ module ItemsHelper
     the_hash[:area]  = area if not area.empty?
     the_hash[:xtype] = xtype if xtype > 0
  
+    items_path(the_hash)
+
     condition_list_items_path(the_hash)
   end
 
