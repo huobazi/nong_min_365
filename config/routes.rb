@@ -15,10 +15,11 @@ NongMin365::Application.routes.draw do
     end
   end
 
+  #get 'items/(c:category)/(a:area)/(t:xtype)/(p:page)', :controller => :items, :action => :index, :as => :condition_list_items
   resources :sessions, :only =>[:create]
   resources :items do
     collection do
-      get '/(c:category)/(a:area)/(t:xtype)/(p:page)', :action => :index, :as => :condition_list
+      get '(c:category)/(a:area)/(t:xtype)/(p:page)', :action => :index, :as => :condition_list
     end
   end
 

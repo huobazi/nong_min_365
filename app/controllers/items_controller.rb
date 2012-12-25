@@ -4,10 +4,10 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    page_size = 1
-    category_id = params[:category].to_i
-    xtype       = params[:xtype].to_i
+    page_size   = 1
     area_code   = params[:area] || ''
+    xtype       = params[:xtype].to_i
+    category_id = params[:category].to_i
 
     items_scope = Item
     items_scope = items_scope.where('category_id = ?', category_id) if category_id > 0 
@@ -17,49 +17,50 @@ class ItemsController < ApplicationController
       code_name_ary = %w(province_code city_code county_code town_code village_code)
       code_level, code_prefix = ChineseRegion.get_level_and_prefix(area_code)
       items_scope = items_scope.where(" #{code_name_ary[code_level -1]} = ?", area_code)
-      @current_areas = ChineseRegion.get_parents(area_code)
     end
 
-    @categories = Category.all  
-
-    @current_category_name = ''
-    if category_id > 0
-      @current_category_name = @categories.find(category_id).first.name
-    end
-    
-    @current_xtype_name = ''
-    if xtype > 0
-      @current_xtype_name = xtype == 1 ? "供应" : "求购"
-    end
-
-    if area_code.empty?
-      @regions = ChineseRegion.provinces 
-    else
-      temp_level, @regions =  ChineseRegion.children(area_code)
-    end
+    prepare_items_condition_list(category_id, area_code, xtype)   
 
     @items = items_scope.page(params[:page]).per(page_size)
 
     respond_to do |format|
       format.html { }
-      format.mobile { page_size = 1 }
+      format.mobile { }
     end
   end
 
   # GET /items/1
   def show
     @item = Item.find(params[:id])
+    @page_tiele = @item.title
+    drop_breadcrumb(@item.province_name, condition_list_items_path(:area => @item.province_code) )
+    drop_breadcrumb(@item.city_name, condition_list_items_path(:area => @item.city_code) )
+    drop_breadcrumb(@item.county_name, condition_list_items_path(:area => @item.county_code) )
+    drop_breadcrumb(@item.town_name, condition_list_items_path(:area => @item.town_code) )
+    drop_breadcrumb(@item.village_name, condition_list_items_path(:area => @item.village_code) )
+    drop_breadcrumb(@item.category.name, condition_list_items_path(:category => @item.category_id) )
+    drop_breadcrumb(@item.xtype == 1 ? '供应':'求购', condition_list_items_path(:xtype => @item.xtype) )
+    drop_breadcrumb(@item.title, item_path(@item) )
+
+    prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
   end
 
   # GET /items/new
   def new
+    @page_tiele = '发布'
+    drop_breadcrumb("发布", new_item_path)
+
     @item = Item.new
     @provinces = ChineseRegion.provinces
   end
 
   # GET /items/1/edit
   def edit
+
     @item = Item.find(params[:id])
+    drop_breadcrumb("编辑", edit_item_path(@item) )
+    @page_tiele = '编辑' + @item.title
+
     @provinces = ChineseRegion.provinces
 
     children_level, @cities = ChineseRegion.children(@item.province_code)
@@ -119,4 +120,29 @@ class ItemsController < ApplicationController
     redirect_to items_url 
   end
 
+  private 
+  def prepare_items_condition_list(category_id, area_code, xtype)
+    @current_params = {}
+    @current_params[:area]     = area_code
+    @current_params[:xtype]    = xtype
+    @current_params[:category] = category_id 
+
+    @categories = Category.all  
+    @current_category_name = ''
+    if category_id > 0
+      @current_category_name = @categories.find(category_id).first.name
+    end
+
+    @current_xtype_name = ''
+    if xtype > 0
+      @current_xtype_name = xtype == 1 ? "供应" : "求购"
+    end
+
+    if area_code.empty?
+      @regions = ChineseRegion.provinces 
+    else
+      temp_level, @regions = ChineseRegion.children(area_code)
+      @current_areas       = ChineseRegion.get_parents(area_code)
+    end
+  end
 end
