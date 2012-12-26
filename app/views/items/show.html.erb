@@ -1,16 +1,49 @@
-<div class="row content">
+<div class="row">
   <div class="span9">
     <%= render "condition_list" %>
-  <div class="box">
-    <%= @item.title %> <br/>
-    <%= @item.amount %> <br/>
-    <%= @item.body %> <br/>
-    <%= @item.contact_name %> <br/>
-    <%= @item.contact_phone %> <br/>
-    <%= @item.contact_qq %> <br/>
-    <%= @item.province_name %> - <%= @item.city_name %> - <%= @item.county_name %> - <%= @item.town_name %> - <%= @item.village_name %><br/>
-    <%= @item.ip %> <br/>
-    <%= @item.xtype == 1 ? '供应' : '求购' %> <br/>
+    <div class="box content">
+      <ul class="prop">
+        <li>
+          <label> 产品：</label>
+          <%= @item.title %>
+        </li>
+        <li>
+          <label> 数量：</label>
+          <%= @item.amount %>
+        </li>
+        <li>
+          <label>分类：</label>
+          <%= @item.category.name %> 
+        </li>
+        <li>
+          <label>类型：</label>
+          <%= @item.xtype == 1 ? '供应' : '求购' %> <br/>
+        </li>
+        <li>
+          <label>联系人：</label>
+          <%= @item.contact_name %> 
+        </li>
+        <li>
+          <label>联系QQ：</label>
+          <%= @item.contact_qq %>
+        </li>
+        <li>
+          <label>IP：</label>
+          <%= @item.ip %>
+        </li>
+        <li>
+          <label>联系电话：</label>
+          <%= @item.contact_phone %>
+        </li>
+        <li class="from">
+          <label>来自：</label>
+          <%= @item.province_name %> - <%= @item.city_name %> - <%= @item.county_name %> - <%= @item.town_name %> - <%= @item.village_name %><br/>
+        </li>
+      </ul>
+      <div id="line"></div>
+      <div class="body">
+        <%= @item.body %>
+      </div>
     </div>
   </div>
   <div class="span3">

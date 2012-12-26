@@ -14,12 +14,10 @@
   }
 }
 
-.items-controller , .index-action{
+.items-controller {
   #condition-list{
     background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
-    border: 1px solid #DDDDDD;
-    padding-top: 5px;
-    padding-left: 16px;
+    padding: 5px 16px;
     div.bottom{
       background: none repeat scroll 0 0 transparent;
     }
@@ -85,11 +83,12 @@
       }
     }
   }
+}
+.index-action{ 
   #items-list{
-    background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
-    border: 1px solid #DDDDDD;
-    padding-left: 16px;
-    padding-top: 5px;
+    /*background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
+    margin-top: 10px;
+    padding: 5px 16px;
     table.list{
       th{ text-align:left;font-weight:bold; }
       th.area{width: 120px;}
@@ -99,6 +98,35 @@
       th.contact{width: 120px;}
       th.created{width: 120px;}
       td{height: 38px;}
+    }
+  }
+}
+.show-action{
+  div.content{
+    margin-top: 10px;
+    padding: 4px 16px;
+    ul.prop{
+      margin: 0;
+      li{
+        list-style: none outside none;
+        float: left;
+        width: 49%;
+        label{
+          float: left;
+          display: inline;
+          width: 70px;
+        }
+      }
+      li.from{ width: 100%; }
+    }
+    #line{
+      clear:both;
+      border-top:1px dashed #ccc;
+      width:100%;
+      margin-bottom:10px
+    }
+    div.body{
+      
     }
   }
 }
