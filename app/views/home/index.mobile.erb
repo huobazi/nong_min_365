@@ -3,7 +3,7 @@
     <% unless signed_in? %>
       <%= link_to '注册', signup_path, "class" => "ui-btn-left" %>
     <% end %>
-    <h1><%= @title || 'NongMing365' %></h1>
+    <h1><%= @page_title || @title || 'NongMing365' %></h1>
     <% unless signed_in? %>
       <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
     <% else %>

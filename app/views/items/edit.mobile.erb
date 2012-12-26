@@ -7,7 +7,7 @@
     <% if request.referer.to_s.empty? %>
       <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
     <% end %>
-    <h1><%= @item.title || 'NongMing365' %></h1>
+    <h1><%= @page_title || @title || 'NongMing365' %></h1>
     <% unless signed_in? %>
       <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
     <% else %>

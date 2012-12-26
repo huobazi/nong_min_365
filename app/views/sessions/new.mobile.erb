@@ -1,7 +1,7 @@
 <div id="page" data-role="page">
   <div id="header-bar" data-role="header" data-theme="b" >
     <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
-    <h1><%= @title || 'NongMing365' %></h1>
+    <h1><%= @page_title || @title || 'NongMing365' %></h1>
     <%= link_to '注册', signup_path, "class" => "ui-btn-right" %>
   </div>
   <div data-role="content">
