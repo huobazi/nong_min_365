@@ -110,13 +110,14 @@
       li{
         list-style: none outside none;
         float: left;
-        width: 49%;
         label{
           float: left;
           display: inline;
           width: 70px;
         }
       }
+      li.left{width: 180px;}
+      li.right{width: 480px;}
       li.from{ width: 100%; }
     }
     #line{

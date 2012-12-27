@@ -3,35 +3,35 @@
     <%= render "condition_list" %>
     <div class="box content">
       <ul class="prop">
-        <li>
+        <li class="left">
           <label> 产品：</label>
           <%= @item.title %>
         </li>
-        <li>
+        <li class="right">
           <label> 数量：</label>
           <%= @item.amount %>
         </li>
-        <li>
+        <li class="left">
           <label>分类：</label>
           <%= @item.category.name %> 
         </li>
-        <li>
+        <li class="right">
           <label>类型：</label>
           <%= @item.xtype == 1 ? '供应' : '求购' %> <br/>
         </li>
-        <li>
+        <li class="left">
           <label>联系人：</label>
           <%= @item.contact_name %> 
         </li>
-        <li>
+        <li class="right">
           <label>联系QQ：</label>
           <%= @item.contact_qq %>
         </li>
-        <li>
+        <li class="left">
           <label>IP：</label>
           <%= @item.ip %>
         </li>
-        <li>
+        <li class="right">
           <label>联系电话：</label>
           <%= @item.contact_phone %>
         </li>
