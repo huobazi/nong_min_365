@@ -5,16 +5,6 @@
         <dt>已选</dt>
         <dd>
         <ul class="current-condition">
-          <% if @current_areas %>
-            <% @current_areas.each do |a| %>
-              <li>
-                <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_area_path(a.code) %>" >
-                  <%= a.name %>
-                  <span></span>
-                </a>
-              </li>
-            <% end %>
-          <% end %>
           <% if @current_category_name.size > 0 %>
             <li>
               <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_category_path %>" >
@@ -31,6 +21,17 @@
               </a>
             </li>
           <% end%>
+
+          <% if @current_areas %>
+            <% @current_areas.each do |a| %>
+              <li>
+                <a class="close-bredcrumb" href="<%= build_items_list_condition_remove_area_path(a.code) %>" >
+                  <%= a.name %>
+                  <span></span>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
         </dd> 
       </dl> 
@@ -60,17 +61,17 @@
     </dl> 
   </div>
   <% if @regions and @regions.size > 0 %>
-  <div class="bottom">
-    <dl>
-      <dt><%= @current_areas.nil? ? "地区" : "下辖" %></dt>
-      <dd>
-      <ul>
-        <% @regions.each do |r| %>
-          <li><%= build_items_list_condition_area_link(r.code, r.name) %></li>
-        <% end %>
-      </ul>
-      </dd> 
-    </dl> 
-  </div>
+    <div class="bottom">
+      <dl>
+        <dt><%= @current_areas.nil? ? "地区" : "下辖" %></dt>
+        <dd>
+        <ul>
+          <% @regions.each do |r| %>
+            <li><%= build_items_list_condition_area_link(r.code, r.name) %></li>
+          <% end %>
+        </ul>
+        </dd> 
+      </dl> 
+    </div>
   <% end %>
 </div>

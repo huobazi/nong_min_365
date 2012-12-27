@@ -130,6 +130,6 @@ module ItemsHelper
       link_text       = item.province_name
     end
 
-    link_to link_text, items_path(the_hash)
+    link_to link_text, condition_list_items_path(the_hash)
   end
 end

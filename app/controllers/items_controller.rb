@@ -22,6 +22,22 @@ class ItemsController < ApplicationController
     prepare_items_condition_list(category_id, area_code, xtype)   
 
     @items = items_scope.page(params[:page]).per(page_size)
+    
+    drop_breadcrumb('产品', items_path)
+
+    if @current_category_name.size > 0 
+      drop_breadcrumb @current_category_name, condition_list_items_path(:category => category_id, :xtype => nil, :area => nil)
+    end
+
+    if @current_xtype_name.size > 0
+      drop_breadcrumb @current_xtype_name, condition_list_items_path(:category => category_id, :xtype => xtype, :area => nil)
+    end
+
+    if @current_areas and @current_areas.size > 0
+      @current_areas.each do |a| 
+        drop_breadcrumb a.name, condition_list_items_path(:area => a.code, :category => category_id, :xtype => xtype)
+      end
+    end
 
     respond_to do |format|
       format.html { }
@@ -33,13 +49,15 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @page_tiele = @item.title
-    drop_breadcrumb(@item.province_name, condition_list_items_path(:area => @item.province_code) )
-    drop_breadcrumb(@item.city_name, condition_list_items_path(:area => @item.city_code) )
-    drop_breadcrumb(@item.county_name, condition_list_items_path(:area => @item.county_code) )
-    drop_breadcrumb(@item.town_name, condition_list_items_path(:area => @item.town_code) )
-    drop_breadcrumb(@item.village_name, condition_list_items_path(:area => @item.village_code) )
-    drop_breadcrumb(@item.category.name, condition_list_items_path(:category => @item.category_id) )
-    drop_breadcrumb(@item.xtype == 1 ? '供应':'求购', condition_list_items_path(:xtype => @item.xtype) )
+    
+    drop_breadcrumb('产品', items_path)
+    drop_breadcrumb(@item.category.name, condition_list_items_path(:category => @item.category_id, :xtype => nil, :area => nil) )
+    drop_breadcrumb(@item.xtype == 1 ? '供应':'求购', condition_list_items_path(:category => @item.category_id, :xtype => @item.xtype, :area => nil) )
+    drop_breadcrumb(@item.province_name, condition_list_items_path(:area => @item.province_code, :category => @item.category_id, :xtype => @item.xtype) )
+    drop_breadcrumb(@item.city_name, condition_list_items_path(:area => @item.city_code, :category => @item.category_id, :xtype => @item.xtype) )
+    drop_breadcrumb(@item.county_name, condition_list_items_path(:area => @item.county_code, :category => @item.category_id, :xtype => @item.xtype) )
+    drop_breadcrumb(@item.town_name, condition_list_items_path(:area => @item.town_code, :category => @item.category_id, :xtype => @item.xtype) )
+    drop_breadcrumb(@item.village_name, condition_list_items_path(:area => @item.village_code, :category => @item.category_id, :xtype => @item.xtype ) )
     drop_breadcrumb(@item.title, item_path(@item) )
 
     prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
