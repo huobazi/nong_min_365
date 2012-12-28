@@ -31,8 +31,6 @@
 
 class Item < ActiveRecord::Base
   
-  default_scope order('id desc')
-
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count
 
@@ -62,6 +60,8 @@ class Item < ActiveRecord::Base
   validates :contact_qq, :presence => true, :length => { :in => 5..20 }, :numericality => { :only_integer => true }
   validates :body, :presence => true
   validates :password, :presence => true, :length => { :in => 6..20 }, :if => :require_password?
+  
+  scope :latest, order(' id DESC ')
 
   def require_password?
     user_id == 0

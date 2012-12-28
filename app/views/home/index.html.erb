@@ -4,16 +4,10 @@
   </div>
   <div class="span9">
     <%= render "area_map" %>
-    <div>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
-      xxxxxxx</br>
+    <div id="items-list">
+      <% @categories.each do |c| %>
+      <%= render_cell :items, :homepage_latest_items ,{:category_id => c.id, :categories => @categories} %>
+      <% end %>
     </div>
   </div>
 </div>

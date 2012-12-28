@@ -23,5 +23,15 @@ class ApplicationController < ActionController::Base
       request.format = :mobilejs
     end
   end
+end
 
+module BootstrapHelper
+    module Breadcrumb
+        module InstanceMethods
+            protected
+            def set_breadcrumbs
+                @breadcrumbs = ["<a href='/'><i class = 'icon-home'></i>首页</a>".html_safe]
+            end
+        end
+    end
 end

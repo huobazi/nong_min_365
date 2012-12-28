@@ -1,0 +1,30 @@
+<div class="header">
+  <%= link_to @category.name, condition_list_items_path(:category => @category.id) %>
+  <span class="count">
+    <%= @category.items_count %>
+  </span>
+  <span class="more">
+    <%= link_to '更多...', condition_list_items_path(:category => @category.id) %>
+  </span>
+</div>
+<ul class="items">
+  <% @items.each  do |item| %>
+    <li>
+      <span class="area">
+        <%= link_to '【' + item.province_name + '】' ,condition_list_items_path(:area => item.province_code) %>
+      </span>
+      <span class="title">
+        <%= link_to item.title , item_path(item) %>
+        <span class="amount">
+          <%= item.amount %>
+        </span>
+      </span>
+      <span class="contact">
+        【<%= item.contact_name %>】
+      </span>
+      <span class="created">
+        <%= item.created_at.strftime('%Y-%m-%d %H:%M') %>
+      </span>
+    </li>
+  <% end %>
+</ul>

@@ -1,29 +1,17 @@
 // Place all the styles related to the Ads controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.items-controller , .create-action{
-  .simple_form{
-    .control-group{
-      label{ width: 80px; }
-      .controls {
-        margin-left: 100px;
-        .regions{ width: 100px; margin-right: 6px; }
-        .body_editor{ height: 150px; }
-      }
-    }
-  }
-}
 
 .items-controller {
   #condition-list{
-    background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
+    background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
     padding: 5px 16px;
     div.bottom{
       background: none repeat scroll 0 0 transparent;
     }
     div{
       padding-bottom: 20px;
-      background: url("icons/p-filer-bg-dotted.gif") repeat-x scroll left bottom transparent;
+      background: url("bg/p-filer-bg-dotted.gif") repeat-x scroll left bottom transparent;
       vertical-align: middle;
     }
     dl{
@@ -83,10 +71,20 @@
       }
     }
   }
-}
-.index-action{ 
-  #items-list{
-    /*background: url("icons/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
+
+  .create-action,  .simple_form{
+    .control-group{
+      label{ width: 80px; }
+      .controls {
+        margin-left: 100px;
+        .regions{ width: 100px; margin-right: 6px; }
+        .body_editor{ height: 150px; }
+      }
+    }
+  }
+
+  .index-action,  div#items-list{
+    /*background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
     margin-top: 10px;
     padding: 5px 16px;
     table.list{
@@ -100,9 +98,7 @@
       td{height: 38px;}
     }
   }
-}
-.show-action{
-  div.content{
+  .show-action,  div.content{
     margin-top: 10px;
     padding: 4px 16px;
     ul.prop{
@@ -116,8 +112,8 @@
           width: 70px;
         }
       }
-      li.left{width: 180px;}
-      li.right{width: 480px;}
+      li.left{width: 220px;}
+      li.right{width: 440px;}
       li.from{ width: 100%; }
     }
     #line{
@@ -127,7 +123,7 @@
       margin-bottom:10px
     }
     div.body{
-      
+
     }
   }
 }

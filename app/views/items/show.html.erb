@@ -4,8 +4,8 @@
     <div class="box content">
       <ul class="prop">
         <li class="left">
-          <label> 产品：</label>
-          <%= @item.title %>
+          <label> 发布时间：</label>
+          <%= @item.created_at.strftime('%Y-%m-%d %H:%M') %>
         </li>
         <li class="right">
           <label> 数量：</label>

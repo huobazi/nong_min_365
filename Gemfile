@@ -47,6 +47,9 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'ruby-pinyin', '0.1.0'
 gem 'default_value_for', '2.0.1'
 
+# Cells
+gem 'cells', '3.8.6'
+
 # For mobile devise
 gem 'mobylette', '3.3.1'
 

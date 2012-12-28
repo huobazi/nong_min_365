@@ -9,9 +9,9 @@ class ItemsController < ApplicationController
     xtype       = params[:xtype].to_i
     category_id = params[:category].to_i
 
-    items_scope = Item
-    items_scope = items_scope.where('category_id = ?', category_id) if category_id > 0 
-    items_scope = items_scope.where('xtype = ?', xtype) if xtype > 0 
+    items_scope = Item.latest
+    items_scope = items_scope.where(:category_id => category_id) if category_id > 0 
+    items_scope = items_scope.where(:xtype => xtype) if xtype > 0 
 
     if not area_code.empty?
       code_name_ary = %w(province_code city_code county_code town_code village_code)
