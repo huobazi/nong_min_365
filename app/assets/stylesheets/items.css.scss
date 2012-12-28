@@ -3,127 +3,130 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .items-controller {
-  #condition-list{
-    background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
-    padding: 5px 16px;
-    div.bottom{
-      background: none repeat scroll 0 0 transparent;
-    }
-    div{
-      padding-bottom: 20px;
-      background: url("bg/p-filer-bg-dotted.gif") repeat-x scroll left bottom transparent;
-      vertical-align: middle;
-    }
-    dl{
-      clear: both;
-      content: ".";
-      display: block;
-      height: 0;
-      dt{
-        float: left;
-        display: inline;
-      }
-      dd{
-        a.current{background: none repeat scroll 0 0 #4598D2;}
-        ul.current-condition{
-          li{
-            a{
-              display: inline;
-              background: none repeat scroll 0 0 #FFFFFF;
-              border: 1px solid #CCCCCC;
-              border-radius: 2px 2px 2px 2px;
-              height: 18px;
-              line-height: 18px;
-              margin-right: 8px;
-              padding: 0 22px 0 8px;
-              position: relative;
-              cursor: pointer;
-              white-space: nowrap;
-              text-decoration: none;
-              span {
-                position: absolute;
-                right: 0;
-                top: -1px;
-                width: 18px;
-                height: 18px;
-                cursor: pointer;
-                background: url("icons/allIcon.gif") no-repeat scroll 0 0 transparent;
-                background-position: left -99px;
-              }
-            }
-            a:hover {
-              text-decoration: none;
-              border: 1px solid #E5004F;
-            }
-            a:hover span {
-              text-decoration: none;
-              background-position: left -81px;
-            }
-          }
+    #condition-list{
+        background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;
+        padding: 5px 16px;
+        div.bottom{
+            padding-bottom: 24px;
+            background: none repeat scroll 0 0 transparent;
         }
-      } 
-      li {
-        list-style: none outside none;
-        float:left; 
-        a {
-          padding: 2px 5px;
+        div{
+            padding-bottom: 10px;
+            background: url("bg/p-filer-bg-dotted.gif") repeat-x scroll left bottom transparent;
+            vertical-align: middle;
+            height:100%;
         }
-      }
-    }
-  }
-
-  .create-action,  .simple_form{
-    .control-group{
-      label{ width: 80px; }
-      .controls {
-        margin-left: 100px;
-        .regions{ width: 100px; margin-right: 6px; }
-        .body_editor{ height: 150px; }
-      }
-    }
-  }
-
-  .index-action,  div#items-list{
-    /*background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
-    margin-top: 10px;
-    padding: 5px 16px;
-    table.list{
-      th{ text-align:left;font-weight:bold; }
-      th.area{width: 120px;}
-      th.title{}
-      th.amount{width: 100px;}
-      th.xtype{width: 80px;}
-      th.contact{width: 120px;}
-      th.created{width: 120px;}
-      td{height: 38px;}
-    }
-  }
-  .show-action,  div.content{
-    margin-top: 10px;
-    padding: 4px 16px;
-    ul.prop{
-      margin: 0;
-      li{
-        list-style: none outside none;
-        float: left;
-        label{
-          float: left;
-          display: inline;
-          width: 70px;
+        dl{
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            dt{
+                float: left;
+                display: inline;
+            }
+            dd{
+                height:100%;
+                a.current{background: none repeat scroll 0 0 #4598D2;}
+                ul.current-condition{
+                    li{
+                        a{
+                            display: inline;
+                            background: none repeat scroll 0 0 #FFFFFF;
+                            border: 1px solid #CCCCCC;
+                            border-radius: 2px 2px 2px 2px;
+                            height: 18px;
+                            line-height: 18px;
+                            margin-right: 8px;
+                            padding: 0 22px 0 8px;
+                            position: relative;
+                            cursor: pointer;
+                            white-space: nowrap;
+                            text-decoration: none;
+                            span {
+                                position: absolute;
+                                right: 0;
+                                top: -1px;
+                                width: 18px;
+                                height: 18px;
+                                cursor: pointer;
+                                background: url("icons/allIcon.gif") no-repeat scroll 0 0 transparent;
+                                background-position: left -99px;
+                            }
+                        }
+                        a:hover {
+                            text-decoration: none;
+                            border: 1px solid #E5004F;
+                        }
+                        a:hover span {
+                            text-decoration: none;
+                            background-position: left -81px;
+                        }
+                    }
+                }
+            } 
+            li {
+                list-style: none outside none;
+                float:left; 
+                a {
+                    padding: 2px 5px;
+                }
+            }
         }
-      }
-      li.left{width: 220px;}
-      li.right{width: 440px;}
-      li.from{ width: 100%; }
     }
-    #line{
-      clear:both;
-      border-top:1px dashed #ccc;
-      width:100%;
-      margin-bottom:10px
-    }
-    div.body{
 
+    .create-action,  .simple_form{
+        .control-group{
+            label{ width: 80px; }
+            .controls {
+                margin-left: 100px;
+                .regions{ width: 100px; margin-right: 6px; }
+                .body_editor{ height: 150px; }
+            }
+        }
     }
-  }
+
+    .index-action,  div#items-list{
+        /*background: url("bg/p-filer-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
+        margin-top: 10px;
+        padding: 5px 16px;
+        table.list{
+            th{ text-align:left;font-weight:bold; }
+            th.area{width: 120px;}
+            th.title{}
+            th.amount{width: 100px;}
+            th.xtype{width: 80px;}
+            th.contact{width: 120px;}
+            th.created{width: 120px;}
+            td{height: 38px;}
+        }
+    }
+    .show-action,  div.content{
+        margin-top: 10px;
+        padding: 4px 16px;
+        ul.prop{
+            margin: 0;
+            li{
+                list-style: none outside none;
+                float: left;
+                label{
+                    float: left;
+                    display: inline;
+                    width: 70px;
+                }
+            }
+            li.left{width: 220px;}
+            li.right{width: 440px;}
+            li.from{ width: 100%; }
+        }
+        #line{
+            clear:both;
+            border-top:1px dashed #ccc;
+            width:100%;
+            margin-bottom:10px
+        }
+        div.body{
+
+        }
+    }
 }
