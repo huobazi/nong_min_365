@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    page_size   = 1
+    page_size   = 20 
     area_code   = params[:area] || ''
     xtype       = params[:xtype].to_i
     category_id = params[:category].to_i

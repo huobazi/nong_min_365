@@ -15,9 +15,8 @@
       </span>
       <span class="title">
         <%= link_to item.title , item_path(item) %>
-        <span class="amount">
-          <%= item.amount %>
-        </span>
+        &nbsp;<%= item.amount %>
+        &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
       </span>
       <span class="contact">
         【<%= item.contact_name %>】

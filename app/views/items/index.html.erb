@@ -2,30 +2,34 @@
   <div class="span9">
     <%= render "condition_list" %>
     <div id="items-list" class="box">
-      <table class="list" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tbody>
-          <tr>
-            <th class="area">地区</th>
-            <th class="title">标题</th>
-            <th class="amount">数量</th>
-            <th class="xtype">类型</th>
-            <th class="contact">联系人</th>
-            <th class="created">日期</th>
-          </tr>
-          <% @items.each do |item| %>
-            <tr>
-              <td><%= build_items_list_area_link item %></td>
-              <td><%= link_to item.title, item_path(item) %></td>
-              <td><%= item.amount %></td>
-              <td><%= item.xtype == 1 ? '供应' : '求购' %></td>
-              <td><%= item.contact_name %></td>
-              <td><%= item.created_at.strftime('%Y-%m-%d') %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @items %>
-    </div>
+      <ul class="items">
+        <li class="header">
+          <span class="area">地区</span>
+          <span class="title">标题</span>
+          <span class="contact">联系人</span>
+          <span class="created">发布时间</span>
+        </li>
+        <% @items.each  do |item| %>
+          <li>
+            <span class="area">
+              <%= build_items_list_area_link item %>
+            </span>
+            <span class="title">
+              <%= link_to item.title , item_path(item) %>
+            &nbsp;<%= item.amount %>
+            &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
+        </span>
+        <span class="contact">
+          【<%= item.contact_name %>】
+        </span>
+        <span class="created">
+          <%= item.created_at.strftime('%Y-%m-%d %H:%M') %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @items %>
+</div>
   </div>
   <div class="span3">
     <%= render 'sidebar_for_new_item' %>
