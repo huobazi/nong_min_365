@@ -6,7 +6,7 @@
     <%= render "area_map" %>
     <div id="items-list">
       <% @categories.each do |c| %>
-      <%= render_cell :items, :homepage_latest_items ,{:category_id => c.id, :categories => @categories} %>
+        <%= render_cell :items, :homepage_latest_items ,{ :category_id => c.id, :categories => @categories, :row_count => 5 } %>
       <% end %>
     </div>
   </div>
