@@ -6,7 +6,7 @@ class ItemsCell < Cell::Rails
     category_id = args[:category_id]
 
     @category = categories.find{|x| x.id == category_id}
-    @items = Item.latest.where(:category_id => category_id)
+    @items = Item.latest.where(:category_id => category_id).limit(5)
 
     render
   end

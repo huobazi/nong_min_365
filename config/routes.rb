@@ -27,7 +27,12 @@ NongMin365::Application.routes.draw do
     root :to => "dashboard#index"
     resources :dashboard, :only => [:index]
     resources :users
-    resources :categories
+    resources :categories do
+      member do
+        put 'sort_up'
+        put 'sort_down'
+      end
+    end
   end
 
   # The priority is based upon ordecurrent_passwordr of creation:

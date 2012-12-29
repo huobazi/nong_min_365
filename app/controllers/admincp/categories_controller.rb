@@ -81,4 +81,27 @@ class Admincp::CategoriesController < Admincp::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sort_up 
+    @category = ::Category.find(params[:id])
+    @category.sort -= 1;
+    @category.save
+
+    respond_to do |format|
+      format.html { redirect_to admincp_categories_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def sort_down
+    @category = ::Category.find(params[:id])
+    @category.sort += 1;
+    @category.save
+
+    respond_to do |format|
+      format.html { redirect_to admincp_categories_url }
+      format.json { head :no_content }
+    end
+  end
+
 end

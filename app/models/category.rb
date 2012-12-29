@@ -9,10 +9,14 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  items_count :integer          default(0)
+#  sort        :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
   attr_accessible :name
+  
+  default_scope order('sort ASC')
 
   validates :name,
     :presence => true,

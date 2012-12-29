@@ -51,6 +51,8 @@ zh-CN:
     created_at: '创建与' 
     all: '所以' 
     or: '或'
+    sort_up: '上'
+    sort_down: '下'
   common:
     save: '保存'
     saving: '正在保存'

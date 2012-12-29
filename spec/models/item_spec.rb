@@ -1,4 +1,35 @@
 # -*- encoding : utf-8 -*-
+# == Schema Information
+#
+# Table name: items
+#
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  amount        :string(255)
+#  xtype         :integer
+#  province_code :string(255)
+#  contact_name  :string(255)
+#  contact_phone :string(255)
+#  contact_qq    :string(255)
+#  body          :text
+#  password      :string(255)
+#  category_id   :integer
+#  user_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  city_code     :string(255)
+#  county_code   :string(255)
+#  town_code     :string(255)
+#  village_code  :string(255)
+#  province_name :string(255)
+#  city_name     :string(255)
+#  county_name   :string(255)
+#  town_name     :string(255)
+#  village_name  :string(255)
+#  ip            :string(255)
+#
+
+# -*- encoding : utf-8 -*-
 require "spec_helper"
 
 describe Item do
