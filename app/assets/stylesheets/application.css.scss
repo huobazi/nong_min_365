@@ -1,7 +1,7 @@
 //-----------------------------------------
 // Variables come first
 //-----------------------------------------
-@import "application/variables";
+@import "application/_variables";
 
 //-----------------------------------------
 // Custom application partials
@@ -23,7 +23,7 @@
 //-----------------------------------------
 // Import application base theme 
 //-----------------------------------------
-@import "application/base";
+@import "application/_base";
 
 //-----------------------------------------
 // Import 

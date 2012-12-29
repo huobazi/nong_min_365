@@ -48,7 +48,7 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.2.1.1)
+    bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     bootstrap_helper (2.1.2)
       railties (~> 3.0)
@@ -212,7 +212,7 @@ GEM
       rspec (~> 2.11.0)
     ruby-pinyin (0.1.0)
     rubyzip (0.9.9)
-    sass (3.2.1)
+    sass (3.2.4)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -257,7 +257,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
-  bootstrap-sass (= 2.2.1.1)
+  bootstrap-sass (= 2.2.2.0)
   bootstrap_helper (= 2.1.2)
   cancan (= 1.6.8)
   capybara

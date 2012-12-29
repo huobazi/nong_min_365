@@ -1,5 +1,4 @@
 // Variables to customize the look and feel of Bootstrap
-// Swatch: United
 // Version: 2.0.2
 // -----------------------------------------------------
 
@@ -24,7 +23,7 @@ $white:                 #fff;
 // -------------------------
 $blue:                  #19B6EE;
 $blueDark:              #0064cd;
-$green:                 #38B44A;
+$green:                 #74B042;
 $red:                   #DF382C;
 $yellow:                #EFB73E;
 $orange:                #DD4814;
@@ -40,7 +39,7 @@ $textColor:             $grayDark;
 
 // Links
 // -------------------------
-$linkColor:             $orange;
+$linkColor:             $grayDark;
 $linkColorHover:        darken($linkColor, 15%);
 
 
@@ -134,16 +133,16 @@ $hrBorder:                $grayLighter;
 
 // Navbar
 // -------------------------
-$navbarHeight:                    40px;
-$navbarBackground:                $orange;
-$navbarBackgroundHighlight:       #CE4213;
+$navbarHeight:                    44px;
+$navbarBackground:                $green;
+$navbarBackgroundHighlight:       $green;
 
 $navbarText:                      $white;
 $navbarLinkColor:                 $white;
 $navbarLinkColorHover:            $white;
 $navbarLinkColorActive:           $navbarLinkColorHover;
-$navbarLinkBackgroundHover:       transparent;
-$navbarLinkBackgroundActive:      $navbarBackground;
+$navbarLinkBackgroundHover:       darken($navbarBackground, 10%);
+$navbarLinkBackgroundActive:      darken($navbarBackground, 10%);
 
 $navbarSearchBackground:          lighten($navbarBackground, 25%);
 $navbarSearchBackgroundFocus:     $white;

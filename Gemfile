@@ -21,7 +21,7 @@ group :assets do
   gem 'uglifier', '1.3.0'
   gem 'compass-rails', '1.0.3'
   gem 'compass-h5bp'
-  gem 'bootstrap-sass', '2.2.1.1'
+  gem 'bootstrap-sass', '2.2.2.0'
   gem 'font-awesome-rails', '0.4.1'
   gem 'kaminari-bootstrap', '0.1.3'
   gem 'chosen-rails', '0.9.8.3'

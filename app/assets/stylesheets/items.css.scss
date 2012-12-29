@@ -4,7 +4,7 @@
 
 .items-controller {
   #condition-list{
-    background: url("bg/box-bg-top.gif") repeat-x scroll left top #FDFDFD;
+    background: url("bg/box_bg_top.gif") repeat-x scroll left top #FDFDFD;
     padding: 5px 16px;
     div{
       height:auto !important;
@@ -34,8 +34,8 @@
             line-height:26px;
             a{
               display: inline;
-              background: none repeat scroll 0 0 #FFFFFF;
-              border: 1px solid #CCCCCC;
+              background: none repeat scroll 0 0 #ffF;
+              border: 1px solid #ccc;
               border-radius: 2px 2px 2px 2px;
               height: 18px;
               line-height: 18px;
@@ -89,7 +89,7 @@
   }
 
   .index-action,  div#items-list{
-    /*background: url("bg/box-bg-top.gif") repeat-x scroll left top #FDFDFD;*/
+    /*background: url("bg/box_bg_top.gif") repeat-x scroll left top #FDFDFD;*/
     margin-top: 10px;
     padding: 5px 6px;
     ul.items{
