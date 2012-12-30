@@ -34,9 +34,9 @@ zh-CN:
         province_code: '所在地'
         province: '所在省份'
         city: '所在城市'
-        county: '所在县'
-        town: '所在乡镇'
-        village: '所在村'
+        county: '所在县/区'
+        town: '所在乡/镇/街道'
+        village: '所在村/社区'
 
 
   web-app-theme: 
