@@ -148,7 +148,8 @@ class ItemsController < ApplicationController
     @categories = Category.all  
     @current_category_name = ''
     if category_id > 0
-      @current_category_name = @categories.find(category_id).first.name
+      @current_category = @categories.find{|x| x.id == category_id}
+      @current_category_name = @current_category.name
     end
 
     @current_xtype_name = ''
