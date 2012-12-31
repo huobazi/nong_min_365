@@ -14,6 +14,50 @@
       <%= link_to "退出", signout_path, method: "delete", "class" => "ui-btn-right" %>
     <% end %>
   </div>
-  <div data-role="content">
+  <div id="show-content" data-role="content">
+    <div class="box content">
+      <ul class="prop">
+        <li class="left">
+          <label> 发布时间：</label>
+          <%= @item.created_at.strftime('%Y-%m-%d %H:%M') %>
+        </li>
+        <li class="right">
+          <label> 数量：</label>
+          <%= @item.amount %>
+        </li>
+        <li class="left">
+          <label>分类：</label>
+          <%= @item.category.name %> 
+        </li>
+        <li class="right">
+          <label>类型：</label>
+          <%= @item.xtype == 1 ? '供应' : '求购' %> <br/>
+        </li>
+        <li class="left">
+          <label>联系人：</label>
+          <%= @item.contact_name %> 
+        </li>
+        <li class="right">
+          <label>联系QQ：</label>
+          <%= @item.contact_qq %>
+        </li>
+        <li class="left">
+          <label>IP：</label>
+          <%= @item.ip %>
+        </li>
+        <li class="right">
+          <label>联系电话：</label>
+          <%= @item.contact_phone %>
+        </li>
+        <li class="from">
+          <label>来自：</label>
+          <%= @item.province_name %> - <%= @item.city_name %> - <%= @item.county_name %> - <%= @item.town_name %> - <%= @item.village_name %><br/>
+        </li>
+      </ul>
+      <div id="line"></div>
+      <div class="body">
+        <%= @item.body %>
+      </div>
+    </div>
   </div>
 </div>
