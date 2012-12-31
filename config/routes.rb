@@ -15,6 +15,7 @@ NongMin365::Application.routes.draw do
     end
   end
 
+  get 'tags/:tag' => 'items#tags', :as => :items_tags
   #get 'items(.c:category)(.a:area)(.t:xtype)(.p:page)', :controller => :items, :action => :index, :as => :condition_list_items
   resources :sessions, :only =>[:create]
   resources :items do

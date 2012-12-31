@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     prepare_items_condition_list(category_id, area_code, xtype)   
 
     @items = items_scope.page(params[:page]).per(page_size)
-    
+
     drop_breadcrumb('产品', items_path)
 
     if @current_category_name.size > 0 
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
       @current_areas.each do |a| 
         drop_breadcrumb a.name, condition_list_items_path(:area => a.code, :category => category_id, :xtype => xtype)
       end
-    end
+    end  
 
     respond_to do |format|
       format.html { }
@@ -138,6 +138,19 @@ class ItemsController < ApplicationController
     redirect_to items_url 
   end
 
+  def tags
+    if params[:tag]
+      page_size = 20
+      prepare_items_condition_list(0, '', 0)
+      @items = Item.tagged_with(params[:tag]).page(params[:page]).per(page_size)
+
+      drop_breadcrumb('标签:' + params[:tag], items_tags_path(params[:tag]))
+      render 'index'
+    else
+      redirect_to items_path
+    end
+  end
+
   private 
   def prepare_items_condition_list(category_id, area_code, xtype)
     @current_params = {}
@@ -163,5 +176,6 @@ class ItemsController < ApplicationController
       temp_level, @regions = ChineseRegion.children(area_code)
       @current_areas       = ChineseRegion.get_parents(area_code)
     end
+
   end
 end

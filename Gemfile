@@ -42,6 +42,10 @@ gem 'cancan', '1.6.8'
 gem 'rails_admin', '0.2.0'
 gem 'rails-i18n', '0.6.6'
 
+# Tagging
+gem 'acts-as-taggable-on', '2.3.3'
+
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 gem 'ruby-pinyin', '0.1.0'

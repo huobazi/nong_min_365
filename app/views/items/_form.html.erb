@@ -38,6 +38,8 @@
     <%= f.input :contact_name %>
     <%= f.input :contact_phone %> 
     <%= f.input :contact_qq %>
+    <%= f.input :tag_list, 
+      :hint => "例:秦美,猕猴桃,陕西,眉县...(用逗号隔开的关键字,便于你的信息被搜索到)" %>
     <% if !signed_in? %>
       <%= f.input :password, :required => true %>
     <% end %>

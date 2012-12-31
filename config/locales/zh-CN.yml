@@ -37,6 +37,7 @@ zh-CN:
         county: '所在县/区'
         town: '所在乡/镇/街道'
         village: '所在村/社区'
+        tag_list: '标签'
 
 
   web-app-theme: 

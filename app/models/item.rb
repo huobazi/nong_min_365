@@ -31,6 +31,8 @@
 
 class Item < ActiveRecord::Base
   
+  acts_as_taggable_on :tags
+  
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count
 
@@ -44,7 +46,8 @@ class Item < ActiveRecord::Base
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
     :contact_phone, :contact_qq, :password, :title, :xtype,
-    :province_code, :city_code, :county_code, :town_code, :village_code
+    :province_code, :city_code, :county_code, :town_code, :village_code,
+    :tag_list
 
   validates :title, :presence => true, :length => { :in => 6..30 }
   validates :amount, :presence => true
