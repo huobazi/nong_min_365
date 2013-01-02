@@ -97,6 +97,34 @@ div.field .hint { font-size: 12px; color: #999;}
   bottom: 15px;
   right: 15px;
 }
+
+.box-header {
+  margin: 0 auto;
+  height: 30px;
+  line-height: 30px;
+  background-image: url(bg/latest_header.jpg);
+  border: 1px solid #9bbd73;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0 10px;
+}
 .box{
     border: 1px solid #DDD;
+}
+
+#tag_cloud{
+  float:left;
+  clear:both;
+  width:100%;
+  .box-header {
+  }
+  .box{
+    margin-top:4px;
+    padding: 4px;
+    line-height: 1.2;
+  }
+  .css1 { font-size: 0.8em; }
+  .css2 { font-size: 1.2em; }
+  .css3 { font-size: 1.6em; }
+  .css4 { font-size: 1.8em; }
 }

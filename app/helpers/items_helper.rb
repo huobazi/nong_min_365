@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 module ItemsHelper
-
   def build_items_list_condition_category_link(category_id, category_name)
     the_hash = {}
     category = @current_params[:category].to_i

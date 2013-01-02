@@ -1,6 +1,14 @@
 <div class="row main">
   <div class="span3">
     <%= render "categories_map" %>
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
+    </div>
   </div>
   <div class="span9">
     <%= render "area_map" %>

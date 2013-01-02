@@ -3,6 +3,14 @@
     <%= render 'form' %>
   </div>
   <div class="span3">
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
+    </div>
     <%= render 'sidebar_for_new_item' %>
   </div>
 </div>
