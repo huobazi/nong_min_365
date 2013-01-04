@@ -57,6 +57,11 @@
       <%= f.number_field :contact_qq , :required => true ,:placeholder=>'联系QQ', :value => @item.contact_qq %>
     </fieldset>
   </div>
+  <div data-role="fieldcontain">
+    <fieldset data-role="controlgroup">
+      <%= f.text_field :tag_list , :required => true ,:placeholder=>'例:秦美,猕猴桃,陕西,眉县...(用逗号隔开的关键字,便于你的信息被搜索到)', :value => @item.tag_list %>
+    </fieldset>
+  </div>
   <% if !signed_in? %>
     <div data-role="fieldcontain">
       <fieldset data-role="controlgroup">

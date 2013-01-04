@@ -42,7 +42,7 @@ class Item < ActiveRecord::Base
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
-  before_save :populate_region_name
+  before_save :populate_region_name,:fix_tags_name
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
     :contact_phone, :contact_qq, :password, :title, :xtype,
@@ -63,6 +63,7 @@ class Item < ActiveRecord::Base
   validates :contact_qq, :presence => true, :length => { :in => 5..20 }, :numericality => { :only_integer => true }
   validates :body, :presence => true
   validates :password, :presence => true, :length => { :in => 6..20 }, :if => :require_password?
+  validates :tag_list, :presence => true
   
   scope :latest, order(' id DESC ')
 
@@ -82,4 +83,11 @@ class Item < ActiveRecord::Base
    self.town_name     = self.town.name
    self.village_name  = self.village.name
   end
+
+  private
+  def fix_tags_name 
+    # 全角逗号的处理
+    self.tag_list = self.tag_list.join(',').gsub(/，/,',')
+  end
+  
 end
