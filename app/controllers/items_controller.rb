@@ -65,8 +65,8 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @page_tiele = '发布'
-    drop_breadcrumb("发布", new_item_path)
+    @page_tiele = '发布产品'
+    drop_breadcrumb("发布产品", new_item_path)
 
     @item = Item.new
     @provinces = ChineseRegion.provinces
