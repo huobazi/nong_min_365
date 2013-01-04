@@ -100,7 +100,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.js { render :layout => false }
-        format.mobile { redirect_to(@item), :notice => '创建成功！' }
+        format.mobile { redirect_to @item, :notice => '创建成功！' }
       else
         format.js { render :layout => false }
         format.mobile {
