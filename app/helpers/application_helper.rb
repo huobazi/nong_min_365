@@ -39,9 +39,18 @@ module ApplicationHelper
     end
   end
 
-  def ie_html(attrs={}, &block)
-    warn "[DEPRECATION] 'ie_html' is deprecated. Use html_tag instead."
-    html_tag(attrs, &block)
+  def render_body_tag
+    class_attribute = ["#{action_name}-action"].join(" ")
+    id_attribute = (@body_id)? " id=\"#{@body_id}\"" : " id=\"#{controller_name}-controller-#{action_name}-action\"" 
+
+    raw(%Q|<!--[if lt IE 7 ]>
+<body class="#{class_attribute} ie6"><![endif]-->
+<!--[if gte IE 7 ]>
+<body class="#{class_attribute} ie"><![endif]-->
+<!--[if !IE]>-->
+<body#{id_attribute} class="#{class_attribute}">
+<!--<![endif]-->|)
+
   end
 
   def google_account_id
@@ -50,21 +59,21 @@ module ApplicationHelper
 
   def google_api_key
     ENV['GOOGLE_API_KEY'] || html5_rails_config(:google_api_key)
-  end
+end
 
   private
 
-  def add_class(name, attrs)
-    classes = attrs[:class] || ""
-    classes.strip!
-    classes = " " + classes if !classes.blank?
-    classes = name + classes
-    attrs.merge(:class => classes)
-  end
+def add_class(name, attrs)
+  classes = attrs[:class] || ""
+  classes.strip!
+  classes = " " + classes if !classes.blank?
+  classes = name + classes
+  attrs.merge(:class => classes)
+end
 
-  def html5_rails_config(key)
-    configs = YAML.load_file(File.join(::Rails.root, 'config', 'html5_rails.yml'))[::Rails.env.to_sym] rescue {}
-    configs[key]
-  end
+def html5_rails_config(key)
+  configs = YAML.load_file(File.join(::Rails.root, 'config', 'html5_rails.yml'))[::Rails.env.to_sym] rescue {}
+  configs[key]
+end
 
 end

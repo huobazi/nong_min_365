@@ -80,98 +80,107 @@
       }
     }
   }
-
-  .create-action,  .simple_form{
-    .control-group{
-      label{ width: 80px; }
-      .controls {
-        margin-left: 100px;
-        .regions{ width: 100px; margin-right: 6px; }
-        .body_editor{ height: 150px; }
-      }
-    }
-  }
-
-  .index-action,  div#items-list{
-    /*background: url("bg/box_bg_top.gif") repeat-x scroll left top #FDFDFD;*/
-    margin-top: 10px;
-    padding: 5px 6px;
-    ul.items{
-      margin-left:0;
-      li.header{
-        margin: 0 auto;
-        height: 30px;
-        line-height: 30px;
-        background-image: url(bg/latest_header.jpg);
-        border:none; 
-        font-size: 14px;
-        font-weight: bold;
-        padding: 0 10px;
-      }
-      li{
-        list-style: none outside none;
-        border-bottom: 1px dashed #9bbd73;
-        height:34px;
-        line-height:34px;
-        padding: 0 6px;
-        span{
-          display:block;
-          float:left;
-          overflow:hidden;
-          text-align:left;
-        }
-        span.area{
-          width:120px;
-          font-weight:bold;
-        }
-        span.title{
-          width: 280px;
-        }
-        span.contact{
-          width:120px;
-        }
-        span.created{
-          width:120px;
-          float:right;
-        }
-      }
-    }
-  }
-  .show-action,  div.content{
-    margin-top: 10px;
-    padding: 4px 16px;
-    ul.prop{
-      margin: 0;
-      li{
-        list-style: none outside none;
-        float: left;
-        label{
-          float: left;
-          display: inline;
-          width: 70px;
-        }
-      }
-      li.left{width: 220px;}
-      li.right{width: 440px;}
-      li.from{ width: 100%; }
-      li.tags{ width: 100%; }
-    }
-    #line{
-      clear:both;
-      border-top:1px dashed #ccc;
-      width:100%;
-      margin-bottom:10px
-    }
-    div.body{
-
-    }
-  }
-
   #tag_cloud{
     margin: 0;
     .box-header {
     }
     .box{
+    }
+  }
+
+  .create-action, .new-action, .edit-action{
+    .simple_form{
+      .control-group{
+        label{ width: 80px; }
+        .controls {
+          margin-left: 100px;
+          .regions{ width: 100px; margin-right: 6px; }
+          textarea.body-editor{
+            height: 150px; 
+            width: 420px;
+          }
+        }
+      }
+    } 
+  }
+
+  .index-action, .tags-action{
+    div#items-list{
+      /*background: url("bg/box_bg_top.gif") repeat-x scroll left top #FDFDFD;*/
+      margin-top: 10px;
+      padding: 5px 6px;
+      ul.items{
+        margin-left:0;
+        li.header{
+          margin: 0 auto;
+          height: 30px;
+          line-height: 30px;
+          background-image: url(bg/latest_header.jpg);
+          border:none; 
+          font-size: 14px;
+          font-weight: bold;
+          padding: 0 10px;
+        }
+        li{
+          list-style: none outside none;
+          border-bottom: 1px dashed #9bbd73;
+          height:34px;
+          line-height:34px;
+          padding: 0 6px;
+          span{
+            display:block;
+            float:left;
+            overflow:hidden;
+            text-align:left;
+          }
+          span.area{
+            width:120px;
+            font-weight:bold;
+          }
+          span.title{
+            width: 280px;
+          }
+          span.contact{
+            width:120px;
+          }
+          span.created{
+            width:120px;
+            float:right;
+          }
+        }
+      }
+    }
+  }
+
+  .show-action{
+    div.content{
+      margin-top: 10px;
+      padding: 4px 16px;
+      ul.prop{
+        margin: 0;
+        li{
+          list-style: none outside none;
+          float: left;
+          label{
+            float: left;
+            display: inline;
+            width: 70px;
+          }
+        }
+        li.left{width: 220px;}
+        li.right{width: 440px;}
+        li.from{ width: 100%; }
+        li.tags{ width: 100%; }
+      }
+      #line{
+        clear:both;
+        border-top:1px dashed #ccc;
+        width:100%;
+        margin-bottom:10px
+      }
+      div.body{
+
+      }
     }
   }
 }
