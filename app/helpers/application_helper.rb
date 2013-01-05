@@ -66,8 +66,8 @@ end
 def add_class(name, attrs)
   classes = attrs[:class] || ""
   classes.strip!
-  classes = " " + classes if !classes.blank?
-  classes = name + classes
+  classes = classes + " " if !classes.blank?
+  classes = classes + name
   attrs.merge(:class => classes)
 end
 
