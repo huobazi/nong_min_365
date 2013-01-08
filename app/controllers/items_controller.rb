@@ -61,6 +61,8 @@ class ItemsController < ApplicationController
     drop_breadcrumb(@item.title, item_path(@item) )
 
     prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
+
+    Item.increment_counter(:view_count , @item.id)
   end
 
   # GET /items/new

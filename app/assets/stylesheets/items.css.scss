@@ -90,6 +90,14 @@
 
   .create-action, .new-action, .edit-action{
     .simple_form{
+      legend{
+        span{
+          font-size:13px;
+          font-weight:normal;
+          color:#369;
+          a{color:red;}
+        }
+      }
       .control-group{
         label{ width: 80px; }
         .controls {

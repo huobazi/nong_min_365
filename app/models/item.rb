@@ -6,12 +6,12 @@
 #  id            :integer          not null, primary key
 #  title         :string(255)
 #  amount        :string(255)
+#  xtype         :integer
 #  province_code :string(255)
 #  contact_name  :string(255)
 #  contact_phone :string(255)
 #  contact_qq    :string(255)
 #  body          :text
-#  password      :string(255)
 #  category_id   :integer
 #  user_id       :integer
 #  created_at    :datetime         not null
@@ -26,9 +26,10 @@
 #  town_name     :string(255)
 #  village_name  :string(255)
 #  ip            :string(255)
-#  xtype         :integer
+#  view_count    :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   
   acts_as_taggable_on :tags
@@ -45,14 +46,14 @@ class Item < ActiveRecord::Base
   before_save :populate_region_name,:fix_tags_name
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
-    :contact_phone, :contact_qq, :password, :title, :xtype,
+    :contact_phone, :contact_qq, :title, :xtype,
     :province_code, :city_code, :county_code, :town_code, :village_code,
     :tag_list
 
   validates :title, :presence => true, :length => { :in => 6..30 }
   validates :amount, :presence => true
   validates :category_id, :presence => { :message => '必须选择' }
-  validates :xtype, :presence => { :message => '必须选择' }
+  #validates :xtype, :presence => { :message => '必须选择' }
   validates :province_code, :presence => true
   validates :city_code, :presence => true
   validates :county_code, :presence => true
@@ -62,14 +63,9 @@ class Item < ActiveRecord::Base
   validates :contact_phone, :presence => true, :length => { :in => 7..20 }, :numericality => { :only_integer => true }
   validates :contact_qq, :presence => true, :length => { :in => 5..20 }, :numericality => { :only_integer => true }
   validates :body, :presence => true
-  validates :password, :presence => true, :length => { :in => 6..20 }, :if => :require_password?
   validates :tag_list, :presence => true
   
   scope :latest, order(' id DESC ')
-
-  def require_password?
-    user_id == 0
-  end
 
   def region_name
    [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  

@@ -62,17 +62,7 @@
       <%= f.text_field :tag_list , :required => true ,:placeholder=>'例:秦美,猕猴桃,陕西,眉县...(用逗号隔开的关键字,便于你的信息被搜索到)', :value => @item.tag_list %>
     </fieldset>
   </div>
-  <% if !signed_in? %>
-    <div data-role="fieldcontain">
-      <fieldset data-role="controlgroup">
-        <%= f.password_field :password, :required => true , :placeholder=>'密码'%>
-      </fieldset>
-    </div>
-  <% end %>
-  <div class="form-actions">
-    <%= link_to(t("common.cancel"), @item.id.blank?? root_path : item_path(@item.id), 'data-role' => "button",'data-icon'=> 'back')%>
-    <input type="submit" data-icon="forward" data-iconpos="right" value="保存" />
-  </div>
+      <input type="submit" data-icon="forward" data-iconpos="right" value="发布" />
 <% end %>
 <% content_for :javascripts do %>
 <% end %>

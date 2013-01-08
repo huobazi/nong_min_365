@@ -12,7 +12,6 @@
 #  contact_phone :string(255)
 #  contact_qq    :string(255)
 #  body          :text
-#  password      :string(255)
 #  category_id   :integer
 #  user_id       :integer
 #  created_at    :datetime         not null
@@ -27,8 +26,11 @@
 #  town_name     :string(255)
 #  village_name  :string(255)
 #  ip            :string(255)
+#  view_count    :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require "spec_helper"
 

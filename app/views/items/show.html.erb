@@ -3,44 +3,19 @@
     <%= render "condition_list" %>
     <div class="box content">
       <ul class="prop">
-        <li class="left">
-          <label> 发布时间：</label>
-          <%= @item.created_at.strftime('%Y-%m-%d %H:%M') %>
-        </li>
-        <li class="right">
-          <label> 数量：</label>
-          <%= @item.amount %>
-        </li>
-        <li class="left">
-          <label>分类：</label>
-          <%= @item.category.name %> 
-        </li>
-        <li class="right">
-          <label>类型：</label>
-          <%= @item.xtype == 1 ? '供应' : '求购' %>
-        </li>
-        <li class="left">
-          <label>联系人：</label>
-          <%= @item.contact_name %> 
-        </li>
-        <li class="right">
-          <label>联系QQ：</label>
-          <%= @item.contact_qq %>
-        </li>
-        <li class="left">
-          <label>IP：</label>
-          <%= @item.ip %>
-        </li>
-        <li class="right">
-          <label>联系电话：</label>
-          <%= @item.contact_phone %>
-        </li>
-        <li class="from">
-          <label>来自：</label>
+        <li class="left"><label>数量：</label> <%= @item.amount %> </li>
+        <li class="right"><label>发布时间：</label> <%= @item.created_at.strftime('%Y-%m-%d %H:%M') %> </li>
+        <li class="left"><label>分类：</label> <%= @item.category.name %> </li>
+        <li class="right"><label>类型：</label> <%= @item.xtype == 1 ? '供应' : '求购' %> </li>
+        <li class="left"><label>联系人：</label> <%= @item.contact_name %> </li>
+        <li class="right"><label>联系QQ：</label> <%= @item.contact_qq %> </li>
+        <li class="left"><label>IP：</label> <%= @item.ip %> </li>
+        <li class="right"><label>联系电话：</label> <%= @item.contact_phone %> </li>
+        <li class="left"><label for="">浏览次数：</label> <%= @item.view_count %> </li>
+        <li class="from"><label>来自：</label>
           <%= @item.province_name %> - <%= @item.city_name %> - <%= @item.county_name %> - <%= @item.town_name %> - <%= @item.village_name %>
         </li>
-        <li class="tags">
-          <label>标签：</label>
+        <li class="tags"><label>标签：</label>
           <%= raw @item.tags.map(&:name).map{ |tag| link_to tag, items_tags_path(:tag => tag)}.join(',') %>
         </li>
       </ul>
@@ -59,6 +34,6 @@
         <%= render_cell :items, :tag_cloud %> 
       </div>
     </div>
-    <%= render 'sidebar_for_new_item' %>
+    <%= render 'sidebar_for_items' %>
   </div>
 </div>
