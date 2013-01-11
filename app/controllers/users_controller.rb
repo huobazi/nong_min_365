@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def new
     @title = '用户注册'
     @user = User.new
+    expires_in 10.minutes
   end
 
   def create

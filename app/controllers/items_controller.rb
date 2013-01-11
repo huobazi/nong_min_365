@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    page_size   = 20 
+    page_size   = 20
+    page_index  = params[:page]
     area_code   = params[:area] || ''
     xtype       = params[:xtype].to_i
     category_id = params[:category].to_i
@@ -21,7 +22,7 @@ class ItemsController < ApplicationController
 
     prepare_items_condition_list(category_id, area_code, xtype)   
 
-    @items = items_scope.page(params[:page]).per(page_size)
+    @items = items_scope.page(page_index).per(page_size)
 
     drop_breadcrumb('产品', items_path)
 
@@ -39,6 +40,7 @@ class ItemsController < ApplicationController
       end
     end  
 
+    fresh_when(:etag => [@items.first.updated_at, page_size, page_index, area_code, xtype, category_id])
     respond_to do |format|
       format.html { }
       format.mobile { }
@@ -62,7 +64,10 @@ class ItemsController < ApplicationController
 
     prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
 
-    Item.increment_counter(:view_count , @item.id)
+    Item.increment_counter(:visit_count , @item.id)
+
+    fresh_when(:etag => [@item], :last_modified => @item.updated_at)
+
   end
 
   # GET /items/new
@@ -72,6 +77,8 @@ class ItemsController < ApplicationController
 
     @item = Item.new
     @provinces = ChineseRegion.provinces
+    
+    fresh_when
   end
 
   # GET /items/1/edit
@@ -151,12 +158,13 @@ class ItemsController < ApplicationController
     if params[:tag]
       page_size = 20
       prepare_items_condition_list(0, '', 0)
-      @items = Item.tagged_with(params[:tag]).page(params[:page]).per(page_size)
 
       drop_breadcrumb('标签:' + params[:tag], items_tags_path(params[:tag]))
-      render 'index'
+      @items = Item.latest.tagged_with(params[:tag]).page(params[:page]).per(page_size)
+      
+      fresh_when(:etag => [@items.first.updated_at, params[:tag], params[:page], page_size])
     else
-      redirect_to items_path
+      redirect_to items_path and return
     end
   end
 

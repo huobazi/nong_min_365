@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="span9">
+    <%= render "condition_list" %>
+    <div id="items-list" class="box">
+      <ul class="items">
+        <li class="header">
+          <span class="area">地区</span>
+          <span class="title">标题</span>
+          <span class="contact">联系人</span>
+          <span class="created">发布时间</span>
+        </li>
+        <% @items.each  do |item| %>
+          <li>
+            <span class="area">
+              <%= build_items_list_area_link item %>
+            </span>
+            <span class="title">
+              <%= link_to item.title , item_path(item) %>
+            &nbsp;<%= item.amount %>
+            &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
+        </span>
+        <span class="contact">
+          【<%= item.contact_name %>】
+        </span>
+        <span class="created">
+          <%= item.created_at.strftime('%Y-%m-%d %H:%M') %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @items %>
+</div>
+  </div>
+  <div class="span3">
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
+    </div>
+    <%= render 'sidebar_for_items' %>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: items
@@ -26,9 +25,10 @@
 #  town_name     :string(255)
 #  village_name  :string(255)
 #  ip            :string(255)
-#  view_count    :integer          default(0)
+#  visit_count   :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-

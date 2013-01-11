@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 
   def new
     @title = '用户登录'
+    expires_in 10.minutes
   end
 
   # POST /sessions
