@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
 
     # 加入页面上直接调用的信息用于组合 etag
     opts[:etag] << current_user
+    opts[:etag] << @page_title 
 
     # Config 的某些信息
     opts[:etag] << google_account_id

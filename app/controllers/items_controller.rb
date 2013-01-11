@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
+    @page_title = "产品"
     page_size   = 20
     page_index  = params[:page]
     area_code   = params[:area] || ''
@@ -24,7 +25,7 @@ class ItemsController < ApplicationController
 
     @items = items_scope.page(page_index).per(page_size)
 
-    drop_breadcrumb('产品', items_path)
+    drop_breadcrumb(@page_title, items_path)
 
     if @current_category_name.size > 0 
       drop_breadcrumb @current_category_name, condition_list_items_path(:category => category_id, :xtype => nil, :area => nil)
@@ -40,7 +41,8 @@ class ItemsController < ApplicationController
       end
     end  
 
-    fresh_when(:etag => [@items.first.updated_at, page_size, page_index, area_code, xtype, category_id])
+    fresh_when(:etag => [@items.map{|x|x.updated_at}, page_size, page_index, area_code, xtype, category_id])
+
     respond_to do |format|
       format.html { }
       format.mobile { }
@@ -50,8 +52,8 @@ class ItemsController < ApplicationController
   # GET /items/1
   def show
     @item = Item.find(params[:id])
-    @page_tiele = @item.title
-    
+    @page_title = @item.title
+
     drop_breadcrumb('产品', items_path)
     drop_breadcrumb(@item.category.name, condition_list_items_path(:category => @item.category_id, :xtype => nil, :area => nil) )
     drop_breadcrumb(@item.xtype == 1 ? '供应':'求购', condition_list_items_path(:category => @item.category_id, :xtype => @item.xtype, :area => nil) )
@@ -63,21 +65,20 @@ class ItemsController < ApplicationController
     drop_breadcrumb(@item.title, item_path(@item) )
 
     prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
-
-    Item.increment_counter(:visit_count , @item.id)
+    Item.increment_counter(:visit_count , @item.id) if ! params[:recall]
 
     fresh_when(:etag => [@item], :last_modified => @item.updated_at)
-
+    response.headers['X-NM365-Item-Visit-Counts'] = @item.visit_count.to_s
   end
 
   # GET /items/new
   def new
-    @page_tiele = '发布产品'
-    drop_breadcrumb("发布产品", new_item_path)
+    @page_title = '发布产品'
+    drop_breadcrumb(@page_title, new_item_path)
 
     @item = Item.new
     @provinces = ChineseRegion.provinces
-    
+
     fresh_when
   end
 
@@ -86,7 +87,7 @@ class ItemsController < ApplicationController
 
     @item = Item.find(params[:id])
     drop_breadcrumb("编辑", edit_item_path(@item) )
-    @page_tiele = '编辑' + @item.title
+    @page_title = '编辑' + @item.title
 
     @provinces = ChineseRegion.provinces
 
@@ -98,9 +99,9 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(params[:item])
+    @item         = Item.new(params[:item])
+    @item.ip      = request.remote_ip
     @item.user_id = 0
-    @item.ip = request.remote_ip
 
     if signed_in?
       @item.user_id = current_user.id
@@ -156,16 +157,26 @@ class ItemsController < ApplicationController
 
   def tags
     if params[:tag]
-      page_size = 20
+      tag         = params[:tag]
+      page_index  = params[:page]
+      @page_title = "标签:#{tag}"
+      page_size   = 20
+      
       prepare_items_condition_list(0, '', 0)
 
-      drop_breadcrumb('标签:' + params[:tag], items_tags_path(params[:tag]))
-      @items = Item.latest.tagged_with(params[:tag]).page(params[:page]).per(page_size)
-      
-      fresh_when(:etag => [@items.first.updated_at, params[:tag], params[:page], page_size])
+      drop_breadcrumb(@page_title, items_tags_path(tag))
+      @items = Item.latest.tagged_with(tag).page(page_index).per(page_size)
+
+      fresh_when(:etag => [@items.map{|x|x.updated_at}, tag, page_index, page_size])
     else
       redirect_to items_path and return
     end
+  end
+  
+  def show_hits
+    @item = Item.find(params[:id])
+    response.headers['X-NM365-Item-Hits'] = @item.visit_count.to_s
+    render :text => ''
   end
 
   private 
@@ -193,6 +204,5 @@ class ItemsController < ApplicationController
       temp_level, @regions = ChineseRegion.children(area_code)
       @current_areas       = ChineseRegion.get_parents(area_code)
     end
-
   end
 end

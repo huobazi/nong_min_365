@@ -4,8 +4,10 @@ class UsersController < ApplicationController
   before_filter :require_login, :only => [:change_password, :update_password]
 
   def new
-    @title = '用户注册'
+    @page_title = '用户注册'
     @user = User.new
+
+    fresh_when 
     expires_in 10.minutes
   end
 
@@ -20,7 +22,11 @@ class UsersController < ApplicationController
   end
 
   def change_password
+    @page_title = '修改密码'
     @user = User.new
+    
+    fresh_when 
+    expires_in 10.minutes
   end
 
   def update_password

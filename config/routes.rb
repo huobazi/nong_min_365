@@ -23,6 +23,9 @@ NongMin365::Application.routes.draw do
     collection do
       get '(c:category)/(t:xtype)/(a:area)/(p:page)', :action => :index, :as => :condition_list
     end
+    member do
+      get 'show_hits'
+    end
   end
 
   namespace :admincp do
