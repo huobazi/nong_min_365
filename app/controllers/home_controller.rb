@@ -4,9 +4,5 @@ class HomeController < ApplicationController
   
   def index
     @page_tiele = '首页'
-    @categories = Category.all
-    
-    #expires_in 10.minutes
-    fresh_when(:etag => [@categories]) 
   end
 end

@@ -1,6 +1,6 @@
 <div class="row main">
   <div class="span3">
-    <%= render "categories_map" %>
+    <%= render_cell :items, :homepage_categories_navbar, {:categories => @categories} %> 
     <div id="tag_cloud">
       <div class="box-header">
         热门标签
@@ -12,10 +12,6 @@
   </div>
   <div class="span9">
     <%= render "area_map" %>
-    <div id="items-list">
-      <% @categories.each do |c| %>
-        <%= render_cell :items, :homepage_latest_items ,{ :category_id => c.id, :categories => @categories, :row_count => 5 } %>
-      <% end %>
-    </div>
+    <%= render_cell :items, :homepage_latest_items_wrapper %> 
   </div>
 </div>
