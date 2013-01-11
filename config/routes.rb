@@ -3,6 +3,7 @@ NongMin365::Application.routes.draw do
   mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
 
   root :to => 'home#index'
+  get 'search' => 'search#index', :as => :search
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout

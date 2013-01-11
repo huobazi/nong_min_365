@@ -12,6 +12,7 @@
 defaults: &defaults
   :google_account_id: "UA-56321-6"  # Google Analytics
   :google_api_key:    ""  # Google APIs
+  :google_search_uniq_id:    "016513491848168237899:swsyxn_k2a4"  # Google APIs
 
 :development:
   <<: *defaults

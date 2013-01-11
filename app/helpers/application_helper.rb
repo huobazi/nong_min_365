@@ -61,6 +61,10 @@ module ApplicationHelper
     ENV['GOOGLE_API_KEY'] || html5_rails_config(:google_api_key)
 end
 
+  def google_search_uniq_id
+    ENV['GOOGLE_SEARCH_UNIQ_ID'] || html5_rails_config(:google_search_uniq_id)
+  end
+
   private
 
 def add_class(name, attrs)
