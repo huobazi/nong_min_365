@@ -12,7 +12,9 @@ abbr[title] { border: 0; cursor: default; }
 form {
   margin-bottom: 0;
 }
-.form-actions {
+.form-horizontal .form-actions {
+  padding-left: 20px;
+  text-align:center;
   background-color: #f9f9f9;
   border-top: 1px solid #eee;
   margin-bottom: 0px;

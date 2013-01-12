@@ -10,7 +10,9 @@
         <div class="form-actions">
           <%= f.submit "提交注册信息", 
             :id => 'btnSubmit',
-            :class => "btn btn-primary" %>
+            :class => "btn btn-primary btn-large",
+            'data-disable-with' => "请稍后..."
+          %>
         </div>
       </fieldset>
     <% end %>
