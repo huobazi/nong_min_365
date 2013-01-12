@@ -3,7 +3,7 @@
   :validate => false,
   :html => { :class => 'form-horizontal' }   do |f| %>
   <fieldset>
-    <legend><%= @item.new_record? ? raw("发布信息<span>（提示：<a href='#{ signup_path }'>注册会员</a>并<a href='#{ signin_path }'>登陆</a>，对自己发的信息有管理或修改权限，未注册登陆发布信息将不能管理和修改) </span>") : '编辑信息' %></legend>
+    <legend><%= @item.new_record? ? ( signed_in? ? '' : raw("发布信息<span>（提示：<a href='#{ signup_path }'>注册会员</a>并<a href='#{ signin_path }'>登陆</a>，对自己发的信息有管理或修改权限，未注册登陆发布信息将不能管理和修改) </span>") ) : '编辑信息' %></legend>
     <%= f.input :title %>
     <%= f.input :amount, 
       :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)" %>
