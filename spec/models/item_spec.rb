@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: items
@@ -26,6 +27,7 @@
 #  village_name  :string(255)
 #  ip            :string(255)
 #  visit_count   :integer          default(0)
+#  slug          :string(255)
 #
 
 # -*- encoding : utf-8 -*-

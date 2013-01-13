@@ -25,4 +25,9 @@ class Category < ActiveRecord::Base
   before_save { |category| category.slug = ::PinYin.permlink( category.name ) }
 
   has_many :items
+
+
+  def to_param
+    "#{id} #{slug}".parameterize
+  end
 end

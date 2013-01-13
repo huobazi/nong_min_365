@@ -27,8 +27,10 @@
 #  village_name  :string(255)
 #  ip            :string(255)
 #  visit_count   :integer          default(0)
+#  slug          :string(255)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   
@@ -66,6 +68,12 @@ class Item < ActiveRecord::Base
   validates :tag_list, :presence => true
   
   scope :latest, order(' id DESC ')
+
+  before_save { |item| item.slug = ::PinYin.permlink( item.title ) }
+
+  def to_param
+    "#{id} #{slug}".parameterize
+  end
 
   def region_name
    [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  
