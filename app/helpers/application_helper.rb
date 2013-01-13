@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
-
   def add_errors_to_flash_now  
     model_name = controller_name[0...-1]  
     model = nil  
@@ -39,6 +38,11 @@ module ApplicationHelper
     end
   end
 
+  def render_page_title
+    title = @page_title ? "#{SiteSettings.site_name} | #{@page_title}" : SiteSettings.site_name rescue "SITE_NAME"
+    content_tag("title", title, nil, false)
+  end
+
   def render_body_tag
     class_attribute = ["#{action_name}-action"].join(" ")
     id_attribute = (@body_id)? " id=\"#{@body_id}\"" : " id=\"#{controller_name}-controller-#{action_name}-action\"" 
@@ -54,30 +58,31 @@ module ApplicationHelper
   end
 
   def google_account_id
-    ENV['GOOGLE_ACCOUNT_ID'] || html5_rails_config(:google_account_id)
+    SiteSettings.google_account_id
   end
 
   def google_api_key
-    ENV['GOOGLE_API_KEY'] || html5_rails_config(:google_api_key)
-end
+    SiteSettings.google_api_key
+  end
 
   def google_search_uniq_id
-    ENV['GOOGLE_SEARCH_UNIQ_ID'] || html5_rails_config(:google_search_uniq_id)
+    SiteSettings.google_search_uniq_id
+    #ENV['GOOGLE_SEARCH_UNIQ_ID'] || rails_config(:google_search_uniq_id)
   end
 
   private
 
-def add_class(name, attrs)
-  classes = attrs[:class] || ""
-  classes.strip!
-  classes = classes + " " if !classes.blank?
-  classes = classes + name
-  attrs.merge(:class => classes)
-end
+  def add_class(name, attrs)
+    classes = attrs[:class] || ""
+    classes.strip!
+    classes = classes + " " if !classes.blank?
+    classes = classes + name
+    attrs.merge(:class => classes)
+  end
 
-def html5_rails_config(key)
-  configs = YAML.load_file(File.join(::Rails.root, 'config', 'html5_rails.yml'))[::Rails.env.to_sym] rescue {}
-  configs[key]
-end
+  def rails_config(key)
+    configs = YAML.load_file(File.join(::Rails.root, 'config', 'rails.yml'))[::Rails.env.to_sym] rescue {}
+    configs[key]
+  end
 
 end

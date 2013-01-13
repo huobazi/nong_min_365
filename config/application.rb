@@ -69,7 +69,5 @@ module NongMin365
   end
 end
 
-SITE_NAME = "NongMin365.COM"
-
 I18n.locale = 'zh-CN'
 
