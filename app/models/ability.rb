@@ -3,29 +3,34 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    if user.blank?
+      # not logged in
+      cannot :manage, :all
+      basic_read_only
+    elsif user.has_role?(:admin)
+      # admin
+      can :manage, :all
+    elsif user.has_role?(:member)
+      # Item 
+      can :create, Item 
+      can :update, Item do |item|
+        (item.user_id == user.id)
+      end
+      can :destroy, Item do ||
+        (item.user_id == user.id)
+      end
 
-    if user && user.admin?
-
-      can :access, :rails_admin # needed to access RailsAdmin
-
-      # Performed checks for `root` level actions:
-      can :dashboard            # dashboard access
-
-      # Performed checks for `collection` scoped actions:
-      can :index, Model         # included in :read
-      can :new, Model           # included in :create
-      can :export, Model
-      can :history, Model       # for HistoryIndex
-      can :destroy, Model       # for BulkDelete
-
-      # Performed checks for `member` scoped actions:
-      can :show, Model, object            # included in :read
-      can :edit, Model, object            # included in :update
-      can :destroy, Model, object         # for Delete
-      can :history, Model, object         # for HistoryShow
-      can :show_in_app, Model, object
-
+      basic_read_only
+    else
+      # banned or unknown situation
+      cannot :manage, :all
+      basic_read_only
     end
+  end
 
+  protected
+  def basic_read_only
+    can :read,Item
+    can :tags, Item 
   end
 end
