@@ -7,7 +7,6 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg', '0.14.1'
-gem "rails-settings-cached", "0.2.4"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,6 +37,9 @@ gem 'client_side_validations-simple_form', '2.0.1'
 
 # Google Analytics performance 
 gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
+
+gem "rails-settings-cached", "0.2.4"
+gem "rolify", "3.2.0"
 
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'
