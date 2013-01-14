@@ -46,9 +46,9 @@ module SessionsHelper
     end
   end
 
-  def require_admin
+def require_admin_or_founder
     require_login
-    if !current_user.admin?
+    if !current_user.has_role?(:admin) and !current_user.has_role?(:founder)
       respond_to do |format|
         format.html { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
         format.mobile { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
@@ -57,6 +57,28 @@ module SessionsHelper
     end
   end
 
+
+  def require_admin
+    require_login
+    if !current_user.has_role?(:admin)
+      respond_to do |format|
+        format.html { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
+        format.mobile { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
+        format.json { head(:unauthorized) }
+      end
+    end
+  end
+
+  def require_founder
+    require_login
+    if !current_user.has_role?(:founder)
+      respond_to do |format|
+        format.html { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
+        format.mobile { redirect_to main_app.signin_path, :notice => '您未被授权访问此页面!' }
+        format.json { head(:unauthorized) }
+      end
+    end
+  end
   def set_remember_me
     cookies.signed[:_remember_token] = {
       :value => @current_user.remember_token,
