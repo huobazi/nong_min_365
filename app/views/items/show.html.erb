@@ -22,31 +22,36 @@
       <div id="line"></div>
       <div class="body">
         <%= @item.body %>
+        <div class="opts">
+          <% if current_user and (current_user.id == @item.user_id or current_user.has_role?(:founder) or current_user.has_role(:admin)) %> 
+             <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path %>
+        <% end %> 
       </div>
     </div>
   </div>
-  <div class="span3">
-    <div id="tag_cloud">
-      <div class="box-header">
-        热门标签
-      </div>
-      <div class="box">
-        <%= render_cell :items, :tag_cloud %> 
-      </div>
+</div>
+<div class="span3">
+  <div id="tag_cloud">
+    <div class="box-header">
+      热门标签
     </div>
-    <%= render 'sidebar_for_items' %>
+    <div class="box">
+      <%= render_cell :items, :tag_cloud %> 
+    </div>
   </div>
+  <%= render 'sidebar_for_items' %>
+</div>
 </div>
 <% content_for :javascripts do %>
   <script type="text/javascript">
     $(document).ready(function(){
         $.ajax({
-            url: '<%= show_hits_item_path %>',
-            type: "GET",
-            success: function(data, textStatus, jqXHR) {
-                $('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
-            }
+url: '<%= show_hits_item_path %>',
+type: "GET",
+success: function(data, textStatus, jqXHR) {
+$('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
+}
+});
         });
-    });
-    </script>
+</script>
 <% end %>
