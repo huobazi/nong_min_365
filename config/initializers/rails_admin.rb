@@ -15,7 +15,7 @@ RailsAdmin.config do |config|
   #config.authorize_with :cancan
   config.authenticate_with{
     #require_login
-    unless (signed_in? && current_user.username == 'huobazi')
+    unless (signed_in? and current_user.has_role?(:founder))
       redirect_to main_app.root_path, :alert => "您未被授权访问此页面!"
     end
   }

@@ -30,52 +30,51 @@ class User < ActiveRecord::Base
     :presence => true ,
     :uniqueness => { :case_sensitive => false },
     :length => { :in => 6..20 }
-
   validates :password, 
     :presence => true, 
     :length => { :in => 6..36 },
     :confirmation => true 
-
   validates :password_confirmation, :presence => true
-  
   validates :current_password, :presence => true, :on => [:update_password, :change_password]
-
   validates :email, 
     :uniqueness => { :case_sensitive => false },
     :length => { :in => 3..254 },
     :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i },
     :allow_blank => true
-
   validates :cellphone,
     :uniqueness => true,
     :length => { :is => 11 },
     :numericality => { :only_integer => true },
     :allow_blank => true
-
   validates :qq,
     :length => { :in => 5..20 }, 
     :numericality => { :only_integer => true },
     :allow_blank => true
 
-  
-  def admin?
-    true 
+  def has_role?(role)
+    case role
+    when :founder then is_founder?
+    when :admini then is_admin?
+    when :member then is_member?
+    else
+      false
+    end
   end
 
   #def update_with_password(params, *options)
-    #params.delete(:current_password)
-    #super(params)
+  #params.delete(:current_password)
+  #super(params)
   #end
 
   #def update_without_password(params={})
-    #params.delete(:current_password)
-    #super(params)
+  #params.delete(:current_password)
+  #super(params)
   #end
 
   def self.authenticate_by_username(username, password)
     find_by_username(username).try(:authenticate, password)
   end
-  
+
   def self.authenticate_by_email(email, password)
     find_by_email(emaill).try(:authenticate, password)
   end
@@ -89,6 +88,19 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  private  
+  def is_founder?
+    self.username == 'huobazi' && self.email == 'huobazi@gmail.com'
+  end
+
+  def is_admin?
+    SiteSettings.admin_emails.include? self.email
+  end
+
+  def is_member?
+    self.id > 0
   end
 
 end
