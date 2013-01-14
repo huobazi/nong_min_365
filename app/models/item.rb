@@ -30,8 +30,6 @@
 #  slug          :string(255)
 #
 
-# -*- encoding : utf-8 -*-
-# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   
   acts_as_taggable_on :tags
