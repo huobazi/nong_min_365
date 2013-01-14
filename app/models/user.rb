@@ -16,7 +16,6 @@
 #
 
 class User < ActiveRecord::Base
-  rolify
   has_secure_password
 
   attr_accessor :current_password
