@@ -4,8 +4,20 @@
       <%= render "error_messages", :target => nil %>
       <fieldset>
         <legend>登录</legend>
-        <%= f.input :login, :label => "用户名",:input_html => { :value => ( params[:session][:login] if params[:session]) } %>
-        <%= f.input :password, :label => '密&nbsp;&nbsp;&nbsp;&nbsp;码', :input_html => {  } %>
+        <div class="control-group string required">
+          <label class="string required control-label" for="session_login"><abbr title="required">*</abbr> 用户名</label>
+          <div class="input-prepend ">
+            <span class="add-on"><i class="icon-user"></i></span>
+            <%= f.text_field :login, :value => ( params[:session][:login] if params[:session]), :placeholder => '用户名', :class => 'string required', 'data-validate' => 'true'%>
+          </div>
+        </div>
+        <div class="control-group string required">
+          <label class="string required control-label" for="session_password"><abbr title="required">*</abbr> 用户名</label>
+          <div class="input-prepend ">
+            <span class="add-on"><i class="icon-key"></i></span>
+            <%= f.password_field :password, :placeholder => '密码', :class => 'string required' , 'data-validate' => 'true'%>
+          </div>
+        </div>
         <div class="control-group checkbox optional">
           <label class="checkbox optional control-label">&nbsp;</label>
           <div class="controls">
