@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113133203) do
+ActiveRecord::Schema.define(:version => 20130114115040) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(:version => 20130113133203) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
     t.text     "value"
@@ -133,5 +144,12 @@ ActiveRecord::Schema.define(:version => 20130113133203) do
   add_index "users", ["id"], :name => "index_users_on_id"
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
   add_index "users", ["username"], :name => "index_users_on_username"
+
+  create_table "users_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
 end
