@@ -40,7 +40,22 @@ module ApplicationHelper
 
   def render_page_title
     title = @page_title ? "#{SiteSettings.site_name} | #{@page_title}" : SiteSettings.site_name rescue "SITE_NAME"
-    content_tag("title", title, nil, false)
+    content_tag("title", title, nil, false).html_safe
+  end
+
+  def render_page_keywords_and_description
+    @page_keywords ||= []
+    @page_keywords << @item.tags if (@item and @item.tags.size > 0)
+    @page_keywords << @breadcrumbs 
+    @page_keywords.push @current_category_name if( @current_category_name and @current_category_name.size > 0 )
+    @page_keywords.push @current_xtype_name if( @current_xtype_name and @current_category_name.size > 0)
+    @page_keywords.push SiteSettings.site_name
+
+    content = Nokogiri::HTML(@page_keywords.join(','))
+    [
+      tag('meta', :name => 'keywords', :content => content.text),
+      tag('meta', :name => 'description', :content => content.text)
+    ].join("\n").html_safe
   end
 
   def render_body_tag
