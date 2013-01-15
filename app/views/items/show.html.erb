@@ -24,10 +24,10 @@
         <%= @item.body %>
       </div>
       <div class="opts">
-        <% if can? :update, @item %> 
+        <% if can? :edit, @item %> 
           <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
         <% end %> 
-        <% if can? :de, @item %> 
+        <% if can? :destroy, @item %> 
           <%= link_to raw('<i class="icon-trash"></i>删除'), item_path(@item), :method => :delete, :confirm => "确定删除本产品信息？",:class => 'btn btn-small btn-danger' %>
         <% end %> 
       </div>

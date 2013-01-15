@@ -3,6 +3,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :update, :destroy, :to => :modify
     if user.blank?
       # not logged in
       cannot :manage, :all

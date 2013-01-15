@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :adjust_mobilejs_format_for_mobile_devise
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   #mobilette config
   mobylette_config do |config|
     config[:skip_xhr_requests] = false
