@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ItemsController < ApplicationController
+  load_and_authorize_resource
   respond_to :js, :only => [:create, :update, :destroy]
 
   # GET /items
@@ -84,16 +85,14 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-
     @item = Item.find(params[:id])
     drop_breadcrumb("编辑", edit_item_path(@item) )
-    @page_title = '编辑' + @item.title
 
-    @provinces = ChineseRegion.provinces
-
-    children_level, @cities = ChineseRegion.children(@item.province_code)
+    @page_title               = '编辑' + @item.title
+    @provinces                = ChineseRegion.provinces
+    children_level, @cities   = ChineseRegion.children(@item.province_code)
     children_level, @counties = ChineseRegion.children(@item.city_code)
-    children_level, @towns = ChineseRegion.children(@item.county_code)
+    children_level, @towns    = ChineseRegion.children(@item.county_code)
     children_level, @villages = ChineseRegion.children(@item.town_code)
   end
 
@@ -101,11 +100,7 @@ class ItemsController < ApplicationController
   def create
     @item         = Item.new(params[:item])
     @item.ip      = request.remote_ip
-    @item.user_id = 0
-
-    if signed_in?
-      @item.user_id = current_user.id
-    end
+    @item.user_id = signed_in? ? current_user.id : 0
 
     respond_to do |format|
       if @item.save
@@ -114,10 +109,10 @@ class ItemsController < ApplicationController
       else
         format.js { render :layout => false }
         format.mobile {
-          @provinces = ChineseRegion.provinces
-          children_level, @cities = ChineseRegion.children(@item.province_code)
+          @provinces                = ChineseRegion.provinces
+          children_level, @cities   = ChineseRegion.children(@item.province_code)
           children_level, @counties = ChineseRegion.children(@item.city_code)
-          children_level, @towns = ChineseRegion.children(@item.county_code)
+          children_level, @towns    = ChineseRegion.children(@item.county_code)
           children_level, @villages = ChineseRegion.children(@item.town_code)
           render 'new'
         }
@@ -130,16 +125,16 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     respond_to do |format|
-      if @item.update_attributes(params[:item])
+      if @item.update_attributes(params[:item].delete(:user_id))
         format.js{ render :layout => false }
         format.mobile{ redirect_to @item, :notice => "编辑成功！" }
       else
         format.js{ render :layout => false }
         format.mobile{ 
-          @provinces = ChineseRegion.provinces
-          children_level, @cities = ChineseRegion.children(@item.province_code)
+          @provinces                = ChineseRegion.provinces
+          children_level, @cities   = ChineseRegion.children(@item.province_code)
           children_level, @counties = ChineseRegion.children(@item.city_code)
-          children_level, @towns = ChineseRegion.children(@item.county_code)
+          children_level, @towns    = ChineseRegion.children(@item.county_code)
           children_level, @villages = ChineseRegion.children(@item.town_code)
           render 'new'
         }
@@ -161,7 +156,7 @@ class ItemsController < ApplicationController
       page_index  = params[:page]
       @page_title = "标签:#{tag}"
       page_size   = 20
-      
+
       prepare_items_condition_list(0, '', 0)
 
       drop_breadcrumb(@page_title, items_tags_path(tag))
@@ -172,7 +167,7 @@ class ItemsController < ApplicationController
       redirect_to items_path and return
     end
   end
-  
+
   def show_hits
     @item = Item.find(params[:id])
     response.headers['X-NM365-Item-Hits'] = @item.visit_count.to_s

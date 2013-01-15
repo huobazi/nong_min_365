@@ -22,25 +22,28 @@
       <div id="line"></div>
       <div class="body">
         <%= @item.body %>
-        <div class="opts">
-          <% if current_user and (current_user.id == @item.user_id or current_user.has_role?(:founder) or current_user.has_role(:admin)) %> 
-             <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path %>
+      </div>
+      <div class="opts">
+        <% if can? :update, @item %> 
+          <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
+        <% end %> 
+        <% if can? :de, @item %> 
+          <%= link_to raw('<i class="icon-trash"></i>删除'), item_path(@item), :method => :delete, :confirm => "确定删除本产品信息？",:class => 'btn btn-small btn-danger' %>
         <% end %> 
       </div>
     </div>
   </div>
-</div>
-<div class="span3">
-  <div id="tag_cloud">
-    <div class="box-header">
-      热门标签
+  <div class="span3">
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
     </div>
-    <div class="box">
-      <%= render_cell :items, :tag_cloud %> 
-    </div>
+    <%= render 'sidebar_for_items' %>
   </div>
-  <%= render 'sidebar_for_items' %>
-</div>
 </div>
 <% content_for :javascripts do %>
   <script type="text/javascript">
@@ -54,4 +57,4 @@ $('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
 });
         });
 </script>
-<% end %>
+    <% end %>
