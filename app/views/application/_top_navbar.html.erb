@@ -21,7 +21,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to '发布产品', new_item_path %></li>
-              <li><%= link_to "我的信息", '#' %></li>
+              <li><%= link_to "我的信息", my_items_users_path %></li>
               <li><%= link_to "修改密码", change_password_users_path %></li>
               <li class="divider"></li>
               <% if current_user.has_role?(:founder) or current_user.has_role?(:admin) %>

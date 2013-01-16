@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   before_filter :require_not_login, :only => [:new, :create]
-  before_filter :require_login, :only => [:change_password, :update_password]
+  before_filter :require_login, :only => [:my_items, :change_password, :update_password]
 
   def new
     @page_title = '用户注册'
@@ -21,15 +21,39 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_items 
+    @page_title = '我的产品'
+    drop_breadcrumb(@page_title, my_items_users_path)
+
+    page_size   = 10
+    page_index  = params[:page]
+    @items = current_user.items.page(page_index).per(page_size) 
+
+    respond_to do |wants|
+      wants.html{ render :layout => 'my' } 
+      wants.mobile 
+    end
+  end
+
   def change_password
     @page_title = '修改密码'
+    drop_breadcrumb(@page_title, change_password_users_path)
+
     @user = User.new
-    
+
     fresh_when 
     expires_in 10.minutes
+
+    respond_to do |wants|
+      wants.html{ render :layout => 'my' } 
+      wants.mobile 
+    end
   end
 
   def update_password
+    @page_title = '修改密码'
+    drop_breadcrumb(@page_title, change_password_users_path)
+
     post_params = get_update_password_params
     current_password = post_params[:current_password]
     @user = current_user

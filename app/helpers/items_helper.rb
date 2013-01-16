@@ -98,6 +98,7 @@ module ItemsHelper
 
   def build_items_list_area_link(item)
     the_hash = {}
+    @current_params ||= {}
     category = @current_params[:category].to_i
     xtype    = @current_params[:xtype].to_i
     area     = @current_params[:area] || ''

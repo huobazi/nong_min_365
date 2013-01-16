@@ -8,3 +8,52 @@
     }
   }
 }
+
+.users-controller{
+  .my_items-action{
+    div#items-list{
+      padding:0 6px 5px 6px;
+      ul.items{
+        margin-left:0;
+        padding: 0 5px;
+        li.header{
+          margin: 0 auto;
+          height: 30px;
+          line-height: 30px;
+          background-image: url(bg/latest_header.jpg);
+          border:none; 
+          font-size: 14px;
+          font-weight: bold;
+          padding: 0 10px;
+        }
+        li{
+          list-style: none outside none;
+          border-bottom: 1px dashed #9bbd73;
+          height:34px;
+          line-height:34px;
+          padding: 0 6px;
+          span{
+            display:block;
+            float:left;
+            overflow:hidden;
+            text-align:left;
+          }
+          span.title{
+          }
+          span.created{
+            width:120px;
+            float:right;
+          }
+        }
+      }
+    }
+
+    #tag_cloud{
+      margin: 0;
+      .box-header {
+      }
+      .box{
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div id="items-list">
+  <ul class="items">
+    <li class="header">
+      <span class="title">标题</span>
+      <span class="created">发布时间</span>
+    </li>
+    <% @items.each  do |item| %>
+      <li>
+        <span class="title">
+          <%= link_to item.title , item_path(item) %>
+          &nbsp;<%= item.amount %>
+        &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
+    </span>
+    <span class="created">
+      <%= item.created_at.strftime('%Y-%m-%d %H:%M') %>
+    </span>
+  </li>
+<% end %>
+  </ul>
+  <%= paginate @items %>
+</div>
