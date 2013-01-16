@@ -17,3 +17,8 @@ $(document).ready ->
       btn.hide('slow')
     return false
 
+
+(->
+  ClientSideValidations.formBuilders['SimpleForm::FormBuilder']['wrappers']["prepend"] =
+    ClientSideValidations.formBuilders['SimpleForm::FormBuilder']['wrappers']["bootstrap"]
+).call(this)

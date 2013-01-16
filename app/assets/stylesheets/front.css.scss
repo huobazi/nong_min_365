@@ -12,6 +12,16 @@ abbr[title] { border: 0; cursor: default; }
 form {
   margin-bottom: 0;
 }
+
+.simple_form{
+  div.error{
+    div.input-prepend{
+      span.help-block, span.help-inline {
+        font-size:13px;
+      }
+    }
+  }
+}
 .form-horizontal .form-actions {
   padding-left: 20px;
   text-align:center;

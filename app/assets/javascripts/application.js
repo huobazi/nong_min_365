@@ -15,7 +15,6 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
-//*= require chosen-jquery
 //
 //= require plugin 
 //

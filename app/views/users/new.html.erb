@@ -1,30 +1,24 @@
 <div class="row-fluid">
-  <div class="span7">
-    <%= simple_form_for @user, :validate => true, :url => users_path, :method => :post do |f| %>
+  <div class="span8">
+    <%= simple_form_for @user, 
+      :wrapper => :prepend, 
+      :validate => true, 
+      :html => {:id => 'new_user_form'}  do |f| %>
       <%= render "error_messages", :target => @user %>
       <fieldset>
         <legend>注册</legend>
-        <div class="control-group string required">
-          <label class="string required control-label" for="user_login"><abbr title="required">*</abbr> 用户名</label>
-          <div class="input-prepend ">
-            <span class="add-on"><i class="icon-user"></i></span>
-            <%= f.text_field :username, :value => @user.username, :placeholder => '用户名', :class => 'string required', 'data-validate' => 'true'%>
-          </div>
-        </div>
-        <div class="control-group string required">
-          <label class="password required control-label" for="user_password"><abbr title="required">*</abbr> 密码</label>
-          <div class="input-prepend ">
-            <span class="add-on"><i class="icon-key"></i></span>
-            <%= f.password_field :password, :placeholder => '密码', :class => 'password required' , 'data-validate' => 'true'%>
-          </div>
-        </div>
-        <div class="control-group string required">
-          <label class="string required control-label" for="user_password_confirmation"><abbr title="required">*</abbr> 确认密码</label>
-          <div class="input-prepend ">
-            <span class="add-on"><i class="icon-key"></i></span>
-            <%= f.password_field :password_confirmation, :placeholder => '确认密码', :class => 'string required' , 'data-validate' => 'true'%>
-          </div>
-        </div>
+        <%= f.input :username do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-user'), :class => "add-on" %>
+          <%= f.input_field :username %>
+        <% end %>
+        <%= f.input :password do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-key'), :class => "add-on" %>
+          <%= f.input_field :password %>
+        <% end %>
+        <%= f.input :password_confirmation do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-key'), :class => "add-on" %>
+          <%= f.input_field :password_confirmation %>
+        <% end %>
         <div class="form-actions">
           <%= f.submit "提交注册信息", 
             :id => 'btnSubmit',
@@ -35,7 +29,7 @@
     </fieldset>
   <% end %>
 </div>
-<div class="span5">
+<div class="span4">
   <div class="hero-unit bg-white">
     <p>已有本站账号？</p>
     <p>
@@ -44,5 +38,8 @@
   </div>
 </div>
 </div>
-<% content_for :javascripts do%>
-<% end %>
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+    <%#$('#new_user_form').enableClientSideValidations();%>
+    </script>
+  <% end %>

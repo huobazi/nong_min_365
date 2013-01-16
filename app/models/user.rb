@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
     :length => { :in => 6..36 },
     :confirmation => true 
   validates :password_confirmation, :presence => true
-  validates :current_password, :presence => true, :on => [:update_password, :change_password]
+  validates :current_password, :presence => true, :on => :change_password
+  validates :current_password, :presence => true, :on => :update_password
   validates :email, 
     :uniqueness => { :case_sensitive => false },
     :length => { :in => 3..254 },

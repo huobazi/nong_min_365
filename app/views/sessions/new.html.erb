@@ -1,27 +1,24 @@
 <div class="row-fluid">
   <div class="span7">
-    <%= simple_form_for(:session, :url => sessions_path) do |f| %>
+    <%= simple_form_for :session,
+      :url => sessions_path, 
+      :wrapper => :prepend,
+      :html => {:id => 'signin_form', 'data-validate' => 'true' }  do |f| %>
       <%= render "error_messages", :target => nil %>
       <fieldset>
         <legend>登录</legend>
-        <div class="control-group string required">
-          <label class="string required control-label" for="session_login"><abbr title="required">*</abbr> 用户名</label>
-          <div class="input-prepend ">
-            <span class="add-on"><i class="icon-user"></i></span>
-            <%= f.text_field :login, :value => ( params[:session][:login] if params[:session]), :placeholder => '用户名', :class => 'string required', 'data-validate' => 'true'%>
-          </div>
-        </div>
-        <div class="control-group string required">
-          <label class="password required control-label" for="session_password"><abbr title="required">*</abbr> 密码</label>
-          <div class="input-prepend ">
-            <span class="add-on"><i class="icon-key"></i></span>
-            <%= f.password_field :password, :placeholder => '密码', :class => 'password required' , 'data-validate' => 'true'%>
-          </div>
-        </div>
+        <%= f.input :login, :label => '用户名' do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-user'), :class => "add-on" %>
+          <%= f.input_field :login, :validate => { :presence => true } %>
+        <% end %>
+        <%= f.input :password, :label => '密码'  do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-key'), :class => "add-on" %>
+          <%= f.input_field :password, :validate => { :presence => true } %>
+        <% end %>
         <div class="control-group checkbox optional">
-          <label class="checkbox optional control-label">&nbsp;</label>
+          <label class="optional control-label">&nbsp;</label>
           <div class="controls">
-            <div class="inputs-list">
+            <div class="input-prepend">
               <label for="session_remember_me">
                 <%= f.check_box :remember_me, :wrapper => :inline_checkbox, :style => "width:auto;" %>
                 两周内自动登录
@@ -44,3 +41,8 @@
     </div>
   </div>
 </div>
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+    $('#signin_form').enableClientSideValidations();
+    </script>
+  <% end %>

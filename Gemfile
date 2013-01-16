@@ -20,12 +20,9 @@ group :assets do
 
   gem 'uglifier', '1.3.0'
   gem 'compass-rails', '1.0.3'
-  gem 'compass-h5bp'
   gem 'bootstrap-sass', '2.2.2.0'
-  #gem 'font-awesome-rails', '0.4.1'
   gem "font-awesome-sass-rails", "~> 3.0.0.1"
   gem 'kaminari-bootstrap', '0.1.3'
-  gem 'chosen-rails', '0.9.8.3'
   gem 'jquery_mobile_rails', '1.2.0'
 end
 
@@ -39,12 +36,11 @@ gem 'client_side_validations-simple_form', '2.0.1'
 gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
 
 gem "rails-settings-cached", "0.2.4"
-gem "rolify", "3.2.0"
 
 gem 'kaminari', '0.14.1'
 gem 'cancan', '1.6.8'
 gem 'rails_admin', '0.4.1'
-gem 'rails-i18n', '0.6.6'
+gem 'rails-i18n', '0.7.2'
 
 # Tagging
 gem 'acts-as-taggable-on', '2.3.3'
@@ -56,10 +52,10 @@ gem 'ruby-pinyin', '0.1.0'
 gem 'default_value_for', '2.0.1'
 
 # Cells
-gem 'cells', '3.8.6'
+gem 'cells', '3.8.8'
 
 # For mobile devise
-gem 'mobylette', '3.3.1'
+gem 'mobylette', '3.3.2'
 
 group :development do
   gem 'pry', '0.9.10'

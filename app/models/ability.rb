@@ -7,7 +7,7 @@ class Ability
     if user.blank?
       # not logged in
       cannot :manage, :all
-      basic_read_only
+      anonymous_basic_access
     elsif user.has_role?(:admin) or user.has_role?(:founder)
       # admin or founder
       can :manage, :all
@@ -26,14 +26,15 @@ class Ability
     else
       # banned or unknown situation
       cannot :manage, :all
-      basic_read_only
+      anonymous_basic_access
     end
   end
 
   protected
-  def basic_read_only
-    can :read,Item
+  def anonymous_basic_access
+    can :read, Item
+    can :create, Item
     can :tags, Item 
-    can :show_hits,Item
+    can :show_hits, Item
   end
 end
