@@ -13,8 +13,10 @@
 .navbar-inner{
   background: url(bg/nav_bg.gif) repeat-x;
 }
-
+.navbar .brand {font-size:28px;}
 .navbar .nav > li > a {
+  font-size:16px;
+  font-weight:bold;
   /*border-left: 1px solid  darken($navbarBackground, 5%); */
   &:hover {
     /*background-color:  darken($navbarBackground, 10%); */
