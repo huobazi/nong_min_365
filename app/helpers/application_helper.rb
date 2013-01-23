@@ -82,7 +82,7 @@ module ApplicationHelper
 
   def google_search_uniq_id
     SiteSettings.google_search_uniq_id
-    #ENV['GOOGLE_SEARCH_UNIQ_ID'] || rails_config(:google_search_uniq_id)
+    #ENV['GOOGLE_SEARCH_UNIQ_ID'] || get_settings_config(:google_search_uniq_id)
   end
 
   private
@@ -95,8 +95,8 @@ module ApplicationHelper
     attrs.merge(:class => classes)
   end
 
-  def rails_config(key)
-    configs = YAML.load_file(File.join(::Rails.root, 'config', 'rails.yml'))[::Rails.env.to_sym] rescue {}
+  def get_settings_config(key)
+    configs = YAML.load_file(File.join(::Rails.root, 'config', 'settings.yml'))[::Rails.env.to_sym] rescue {}
     configs[key]
   end
 
