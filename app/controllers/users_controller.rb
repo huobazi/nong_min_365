@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @page_title = '用户注册'
+    drop_breadcrumb(@page_title, new_users_path)
     @user = User.new
 
     fresh_when 
