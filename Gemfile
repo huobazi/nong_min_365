@@ -35,7 +35,7 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 # Google Analytics performance 
 gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
 
-gem "rails-settings-cached", "0.2.4"
+gem "rails-settings-cached", "~> 0.2.4"
 
 gem 'kaminari', '~> 0.14.1'
 gem 'cancan', '~> 1.6.8'
@@ -66,6 +66,7 @@ group :development do
   gem 'annotate', '~> 2.5.0'
   gem 'magic_encoding', '~> 0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
+  gem "rails-erd", "~> 1.1.0"
 end
 
 group :development, :test do
