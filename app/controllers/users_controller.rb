@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @page_title = '用户注册'
-    drop_breadcrumb(@page_title, new_users_path)
+    drop_breadcrumb(@page_title, signup_path)
     @user = User.new
 
     fresh_when 
@@ -65,11 +65,11 @@ class UsersController < ApplicationController
         sign_out
         redirect_to root_path, :notice => '您已经修改了密码,请使用新密码重新登录!'
       else
-        render "change_password" 
+        render "change_password", :layout => 'my' 
       end
     else
       @user.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-      render "change_password" ,:notice => '当前密码输入错误!'
+      render "change_password" ,{:layout => 'my', :notice => '当前密码输入错误!'}
     end
   end
 

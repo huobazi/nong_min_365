@@ -32,17 +32,31 @@ form {
   margin-bottom: 0px;
 }
 
+/* Footer
+-------------------------------------------------- */
+
 .footer {
-  border-top: 0;
-  margin-bottom: 30px;
-  margin-top: 0px;
-  padding: 0;
-  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
 }
 .footer p {
-  margin: 3px 0;
-  color: #555;
+  margin-bottom: 0;
+  color: #777;
 }
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
 
 textarea.long { width: 670px;}
 textarea.span16 { width: 910px;}

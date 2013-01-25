@@ -2,16 +2,11 @@
   <div class="row">
     <div class="span3">
       <div id="left-nav">
-        <div class="box-header">
-          控制面板
-        </div>
-        <div class="box">
-          <ul>
-            <li><%= link_to '关于我们', static_page_path('about') %></li>
-            <li><%= link_to '联系我们', static_page_path('contact') %></li>
-            <li><%= link_to '帮助中心', static_page_path('help') %></li>
-          </ul>
-        </div>
+        <ul class="nav nav-tabs nav-stacked">
+          <li class="<%= params[:id] == 'about' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>关于我们'), static_page_path('about') %></li>
+          <li class="<%= params[:id] == 'contact' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>联系我们'), static_page_path('contact') %></li>
+          <li class="<%= params[:id] == 'help' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>帮助中心'), static_page_path('help') %></li>
+        </ul>
       </div> 
     </div>
     <div class="span9">

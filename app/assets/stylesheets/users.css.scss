@@ -10,6 +10,23 @@
 }
 
 .users-controller{
+  div#left-nav{
+    li.active{
+      a{
+        color:#fff;
+        background-color:#0088cc
+      }
+      .icon-chevron-right{
+        opacity:1;
+      }
+    }
+    .icon-chevron-right{
+      float: right;
+      margin-top: 2px;
+      margin-right: -6px;
+      opacity: .25;
+    }
+  }
   .my_items-action{
     div#items-list{
       padding:0 6px 5px 6px;

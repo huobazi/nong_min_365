@@ -134,6 +134,9 @@
           height:34px;
           line-height:34px;
           padding: 0 6px;
+          overflow:hidden;
+          text-overflow: ellipsis;
+         -o-text-overflow: ellipsis;
           span{
             display:block;
             float:left;

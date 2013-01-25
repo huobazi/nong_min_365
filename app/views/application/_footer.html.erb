@@ -1,8 +1,17 @@
 <footer id="footer" class="footer">
-  <small class="copyright">
-    Nong Min365, Copyright &copy; <%= Date.today.year %>
-</small>
-</footer>
+  <div class="container">
+    <small class="copyright">
+      Nong Min365, Copyright &copy; <%= Date.today.year %>
+  </small>
+  <ul class="footer-links">
+    <li><%= link_to '关于我们', static_page_path('about') %></li>
+    <li class="muted">·</li>
+    <li><%= link_to '帮助中心', static_page_path('help') %></li>
+    <li class="muted">·</li>
+    <li><%= link_to '联系我们', static_page_path('contact') %></li>
+  </ul>
+</div>
 <div id="go-top">
   <a title='回到顶端' class="go-top" href="#"></a>
 </div>
+</footer>

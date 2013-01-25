@@ -1,31 +1,30 @@
 <% content_for :content do %>
-<div class="row">
-  <div class="span2">
-    <div id="left-nav">
-      <div class="box-header">
-        控制面板
-      </div>
-      <div class="box">
-        <ul>
-          <li><%= link_to '修改密码', change_password_users_path %></li>
-          <li><%= link_to '我的信息', my_items_users_path %></li>
+  <div class="row">
+    <div class="span2">
+      <div id="left-nav">
+        <div class="box-header">
+          控制面板
+        </div>
+        <ul class="nav nav-tabs nav-stacked">
+          <li class=""></li>
+          <li class="<%= action_name == 'change_password'  or action_name == 'update_password' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>修改密码'), change_password_users_path %></li>
+          <li class="<%= action_name == 'my_items' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>我的信息'), my_items_users_path %></li>
         </ul>
-      </div>
-    </div> 
-  </div>
-  <div class="span7">
-  <%= yield %>
-  </div>
-  <div class="span3">
-    <div id="tag_cloud">
-      <div class="box-header">
-        热门标签
-      </div>
-      <div class="box">
-        <%= render_cell :items, :tag_cloud %> 
+      </div> 
+    </div>
+    <div class="span7">
+      <%= yield %>
+    </div>
+    <div class="span3">
+      <div id="tag_cloud">
+        <div class="box-header">
+          热门标签
+        </div>
+        <div class="box">
+          <%= render_cell :items, :tag_cloud %> 
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end %>
 <%= render :template => 'layouts/application' %>
