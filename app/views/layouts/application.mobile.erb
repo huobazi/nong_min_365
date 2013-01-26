@@ -3,39 +3,34 @@
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta charset="utf-8" />
-    <meta charset="utf-8" />
-    <meta name="author" content="Marble Wu" />
-    <meta name="copyright" content="" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no;" name="viewport" />
     <title><%= @page_title || "NongMing365.com" %>触屏版</title>
+    <%= render_page_keywords_and_description %>
+    <meta charset="utf-8" />
     <%= stylesheet_link_tag "application.mobile.css" %>
     <%= javascript_include_tag "application.mobile.js" %>
-      //App custom javascript
-      <%# Looks for google_account_id first in ENV['GOOGLE_ACCOUNT_ID'] then in config/html5_rails.yml %>
-      <% if !google_account_id.blank? %>
-      <script>
-        //<![CDATA[
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '<%= google_account_id %>']);
-        _gaq.push(['_setDomainName', 'nongming365.com']);
-        _gaq.push(['_setSiteSpeedSampleRate', 100]);
-        _gaq.push(['_trackPageview']);
-        <%= Garelic::Timing %>
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-          s.parentNode.insertBefore(g,s)}(document,'script'));
-        //]]>
-      </script>
-      <% end %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <%= yield %>
+    <% if !google_account_id.blank? %>
+      <script>
+        //<![CDATA[
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '<%= google_account_id %>']);
+      _gaq.push(['_setDomainName', 'nongming365.com']);
+      _gaq.push(['_setSiteSpeedSampleRate', 100]);
+      _gaq.push(['_trackPageview']);
+      <%= Garelic::Timing %>
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g,s)}(document,'script'));
+      //]]>
+      </script>
+    <% end %>
   </body>
 </html>
