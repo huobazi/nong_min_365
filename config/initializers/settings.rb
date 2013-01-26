@@ -5,5 +5,5 @@ SiteSettings.save_default(:domain_name, 'nongmin365.com')
 SiteSettings.save_default(:admin_emails , ['huobazi@gmail.com'])
 SiteSettings.save_default(:google_account_id, 'UA-56321-6')
 SiteSettings.save_default(:google_search_uniq_id, '016513491848168237899:swsyxn_k2a4')
-SiteSettings.save_default(:google_api_key, '')
+SiteSettings.save_default(:google_api_key, 'N/A')
 
