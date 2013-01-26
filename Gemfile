@@ -39,7 +39,6 @@ gem "rails-settings-cached", "~> 0.2.4"
 
 gem 'kaminari', '~> 0.14.1'
 gem 'cancan', '~> 1.6.8'
-gem 'rails_admin', '~> 0.4.1'
 gem 'rails-i18n', '~> 0.7.2'
 
 # Tagging

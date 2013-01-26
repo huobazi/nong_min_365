@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
-  mount RailsAdmin::Engine => '/railsadmin', :as => 'rails_admin'
+  
 
   root :to => 'home#index'
   get 'search' => 'home#search', :as => :search

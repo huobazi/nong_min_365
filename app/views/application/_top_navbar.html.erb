@@ -27,9 +27,6 @@
               <% if current_user.has_role?(:founder) or current_user.has_role?(:admin) %>
                 <li><%= link_to "后台", admincp_dashboard_index_path %></li>
               <%end%>
-              <% if current_user.has_role?(:founder) %>
-                <li><%= link_to "后台(*)", rails_admin_path %></li>
-              <%end%>
               <li>
                 <%= link_to "退出", signout_path, method: "delete" %>
               </li>
