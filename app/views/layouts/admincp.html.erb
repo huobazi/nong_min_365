@@ -15,9 +15,8 @@
             <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
             <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
             <li><%= link_to "首页", root_path %></li>
-            <li><%= link_to "后台(*)", rails_admin_path %></li>
             <li>
-            <%= link_to t("web-app-theme.logout", :default => "退出"), signout_path, method: "delete" , class: "logout"%>
+              <%= link_to t("web-app-theme.logout", :default => "退出"), signout_path, method: "delete" , class: "logout"%>
             </li>
           </ul>
         </div>

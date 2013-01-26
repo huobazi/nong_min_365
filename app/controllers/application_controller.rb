@@ -31,8 +31,12 @@ class ApplicationController < ActionController::Base
     opts[:etag] << @page_title 
 
     # Config 的某些信息
-    opts[:etag] << google_account_id
-    opts[:etag] << google_api_key
+    opts[:etag] << SiteSettings.all
+    opts[:etag] << SiteSettings.site_name
+    opts[:etag] << SiteSettings.domain_name
+    opts[:etag] << SiteSettings.google_account_id
+    opts[:etag] << SiteSettings.google_search_uniq_id
+    opts[:etag] << SiteSettings.google_api_key
     opts[:etag] << flash.notice
 
     # 加入通知数量

@@ -43,6 +43,7 @@ module ApplicationHelper
     content_tag("title", title, nil, false).html_safe
   end
 
+  require 'nokogiri'
   def render_page_keywords_and_description
     @page_keywords ||= []
     @page_keywords << @item.tags if (@item and @item.tags.size > 0)
@@ -70,19 +71,6 @@ module ApplicationHelper
 <body#{id_attribute} class="#{class_attribute}">
 <!--<![endif]-->|)
 
-  end
-
-  def google_account_id
-    SiteSettings.google_account_id
-  end
-
-  def google_api_key
-    SiteSettings.google_api_key
-  end
-
-  def google_search_uniq_id
-    SiteSettings.google_search_uniq_id
-    #ENV['GOOGLE_SEARCH_UNIQ_ID'] || get_settings_config(:google_search_uniq_id)
   end
 
   private
