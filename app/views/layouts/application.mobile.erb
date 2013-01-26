@@ -14,9 +14,6 @@
     <%= stylesheet_link_tag "application.mobile.css" %>
     <%= javascript_include_tag "application.mobile.js" %>
     <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <%= yield %>
     <% if !google_account_id.blank? %>
       <script>
         //<![CDATA[
@@ -32,5 +29,8 @@
       //]]>
       </script>
     <% end %>
+  </head>
+  <body>
+    <%= yield %>
   </body>
 </html>
