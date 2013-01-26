@@ -33,6 +33,7 @@ NongMin365::Application.routes.draw do
     root :to => "dashboard#index"
     resources :dashboard, :only => [:index]
     resources :users
+    resources :site_settings, :path => 'settings'
     resources :categories do
       member do
         put 'sort_up'

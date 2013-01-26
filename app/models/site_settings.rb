@@ -13,5 +13,8 @@
 #
 
 class SiteSettings < RailsSettings::CachedSettings
-	attr_accessible :var
+	attr_accessible :var, :value
+
+  validates :var, :presence => true
+  validates :value, :presence => true
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>后台管理系统</title>
+    <title><%= SiteSettings.site_name %> | 后台管理系统</title>
     <%= stylesheet_link_tag 'admincp' %>
     <%= javascript_include_tag 'admincp' %>
     <%= csrf_meta_tag %>
@@ -9,11 +9,9 @@
   <body>
     <div id="container">
       <div id="header">
-        <h1><a href="<%= admincp_dashboard_index_path %>">后台管理系统</a></h1>
+        <h1><a href="<%= admincp_dashboard_index_path %>"><%= SiteSettings.site_name %> | 后台管理系统</a></h1>
         <div id="user-navigation">
           <ul class="wat-cf">
-            <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
-            <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
             <li><%= link_to "首页", root_path %></li>
             <li>
               <%= link_to t("web-app-theme.logout", :default => "退出"), signout_path, method: "delete" , class: "logout"%>
@@ -21,7 +19,11 @@
           </ul>
         </div>
         <div id="main-navigation">
-          <ul class="wat-cf"> <li class="<%= controller.controller_path == 'admincp/categories' ? 'active' : '' %>"><a href="<%= admincp_categories_path %>">分类管理</a></li> <li class="<%= controller.controller_path == 'admincp/users' ? 'active' : '' %>"><a href="<%= admincp_users_path %>">用户管理</a></li></ul>
+          <ul class="wat-cf"> 
+            <li class="<%= controller.controller_path == 'admincp/categories' ? 'active' : '' %>"><a href="<%= admincp_categories_path %>">分类管理</a></li> 
+            <li class="<%= controller.controller_path == 'admincp/users' ? 'active' : '' %>"><a href="<%= admincp_users_path %>">用户管理</a></li> 
+            <li class="<%= controller.controller_path == 'admincp/site_settings' ? 'active' : '' %>"><a href="<%= admincp_site_settings_path %>">配置管理</a></li>
+          </ul>
         </div>
       </div>
       <div id="wrapper" class="wat-cf">

@@ -6,7 +6,7 @@
     </ul>
   </div>
   <div class="content">
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Categories</h2>
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> 分类</h2>
     <div class="inner">
       <table class="table">
         <tr>
@@ -17,6 +17,7 @@
           <th>
           <%= t("activerecord.attributes.category.slug", :default => t("activerecord.labels.slug", :default => "Slug")) %></th>
         <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+        <th>信息数量</th>
         <th class="last">&nbsp;</th>
       </tr>
       <% @categories.each do |category| -%>
@@ -33,6 +34,7 @@
           <td>
             <%= l category.created_at ,:format => :short %>
           </td>
+          <td><%= category.items_count %></td>
           <td class="last">
             <%= link_to "#{t("web-app-theme.sort_up", :default => "Up")}", sort_up_admincp_category_path(category), :method => :put %> | 
             <%= link_to "#{t("web-app-theme.sort_down", :default => "Down")}", sort_down_admincp_category_path(category), :method => :put %> |

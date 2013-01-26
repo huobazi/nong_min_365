@@ -6,40 +6,42 @@
     </ul>
   </div>
   <div class="content">
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Users</h2>
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> 会员</h2>
     <div class="inner">
       <table class="table">
         <tr>
           <th class="first">ID</th>
-                    <th>
+          <th>
             <%= t("activerecord.attributes.user.username", :default => t("activerecord.labels.username", :default => "Username")) %>
           </th>
-                    <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th>信息数量</th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @users.each do |user| -%>
-        <tr class="<%= cycle("odd", "even") %>">
-          <td>
-            <%= user.id %>
-          </td>
-                    <td>
-            <%= link_to user.username, admincp_user_path(user) %>
-          </td>
-                    <td>
-            <%= user.created_at %>
-          </td>
-          <td class="last">
-            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", admincp_user_path(user) %> |
-            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_admincp_user_path(user) %> |
-            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", admincp_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-          </td>
-        </tr>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td>
+              <%= user.id %>
+            </td>
+            <td>
+              <%= link_to user.username, admincp_user_path(user) %>
+            </td>
+            <td>
+              <%= user.created_at %>
+            </td>
+            <td><%= user.items_count %></td>
+            <td class="last">
+              <%= link_to "#{t("web-app-theme.show", :default => "Show")}", admincp_user_path(user) %> |
+              <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_admincp_user_path(user) %> |
+              <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", admincp_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+            </td>
+          </tr>
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">
         <div class="actions">
         </div>
-        
+
       </div>
     </div>
   </div>

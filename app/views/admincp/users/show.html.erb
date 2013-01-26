@@ -8,36 +8,36 @@
   </div>
   <div class="content">
     <div class="inner">
-      
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.username", :default => t("activerecord.labels.username", :default => "Username")) %>:</b>
-          <%= @user.username %>
-        </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.email", :default => t("activerecord.labels.email", :default => "Email")) %>:</b>
-          <%= @user.email %>
-        </p>
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.username", :default => t("activerecord.labels.username", :default => "Username")) %>:</b>
+        <%= @user.username %>
+      </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.password_digest", :default => t("activerecord.labels.password_digest", :default => "Password digest")) %>:</b>
-          <%= @user.password_digest %>
-        </p>
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.email", :default => t("activerecord.labels.email", :default => "Email")) %>:</b>
+        <%= @user.email %>
+      </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.cellphone", :default => t("activerecord.labels.cellphone", :default => "Cellphone")) %>:</b>
-          <%= @user.cellphone %>
-        </p>
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.password_digest", :default => t("activerecord.labels.password_digest", :default => "Password digest")) %>:</b>
+        <%= @user.password_digest %>
+      </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.qq", :default => t("activerecord.labels.qq", :default => "Qq")) %>:</b>
-          <%= @user.qq %>
-        </p>
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.cellphone", :default => t("activerecord.labels.cellphone", :default => "Cellphone")) %>:</b>
+        <%= @user.cellphone %>
+      </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.admincp_user.remember_token", :default => t("activerecord.labels.remember_token", :default => "Remember token")) %>:</b>
-          <%= @user.remember_token %>
-        </p>
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.qq", :default => t("activerecord.labels.qq", :default => "Qq")) %>:</b>
+        <%= @user.qq %>
+      </p>
+
+      <p>
+        <b><%= t("activerecord.attributes.admincp_user.remember_token", :default => t("activerecord.labels.remember_token", :default => "Remember token")) %>:</b>
+        <%= @user.remember_token %>
+      </p>
       <div class="wat-cf">
         <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_admincp_user_path(@user), :class => "button" %>
         <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), admincp_user_path(@user), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>

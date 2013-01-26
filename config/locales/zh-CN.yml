@@ -50,7 +50,7 @@ zh-CN:
     delete: '删除' 
     confirm: '警告！此动作无法撤销，确定要删除么?'
     created_at: '创建与' 
-    all: '所以' 
+    all: '所有' 
     or: '或'
     sort_up: '上'
     sort_down: '下'
