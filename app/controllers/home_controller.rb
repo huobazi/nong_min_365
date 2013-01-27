@@ -2,9 +2,16 @@
 class HomeController < ApplicationController
   caches_action :index, :expires_in => 10.minutes, :layout => false
   caches_action :search, :expires_in => 60.minutes, :layout => false
-  
+
   def index
     @page_tiele = '首页'
+
+    respond_to do |format|
+      format.html { }
+      format.mobile { 
+        @categories = Category.all
+      }
+    end
   end
 
   def search 

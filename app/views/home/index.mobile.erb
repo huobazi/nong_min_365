@@ -1,5 +1,5 @@
 <div id="page" data-role="page">
-  <div id="header-bar" data-role="header" data-theme="b" >
+  <div id="header-bar" data-role="header" data-theme="b" data-position="fixed">
     <% unless signed_in? %>
       <%= link_to '注册', signup_path, "class" => "ui-btn-left" %>
     <% end %>

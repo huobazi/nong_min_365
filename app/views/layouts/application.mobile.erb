@@ -18,8 +18,8 @@
       <script>
         //<![CDATA[
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<%= google_account_id %>']);
-      _gaq.push(['_setDomainName', 'nongming365.com']);
+      _gaq.push(['_setAccount', '<%= SiteSettings.google_account_id %>']);
+      _gaq.push(['_setDomainName', '<%= SiteSettings.domain_name %>']);
       _gaq.push(['_setSiteSpeedSampleRate', 100]);
       _gaq.push(['_trackPageview']);
       <%= Garelic::Timing %>
