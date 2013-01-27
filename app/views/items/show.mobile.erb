@@ -1,9 +1,9 @@
-<div id="page" data-role="page" data-position="fixed"
+<div id="page" data-role="page"
   <% if not request.referer.to_s.empty? %>
     data-add-back-btn="true" data-back-btn-text="返回"
   <% end %>
   >
-  <div id="header-bar" data-role="header" data-theme="b" >
+  <div id="header-bar" data-role="header" data-theme="b"  data-position="fixed">
     <% if request.referer.to_s.empty? %>
       <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
     <% end %>

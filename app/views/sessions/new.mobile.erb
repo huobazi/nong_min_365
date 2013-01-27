@@ -1,5 +1,5 @@
-<div id="page" data-role="page" data-position="fixed">
-  <div id="header-bar" data-role="header" data-theme="b" >
+<div id="page" data-role="page" >
+  <div id="header-bar" data-role="header" data-theme="b" data-position="fixed" >
     <%= link_to '首页', root_path, "class" => "ui-btn-left", "data-icon" => "home" %>
     <h1><%= @page_title || @title || 'NongMing365' %></h1>
     <%= link_to '注册', signup_path, "class" => "ui-btn-right" %>
