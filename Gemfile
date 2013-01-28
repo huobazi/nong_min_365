@@ -65,6 +65,9 @@ gem 'mobylette', '~> 3.3.2'
 gem "high_voltage", "~> 1.2.1"
 
 group :development do
+  # Deploy with Capistrano
+  gem 'capistrano', '~> 2.14.1'
+  gem "rvm-capistrano", "~> 1.2.7", :require => false
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
   gem 'magic_encoding', '~> 0.0.2'
@@ -94,8 +97,6 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
