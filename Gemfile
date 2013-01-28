@@ -70,6 +70,9 @@ group :development do
   gem 'magic_encoding', '~> 0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
   gem "rails-erd", "~> 1.1.0"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :development, :test do
