@@ -52,29 +52,57 @@ namespace :spider do
       dest_categories
     end
 
-    def populate_items_link_by_category(short_name, category_id)
+    def populate_items_link_by_category(short_name, category_id, xtype)
       items_link_list = []
-      url = "http://#{$nx28_host}/info_list.php?info_classes=#{short_name}"
+      url = "http://#{$nx28_host}/info_list.php?r_s=#{xtype}&info_classes=#{short_name}"
       html = crawl_get(url)
       doc = Nokogiri::HTML(html)
       doc.css('div.middle_mian_l_content table tr>td:nth-child(2)>a').each do |link|
         name =  link.content.gsub(/[\r\n\t\s\b\B]*/,'')
         link  =  link[:href].gsub('../','http://nx28.com/')
-        items_link_list.push({:link => link, :category_id => category_id })
+        items_link_list.push({:link => link, :category_id => category_id, :xtype => xtype })
       end
 
       items_link_list
     end
 
-    def populateL_item(url, category_id)
+    def populateL_item(url, category_id, xtype)
       item = {}
 
-      # TODO 这里应该try catch 两种页面
       html = crawl_get(url)
-      doc = Nokogiri::HTML(html)
-      name = doc.css('div.middle_r_top > span')[0].content
+      doc = Nokogiri::HTML(html,nil,'gbk')
 
-      item[:name] = name 
+      title = doc.css('title')[0].content.gsub('-农享网','')
+      amount = doc.css('font[color="#FF0000"]')[0].content
+      el_phone = doc.css('span[class="middle_r_main_publishtime_source_scan_check_phone"]')[0]
+      if el_phone
+        contact_phone = el_phone.content
+      else
+        contact_phone = doc.css('div#2')[0].content.split(':')[1]
+      end
+
+      body = doc.css('div.middle_r_main_title').css('p')[0].content
+      options = doc.css('div#content')[0].content
+      zone = doc.css('div[class="middle_r_main_publishtime_source_scan_check_diqu"]')[0].content.split('IP')[0].split('|')
+
+
+      item[:src] = url
+      item[:category_id] = category_id 
+      item[:title] = title.gsub(/[\r\n\t\s\b\B]*/,'') 
+      item[:amount] = amount.gsub(/[\r\n\t\s\b\B]*/,'') 
+      item[:contact_phone] = contact_phone.gsub(/[\r\n\t\s\b\B]*/,'') 
+      item[:body] = body
+
+      item[:xtype] = xtype == 0 ? 1 : 2
+      item[:contact_name] = options.split('发布人：')[1].split('联系')[0].gsub(/\n/,'').gsub(/[\r\n\t\s\b\B]*/,'')
+      item[:user_id] = -1 
+
+      item[:sheng] = zone[0].gsub('省','').gsub(/[\r\n\t\s\b\B]*/,'')
+      item[:shi] = zone[1].gsub(/[\r\n\t\s\b\B]*/,'')
+      item[:xian] = zone[2].gsub(/[\r\n\t\s\b\B]*/,'')
+      item[:xiang] = zone[3].gsub(/[\r\n\t\s\b\B]*/,'')
+      item[:cun] = zone[4].gsub(/[\r\n\t\s\b\B]*/,'')
+
       item
     end
 
@@ -85,15 +113,17 @@ namespace :spider do
     items_link_list = []
     categories_list = populate_categories
     categories_list.each do |category|
-      items_link_list.concat populate_items_link_by_category(category[:short_name], category[:local_id])
+      items_link_list.concat populate_items_link_by_category(category[:short_name], category[:local_id],0)
+      items_link_list.concat populate_items_link_by_category(category[:short_name], category[:local_id],1)
     end
 
     items_size = items_link_list.size
 
     items_link_list.each_with_index do |item_link, index|
-      item = populateL_item(item_link[:link], item_link[:category_id])
+      item = populateL_item(item_link[:link], item_link[:category_id],item_link[:xtype])
       save_item(item)
-      puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:name]}"
+      #puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
+      puts item
     end
 
   end
