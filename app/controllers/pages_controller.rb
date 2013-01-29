@@ -10,9 +10,9 @@ class PagesController < HighVoltage::PagesController
     when 'about'
       'static'
     when '404'
-      'application'
+      'errors'
     when 'errors'
-      'application'
+      'errors'
     else
       'static'
     end
