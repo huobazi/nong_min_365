@@ -5,6 +5,7 @@ module Rails
     end
   end
 end
+
 rails_env = ENV["RAILS_ENV"] || "production"
 
 preload_app true
@@ -16,8 +17,8 @@ stdout_path "#{Rails.root}/log/unicorn.log"
 listen 5000, :tcp_nopush => false
 
 listen "/tmp/unicorn.nongmin365.com.sock"
-worker_processes 6
-timeout 120
+worker_processes 4
+timeout 60
 
 if GC.respond_to?(:copy_on_write_friendly=)
   GC.copy_on_write_friendly = true

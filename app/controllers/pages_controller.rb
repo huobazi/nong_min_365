@@ -9,6 +9,10 @@ class PagesController < HighVoltage::PagesController
     case params[:id]
     when 'about'
       'static'
+    when '404'
+      'application'
+    when 'errors'
+      'application'
     else
       'static'
     end

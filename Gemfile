@@ -95,7 +95,7 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem "unicorn", "~> 4.5.0"
 
 
 # To use debugger
