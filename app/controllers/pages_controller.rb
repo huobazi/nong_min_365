@@ -7,12 +7,10 @@ class PagesController < HighVoltage::PagesController
   protected
   def layout_for_page
     case params[:id]
+    when /^errors/
+      'errors'
     when 'about'
       'static'
-    when '404'
-      'errors'
-    when 'errors'
-      'errors'
     else
       'static'
     end
@@ -20,6 +18,8 @@ class PagesController < HighVoltage::PagesController
 
   def set_page_title_and_breadcrumb
     case params[:id] 
+    when /^errors/
+      @page_title = '出错啦'
     when 'about'
       @page_title = '关于我们'
       drop_breadcrumb(@page_title, static_page_path('about'))
@@ -30,7 +30,6 @@ class PagesController < HighVoltage::PagesController
       @page_title = '联系我们'
       drop_breadcrumb(@page_title, static_page_path('contact'))  
     end
-
   end
 
 end
