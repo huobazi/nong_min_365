@@ -26,7 +26,8 @@ task :defaults do
   set_default :unicorn_socket,  "#{sockets_path}/unicorn.sock"
   set_default :unicorn_pid,     "#{pids_path}/unicorn.pid"
   set_default :unicorn_config,  "#{config_path}/unicorn.rb"
-  set_default :unicorn_script,  "#{services_path!}/unicorn-#{app!}"
+  set_default :unicorn_service_name,  "unicorn-#{app!}"
+  set_default :unicorn_script,  "#{services_path!}/#{unicorn_service_name}"
   set_default :unicorn_workers, 1
   set_default :unicorn_bin,   'bundle exec unicorn' # you may prefer this over the line below
   #set_default :unicorn_bin,     "#{deploy_to}/#{current_path}/bin/unicorn_rails"

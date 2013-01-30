@@ -13,11 +13,12 @@ namespace :unicorn do
     queue 'echo "-----> Relocate unicorn script file"'
     queue echo_cmd %{sudo cp "#{config_path}/unicorn.sh" "#{unicorn_script}" && sudo chown #{unicorn_user}:#{unicorn_group} #{unicorn_script} && sudo chmod u+x #{unicorn_script}}
     queue check_ownership unicorn_user, unicorn_group, unicorn_script
+    queue echo_cmd "sudo update-rc.d #{unicron_service_nameunicron_service_name} defaults"
   end
 
   desc "Parses all Unicorn config files and uploads them to server"
   task :upload => [:'upload:config', :'upload:script']
-  
+
   namespace :upload do
     desc "Parses Unicorn config file and uploads it to server"
     task :config do
@@ -32,7 +33,7 @@ namespace :unicorn do
 
   desc "Parses all Unicorn config files and shows them in output"
   task :parse => [:'parse:config', :'parse:script']
-  
+
   namespace :parse do
     desc "Parses Unicorn config file and shows it in output"
     task :config do
