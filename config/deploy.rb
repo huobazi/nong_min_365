@@ -10,6 +10,7 @@ require 'mina/extras'
 require 'mina/god'
 require 'mina/unicorn'
 require 'mina/nginx'
+require 'mina/utils'
 
 Dir['lib/mina/servers/*.rb'].each { |f| load f }
 
@@ -24,7 +25,7 @@ set :repository,         'git@bitbucket.org:huobazi/nong_min_365.git'
 set :keep_releases,       9999        #=> I like to keep all my releases
 set :default_server,     :production
 
-set :shared_paths, ['config/database.yml', 'config/newrelic.yml', 'config/initializers/secret_token.rb', 'tmp', 'log'] # last one is for paperclip
+set :shared_paths, ['config/database.yml', 'config/newrelic.yml', 'config/initializers/secret_token.rb', 'tmp', 'log']
 
 ###########################################################################
 # Tasks
@@ -33,7 +34,8 @@ set :shared_paths, ['config/database.yml', 'config/newrelic.yml', 'config/initia
 set :server, ENV['to'] || default_server
 invoke :"env:#{server}"
 
-  desc "Deploys the current version to the server."
+desc "Deploys the current version to the server."
+
 task :deploy do
   deploy do
     invoke :'git:clone'
