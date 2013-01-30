@@ -2,22 +2,11 @@
 source 'http://ruby.taobao.org'
 
 gem 'rails', '~> 3.2.11'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg', '~> 0.14.1'
-
-# Gems used only for assets and not required
-# in production environments by default.
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
   gem 'coffee-rails', '~> 3.2.2'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '~> 1.3.0'
   gem 'compass-rails', '~> 1.0.3'
   gem 'bootstrap-sass', '~> 2.2.2.0'
@@ -64,18 +53,18 @@ gem 'mobylette', '~> 3.3.2'
 # For stack pages
 gem "high_voltage", "~> 1.2.1"
 
+# Use unicorn as the app server
+gem "unicorn", "~> 4.5.0"
+
 group :development do
-  # Deploy with Capistrano
-  gem 'capistrano', '~> 2.14.1'
-  gem "rvm-capistrano", "~> 1.2.7", :require => false
+  # Deploy with Mina 
+  gem "mina", "~> 0.2.1"
+  gem "god", "~> 0.13.1"
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
   gem 'magic_encoding', '~> 0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
   gem "rails-erd", "~> 1.1.0"
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
 end
 
 group :development, :test do
@@ -86,18 +75,9 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
-  #gem 'capybara-webkit'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'simplecov', require: false
 end
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
 
-# Use unicorn as the app server
-gem "unicorn", "~> 4.5.0"
-
-
-# To use debugger
-# gem 'debugger'
 
