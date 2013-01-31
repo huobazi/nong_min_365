@@ -84,6 +84,13 @@ server {
     log_not_found off;
   }
   
+  location ~ ^/(assets)/  {
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+    add_header      Last-Modified "";
+    add_header      ETag "";
+  }
   # location /attachment_files {
   #     root <%= deploy_to %>/<%= current_path %>/public/system;
   #     internal;
@@ -99,9 +106,9 @@ server {
     expires -1;
   }
 
-  error_page 500 502 503 504 /500.html;
-  error_page 403 /403.html;
-  error_page 404 /404.html;
+  error_page 500 502 503 504 =200 /errors/500;
+  error_page 403 /errors/403;
+  error_page 404 /errors/404;
 
   client_max_body_size 50M;
   keepalive_timeout 10;
