@@ -30,7 +30,7 @@ task :create_extra_paths do
 
   queue 'echo "-----> Create shared paths"'
     
-  shared_dirs = shared_paths!.map { |file| File.dirname("#{deploy_to}/#{shared_path}/#{file}") }.uniq
+  shared_dirs = shared_paths.map { |file| File.dirname("#{deploy_to}/#{shared_path}/#{file}") }.uniq
   cmds = dirs.map do |dir|
     equeu echo_cmd %{mkdir -p "#{dir}"}
   end
