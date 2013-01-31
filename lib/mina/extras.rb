@@ -29,9 +29,15 @@ task :create_extra_paths do
   queue echo_cmd "mkdir -p #{config_path}"
 
   queue 'echo "-----> Create shared paths"'
-  shared_paths.each do |p|
-    queue echo_cmd "mkdir -p #{deploy_to}/#{shared_path}/#{p}"
+    
+  shared_dirs = shared_paths!.map { |file| File.dirname("#{deploy_to}/#{shared_path}/#{file}") }.uniq
+  cmds = dirs.map do |dir|
+    equeu echo_cmd %{mkdir -p "#{dir}"}
   end
+
+  #shared_paths.each do |p|
+    #queue echo_cmd "mkdir -p #{deploy_to}/#{shared_path}/#{p}"
+  #end
 
   queue 'echo "-----> Create PID and Sockets paths"'
   queue echo_cmd "mkdir -p #{pids_path} && chown #{user}:#{group} #{pids_path} && chmod +rw #{pids_path}"
@@ -50,7 +56,7 @@ task :create_app_configs do
   files_hash.each do |source, target|
     upload_file "the #{source}", source, target 
   end
-   files_hash.each do |source, target|
+  files_hash.each do |source, target|
     queue %{echo "-----> (!!!) PLEASE edit the settings in the #{target}  (!!!)"}
   end
 end
