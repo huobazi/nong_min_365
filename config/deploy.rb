@@ -19,8 +19,7 @@ Dir['lib/mina/servers/*.rb'].each { |f| load f }
 ###########################################################################
 
 set :app,                'nong_min_365'
-#set :repository,         'https://huobazi@bitbucket.org/huobazi/nong_min_365.git'
-set :repository,         'git@bitbucket.org:huobazi/nong_min_365.git'
+set :repository,         'https://huobazi@bitbucket.org/huobazi/nong_min_365.git'
 
 set :keep_releases,       9999        #=> I like to keep all my releases
 set :default_server,     :production
