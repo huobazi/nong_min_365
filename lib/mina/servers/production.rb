@@ -3,7 +3,7 @@
 namespace :env do
   task :production => [:environment] do
     set :domain,              'nongmin365.com'
-    set :deploy_to,           '/home/deployer/app'
+    set :deploy_to,           "/home/deployer/app/#{app}"
     set :sudoer,              'deployer'
     set :user,                'deployer'
     set :group,               'deployer'

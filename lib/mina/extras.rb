@@ -49,7 +49,9 @@ task :create_app_configs do
   }
   files_hash.each do |source, target|
     upload_file "the #{source}", source, target 
-    queue 'echo "-----> PLEASE edit the -----> #{target} !!!"'
+  end
+   files_hash.each do |source, target|
+    queue %{echo "-----> PLEASE edit the settings in the #{target} !!!"}
   end
 end
 
@@ -64,7 +66,7 @@ task :sudo do
 end
 
 def upload_file(desc, tpl, destination)
-  contents = File.read(tpl)
+  contents = File.read(tpl).gsub('"','\\"').gsub('`','\\\\`').gsub('$','\\\\$')
   queue %{echo "-----> Put #{desc} file to #{destination}"}
   queue %{echo "#{contents}" > #{destination}}
   queue check_exists(destination)
