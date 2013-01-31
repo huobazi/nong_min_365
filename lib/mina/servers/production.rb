@@ -13,7 +13,6 @@ namespace :env do
 
     invoke :defaults                                         # load rest of the config
 
-    set :rvm_path,            '/usr/local/rvm/scripts/rvm'
     set :rvm_string,          '1.9.3'
     invoke :"rvm:use[#{rvm_string}]"
   end
