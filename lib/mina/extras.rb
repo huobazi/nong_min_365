@@ -29,14 +29,14 @@ task :create_extra_paths do
   queue echo_cmd "mkdir -p #{config_path}"
 
   queue 'echo "-----> Create shared paths"'
-    
+
   shared_dirs = shared_paths.map { |file| File.dirname("#{deploy_to}/#{shared_path}/#{file}") }.uniq
-  cmds = dirs.map do |dir|
-    equeu echo_cmd %{mkdir -p "#{dir}"}
+  cmds = shared_dirs.map do |dir|
+    queue echo_cmd %{mkdir -p "#{dir}"}
   end
 
   #shared_paths.each do |p|
-    #queue echo_cmd "mkdir -p #{deploy_to}/#{shared_path}/#{p}"
+  #queue echo_cmd "mkdir -p #{deploy_to}/#{shared_path}/#{p}"
   #end
 
   queue 'echo "-----> Create PID and Sockets paths"'
