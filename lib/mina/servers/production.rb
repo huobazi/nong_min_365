@@ -6,7 +6,7 @@ namespace :env do
     set :deploy_to,           '/home/deployer/app'
     set :sudoer,              'deployer'
     set :user,                'deployer'
-    set :group,               'app_user'
+    set :group,               'deployer'
     set :rvm_path,            '/usr/local/rvm/scripts/rvm'
     set :services_path,       '/etc/init.d'          # Where your God and Unicorn service control scripts will go
     set :nginx_path,          '/etc/nginx'
