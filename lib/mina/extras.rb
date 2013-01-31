@@ -72,8 +72,7 @@ task :sudo do
 end
 
 def upload_file(desc, tpl, destination)
-  #contents = File.read(tpl).gsub('"','\\"').gsub('`','\\\\`').gsub('$','\\\\$')
-  contents = "xxxxx"
+  contents = File.read(tpl).gsub('"','\\"').gsub('`','\\\\`').gsub('$','\\\\$')
   queue %{echo "-----> Put #{desc} file to #{destination}"}
   queue %{echo "#{contents}" > #{destination}}
   queue check_exists(destination)
