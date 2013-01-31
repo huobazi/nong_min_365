@@ -3,7 +3,8 @@
 # Sensible defaults. You wouldn't want to change those in most of the cases
 ###########################################################################
 task :defaults do
-  set_default :term_mode,       :pretty
+  #set_default :term_mode,       :pretty
+  set_default :term_mode, :system # :pretty doesn't seem to work with sudo well
   set_default :rails_env,       'production'
   set_default :shared_paths,    ['tmp', 'log', 'public/system'] # last one is for paperclip
   set_default :branch,          'master'
