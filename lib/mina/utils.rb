@@ -16,14 +16,14 @@ end
 namespace :spider do
   desc "Run the Nx28 spider"
   task :nx28 do
-    queue echo_cmd "cd #{current_path}; RAILS_ENV=production bundle exec rake spider:nx28"
+    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=production bundle exec rake spider:nx28"
   end
 end
 
 namespace :cache do
   desc "Clear the application cache"
   task :clear  do
-    queue echo_cmd "cd #{current_path}; RAILS_ENV=production bundle exec rake cache:clear"
+    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=production bundle exec rake cache:clear"
   end
 end
 
@@ -46,6 +46,6 @@ end
 namespace :remote_rake do
   desc "Run a task on remote servers, ex: cap remote_rake:invoke task=cache:clear"
   task :invoke do
-    queue echo_cmd "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake #{ENV['task']}"
+    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=#{rails_env} bundle exec rake #{ENV['task']}"
   end
 end
