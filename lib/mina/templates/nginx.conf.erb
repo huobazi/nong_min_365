@@ -1,3 +1,12 @@
+ # Default server
+ server {
+    listen 80;
+    location / {
+      rewrite  ^/(.*)$  http://nongmin365.com/$1  permanent;
+      proxy_set_header Host "nongmin365.com";
+    }
+}
+
 <%
 # upstream unicorn {
 #   server unix:/tmp/unicorn.photoapp.sock fail_timeout=0;

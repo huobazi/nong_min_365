@@ -151,6 +151,7 @@ namespace :spider do
       begin
         tmp = Item.find_by_source(hash[:src])
         if tmp and tmp.id > 0
+          puts '===Already exists'
           return
         end
 
