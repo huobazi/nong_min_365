@@ -43,7 +43,7 @@ class Item < ActiveRecord::Base
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
-  before_save :populate_region_name,:fix_tags_name
+  before_save :populate_region_name,:fix_tags_name, :add_province_name_to_tags
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
     :contact_phone, :contact_qq, :title, :xtype,
@@ -92,4 +92,9 @@ class Item < ActiveRecord::Base
     self.tag_list = self.tag_list.join(',').gsub(/，/,',')
   end
   
+  private
+  def add_province_name_to_tags
+    self.tag_list = "#{self.province_name}," + self.tag_list
+  end
+
 end
