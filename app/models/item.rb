@@ -94,7 +94,9 @@ class Item < ActiveRecord::Base
   
   private
   def add_province_name_to_tags
-    self.tag_list = "#{self.province_name}," + self.tag_list
+    if not self.tag_list.include "#{self.province_name},"
+      self.tag_list = "#{self.province_name}," + self.tag_list
+    end
   end
 
 end
