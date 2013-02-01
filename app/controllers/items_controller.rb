@@ -88,6 +88,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     drop_breadcrumb("编辑", edit_item_path(@item) )
 
+    if @item.tag_list.include "#{@item.province_name},"
+      @item.tag_list.gsub("#{@item.province_name},",'')
+    end
+
     @page_title               = '编辑' + @item.title
     @provinces                = ChineseRegion.provinces
     children_level, @cities   = ChineseRegion.children(@item.province_code)
