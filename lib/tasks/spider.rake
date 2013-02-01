@@ -8,6 +8,7 @@ namespace :spider do
   task :nx28 => [:environment] do
 
     $nx28_host = 'nx28.com'
+    $user_id = -1
     def encode_text(input)
       Iconv.iconv("UTF-8",  "GBK",input)  
     end
@@ -98,6 +99,14 @@ namespace :spider do
     def populateL_item(url, category_id, xtype)
       item = {}
       begin
+        url = url.gsub(/[\r\n\t\s\b\B]*/,'') 
+        item[:exists] = 0
+        tmp = Item.find_by_source(url)
+        if tmp and tmp.id > 0 and tmp.user_id == $user_id
+          item[:exists] = 1
+          return
+        end
+
         html = crawl_get(url)
         doc = Nokogiri::HTML(html,nil,'gbk')
 
@@ -114,21 +123,21 @@ namespace :spider do
         options = doc.css('div#content')[0].content
         zone = doc.css('div[class="middle_r_main_publishtime_source_scan_check_diqu"]')[0].content.split('IP')[0].split('|')
 
-        item[:src] = url.gsub(/[\r\n\t\s\b\B]*/,'') 
-        item[:category_id] = category_id 
-        item[:title] = title.gsub(/[\r\n\t\s\b\B]*/,'') 
-        item[:amount] = amount.gsub(/[\r\n\t\s\b\B]*/,'') 
-        item[:contact_phone] = contact_phone.gsub(/[\r\n\t\s\b\B]*/,'') 
-        item[:body] = body
+        item[:src]           = url
+        item[:category_id]   = category_id
+        item[:title]         = title.gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:amount]        = amount.gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:contact_phone] = contact_phone.gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:body]          = body
 
-        item[:xtype] = xtype == 0 ? 1 : 2
-        item[:contact_name] = options.split('发布人：')[1].split('联系')[0].gsub(/\n/,'').gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:xtype]         = (xtype == 0 ? 1 : 2)
+        item[:contact_name]  = options.split('发布人：')[1].split('联系')[0].gsub(/\n/,'').gsub(/[\r\n\t\s\b\B]*/,'')
 
-        item[:sheng] = zone[0].split('：')[1].gsub('省','').gsub(/[\r\n\t\s\b\B]*/,'')
-        item[:shi] = zone[1].gsub(/[\r\n\t\s\b\B]*/,'')
-        item[:xian] = zone[2].gsub(/[\r\n\t\s\b\B]*/,'')
-        item[:xiang] = zone[3].gsub(/[\r\n\t\s\b\B]*/,'')
-        item[:cun] = zone[4].gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:sheng]         = zone[0].split('：')[1].gsub('省','').gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:shi]           = zone[1].gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:xian]          = zone[2].gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:xiang]         = zone[3].gsub(/[\r\n\t\s\b\B]*/,'')
+        item[:cun]           = zone[4].gsub(/[\r\n\t\s\b\B]*/,'')
 
         item[:province_code] = (ChineseRegion.find_by_name item[:sheng]).code
         item[:city_code]     = (ChineseRegion.find_by_name item[:shi]).code
@@ -149,15 +158,13 @@ namespace :spider do
 
     def save_item(hash)
       begin
-        tmp = Item.find_by_source(hash[:src])
-        if tmp and tmp.id > 0
+        if item[:exists] == 1
           puts '===Already exists'
           return
         end
 
         item               = Item.new
-
-        item.user_id       = -1
+        item.user_id       = $user_id
         item.title         = hash[:title]
         item.category_id   = hash[:category_id]
         item.amount        = hash[:amount]
@@ -172,7 +179,7 @@ namespace :spider do
         item.village_code  = hash[:village_code]
         item.source        = hash[:src]
         item.tag_list      = hash[:sheng]
-        item.contact_qq = '000000'
+        item.contact_qq    = '000000'
 
         item.save!
 
@@ -197,7 +204,7 @@ namespace :spider do
     items_size = items_link_list.size
 
     items_link_list.each_with_index do |item_link, index|
-      item = populateL_item(item_link[:link], item_link[:category_id],item_link[:xtype])
+      item = populate_item(item_link[:link], item_link[:category_id],item_link[:xtype])
       save_item(item)
       puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
       sleep(0.1)

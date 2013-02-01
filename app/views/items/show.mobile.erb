@@ -39,7 +39,7 @@
         </li>
         <li class="right">
           <label>联系QQ：</label>
-          <%= @item.contact_qq %>
+          <%= @item.contact_qq = '000000' ? '': @item.contact_qq %>
         </li>
         <li class="left">
           <label>IP：</label>
