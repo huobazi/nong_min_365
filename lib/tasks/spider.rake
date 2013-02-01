@@ -114,7 +114,7 @@ namespace :spider do
         options = doc.css('div#content')[0].content
         zone = doc.css('div[class="middle_r_main_publishtime_source_scan_check_diqu"]')[0].content.split('IP')[0].split('|')
 
-        item[:src] = url
+        item[:src] = url.gsub(/[\r\n\t\s\b\B]*/,'') 
         item[:category_id] = category_id 
         item[:title] = title.gsub(/[\r\n\t\s\b\B]*/,'') 
         item[:amount] = amount.gsub(/[\r\n\t\s\b\B]*/,'') 
@@ -149,25 +149,31 @@ namespace :spider do
 
     def save_item(hash)
       begin
-      item               = Item.new
+        tmp = Item.find_by_source(hash[:src])
+        if tmp.id > 0
+          return
+        end
 
-      item.user_id       = -1
-      item.title         = hash[:title]
-      item.category_id   = hash[:category_id]
-      item.amount        = hash[:amount]
-      item.contact_phone = hash[:contact_phone]
-      item.body          = hash[:body]
-      item.xtype         = hash[:xtype]
-      item.contact_name  = hash[:contact_name]
-      item.province_code = hash[:province_code]
-      item.city_code     = hash[:city_code]
-      item.county_code   = hash[:county_code]
-      item.town_code     = hash[:town_code]
-      item.village_code  = hash[:village_code]
-      item.tag_list      = hash[:sheng]
-      item.contact_qq = '000000'
+        item               = Item.new
 
-      item.save!
+        item.user_id       = -1
+        item.title         = hash[:title]
+        item.category_id   = hash[:category_id]
+        item.amount        = hash[:amount]
+        item.contact_phone = hash[:contact_phone]
+        item.body          = hash[:body]
+        item.xtype         = hash[:xtype]
+        item.contact_name  = hash[:contact_name]
+        item.province_code = hash[:province_code]
+        item.city_code     = hash[:city_code]
+        item.county_code   = hash[:county_code]
+        item.town_code     = hash[:town_code]
+        item.village_code  = hash[:village_code]
+        item.source        = hash[:src]
+        item.tag_list      = hash[:sheng]
+        item.contact_qq = '000000'
+
+        item.save!
 
       rescue Exception => e
         #exception
@@ -193,7 +199,7 @@ namespace :spider do
       item = populateL_item(item_link[:link], item_link[:category_id],item_link[:xtype])
       save_item(item)
       puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
-      sleep(0.3)
+      sleep(0.1)
     end
 
   end
