@@ -11,6 +11,7 @@ server {
    listen 80;
    server_name www.nongmin365.com;
    rewrite ^/(.*) http://nongmin365.com/$1 permanent;
+   proxy_set_header Host "nongmin365.com";
 }
 
 <%
