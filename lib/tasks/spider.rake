@@ -193,7 +193,7 @@ namespace :spider do
       item = populateL_item(item_link[:link], item_link[:category_id],item_link[:xtype])
       save_item(item)
       puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
-      puts item
+      sleep(0.3)
     end
 
   end
