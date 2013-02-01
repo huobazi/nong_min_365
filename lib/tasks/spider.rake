@@ -148,7 +148,7 @@ namespace :spider do
     end
 
     def save_item(hash)
-      #begin
+      begin
       item               = Item.new
 
       item.user_id       = -1
@@ -165,18 +165,18 @@ namespace :spider do
       item.town_code     = hash[:town_code]
       item.village_code  = hash[:village_code]
       item.tag_list      = hash[:sheng]
-      item.qq = '000000'
+      item.contact_qq = '000000'
 
       item.save!
 
-      #rescue Exception => e
-      # exception
-      #puts e.message
-      #else
-      # other exception
-      #ensure
-      # always executed
-      #end
+      rescue Exception => e
+        #exception
+        puts e.message
+      else
+        #other exception
+      ensure
+        #always executed
+      end
 
     end
 

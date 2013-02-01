@@ -4,11 +4,11 @@
     <div class="box content">
       <ul class="prop">
         <li class="left"><label>数量：</label> <%= @item.amount %> </li>
-        <li class="right"><label>发布时间：</label> <%= @item.created_at.strftime('%Y-%m-%d %H:%M') %> </li>
+        <li class="right"><label>发布时间：</label> <%= @item.created_at.strftime('%Y-%m-%d') %> </li>
         <li class="left"><label>分类：</label> <%= @item.category.name %> </li>
         <li class="right"><label>类型：</label> <%= @item.xtype == 1 ? '供应' : '求购' %> </li>
         <li class="left"><label>联系人：</label> <%= @item.contact_name %> </li>
-        <li class="right"><label>联系QQ：</label> <%= @item.contact_qq %> </li>
+        <li class="right"><label>联系QQ：</label> <%= @item.contact_qq = '000000' ? '': @item.contact_qq %> </li>
         <li class="left"><label>IP：</label> <%= @item.ip %> </li>
         <li class="right"><label>联系电话：</label> <%= @item.contact_phone %> </li>
         <li class="left"><label>浏览次数：</label> <span id="item-visit-counts"><%= @item.visit_count %></span> </li>
