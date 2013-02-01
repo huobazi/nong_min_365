@@ -1,6 +1,6 @@
  # Default server
 server {
-    listen 80;
+    listen 80 default_server;
     location / {
       rewrite  ^/(.*)$  http://nongmin365.com/$1  permanent;
       proxy_set_header Host "nongmin365.com";
