@@ -37,7 +37,7 @@ namespace :nginx do
     puts erb("#{config_templates_path}/nginx.conf.erb")
   end
   
-  %w(stop start restart reload status).each do |action|
+  %w(stop start restart reload status configtest).each do |action|
     desc "#{action.capitalize} Nginx"
     task action.to_sym do
       queue %{echo "-----> #{action.capitalize} Nginx"}
