@@ -150,7 +150,7 @@ namespace :spider do
     def save_item(hash)
       begin
         tmp = Item.find_by_source(hash[:src])
-        if tmp.id > 0
+        if tmp and tmp.id > 0
           return
         end
 
