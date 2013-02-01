@@ -151,18 +151,18 @@
           border-bottom: 1px dashed #9bbd73;
           height:34px;
           line-height:34px;
-          padding: 0 10px;
+          padding: 0 8px;
           span{
             display:block;
             float:left;
             overflow:hidden;
           }
           span.area{
+            width:65px;
             font-weight:bold;
           }
           span.title{
             width: 400px;
-            margin: 0 0 0 8px;
           }
           span.contact{
             height:34px;
