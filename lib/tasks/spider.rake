@@ -179,6 +179,7 @@ namespace :spider do
         item.village_code  = hash[:village_code]
         item.source        = hash[:src]
         item.contact_qq    = '000000'
+        item.tag_list      = "#{hash[:sheng]},"
 
         item.save!
 
