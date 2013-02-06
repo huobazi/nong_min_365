@@ -96,7 +96,7 @@ namespace :spider do
       items_link_list
     end
 
-    def populateL_item(url, category_id, xtype)
+    def populate_item(url, category_id, xtype)
       item = {}
       begin
         url = url.gsub(/[\r\n\t\s\b\B]*/,'') 
