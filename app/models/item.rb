@@ -50,7 +50,7 @@ class Item < ActiveRecord::Base
     :province_code, :city_code, :county_code, :town_code, :village_code,
     :tag_list
 
-  validates :title, :presence => true, :length => { :in => 6..30 }
+  validates :title, :presence => true, :length => { :in => 4..30 }
   validates :amount, :presence => true
   validates :category_id, :presence => { :message => '必须选择' }
   #validates :xtype, :presence => { :message => '必须选择' }
