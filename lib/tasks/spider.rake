@@ -158,7 +158,7 @@ namespace :spider do
 
     def save_item(hash)
       begin
-        if item[:exists] == 1
+        if hash[:exists] == 1
           puts '===  #{item[:title]} was already exists.'
           return
         end
