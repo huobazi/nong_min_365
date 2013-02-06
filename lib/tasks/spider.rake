@@ -204,7 +204,7 @@ namespace :spider do
 
     items_link_list.each_with_index do |item_link, index|
       item = populate_item(item_link[:link], item_link[:category_id],item_link[:xtype])
-      if item[exists] == 0
+      if item[:exists] == 0
         save_item(item)
         puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
         sleep(0.1)
