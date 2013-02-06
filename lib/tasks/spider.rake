@@ -104,7 +104,7 @@ namespace :spider do
         tmp = Item.find_by_source(url)
         if tmp and tmp.id > 0 and tmp.user_id == $user_id
           item[:exists] = 1
-          return
+          return item
         end
 
         html = crawl_get(url)
@@ -159,7 +159,7 @@ namespace :spider do
     def save_item(hash)
       begin
         if item[:exists] == 1
-          puts '===Already exists'
+          puts '===  #{item[:title]} was already exists.'
           return
         end
 
@@ -204,9 +204,11 @@ namespace :spider do
 
     items_link_list.each_with_index do |item_link, index|
       item = populate_item(item_link[:link], item_link[:category_id],item_link[:xtype])
-      save_item(item)
-      puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
-      sleep(0.1)
+      if item[exists] == 0
+        save_item(item)
+        puts "All:-#{items_size}-Now:-#{index + 1}-- save the item #{item[:title]}"
+        sleep(0.1)
+      end
     end
 
   end
