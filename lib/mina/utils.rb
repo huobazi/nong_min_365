@@ -9,7 +9,7 @@ namespace :apt do
   task :upgrade do
     queue echo_cmd "sudo apt-get update"
     queue echo_cmd "sudo apt-get -y upgrade"
-    queue echo_cmd "sudo apt-get -y dist-upgrade"
+    #queue echo_cmd "sudo apt-get -y dist-upgrade"
   end
 end
 
