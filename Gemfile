@@ -26,6 +26,9 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 # Google Analytics performance 
 gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
 
+# Newrelic Analytics 
+gem "newrelic_rpm", "~> 3.5.5.38"
+
 gem "rails-settings-cached", "~> 0.2.4"
 
 gem 'kaminari', '~> 0.14.1'
