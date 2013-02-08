@@ -38,11 +38,9 @@ gem 'rails-i18n', '~> 0.7.2'
 # Tagging
 gem 'acts-as-taggable-on', '~> 2.3.3'
 
-
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'ruby-pinyin', '~> 0.1.0'
-
 
 #gem 'default_value_for', '~> 2.0.1'
 
