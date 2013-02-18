@@ -88,8 +88,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     drop_breadcrumb("编辑", edit_item_path(@item) )
 
-    if @item.tag_list.include "#{@item.province_name},"
-      @item.tag_list.gsub("#{@item.province_name},",'')
+    if @item.tag_list.include? "#{@item.province_name}"
+      @item.tag_list.remove "#{@item.province_name}"
     end
 
     @page_title               = '编辑' + @item.title
@@ -129,7 +129,8 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     respond_to do |format|
-      if @item.update_attributes(params[:item].delete(:user_id))
+      params[:item].delete(:user_id)
+      if @item.update_attributes(params[:item])
         format.js{ render :layout => false }
         format.mobile{ redirect_to @item, :notice => "编辑成功！" }
       else
@@ -140,7 +141,7 @@ class ItemsController < ApplicationController
           children_level, @counties = ChineseRegion.children(@item.city_code)
           children_level, @towns    = ChineseRegion.children(@item.county_code)
           children_level, @villages = ChineseRegion.children(@item.town_code)
-          render 'new'
+          render 'edit'
         }
       end
     end
