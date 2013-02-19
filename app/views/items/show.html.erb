@@ -16,7 +16,7 @@
           <%= @item.province_name %> - <%= @item.city_name %> - <%= @item.county_name %> - <%= @item.town_name %> - <%= @item.village_name %>
         </li>
         <li class="tags"><label>标签：</label>
-          <%= raw @item.tags.map(&:name).map{ |tag| link_to tag, items_tags_path(:tag => tag)}.join(',') %>
+          <%= raw @item.tags.map(&:name).map{ |tag| link_to tag, items_tags_path(:tag => tag)}.join('') %>
         </li>
       </ul>
       <div id="line"></div>

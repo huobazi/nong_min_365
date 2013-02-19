@@ -180,19 +180,28 @@
         li.left{width: 220px;}
         li.right{width: 440px;}
         li.from{ width: 100%; }
-        li.tags{ width: 100%; }
-      }
-      #line{
-        clear:both;
-        border-top:1px dashed #ccc;
-        width:100%;
-        margin-bottom:10px
-      }
-      div.body{
-        }
-        div.opts{
-          text-align:right;
-        }
-      }
-    }
+        li.tags{ width: 100%;
+         a{
+           border-radius: 4px;
+           background-color: $green;
+           color: #fff;
+           padding: 2px 4px;
+           line-height: 14px;
+           margin: 0 6px 0 0;
+         } 
+       }
+     }
+     #line{
+       clear:both;
+       border-top:1px dashed #ccc;
+       width:100%;
+       margin-bottom:10px
+     }
+     div.body{
+     }
+     div.opts{
+       text-align:right;
+     }
+   }
+ }
   }
