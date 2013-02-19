@@ -77,7 +77,7 @@ namespace :spider do
       items_link_list = []
 
       begin
-        url = "http://#{$nx28_host}/info_list.php?r_s=#{xtype}&info_classes=#{short_name}"
+        url = "http://#{$nx28_host}/info_list.php?s_r=#{xtype}&info_classes=#{short_name}"
         html = crawl_get(url)
         doc = Nokogiri::HTML(html)
         doc.css('div.middle_mian_l_content table tr>td:nth-child(2)>a').each do |link|
