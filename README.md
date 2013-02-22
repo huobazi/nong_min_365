@@ -11,7 +11,7 @@ rails g web_app_theme:themed admincp/models --layout=admincp
 
 rewrite原有文件
 
-
+## 记得重设索引
 ----------- 发布 记得设置这几个code的排序规则 -------------
 -- Index: index_chinese_regions_on_code
 DROP INDEX index_chinese_regions_on_code;
