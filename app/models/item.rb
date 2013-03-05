@@ -90,8 +90,11 @@ class Item < ActiveRecord::Base
   def fix_tags_name 
     # 全角逗号的处理
     self.tag_list = self.tag_list.join(',').gsub(/，/,',')
+
+    # 全角顿号的处理
+    self.tag_list = self.tag_list.join(',').gsub(/、/,',')
   end
-  
+
   private
   def add_province_name_to_tags
     if not self.tag_list.include? "#{self.province_name}"
