@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'typhoeus'
-require "iconv"  
-require "iconv"  
+begin 
+  require 'iconv'
+rescue ::LoadError
+end
 
 namespace :spider do
   desc 'Crawl nx28 items' 
@@ -9,8 +11,23 @@ namespace :spider do
 
     $nx28_host = 'nx28.com'
     $user_id = -1
+
+    # Converts string encoding
+    def encode_string(str, src, dst)
+      if str.respond_to?(:encode)
+        str.encode(dst, { :invalid => :replace, :undef => :replace, :replace => '' })
+      else
+        begin
+          Iconv.conv(dst, src, str)
+        rescue
+          raise ::RuntimeError, "Your installation does not support iconv (needed for utf8 conversion)"
+        end
+      end      
+    end
+
     def encode_text(input)
-      Iconv.iconv("UTF-8",  "GBK",input)  
+      #Iconv.iconv("UTF-8",  "GBK",input)  
+      encode_string(input,'GBK','UTF-8')
     end
 
     def crawl_get(url)
