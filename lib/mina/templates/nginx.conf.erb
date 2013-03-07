@@ -86,13 +86,13 @@ server {
 
   rewrite ^/(.*)/$ /$1 permanent; # Truncate trailing slashes
   try_files $uri @rails;
-
   expires -1;
-# TODO: enable cache for all non-static content
-# maybe expires max; in server context, and expires -1; in @rails location?
-#  location ~ \.[\w]+$ { # Files with extension, .css, .png, etc.
-#    expires max;
-#  }
+
+  # TODO: enable cache for all non-static content
+  # maybe expires max; in server context, and expires -1; in @rails location?
+  location ~ \.[\w]+$ { # Files with extension, .css, .png, etc.
+    expires max;
+  }
 
   location = /favicon.ico {
     try_files $uri =204;
@@ -101,6 +101,8 @@ server {
   }
   
   location ~ ^/(assets)/  {
+    access_log off;
+    error_log /dev/null crit;
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
