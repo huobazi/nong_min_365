@@ -24,6 +24,17 @@
         <%= @item.body %>
       </div>
       <div class="opts">
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+          <span class="bds_more">分享到：</span>
+          <a class="bds_qzone">QQ空间</a>
+          <a class="bds_tsina">新浪微博</a>
+          <a class="bds_tqq">腾讯微博</a>
+          <a class="bds_renren">人人网</a>
+          <a class="bds_t163">网易微博</a>
+          <a class="shareCount"></a>
+        </div>
+        <!-- Baidu Button END -->
         <% if can? :edit, @item %> 
           <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
         <% end %> 
@@ -48,13 +59,21 @@
 <% content_for :javascripts do %>
   <script type="text/javascript">
     $(document).ready(function(){
-        $.ajax({
-url: '<%= show_hits_item_path %>',
-type: "GET",
-success: function(data, textStatus, jqXHR) {
-$('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
-}
-});
-        });
-</script>
-    <% end %>
+      $.ajax({
+        url: '<%= show_hits_item_path %>',
+      type: "GET",
+      success: function(data, textStatus, jqXHR) {
+        $('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
+      }
+      });
+    });
+  </script>
+  <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6622985" ></script>
+  <script type="text/javascript" id="bdshell_js"></script>
+  <script type="text/javascript">
+    var bdshell_js = document.getElementById("bdshell_js");
+    if(bdshell_js){
+      bdshell_js.src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+    }
+  </script>
+<% end %>
