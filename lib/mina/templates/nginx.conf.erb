@@ -113,7 +113,7 @@ server {
   }
 
   location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|font)$ {
-    eaccess_log off;
+    access_log off;
     error_log /dev/null;
     gzip on;
     gzip_static on; # to serve pre-gzipped version
