@@ -89,9 +89,15 @@ server {
 
   # TODO: enable cache for all non-static content
   # maybe expires max; in server context, and expires -1; in @rails location?
-  #location ~ \.[\w]+$ { # Files with extension, .css, .png, etc.
-  #  expires max;
-  #}
+  location ~ \.[\w]+$ { # Files with extension, .css, .png, etc.
+    access_log off;
+    error_log /dev/null;
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+    add_header Last-Modified "";
+    add_header ETag "";
+  }
 
   location = /favicon.ico {
     try_files $uri =204;
@@ -101,21 +107,8 @@ server {
   }
   
   location ~ ^/(assets)/  {
-    root <%= deploy_to %>/<%= current_path %>/public;
     access_log off;
     error_log /dev/null;
-    gzip on;
-    gzip_static on; # to serve pre-gzipped version
-    expires max;
-    add_header Cache-Control public;
-    add_header Last-Modified "";
-    add_header ETag "";
-  }
-
-  location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|font)$ {
-    access_log off;
-    error_log /dev/null;
-    gzip on;
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
