@@ -69,7 +69,6 @@ class ItemsController < ApplicationController
     Item.increment_counter(:visit_count , @item.id) if ! params[:recall]
 
     fresh_when(:etag => [@item], :last_modified => @item.updated_at)
-    response.headers['X-NM365-Item-Visit-Counts'] = @item.visit_count.to_s
   end
 
   # GET /items/new
