@@ -13,11 +13,9 @@
   <div data-role="content">
     <ul data-role="listview" data-inset="false" data-icon="star">
       <%#<li data-role="list-divider">分类</li>%>
-      <% @categories.each do |c| %>
-        <li>
-          <a data-transition="slide" href="<%= condition_list_items_path(:category => c.id)%>"><%= c.name %><span class="ui-li-count"><%= c.items_count %></span></a>
-        </li>
-      <% end %>
+      <%= content_tag_for(:li,@categories) do |c| %>
+        <a data-transition="slide" href="<%= condition_list_items_path(:category => c.id)%>"><%= c.name %><span class="ui-li-count"><%= c.items_count %></span></a>
+      <%end%>
     </ul>
   </div>
 </div>

@@ -9,23 +9,21 @@
           <span class="contact">联系人</span>
           <span class="created">发布时间</span>
         </li>
-        <% @items.each  do |item| %>
-          <li>
-            <span class="area">
-              <%= build_items_list_area_link item %>
-            </span>
-            <span class="title">
-              <%= link_to item.title , item_path(item) %>
+        <%= content_tag_for(:li,@items) do |item| %>
+          <span class="area">
+            <%= build_items_list_area_link item %>
+          </span>
+          <span class="title">
+            <%= link_to item.title , item_path(item) %>
             &nbsp;<%= item.amount %>
-            &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
-        </span>
-        <span class="contact">
-          【<%= item.contact_name %>】
-        </span>
-        <span class="created">
-          <%= item.created_at.strftime('%Y-%m-%d') %>
-        </span>
-      </li>
+          &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
+      </span>
+      <span class="contact">
+        【<%= item.contact_name %>】
+      </span>
+      <span class="created">
+        <%= item.created_at.strftime('%Y-%m-%d') %>
+      </span>
     <% end %>
   </ul>
   <%= paginate @items %>

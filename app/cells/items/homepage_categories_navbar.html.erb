@@ -1,13 +1,11 @@
- <ul id="category">
-   <li class="header">产品分类</li>
-   <% @categories.each do |c| %>
-     <li>
-       <div>
-         <div>
-           <%= link_to c.name, condition_list_items_path(:category => c.id) %>
-         </div>
-         <span>&nbsp;</span>
-       </div>
-     </li>
-   <% end %>
- </ul>
+<ul id="category">
+  <li class="header">产品分类</li>
+  <%= content_tag_for(:li, @categories) do |c| %>
+    <div>
+      <div>
+        <%= link_to c.name, condition_list_items_path(:category => c.id) %>
+      </div>
+      <span>&nbsp;</span>
+    </div>
+  <%end%>
+</ul>

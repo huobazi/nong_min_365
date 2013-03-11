@@ -3,12 +3,12 @@
 <% 
     if target && target.errors && target.errors.any?
       errors_count = target.errors.count
-    end
+end
 %>
 <% 
     if flash && flash.alert && flash.alert.size > 0
       flash_count = 1  
-    end
+end
 %>
 
 <% all_message_count = errors_count + flash_count %>
@@ -19,8 +19,8 @@
     <p><strong>有<%= all_message_count %> 处问题导至无法提交:</strong></p>
     <ul>
       <% if errors_count > 0 %>
-        <% target.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <%= content_tag_for(:li,target.errors.full_messages) do |msg| %>
+          <%= msg %>
         <% end %>
       <% end %>
       <% if flash_count > 0 %>

@@ -19,8 +19,8 @@
     <p><strong>有<%= all_message_count %> 处问题导至无法提交:</strong></p>
     <ul>
       <% if errors_count > 0 %>
-        <% target.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <%= content_tag_for(:li,target.errors.full_messages) do |msg| %>
+          <%= msg %>
         <% end %>
       <% end %>
       <% if flash_count > 0 %>
