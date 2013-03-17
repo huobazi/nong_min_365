@@ -26,4 +26,11 @@ class Category < ActiveRecord::Base
 
   has_many :items
 
+  def self.get_cached_all
+    categories = Rails.cache.fetch("global/categories/all}", expires_in: 60.minutes) do
+      Category.all  
+    end
+    categories
+  end
+
 end

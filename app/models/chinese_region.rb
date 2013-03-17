@@ -65,7 +65,7 @@ class ChineseRegion < ActiveRecord::Base
     children_level = level + 1
 
     if level <= 5
-      regions = Rails.cache.fetch("global/regions/children/#{code}", expires_in: 360.minutes) do
+      regions = Rails.cache.fetch("global/regions/#{code}/children", expires_in: 24*60.minutes) do
         self.select('code, name').where(
           "level = :level and code like :code_like", 
           {:level => children_level, :code_like => code_like}
@@ -80,6 +80,7 @@ class ChineseRegion < ActiveRecord::Base
     ary = ['0000000000', '00000000', '000000', '000']
     level, prefix = self.get_level_and_prefix(code)
     id_ary = []
+
     ( 0 .. (level - 1) ).each do |index|
       id_ary[index] = prefix[0,2] + ary[0] if index == 0
       id_ary[index] = prefix[0,4] + ary[1] if index == 1
@@ -88,7 +89,7 @@ class ChineseRegion < ActiveRecord::Base
       id_ary[index] = code if index == 4
     end
 
-    regions = Rails.cache.fetch("global/regions/parents/#{code}", expires_in: 360.minutes) do
+    regions = Rails.cache.fetch("global/regions/#{code}/parents", expires_in: 24*60.minutes) do
       self.select('code, name, level').where(:code => id_ary).order(:level)
     end
     return regions

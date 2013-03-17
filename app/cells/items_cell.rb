@@ -10,12 +10,12 @@ class ItemsCell < Cell::Rails
   cache :tag_cloud, :expires_in => 20.minutes
 
   def homepage_categories_navbar(args={})
-    @categories = args[:categories] || Category.all
+    @categories = args[:categories] || Category.get_cached_all
     render
   end
 
   def homepage_latest_items_wrapper(args={})
-    @categories = args[:categories] || Category.all
+    @categories = args[:categories] || Category.get_cached_all
     render
   end
 

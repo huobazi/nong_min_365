@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     if not area_code.empty?
       code_name_ary = %w(province_code city_code county_code town_code village_code)
       code_level, code_prefix = ChineseRegion.get_level_and_prefix(area_code)
-      items_scope = items_scope.where(" #{code_name_ary[code_level -1]} = ?", area_code)
+      items_scope = items_scope.where(" #{code_name_ary[code_level - 1]} = ?", area_code)
     end
 
     prepare_items_condition_list(category_id, area_code, xtype)   
@@ -185,7 +185,8 @@ class ItemsController < ApplicationController
     @current_params[:xtype]    = xtype
     @current_params[:category] = category_id 
 
-    @categories = Category.all  
+    @categories = Category.get_cached_all
+
     @current_category_name = ''
     if category_id > 0
       @current_category = @categories.find{|x| x.id == category_id}
@@ -198,7 +199,9 @@ class ItemsController < ApplicationController
     end
 
     if area_code.empty?
-      @regions = ChineseRegion.provinces 
+      @regions = Rails.cache.fetch("global/regions/provinces/all}", expires_in: 360.minutes) do
+        ChineseRegion.provinces 
+      end
     else
       temp_level, @regions = ChineseRegion.children(area_code)
       @current_areas       = ChineseRegion.get_parents(area_code)
