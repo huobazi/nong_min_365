@@ -23,8 +23,8 @@ class ChineseRegion < ActiveRecord::Base
   attr_accessible :code, :level, :name
 
   validates :code,
-    :presence => true,
-    :uniqueness => { :case_sensitive => false }
+  :presence => true,
+  :uniqueness => { :case_sensitive => false }
 
   validates :name  , :presence => true
   validates :level , :presence => true
@@ -38,7 +38,7 @@ class ChineseRegion < ActiveRecord::Base
   scope :provinces, select('code, name').where(:level => 1)
 
   def self.get_level_and_prefix(code)
-     ary = ['nil', '0000000000', '00000000', '000000', '000']
+    ary = ['nil', '0000000000', '00000000', '000000', '000']
     if code.end_with? ary[1] 
       level = 1
       code_prefix = code.chomp(ary[1])
@@ -65,20 +65,22 @@ class ChineseRegion < ActiveRecord::Base
     children_level = level + 1
 
     if level <= 5
-      regions = self.select('code, name').where(
-        "level = :level and code like :code_like", 
-        {:level => children_level, :code_like => code_like}
-      )
+      regions = Rails.cache.fetch("global/regions/children/#{code}", expires_in: 360.minutes) do
+        self.select('code, name').where(
+          "level = :level and code like :code_like", 
+          {:level => children_level, :code_like => code_like}
+        )
+      end
     end
 
     return children_level,regions
   end
-  
+
   def self.get_parents(code)
     ary = ['0000000000', '00000000', '000000', '000']
     level, prefix = self.get_level_and_prefix(code)
     id_ary = []
-    ( 0 .. (level -1) ).each do |index|
+    ( 0 .. (level - 1) ).each do |index|
       id_ary[index] = prefix[0,2] + ary[0] if index == 0
       id_ary[index] = prefix[0,4] + ary[1] if index == 1
       id_ary[index] = prefix[0,6] + ary[2] if index == 2
@@ -86,7 +88,10 @@ class ChineseRegion < ActiveRecord::Base
       id_ary[index] = code if index == 4
     end
 
-    self.select('code, name, level').where(:code => id_ary).order(:level)
+    regions = Rails.cache.fetch("global/regions/parents/#{code}", expires_in: 360.minutes) do
+      self.select('code, name, level').where(:code => id_ary).order(:level)
+    end
+    return regions
   end
- 
+
 end
