@@ -55,11 +55,23 @@ class User < ActiveRecord::Base
   def has_role?(role)
     case role
     when :founder then is_founder?
-    when :admini then is_admin?
+    when :admin then is_admin?
     when :member then is_member?
     else
       false
     end
+  end
+
+  def is_founder?
+    self.username == 'huobazi' && self.email == 'huobazi@gmail.com'
+  end
+
+  def is_admin?
+    SiteSettings.admin_emails.include? self.email
+  end
+
+  def is_member?
+    self.id > 0
   end
 
   #def update_with_password(params, *options)
@@ -89,19 +101,6 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
-  end
-
-  private  
-  def is_founder?
-    self.username == 'huobazi' && self.email == 'huobazi@gmail.com'
-  end
-
-  def is_admin?
-    SiteSettings.admin_emails.include? self.email
-  end
-
-  def is_member?
-    self.id > 0
   end
 
 end

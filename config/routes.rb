@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 NongMin365::Application.routes.draw do
-  
 
   root :to => 'home#index'
   get 'search' => 'home#search', :as => :search
@@ -29,6 +28,11 @@ NongMin365::Application.routes.draw do
     end
   end
 
+  require 'sidekiq/web'
+  require "admin_constraint"
+  mount Sidekiq::Web => '/admincp/sidekiq', :constraints => AdminConstraint.new
+  
+  # 必须放在sidekiq后面
   namespace :admincp do
     root :to => "dashboard#index"
     resources :dashboard, :only => [:index]

@@ -14,7 +14,14 @@ group :assets do
   gem 'jquery_mobile_rails', '1.2.0'
 end
 
+gem "json", "~> 1.7.7"
+
+
+# Sidekiq
 gem "sidekiq", "~> 2.8.0"
+gem 'slim'
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
 gem "nokogiri", "~> 1.5.6"
@@ -25,7 +32,7 @@ gem 'simple_form', '~> 2.0.4'
 gem 'client_side_validations-simple_form', '~> 2.0.1'
 
 # Google Analytics performance 
-gem 'garelic', :git => 'git://github.com/jsuchal/garelic.git', :branch => 'master' 
+gem "garelic", "~> 0.2.1"
 
 # Newrelic Analytics 
 gem "newrelic_rpm", "~> 3.5.5.38"

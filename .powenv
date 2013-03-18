@@ -1,12 +1,12 @@
-export PATH ; PATH="/Users/mw82/.rvm/gems/ruby-1.9.3-p327-falcon/bin:/Users/mw82/.rvm/gems/ruby-1.9.3-p327-falcon@global/bin:/Users/mw82/.rvm/rubies/ruby-1.9.3-p327-falcon/bin:/Users/mw82/.rvm/bin:$PATH"
-export rvm_env_string ; rvm_env_string='ruby-1.9.3-p327-falcon'
+export PATH ; PATH="/Users/mw82/.rvm/gems/ruby-2.0.0-p0/bin:/Users/mw82/.rvm/gems/ruby-2.0.0-p0@global/bin:/Users/mw82/.rvm/rubies/ruby-2.0.0-p0/bin:/Users/mw82/.rvm/bin:$PATH"
+export rvm_env_string ; rvm_env_string='ruby-2.0.0-p0'
 export rvm_path ; rvm_path='/Users/mw82/.rvm'
-export rvm_ruby_string ; rvm_ruby_string='ruby-1.9.3-p327-falcon'
+export rvm_ruby_string ; rvm_ruby_string='ruby-2.0.0-p0'
 unset rvm_gemset_name
-export RUBY_VERSION ; RUBY_VERSION='ruby-1.9.3-p327-falcon'
-export GEM_HOME ; GEM_HOME='/Users/mw82/.rvm/gems/ruby-1.9.3-p327-falcon'
-export GEM_PATH ; GEM_PATH='/Users/mw82/.rvm/gems/ruby-1.9.3-p327-falcon:/Users/mw82/.rvm/gems/ruby-1.9.3-p327-falcon@global'
-export MY_RUBY_HOME ; MY_RUBY_HOME='/Users/mw82/.rvm/rubies/ruby-1.9.3-p327-falcon'
-export IRBRC ; IRBRC='/Users/mw82/.rvm/rubies/ruby-1.9.3-p327-falcon/.irbrc'
+export RUBY_VERSION ; RUBY_VERSION='ruby-2.0.0-p0'
+export GEM_HOME ; GEM_HOME='/Users/mw82/.rvm/gems/ruby-2.0.0-p0'
+export GEM_PATH ; GEM_PATH='/Users/mw82/.rvm/gems/ruby-2.0.0-p0:/Users/mw82/.rvm/gems/ruby-2.0.0-p0@global'
+export MY_RUBY_HOME ; MY_RUBY_HOME='/Users/mw82/.rvm/rubies/ruby-2.0.0-p0'
+export IRBRC ; IRBRC='/Users/mw82/.rvm/rubies/ruby-2.0.0-p0/.irbrc'
 unset MAGLEV_HOME
 unset RBXOPT
