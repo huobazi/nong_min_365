@@ -92,6 +92,7 @@ class ChineseRegion < ActiveRecord::Base
     regions = Rails.cache.fetch("global/regions/#{code}/parents", expires_in: 24*60.minutes) do
       self.select('code, name, level').where(:code => id_ary).order(:level)
     end
+
     return regions
   end
 

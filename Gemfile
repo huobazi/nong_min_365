@@ -14,6 +14,7 @@ group :assets do
   gem 'jquery_mobile_rails', '1.2.0'
 end
 
+gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
 gem "nokogiri", "~> 1.5.6"
 gem 'jquery-rails', '~> 2.1.4'
