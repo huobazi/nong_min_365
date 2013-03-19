@@ -23,6 +23,7 @@
             <li class="<%= controller.controller_path == 'admincp/categories' ? 'active' : '' %>"><a href="<%= admincp_categories_path %>">分类管理</a></li> 
             <li class="<%= controller.controller_path == 'admincp/users' ? 'active' : '' %>"><a href="<%= admincp_users_path %>">用户管理</a></li> 
             <li class="<%= controller.controller_path == 'admincp/site_settings' ? 'active' : '' %>"><a href="<%= admincp_site_settings_path %>">配置管理</a></li>
+            <li class="<%= controller.controller_path == 'admincp/sms' ? 'active' : '' %>"><a href="<%= admincp_new_sms_path%>">群发短信</a></li>
           </ul>
         </div>
       </div>
