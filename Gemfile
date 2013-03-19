@@ -35,7 +35,7 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 gem "garelic", "~> 0.2.1"
 
 # Newrelic Analytics 
-gem "newrelic_rpm", "~> 3.5.5.38"
+gem "newrelic_rpm", "~> 3.5.8.72"
 
 gem "rails-settings-cached", "~> 0.2.4"
 
@@ -63,7 +63,7 @@ gem 'mobylette', '~> 3.3.2'
 gem "high_voltage", "~> 1.2.1"
 
 # Use unicorn as the app server
-gem "unicorn", "~> 4.5.0"
+gem "unicorn", "~> 4.6.2"
 
 group :development do
   # Deploy with Mina 
