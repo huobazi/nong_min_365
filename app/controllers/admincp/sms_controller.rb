@@ -19,13 +19,15 @@ class Admincp::SmsController < Admincp::ApplicationController
   def batch_create
     phone_ary = []
     content = params[:sms][:content]
-    items = Item.select('contact_phone').limit(500).where(:user_id => -1).order('id desc')
-
-    items.each do |item|
-      phone_ary.push(item.contact_phone.strip)
+    categories = Category.all
+    categories.each do |category|
+      items = Item.select('contact_phone').limit(20).where(:category_id => category.id, :user_id => -1).order('id desc')
+      items.each do |item|
+        phone_ary.push(item.contact_phone.strip)
+      end
     end
-
-    SmsQueueWorker.perform_async(phone_ary, content)
+    
+    SmsQueueWorker.perform_async(phone_ary.uniq, content)
 
     redirect_to admincp_batch_sms_path, notice: '群发已经进入队列.' 
   end
