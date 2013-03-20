@@ -12,6 +12,8 @@ require 'mina/unicorn'
 require 'mina/nginx'
 require 'mina/utils'
 
+require 'mina-sidekiq'
+
 Dir['lib/mina/servers/*.rb'].each { |f| load f }
 
 ###########################################################################
@@ -37,6 +39,9 @@ desc "Deploys the current version to the server."
 
 task :deploy do
   deploy do
+    # stop accepting new workers
+    invoke :'sidekiq:quiet'
+
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -45,6 +50,7 @@ task :deploy do
 
     to :launch do
       invoke :'unicorn:restart'
+      invoke :'sidekiq:restart'
     end
   end
 end

@@ -68,6 +68,7 @@ gem "unicorn", "~> 4.6.2"
 group :development do
   # Deploy with Mina 
   gem "mina", "~> 0.2.1"
+  gem "mina-sidekiq", :git => 'git://github.com/Mic92/mina-sidekiq.git'
   gem "god", "~> 0.13.1"
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
