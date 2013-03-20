@@ -2,7 +2,7 @@
 
 class SmsQueueWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: false, :queue => 'sms', :backtrace => true
 
   def perform(phone_ary, content)
     if !phone_ary.is_a?(Array) 

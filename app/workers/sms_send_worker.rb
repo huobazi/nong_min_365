@@ -3,7 +3,7 @@
 require 'rest_client'
 class SmsSendWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: false, :queue => 'sms', :backtrace => true
 
   def perform(phone, content)
     sms_bao = SmsBao.new(SiteSettings.smsbao_uname,SiteSettings.smsbao_pwd)
