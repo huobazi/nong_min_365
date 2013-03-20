@@ -10,9 +10,9 @@ require 'mina/extras'
 require 'mina/god'
 require 'mina/unicorn'
 require 'mina/nginx'
+require 'mina/sidekiq'
 require 'mina/utils'
 
-require 'mina-sidekiq'
 
 Dir['lib/mina/servers/*.rb'].each { |f| load f }
 

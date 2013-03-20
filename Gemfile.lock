@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/Mic92/mina-sidekiq.git
-  revision: 8eed3821058cfd10490b553c1a38153ce3442e5b
-  specs:
-    mina-sidekiq (0.1.0)
-      mina
-
-GIT
   remote: git://github.com/pilu/web-app-theme.git
   revision: b7310fe5001ed03b965049f293fce3527ae98dae
   specs:
@@ -298,7 +291,6 @@ DEPENDENCIES
   launchy
   magic_encoding (~> 0.0.2)
   mina (~> 0.2.1)
-  mina-sidekiq!
   mobylette (~> 3.3.2)
   newrelic_rpm (~> 3.5.8.72)
   nokogiri (~> 1.5.6)
