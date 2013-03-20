@@ -46,6 +46,8 @@ NongMin365::Application.routes.draw do
     end
     get 'sms/new' => 'sms#new', :as => :new_sms
     post'sms/send' => 'sms#create', :as => :create_sms
+    get 'sms/batch' => 'sms#batch', :as => :batch_sms
+    post'sms/batch_create' => 'sms#batch_create', :as => :batch_create_sms
   end
 
   # The priority is based upon ordecurrent_passwordr of creation:

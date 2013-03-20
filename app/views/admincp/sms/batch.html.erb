@@ -1,20 +1,14 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first active"><%= link_to "手工群发", admincp_new_sms_path%></li>
-      <li><%= link_to "站内群发", admincp_batch_sms_path%></li>
+      <li class="first"><%= link_to "手工群发", admincp_new_sms_path%></li>
+      <li class="active"><%= link_to "站内群发", admincp_batch_sms_path%></li>
     </ul>
   </div>
   <div class="content">
-    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%> 手工群发短信</h2>
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%> 站内会员群发短信</h2>
     <div class="inner">
-      <%= form_for :sms, :url => admincp_create_sms_path, :html => { :class => :form } do |f| -%>
-        <div class="group">
-          <%= f.label :phones, "手机号码", :default => "Cellphone", :class => :label %>
-          <%= f.text_area:phones, :class => 'text_area', :placeholder=>'手机号码，多个手机号码请每行一个', :required => true %>
-          <span class="description">Ex: 13888888888 ，多个手机号码每行一个</span>
-        </div>
-
+      <%= form_for :sms, :url => admincp_batch_create_sms_path, :html => { :class => :form } do |f| -%>
         <div class="group">
           <%= f.label :content, "短信内容", :default => "Message", :class => :label %>
           <%= f.text_area :content, :class => 'text_area' , :placeholder=>'内容，不能超过64个字符', :required => true %>
