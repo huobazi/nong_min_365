@@ -4,13 +4,16 @@ class Admincp::SmsController < Admincp::ApplicationController
   end
 
   def create
+    phone_ary = []
     phone_input = params[:sms][:phones]
     content = params[:sms][:content]
-    phone_ary = phone_input.split("\r\n")
+    phone_input.split("\r\n").each do |el|
+      phone_ary.push(el.strip) if(el.strip.size == 11)
+    end
     
     SmsQueueWorker.perform_async(phone_ary, content)
 
-    redirect_to admincp_new_sms_path, notice: '群发已经进入队列.' 
+    redirect_to admincp_new_sms_path, notice: '共有#{phone_ary.size}条短信进入群发队列.' 
   end
 
   def batch
@@ -21,14 +24,14 @@ class Admincp::SmsController < Admincp::ApplicationController
     content = params[:sms][:content]
     categories = Category.all
     categories.each do |category|
-      items = Item.select('contact_phone').limit(20).where(:category_id => category.id, :user_id => -1).order('id desc')
+      items = Item.select('contact_phone, created_at').limit(10).offset(36).where(:category_id => category.id, :user_id => -1).order('id desc')
       items.each do |item|
-        phone_ary.push(item.contact_phone.strip)
+        phone_ary.push(item.contact_phone.strip) if(item.created_at.day == Time.now.day and item.contact_phone.to_s.strip.size == 11)
       end
     end
     
     SmsQueueWorker.perform_async(phone_ary.uniq, content)
 
-    redirect_to admincp_batch_sms_path, notice: '群发已经进入队列.' 
+    redirect_to admincp_batch_sms_path, notice: '共有#{phone_ary.size}条短信进入群发队列.' 
   end
 end

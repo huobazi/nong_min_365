@@ -54,7 +54,7 @@ namespace :spider do
         )
 
         result = response.body
-      rescue Exception => e
+      rescue Exception
         # exception
       else
         # other exception
@@ -110,7 +110,7 @@ namespace :spider do
         # always executed
       end
 
-      items_link_list
+      items_link_list.slice 0,22
     end
 
     def populate_item(url, category_id, xtype)
