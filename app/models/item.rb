@@ -69,7 +69,7 @@ class Item < ActiveRecord::Base
   validates :body, :presence => true
   validates :tag_list, :presence => true
   
-  scope :latest, order(' refresh_at DESC ')
+  scope :latest, order(' refresh_at DESC , id DESC ')
 
   before_save { |item| item.slug = ::PinYin.permlink( item.title ) }
 
