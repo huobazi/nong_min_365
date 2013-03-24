@@ -198,9 +198,12 @@
        margin-bottom:10px
      }
      div.body{
-       font-size: 16px;
        padding: 6px 6px;
        line-height: 160%;
+       pre{
+         font-size: 16px;
+         margin: 0;
+       }
      }
      div.opts{
        text-align:right;

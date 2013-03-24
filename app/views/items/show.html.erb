@@ -25,41 +25,41 @@
       </ul>
       <div id="line"></div>
       <div class="body">
-        <%= @item.body %>
+        <pre><%= @item.body.strip %></pre>
+    </div>
+    <div class="opts">
+      <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small' %>
+      <% if can? :edit, @item %> 
+        <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
+      <% end %> 
+      <% if can? :destroy, @item %> 
+        <%= link_to raw('<i class="icon-trash"></i>删除'), item_path(@item), :method => :delete, :confirm => "确定删除本产品信息？",:class => 'btn btn-small btn-danger' %>
+      <% end %> 
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="display:inline;">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone">QQ空间</a>
+        <a class="bds_tsina">新浪微博</a>
+        <a class="bds_tqq">腾讯微博</a>
+        <a class="bds_renren">人人网</a>
+        <a class="bds_t163">网易微博</a>
+        <a class="shareCount"></a>
       </div>
-      <div class="opts">
-        <!-- Baidu Button BEGIN -->
-        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-          <span class="bds_more">分享到：</span>
-          <a class="bds_qzone">QQ空间</a>
-          <a class="bds_tsina">新浪微博</a>
-          <a class="bds_tqq">腾讯微博</a>
-          <a class="bds_renren">人人网</a>
-          <a class="bds_t163">网易微博</a>
-          <a class="shareCount"></a>
-        </div>
-        <!-- Baidu Button END -->
-        <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small' %>
-        <% if can? :edit, @item %> 
-          <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
-        <% end %> 
-        <% if can? :destroy, @item %> 
-          <%= link_to raw('<i class="icon-trash"></i>删除'), item_path(@item), :method => :delete, :confirm => "确定删除本产品信息？",:class => 'btn btn-small btn-danger' %>
-        <% end %> 
-      </div>
+      <!-- Baidu Button END -->
     </div>
   </div>
-  <div class="span3">
-    <div id="tag_cloud">
-      <div class="box-header">
-        热门标签
-      </div>
-      <div class="box">
-        <%= render_cell :items, :tag_cloud %> 
-      </div>
+</div>
+<div class="span3">
+  <div id="tag_cloud">
+    <div class="box-header">
+      热门标签
     </div>
-    <%= render 'sidebar_for_items' %>
+    <div class="box">
+      <%= render_cell :items, :tag_cloud %> 
+    </div>
   </div>
+  <%= render 'sidebar_for_items' %>
+</div>
 </div>
 <% content_for :javascripts do %>
   <script type="text/javascript">
