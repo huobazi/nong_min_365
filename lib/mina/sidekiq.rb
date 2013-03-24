@@ -59,19 +59,20 @@ set_default :sidekiq_pid, lambda { "#{deploy_to}/#{shared_path}/tmp/pids/sidekiq
 namespace :sidekiq do
   # ### sidekiq:quiet
   desc "Quiet sidekiq (stop accepting new work)"
+
   task :quiet do
-    queue %{ if [ -f #{sidekiq_pid} ]; then
+    queue %{ if [ -f #{sidekiq_pid} ] && kill -0 `cat #{sidekiq_pid}`> /dev/null 2>&1 ; then
       echo "-----> Quiet sidekiq (stop accepting new work)"
-      #{echo_cmd %{(cd #{deploy_to}/#{current_path} && #{sidekiqctl} quiet #{sidekiq_pid})} }
+    #{echo_cmd %{(cd #{deploy_to}/#{current_path} && #{sidekiqctl} quiet #{sidekiq_pid})} }
       fi }
   end
 
   # ### sidekiq:stop
   desc "Stop sidekiq"
   task :stop do
-    queue %[ if [ -f #{sidekiq_pid} ]; then
-      echo "-----> Stop sidekiq"
-      #{echo_cmd %[(cd #{deploy_to}/#{current_path} && #{sidekiqctl} stop #{sidekiq_pid} #{sidekiq_timeout})]}
+    queue %[ if [ -f #{sidekiq_pid} ] && kill -0 `cat #{sidekiq_pid}`> /dev/null 2>&1 ; then
+    echo "-----> Stop sidekiq"
+    #{echo_cmd %[(cd #{deploy_to}/#{current_path} && #{sidekiqctl} stop #{sidekiq_pid} #{sidekiq_timeout})]}
       fi ]
   end
 
@@ -79,16 +80,16 @@ namespace :sidekiq do
   desc "Start sidekiq"
   task :start do
     queue %{
-      echo "-----> Start sidekiq"
-      #{echo_cmd %[(cd #{deploy_to}/#{current_path}; nohup #{sidekiq} -e #{rails_env} -C #{sidekiq_config} -P #{sidekiq_pid} >> #{sidekiq_log} 2>&1 </dev/null &) ] }
-      }
+    echo "-----> Start sidekiq"
+    #{echo_cmd %[(cd #{deploy_to}/#{current_path}; nohup #{sidekiq} -e #{rails_env} -C #{sidekiq_config} -P #{sidekiq_pid} >> #{sidekiq_log} 2>&1 </dev/null &) ] }
+    }
   end
 
-  # ### sidekiq:restart
-  desc "Restart sidekiq"
-  task :restart do
-    invoke :'sidekiq:stop'
-    invoke :'sidekiq:start'
+    # ### sidekiq:restart
+    desc "Restart sidekiq"
+    task :restart do
+      invoke :'sidekiq:stop'
+      invoke :'sidekiq:start'
+    end
   end
-end
 
