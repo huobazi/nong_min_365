@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeItemsIndexSettings < ActiveRecord::Migration
   def change 
     remove_index :items, :province_code

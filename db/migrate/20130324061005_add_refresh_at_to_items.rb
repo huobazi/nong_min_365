@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddRefreshAtToItems < ActiveRecord::Migration
   def change
     add_column :items, :refresh_at, :integer, :default => 0 

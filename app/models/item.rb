@@ -28,8 +28,12 @@
 #  ip            :string(255)
 #  visit_count   :integer          default(0)
 #  slug          :string(255)
+#  publis_status :integer          default(0)
+#  source        :string(255)
+#  refresh_at    :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   
   acts_as_taggable_on :tags
