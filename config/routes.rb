@@ -17,14 +17,14 @@ NongMin365::Application.routes.draw do
   end
 
   get 'tags/:tag' => 'items#tags', :as => :items_tags
-  #get 'items(.c:category)(.a:area)(.t:xtype)(.p:page)', :controller => :items, :action => :index, :as => :condition_list_items
   resources :sessions, :only =>[:create]
   resources :items do
     collection do
       get '(c:category)/(t:xtype)/(a:area)/(p:page)', :action => :index, :as => :condition_list
     end
     member do
-      get 'show_hits'
+      get :show_hits
+      put :refresh
     end
   end
 
@@ -40,8 +40,8 @@ NongMin365::Application.routes.draw do
     resources :site_settings
     resources :categories do
       member do
-        put 'sort_up'
-        put 'sort_down'
+        put :sort_up
+        put :sort_down
       end
     end
     get 'sms/new' => 'sms#new', :as => :new_sms

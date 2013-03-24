@@ -15,7 +15,7 @@ class PagesController < HighVoltage::PagesController
       'static'
     end
   end
-
+  
   def set_page_title_and_breadcrumb
     case params[:id] 
     when /^errors/

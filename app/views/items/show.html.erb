@@ -4,7 +4,11 @@
     <div class="box content">
       <ul class="prop">
         <li class="left"><label>数量：</label> <%= @item.amount %> </li>
-        <li class="right"><label>发布时间：</label> <%= @item.created_at.strftime('%Y-%m-%d') %> </li>
+        <li class="right"><label>发布时间：</label>
+          <%#= @item.created_at.strftime('%Y-%m-%d') %>
+          <%#= Time.at(@item.refresh_at).strftime('%Y-%m-%d %H:%M') %>
+          <%= Time.at(@item.refresh_at).strftime('%Y-%m-%d') %>
+        </li>
         <li class="left"><label>分类：</label> <%= @item.category.name %> </li>
         <li class="right"><label>类型：</label> <%= @item.xtype == 1 ? '供应' : '求购' %> </li>
         <li class="left"><label>联系人：</label> <%= @item.contact_name %> </li>
@@ -35,6 +39,7 @@
           <a class="shareCount"></a>
         </div>
         <!-- Baidu Button END -->
+        <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small' %>
         <% if can? :edit, @item %> 
           <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
         <% end %> 

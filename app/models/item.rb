@@ -43,12 +43,12 @@ class Item < ActiveRecord::Base
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
-  before_save :populate_region_name,:fix_tags_name, :add_province_name_to_tags
+  before_save :populate_region_name,:fix_tags_name, :fix_refresh_at, :add_province_name_to_tags
 
   attr_accessible :category_id, :amount, :body, :contact_name, 
     :contact_phone, :contact_qq, :title, :xtype,
     :province_code, :city_code, :county_code, :town_code, :village_code,
-    :tag_list
+    :tag_list, :refresh_at
 
   validates :title, :presence => true, :length => { :in => 4..30 }
   validates :amount, :presence => true
@@ -65,7 +65,7 @@ class Item < ActiveRecord::Base
   validates :body, :presence => true
   validates :tag_list, :presence => true
   
-  scope :latest, order(' id DESC ')
+  scope :latest, order(' refresh_at DESC ')
 
   before_save { |item| item.slug = ::PinYin.permlink( item.title ) }
 
@@ -100,6 +100,11 @@ class Item < ActiveRecord::Base
     if not self.tag_list.include? "#{self.province_name}"
       self.tag_list.push self.province_name
     end
+  end
+
+  private
+  def fix_refresh_at
+   self.refresh_at = Time.now.to_i 
   end
 
 end

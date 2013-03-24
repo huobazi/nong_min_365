@@ -178,6 +178,21 @@ class ItemsController < ApplicationController
     render :text => ''
   end
 
+  def refresh 
+    @item = Item.find(params[:id])
+
+    respond_to do |wants|
+      if @item.update_attributes(:refresh_at => Time.now.to_i )
+        flash[:notice] = '信息刷新成功！'
+        wants.html { redirect_to(@item) }
+        wants.xml  { head :ok }
+      else
+        wants.html { render :action => "show" }
+        wants.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   private 
   def prepare_items_condition_list(category_id, area_code, xtype)
     @current_params = {}

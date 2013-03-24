@@ -15,12 +15,4 @@ class UseFullRegionsInItem < ActiveRecord::Migration
     add_index :items, :village_code
   end
 
-  #def down
-    #rename_column :items, :province_code, :region_code
-    #remove_column :items, :city_code
-    #remove_column :items, :county_code
-    #remove_column :items, :town_code
-    #remove_column :items, :village_code
-  #end
-
 end

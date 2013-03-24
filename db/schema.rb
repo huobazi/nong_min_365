@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201054409) do
+ActiveRecord::Schema.define(:version => 20130324095028) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -38,8 +38,7 @@ ActiveRecord::Schema.define(:version => 20130201054409) do
     t.integer  "village_items_count",  :default => 0
   end
 
-  add_index "chinese_regions", ["code"], :name => "index_chinese_regions_on_code"
-  add_index "chinese_regions", ["level"], :name => "index_chinese_regions_on_level"
+  add_index "chinese_regions", ["code", "level"], :name => "index_chinese_regionse"
 
   create_table "items", :force => true do |t|
     t.string   "title"
@@ -52,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20130201054409) do
     t.text     "body"
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "city_code"
     t.string   "county_code"
     t.string   "town_code"
@@ -68,16 +67,10 @@ ActiveRecord::Schema.define(:version => 20130201054409) do
     t.string   "slug"
     t.integer  "publis_status", :default => 0
     t.string   "source"
+    t.integer  "refresh_at",    :default => 0 
   end
 
-  add_index "items", ["category_id"], :name => "index_items_on_category_id"
-  add_index "items", ["city_code"], :name => "index_items_on_city_code"
-  add_index "items", ["county_code"], :name => "index_items_on_county_code"
-  add_index "items", ["province_code"], :name => "index_items_on_province_code"
-  add_index "items", ["town_code"], :name => "index_items_on_town_code"
-  add_index "items", ["user_id"], :name => "index_items_on_user_id"
-  add_index "items", ["village_code"], :name => "index_items_on_village_code"
-  add_index "items", ["xtype"], :name => "index_items_on_xtype"
+  add_index "items", ["category_id", "refresh_at", "user_id", "province_code", "city_code", "county_code", "town_code", "village_code", "xtype"], :name => "index_on_items"
 
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false

@@ -21,7 +21,7 @@
   【<%= item.contact_name %>】
 </span>
 <span class="created">
-  <%= item.created_at.strftime('%Y-%m-%d') %>
+  <%= Time.at(item.refresh_at).strftime('%Y-%m-%d') %>
 </span>
   <% end %>
 </ul>

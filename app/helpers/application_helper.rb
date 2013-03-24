@@ -87,5 +87,4 @@ module ApplicationHelper
     configs = YAML.load_file(File.join(::Rails.root, 'config', 'settings.yml'))[::Rails.env.to_sym] rescue {}
     configs[key]
   end
-
-end
+end 
