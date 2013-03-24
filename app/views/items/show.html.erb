@@ -25,7 +25,7 @@
       </ul>
       <div id="line"></div>
       <div class="body">
-        <pre><%= @item.body.strip %></pre>
+        <pre><%= @item.body %></pre>
     </div>
     <div class="opts">
       <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small' %>
