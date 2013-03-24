@@ -40,7 +40,7 @@ desc "Deploys the current version to the server."
 task :deploy do
   deploy do
     # stop accepting new workers
-    invoke :'sidekiq:quiet'
+    #invoke :'sidekiq:quiet'
 
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
