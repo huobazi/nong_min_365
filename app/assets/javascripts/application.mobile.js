@@ -14,7 +14,7 @@
 //= require items 
 //
 //
-//= require self
+//= require_self
 
 (function($) {
   $.widget('mobile.tabbar', $.mobile.navbar, {
