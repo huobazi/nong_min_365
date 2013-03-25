@@ -1,7 +1,6 @@
 <%= javascript_include_tag "application" %>
 <!--xxx/<%= Rails.application.assets.find_asset('application.js').digest_path %>-->
-<%# Append your own using content_for :javascripts %>
-<%= yield :javascripts %>
+<%= yield :javascripts %><%# Append your own using content_for :javascripts %>
 <script>
   var _hmt = _hmt || [];
   (function(d,t) {
