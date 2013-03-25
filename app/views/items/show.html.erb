@@ -28,7 +28,7 @@
         <pre><%= @item.body %></pre>
     </div>
     <div class="opts">
-      <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small' %>
+      <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small btn-success' %>
       <% if can? :edit, @item %> 
         <%= link_to raw('<i class="icon-pencil"></i>修改'), edit_item_path(@item), :class => 'btn btn-small' %>
       <% end %> 

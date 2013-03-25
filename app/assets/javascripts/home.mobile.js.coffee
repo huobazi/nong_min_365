@@ -1,3 +1,3 @@
 $(document).live 'pageinit',() ->
-  $('#close-flash').live 'click', () ->
+  $('#close-flash').on'click', () ->
     $(this).parent.remove();

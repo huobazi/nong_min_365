@@ -12,7 +12,9 @@
 //
 //= require home.mobile
 //= require items 
-
+//
+//
+//= require self
 
 (function($) {
   $.widget('mobile.tabbar', $.mobile.navbar, {
@@ -43,7 +45,7 @@
     return $(e.target).find(":jqmData(role='tabbar')").tabbar();
   });
   
-  $(":jqmData(role='page')").live('pageshow', function(e) {
+  $(":jqmData(role='page')").on('pageshow', function(e) {
     // Grab the id of the page that's showing, and select it on the Tab Bar on the page
     var tabBar, id = $(e.target).attr('id');
 

@@ -9,7 +9,7 @@ $(document).ready ->
   $(window).bind 'scroll  resize', ->
     btn = $('#go-top')
     el = $('html')[0]
-    if $.browser.webkit
+    if /webkit/.test(navigator.userAgent.toLowerCase())
       el = $('body')[0]
     if el.scrollTop > 160 
       btn.show('slow')

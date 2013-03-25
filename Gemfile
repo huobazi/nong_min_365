@@ -9,10 +9,10 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 1.3.0'
 end
-gem 'bootstrap-sass', '~> 2.2.2.0'
-gem "font-awesome-sass-rails", "~> 3.0.0.1"
-gem 'kaminari-bootstrap', '0.1.3'
-gem 'jquery_mobile_rails', '1.2.0'
+gem 'bootstrap-sass', '~> 2.3.1.0'
+gem "font-awesome-sass-rails", "~> 3.0.2.2"
+gem 'jquery_mobile_rails', '1.3.0'
+
 gem "json", "~> 1.7.7"
 
 
@@ -24,7 +24,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
 gem "nokogiri", "~> 1.5.6"
-gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-rails', '~> 2.2.1'
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'
 gem 'simple_form', '~> 2.0.4'
@@ -38,7 +38,10 @@ gem "newrelic_rpm", "~> 3.5.8.72"
 
 gem "rails-settings-cached", "~> 0.2.4"
 
+# Pagging
 gem 'kaminari', '~> 0.14.1'
+gem 'kaminari-bootstrap', '0.1.3'
+
 gem 'cancan', '~> 1.6.8'
 gem 'rails-i18n', '~> 0.7.2'
 

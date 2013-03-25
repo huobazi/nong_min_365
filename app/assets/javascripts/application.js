@@ -19,8 +19,6 @@
 //= require plugin 
 //
 //= require front
-//= require users
-//= require home 
 //= require items 
 
 
