@@ -10,7 +10,6 @@
 //
 //= require plugin 
 //
-//= require home.mobile
 //= require items 
 //
 //
