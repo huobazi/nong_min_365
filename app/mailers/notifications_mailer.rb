@@ -8,6 +8,7 @@ class NotificationsMailer < ActionMailer::Base
   def contact_us_mail(message)
     @message = message
     mail(
+      :from => 'webmaster@nongmin365.com',
       :to => 'huobazi@gmail.com', 
       :subject => "[天天农业-联系我们] #{message.subject}",
       :tag => 'contact_us'
