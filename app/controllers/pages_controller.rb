@@ -14,8 +14,8 @@ class PagesController < HighVoltage::PagesController
 
     respond_to do |wants|
       if @message.save
-        #NotificationsMailer.delay.contact_us_mail(@message)
-        NotificationsMailer.contact_us_mail(@message).deliver
+        NotificationsMailer.delay.contact_us_mail(@message)
+        #NotificationsMailer.contact_us_mail(@message).deliver
         flash[:notice] = '留言已发送，感谢您关心我们的成长。' 
         wants.html { redirect_to root_path }
       else

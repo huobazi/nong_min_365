@@ -36,4 +36,7 @@ NongMin365::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+# Disable delivery errors, bad email addresses will be ignored
+  config.action_mailer.raise_delivery_errors = true 
+
 end
