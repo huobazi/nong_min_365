@@ -2,16 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .pages-controller{
-  .show-action{
+  .show-action, .contact-action, .contact_create-action{
     div#left-nav{
       li.active{
         a{
           color:#fff;
           background-color:#0088cc
         }
-      .icon-chevron-right{
-        opacity:1;
-      }
+        .icon-chevron-right{
+          opacity:1;
+        }
       }
       .icon-chevron-right{
         float: right;
@@ -19,6 +19,18 @@
         margin-right: -6px;
         opacity: .25;
       }
+    }
+    form#new_contact_form{
+      label{
+        width: 80px;   
+      }
+      div.controls{
+        margin-left: 100px; 
+      }
+      input.ext, textarea.ext{
+        width: 500px; 
+      } 
+      div.form-actions{ text-align: center; }
     }
   }
 }

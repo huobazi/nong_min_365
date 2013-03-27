@@ -66,6 +66,13 @@ module NongMin365
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.after_initialize do
+      # email settings
+      config.action_mailer.delivery_method   = :postmark
+      config.action_mailer.postmark_settings = { :api_key => SiteSettings.email_sender_password} 
+    end
+
   end
 end
 

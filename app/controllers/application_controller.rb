@@ -67,3 +67,8 @@ module BootstrapHelper
     end
   end
 end
+
+#NongMin365::Application.configure do
+  #config.action_mailer.delivery_method   = :postmark
+  #config.action_mailer.postmark_settings = { :api_key => SiteSettings.email_sender_password} 
+#end

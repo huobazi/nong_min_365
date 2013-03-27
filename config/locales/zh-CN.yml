@@ -38,6 +38,11 @@ zh-CN:
         town: '所在乡/镇/街道'
         village: '所在村/社区'
         tag_list: '标签'
+      mail_message:
+        name: '姓名'
+        email: '邮件'
+        subject: '标题'
+        body: '内容'
 
 
   web-app-theme: 

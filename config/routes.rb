@@ -110,5 +110,6 @@ NongMin365::Application.routes.draw do
   #
   #
 
-  match "/*id" => 'pages#show', :as => :static_page, :format => false
+  post'contact' => 'pages#contact_create', :as => :contact_create
+  match"/*id" => 'pages#show', :as => :static_page, :format => false
 end

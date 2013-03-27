@@ -30,6 +30,9 @@ gem 'client_side_validations', '~> 3.2.1'
 gem 'simple_form', '~> 2.0.4'
 gem 'client_side_validations-simple_form', '~> 2.0.1'
 
+# mail service
+gem "postmark-rails", "~> 0.4.1"
+
 # Google Analytics performance 
 gem "garelic", "~> 0.2.1"
 

@@ -1,0 +1,17 @@
+<%= simple_form_for @message, :url => contact_create_path,
+  :wrapper => :prepend, 
+  :validate => true,
+  :html => {:id => 'new_contact_form'} do |form| %>
+  <%= render "error_messages", :target => nil %>
+  <fieldset>
+    <legend>欢迎您给本站提宝贵意见</legend>
+    <%= form.input :name, :input_html =>{:class=> 'ext'}, :autofocus => true, :require => true, :placeholder => '姓名', :label => '姓名', :value => @message.name %>
+    <%= form.input :email, :input_html =>{:class=> 'ext'}, :placeholder => '邮件', :label => '邮件' , :value => @message.email %>
+    <%= form.input :subject, :input_html =>{:class=> 'ext'}, :placeholder => '标题', :label => '标题' , :value => @message.subject %>
+    <%= form.input :body, :input_html =>{:class=> 'ext'},:as => :text , :placeholder => '内容', :label => '内容' , :value => @message.body %>
+    <div class="form-actions">
+      <%= form.submit t("common.save"), :class => "btn btn-primary btn-large", 'data-disable-with' => t("common.saving") %>
+      <%= link_to(t("common.cancel"), root_path, :class => "btn btn-large")%>
+    </div>
+  </fieldset>
+<% end %>
