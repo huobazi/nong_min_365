@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
 $(document).ready ->
-  $('select.regions').on 'change',() ->
+  $('#new_item_form').on 'change', 'select.regions',() ->
     el = $(this)
     remote_url = el.data('url')
     if( el.val().trim().length <= 0 || parseInt(el.data('level')) >= 5 )

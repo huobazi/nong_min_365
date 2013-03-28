@@ -1,4 +1,5 @@
-<%= form_for @item, :remote => false do |f| %>
+<%= form_for @item, :remote => false,
+  :html => { :id => 'new_item_form' }   do |f| %>
   <%= render "error_messages", :target => @item %>
   <div data-role="fieldcontain">
     <fieldset data-role="controlgroup">
