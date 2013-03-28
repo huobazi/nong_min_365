@@ -182,7 +182,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |wants|
-      if @item.update_attributes(:refresh_at => Time.now.to_i )
+      if @item.update_attribute('refresh_at', Time.now.to_i )
         flash[:notice] = '信息刷新成功！'
         wants.html { redirect_to(@item) }
         wants.xml  { head :ok }
@@ -214,9 +214,7 @@ class ItemsController < ApplicationController
     end
 
     if area_code.empty?
-      @regions = Rails.cache.fetch("global/regions/provinces/all}", expires_in: 360.minutes) do
-        ChineseRegion.provinces 
-      end
+      @regions = ChineseRegion.get_cached_all_province 
     else
       temp_level, @regions = ChineseRegion.children(area_code)
       @current_areas       = ChineseRegion.get_parents(area_code)

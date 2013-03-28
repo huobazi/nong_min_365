@@ -37,6 +37,12 @@ class ChineseRegion < ActiveRecord::Base
 
   scope :provinces, select('code, name').where(:level => 1)
 
+  def self.get_cached_all_province
+    regions = Rails.cache.fetch("global/regions/provinces/all}", expires_in: 360.minutes) do
+      ChineseRegion.provinces 
+    end
+    regions
+  end
   def self.get_level_and_prefix(code)
     ary = ['nil', '0000000000', '00000000', '000000', '000']
     if code.end_with? ary[1] 
