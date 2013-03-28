@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class NotificationsMailer < ActionMailer::Base
 
   default :from => "天天农业<webmaster@nongmin365.com>",
