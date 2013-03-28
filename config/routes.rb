@@ -1,4 +1,8 @@
 # -*- encoding : utf-8 -*-
+require 'sidekiq/web'
+require "admin_constraint"
+
+
 NongMin365::Application.routes.draw do
 
   root :to => 'home#index'
@@ -18,7 +22,7 @@ NongMin365::Application.routes.draw do
 
   get 'tags/:tag' => 'items#tags', :as => :items_tags
   resources :sessions, :only =>[:create]
-  resources :items do
+  resources :items do 
     collection do
       get '(c:category)/(t:xtype)/(a:area)/(p:page)', :action => :index, :as => :condition_list
     end
@@ -28,10 +32,8 @@ NongMin365::Application.routes.draw do
     end
   end
 
-  require 'sidekiq/web'
-  require "admin_constraint"
   mount Sidekiq::Web => '/admincp/sidekiq', :constraints => AdminConstraint.new
-  
+
   # 必须放在sidekiq后面
   namespace :admincp do
     root :to => "dashboard#index"

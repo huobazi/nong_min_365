@@ -23,7 +23,8 @@ module NongMin365
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib/utils)
+
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -71,7 +72,7 @@ module NongMin365
       config.action_mailer.delivery_method   = :postmark
       config.action_mailer.postmark_settings = { :api_key => SiteSettings.email_sender_password }
     end
-  
+
   end
 end
 
