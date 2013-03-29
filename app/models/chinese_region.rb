@@ -17,32 +17,41 @@
 #
 
 class ChineseRegion < ActiveRecord::Base
-  self.primary_key = 'code'
-  CODE_LENGTH = 12
-
+  # extends ...................................................................
+  # includes ..................................................................
+  # security (i.e. attr_accessible) ...........................................
   attr_accessible :code, :level, :name
 
+  # relationships .............................................................
+  # validations ...............................................................
   validates :code,
-  :presence => true,
-  :uniqueness => { :case_sensitive => false }
-
+    :presence => true,
+    :uniqueness => { :case_sensitive => false }
   validates :name  , :presence => true
   validates :level , :presence => true
 
+  # callbacks .................................................................
   has_many :province_items , :class_name => 'Item' , :foreign_key => 'province_code' , :inverse_of => :province
   has_many :city_items     , :class_name => 'Item' , :foreign_key => 'city_code'     , :inverse_of => :city
   has_many :county_items   , :class_name => 'Item' , :foreign_key => 'county_code'   , :inverse_of => :county
   has_many :town_items     , :class_name => 'Item' , :foreign_key => 'town_code'     , :inverse_of => :town
   has_many :village_items  , :class_name => 'Item' , :foreign_key => 'village_code'  , :inverse_of => :village
 
+  # scopes ....................................................................
   scope :provinces, select('code, name').where(:level => 1)
 
+  # additional config .........................................................
+  self.primary_key = 'code'
+  CODE_LENGTH = 12
+
+  # class methods .............................................................
   def self.get_cached_all_province
     regions = Rails.cache.fetch("global/regions/provinces/all}", expires_in: 360.minutes) do
       ChineseRegion.provinces 
     end
     regions
   end
+
   def self.get_level_and_prefix(code)
     ary = ['nil', '0000000000', '00000000', '000000', '000']
     if code.end_with? ary[1] 
@@ -122,4 +131,9 @@ class ChineseRegion < ActiveRecord::Base
 
     return regions
   end
+
+  # public instance methods ...................................................
+  # protected instance methods ................................................
+  # private instance methods ..................................................
+
 end

@@ -16,16 +16,18 @@
 #
 
 class User < ActiveRecord::Base
+  # extends ...................................................................
   has_secure_password
 
+  # includes ..................................................................
+  # security (i.e. attr_accessible) ...........................................
   attr_accessor :current_password
   attr_accessible  :username, :email, :qq, :cellphone, :password, :password_confirmation, :current_password
 
+  # relationships .............................................................
   has_many :items, :order => 'id desc'
 
-  before_create { generate_token(:remember_token) }
-  before_save { |user| user.email = email.downcase if email && email.size > 0 }
-
+  # validations ...............................................................
   validates :username, 
     :presence => true ,
     :uniqueness => { :case_sensitive => false },
@@ -52,6 +54,26 @@ class User < ActiveRecord::Base
     :numericality => { :only_integer => true },
     :allow_blank => true
 
+  # callbacks .................................................................
+  before_create { generate_token(:remember_token) }
+  before_save { |user| user.email = email.downcase if email && email.size > 0 }
+
+  # scopes ....................................................................
+  # additional config .........................................................
+  # class methods .............................................................
+  def self.authenticate_by_username(username, password)
+    find_by_username(username).try(:authenticate, password)
+  end
+
+  def self.authenticate_by_email(email, password)
+    find_by_email(emaill).try(:authenticate, password)
+  end
+
+  def self.authenticate_by_cellphone(cellphone, password)
+    find_by_cellphone(cellphone).try(:authenticate, password)
+  end
+
+  # public instance methods ...................................................
   def has_role?(role)
     case role
     when :founder then founder?
@@ -72,18 +94,7 @@ class User < ActiveRecord::Base
   #super(params)
   #end
 
-  def self.authenticate_by_username(username, password)
-    find_by_username(username).try(:authenticate, password)
-  end
-
-  def self.authenticate_by_email(email, password)
-    find_by_email(emaill).try(:authenticate, password)
-  end
-
-  def self.authenticate_by_cellphone(cellphone, password)
-    find_by_cellphone(cellphone).try(:authenticate, password)
-  end
-
+  # protected instance methods ................................................
   protected
   def generate_token(column)
     begin
@@ -91,6 +102,7 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
+  # private instance methods ..................................................
   private
   def founder?
     self.username == 'huobazi' && self.email == 'huobazi@gmail.com'

@@ -35,25 +35,26 @@
 
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
-  
+  # extends ...................................................................
   acts_as_taggable_on :tags
-  
+
+  # includes ..................................................................
+  # security (i.e. attr_accessible) ...........................................
+  attr_accessible :category_id, :amount, :body, :contact_name, 
+    :contact_phone, :contact_qq, :title, :xtype,
+    :province_code, :city_code, :county_code, :town_code, :village_code,
+    :tag_list, :refresh_at
+
+  # relationships .............................................................
   belongs_to :category, :counter_cache => :items_count
   belongs_to :user, :counter_cache => :items_count
-
   belongs_to :province , :class_name => 'ChineseRegion' , :foreign_key => 'province_code' , :inverse_of => :province_items , :counter_cache => 'province_items_count'
   belongs_to :city     , :class_name => 'ChineseRegion' , :foreign_key => 'city_code'     , :inverse_of => :city_items     , :counter_cache => 'city_items_count'
   belongs_to :county   , :class_name => 'ChineseRegion' , :foreign_key => 'county_code'   , :inverse_of => :county_items   , :counter_cache => 'county_items_count'
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
-  before_save :populate_region_name,:fix_tags_name, :fix_refresh_at, :add_province_name_to_tags
-
-  attr_accessible :category_id, :amount, :body, :contact_name, 
-    :contact_phone, :contact_qq, :title, :xtype,
-    :province_code, :city_code, :county_code, :town_code, :village_code,
-    :tag_list, :refresh_at
-
+  # validations ...............................................................
   validates :title, :presence => true, :length => { :in => 4..30 }
   validates :amount, :presence => true
   validates :category_id, :presence => { :message => '必须选择' }
@@ -68,29 +69,35 @@ class Item < ActiveRecord::Base
   validates :contact_qq, :presence => true, :length => { :in => 5..20 }, :numericality => { :only_integer => true }
   validates :body, :presence => true
   validates :tag_list, :presence => true
-  
-  scope :latest, order(' refresh_at DESC , id DESC ')
 
+  # callbacks .................................................................
+  before_save :populate_region_name,:fix_tags_name, :fix_refresh_at, :add_province_name_to_tags
   before_save { |item| item.slug = ::PinYin.permlink( item.title ) }
 
+  # scopes ....................................................................
+  scope :latest, order(' refresh_at DESC , id DESC ')
+
+  # additional config .........................................................
+  # class methods .............................................................
+  # public instance methods ...................................................
   def to_param
     "#{id} #{slug}".parameterize
   end
 
   def region_name
-   [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  
+    [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  
   end
 
+  # protected instance methods ................................................
+  # private instance methods .................................................. 
   private
   def populate_region_name
-   self.province_name = self.province.name
-   self.city_name     = self.city.name
-   self.county_name   = self.county.name
-   self.town_name     = self.town.name
-   self.village_name  = self.village.name
+    self.province_name = self.province.name
+    self.city_name     = self.city.name
+    self.county_name   = self.county.name
+    self.town_name     = self.town.name
+    self.village_name  = self.village.name
   end
-
-  private
   def fix_tags_name 
     # 全角逗号的处理
     self.tag_list = self.tag_list.join(',').gsub(/，/,',')
@@ -98,17 +105,13 @@ class Item < ActiveRecord::Base
     # 全角顿号的处理
     self.tag_list = self.tag_list.join(',').gsub(/、/,',')
   end
-
-  private
   def add_province_name_to_tags
     if not self.tag_list.include? "#{self.province_name}"
       self.tag_list.push self.province_name
     end
   end
-
-  private
   def fix_refresh_at
-   self.refresh_at = Time.now.to_i 
+    self.refresh_at = Time.now.to_i 
   end
 
 end
