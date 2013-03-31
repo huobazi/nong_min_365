@@ -47,7 +47,7 @@ class ChineseRegion < ActiveRecord::Base
   # class methods .............................................................
   def self.get_cached_all_province
     regions = Rails.cache.fetch("global/regions/provinces/all}", expires_in: 360.minutes) do
-      ChineseRegion.provinces 
+      ChineseRegion.provinces.all
     end
     regions
   end
@@ -95,7 +95,7 @@ class ChineseRegion < ActiveRecord::Base
         self.select('code, name').where(
           "level = :level and code like :code_like", 
           {:level => children_level, :code_like => code_like}
-        )
+        ).all
       end
     end
 
@@ -126,7 +126,7 @@ class ChineseRegion < ActiveRecord::Base
       cache_expire *= 10
     end
     regions = Rails.cache.fetch("global/regions/#{code}/parents", expires_in: cache_expire) do
-      self.select('code, name, level').where(:code => id_ary).order(:level)
+      self.select('code, name, level').where(:code => id_ary).order(:level).all
     end
 
     return regions

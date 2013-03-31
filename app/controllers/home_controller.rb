@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.html { }
       format.mobile { 
-        @categories = Category.all
+        @categories = Category.get_cached_all
       }
     end
   end
