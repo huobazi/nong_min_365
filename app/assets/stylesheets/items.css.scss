@@ -136,7 +136,7 @@
           padding: 0 6px;
           overflow:hidden;
           text-overflow: ellipsis;
-         -o-text-overflow: ellipsis;
+          -o-text-overflow: ellipsis;
           span{
             display:block;
             float:left;
@@ -181,38 +181,38 @@
         li.right{width: 440px;}
         li.from{ width: 100%; }
         li.tags{ width: 100%;
-         a{
-           border-radius: 4px;
-           background-color: $green;
-           color: #fff;
-           padding: 2px 4px;
-           line-height: 14px;
-           margin: 0 6px 0 0;
-         } 
-       }
-     }
-     #line{
-       clear:both;
-       border-top:1px dashed #ccc;
-       width:100%;
-       margin-bottom:10px
-     }
-     div.body{
-       padding: 6px 6px;
-       line-height: 160%;
-       pre{
-         font-size: 16px;
-         margin: 0;
-       }
-     }
-     div.opts{
-       text-align:right;
-       a{
-        i{
-          margin-right: 3px;
-        } 
-       }
-     }
-   }
- }
+          a{
+            border-radius: 4px;
+            background-color: $green;
+            color: #fff;
+            padding: 2px 4px;
+            line-height: 14px;
+            margin: 0 6px 0 0;
+          } 
+        }
+      }
+      #line{
+        clear:both;
+        border-top:1px dashed #ccc;
+        width:100%;
+        margin-bottom:10px
+      }
+      div.body{
+        padding: 6px 6px;
+        line-height: 160%;
+        pre{
+          font-size: 16px;
+          margin: 0;
+        }
+      }
+      div.opts{
+        text-align:right;
+        a{
+          i{
+            margin-right: 3px;
+          } 
+        }
+      }
+    }
   }
+}
