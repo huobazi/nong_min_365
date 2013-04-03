@@ -8,8 +8,15 @@
 
 .chromeframe {
   margin: 0;
-  background: #ccc;
-  color: black;
-  padding: 0.8em;
   text-align: center;
+  background-color: #FAE692;
+  background-image: linear-gradient(#FEEFAE, #FAE692);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #B3A569;
+  color: #211E14;
+  padding: 26px 0;
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
 }
