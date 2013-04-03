@@ -13,7 +13,7 @@ class Admincp::SmsController < Admincp::ApplicationController
     
     SmsQueueWorker.perform_async(phone_ary, content)
 
-    redirect_to admincp_new_sms_path, notice: '共有#{phone_ary.size}条短信进入群发队列.' 
+    redirect_to admincp_new_sms_path, notice: "共有#{phone_ary.size}条短信进入群发队列."
   end
 
   def batch
