@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def render_page_title
-    title = @page_title ? "#{SiteSettings.site_name} | #{@page_title}" : SiteSettings.site_name rescue "SITE_NAME"
+    title = @page_title ? "#{@page_title} | #{SiteSettings.site_name}" : SiteSettings.site_name rescue "SITE_NAME"
     content_tag("title", title, nil, false).html_safe
   end
 

@@ -29,20 +29,24 @@ class ItemsController < ApplicationController
     drop_breadcrumb(@page_title, items_path)
 
     if @current_category_name.size > 0 
+      @page_title = @current_category_name + " #{@page_title}"
       drop_breadcrumb @current_category_name, condition_list_items_path(:category => category_id, :xtype => nil, :area => nil)
     end
 
     if @current_xtype_name.size > 0
+      @page_title = @current_xtype_name + " #{@page_title}"
       drop_breadcrumb @current_xtype_name, condition_list_items_path(:category => category_id, :xtype => xtype, :area => nil)
     end
 
     if @current_areas and @current_areas.size > 0
+      #@page_title = @current_areas[-1].name + "/#{@page_title}"
+      @page_title = @current_areas.map{ |x| x.name }.join(' ') + " #{@page_title}"
       @current_areas.each do |a| 
         drop_breadcrumb a.name, condition_list_items_path(:area => a.code, :category => category_id, :xtype => xtype)
       end
-    end  
+    end
 
-    fresh_when(:etag => [@items.map{|x|x.updated_at}, page_size, page_index, area_code, xtype, category_id])
+    fresh_when(:etag => [@items.map{ |x|x.updated_at }, page_size, page_index, area_code, xtype, category_id])
 
     respond_to do |format|
       format.html { }
