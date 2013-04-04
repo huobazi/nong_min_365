@@ -79,7 +79,7 @@ class ChineseRegion < ActiveRecord::Base
     code_like = "#{prefix}%"
     children_level = level + 1
 
-    if level <= 5
+    if level < 5 #总共5级别
       cache_expire = 1.minutes
       case level 
       when 1
