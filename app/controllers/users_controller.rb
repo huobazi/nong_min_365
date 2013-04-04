@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @title = '用户注册'
+    @page_title = '用户注册'
     @user = User.new(get_create_params) 
     if @user.save
       redirect_to root_url, :notice => "注册成功！" 
