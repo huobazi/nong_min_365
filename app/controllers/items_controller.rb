@@ -22,19 +22,19 @@ class ItemsController < ApplicationController
       items_scope = items_scope.where(" #{code_name_ary[code_level - 1]} = ?", area_code)
     end
 
-    prepare_items_condition_list(category_id, area_code, xtype)   
+    prepare_items_condition_list(category_id, area_code, xtype)
 
     @items = items_scope.page(page_index).per(page_size)
 
     drop_breadcrumb(@page_title, items_path)
 
-    if @current_category_name.size > 0 
-      @page_title = @current_category_name + " #{@page_title}"
+    if @current_category_name.size > 0
+      @page_title = "#{@current_category_name} #{@page_title}"
       drop_breadcrumb @current_category_name, condition_list_items_path(:category => category_id, :xtype => nil, :area => nil)
     end
 
     if @current_xtype_name.size > 0
-      @page_title = @current_xtype_name + " #{@page_title}"
+      @page_title = "#{@current_xtype_name} #{@page_title}"
       drop_breadcrumb @current_xtype_name, condition_list_items_path(:category => category_id, :xtype => xtype, :area => nil)
     end
 
@@ -45,6 +45,8 @@ class ItemsController < ApplicationController
         drop_breadcrumb a.name, condition_list_items_path(:area => a.code, :category => category_id, :xtype => xtype)
       end
     end
+
+    @page_title = "#{@page_title} 第#{page_index ? page_index.to_i : 1}页"
 
     fresh_when(:etag => [@items.map{ |x|x.updated_at }, page_size, page_index, area_code, xtype, category_id])
 
@@ -169,8 +171,9 @@ class ItemsController < ApplicationController
 
       drop_breadcrumb(@page_title, items_tags_path(tag))
       @items = Item.latest.tagged_with(tag).page(page_index).per(page_size)
+      @page_title = "#{@page_title} 第#{page_index ? page_index.to_i : 1}页"
 
-      fresh_when(:etag => [@items.map{|x|x.updated_at}, tag, page_index, page_size])
+      fresh_when(:etag => [@items.map{ |x|x.updated_at }, tag, page_index, page_size])
     else
       redirect_to items_path and return
     end
