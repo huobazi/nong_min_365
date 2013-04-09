@@ -53,10 +53,12 @@ module ApplicationHelper
     @page_keywords.push SiteSettings.site_name
 
     content = Nokogiri::HTML(@page_keywords.join(','))
+
     [
       tag('meta', :name => 'keywords', :content => content.text),
       tag('meta', :name => 'description', :content => content.text)
     ].join("\n").html_safe
+
   end
 
   def render_body_tag

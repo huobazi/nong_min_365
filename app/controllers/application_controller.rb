@@ -9,8 +9,15 @@ class ApplicationController < ActionController::Base
   before_filter :adjust_mobilejs_format_for_mobile_devise
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    render_403 exception
   end
+
+  rescue_from Exception,                            :with => :render_500
+  rescue_from ActiveRecord::RecordNotFound,         :with => :render_404
+  rescue_from ActionController::RoutingError,       :with => :render_404
+  rescue_from ActionController::UnknownController,  :with => :render_404
+  rescue_from ActionController::UnknownAction,      :with => :render_404
+
   #mobilette config
   mobylette_config do |config|
     config[:skip_xhr_requests] = false
@@ -49,10 +56,49 @@ class ApplicationController < ActionController::Base
     super(opts)
   end
 
+  def render_404(exception)
+    render_optional_error_file 404, exception
+  end
+
+  def render_403(exception)
+    render_optional_error_file 403, exception
+  end
+
+  def render_500(exception)
+    render_optional_error_file 500, exception
+  end
+
   private
   def adjust_mobilejs_format_for_mobile_devise
     if is_mobile_request? &&  request.accepts.include?("text/javascript")
       request.format = :mobilejs
+    end
+  end
+
+  def render_optional_error_file(status_code, exception)
+    status = status_code.to_s
+    if ["404","403", "422", "500"].include?(status)
+      respond_to do |format|
+        format.html do
+          render :template => "/pages/errors/#{status}", :status => status, :layout => "errors"
+        end
+        format.any  do
+          method = "to_#{request_format}"
+          text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
+          render :text => text, :status => status
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          render :template => "/pages/errors/unknown", :handler => [:erb], :status => status, :layout => "errors"
+        end
+        format.any  do
+          method = "to_#{request_format}"
+          text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
+          render :text => text, :status => status
+        end
+      end
     end
   end
 end
