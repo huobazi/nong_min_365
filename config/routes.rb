@@ -15,6 +15,8 @@ NongMin365::Application.routes.draw do
   resources :password_resets, :only => [:new, :show, :create, :update]
   resources :users, :only => [:create], :path => 'account' do
     collection do
+      get :edit
+      put :save
       get 'password' => 'users#change_password', :as => :change_password
       get 'items' => 'users#my_items', :as => :my_items
       put :update_password

@@ -14,7 +14,7 @@ zh-CN:
         password_confirmation: '确认密码'
         current_password: '当前密码'
         password_digest: '密码'
-        qq: 'QQ'
+        qq: 'QQ号码'
         email: '电子邮件'
         cellphone: '手机号码'
       category:

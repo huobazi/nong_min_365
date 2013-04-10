@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   before_filter :require_not_login, :only => [:new, :create]
-  before_filter :require_login, :only => [:my_items, :change_password, :update_password]
+  before_filter :require_login, :only => [:edit, :save, :my_items, :change_password, :update_password]
 
   def new
     @user = User.new
@@ -16,13 +16,40 @@ class UsersController < ApplicationController
     @page_title = '用户注册'
     @user = User.new(get_create_params) 
     if @user.save
-      redirect_to root_url, :notice => "注册成功！" 
+      msg = "注册成功！强烈建议您完善个人信息，以便更好的体验本站的服务！"
+      msg = "您没有填写邮件信息，强烈建议您登记邮件，否则您忘记密码，将无法找回您的密码！" if @user.email.blank?
+      redirect_to edit_users_path, :alert => msg
     else
       render 'new'
     end
   end
 
-  def my_items 
+  def edit
+    @user = current_user
+    @page_title = '个人信息'
+    drop_breadcrumb(@page_title, edit_users_path)
+
+    respond_to do |wants|
+      wants.html{ render :layout => 'my' }
+      wants.mobile
+    end
+  end
+
+  def save
+    @user = current_user
+    @page_title = '个人信息'
+    drop_breadcrumb(@page_title, edit_users_path)
+
+    if @user.update_attributes get_edit_params
+      msg = "个人信息修改成功！"
+      msg = "您没有填写邮件信息，强烈建议您登记邮件，否则您忘记密码，将无法找回您的密码！" if @user.email.blank?
+      redirect_to edit_users_path, :alert => msg
+    else
+      render 'edit', :layout => 'my'
+    end
+  end
+
+  def my_items
     @page_title = '我的产品'
     drop_breadcrumb(@page_title, my_items_users_path)
 
@@ -72,6 +99,10 @@ class UsersController < ApplicationController
   private
   def get_create_params
     params[:user].slice(:username,:password, :password_confirmation, :email)
+  end
+
+  def get_edit_params
+    params[:user].slice(:email, :qq, :cellphone)
   end
 
   def get_update_password_params

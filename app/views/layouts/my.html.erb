@@ -7,7 +7,8 @@
         </div>
         <ul class="nav nav-tabs nav-stacked">
           <li class=""></li>
-          <li class="<%= action_name == 'change_password'  or action_name == 'update_password' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>修改密码'), change_password_users_path %></li>
+          <li class="<%= (action_name == 'edit' or action_name == 'save') ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>我的资料'), edit_users_path %></li>
+          <li class="<%= (action_name == 'change_password' or action_name == 'update_password') ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>修改密码'), change_password_users_path %></li>
           <li class="<%= action_name == 'my_items' ? 'active' : '' %>"><%= link_to raw('<i class="icon-chevron-right"></i>我的信息'), my_items_users_path %></li>
         </ul>
       </div> 

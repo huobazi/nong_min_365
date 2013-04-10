@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span12">
+    <%= simple_form_for @user,
+      :wrapper => :prepend,
+      :validate => true,
+      :url => save_users_path,
+      :html => {:id => 'edit_account_form'},
+      :method => :put do |f| %>
+      <%= render "error_messages", :target => @user %>
+      <fieldset>
+        <legend>我的资料</legend>
+        <%= f.input :username do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-user'), :class => "add-on" %>
+          <%= f.input_field :username, :disabled => true, :value => @user.username %>
+        <% end %>
+        <%= f.input :email do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-envelope'), :class => "add-on" %>
+          <%= f.input_field :email, :placeholder => '填写邮件用于找回密码', :value => @user.email, :type => 'email' %>
+        <% end %>
+        <%= f.input :cellphone do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-phone'), :class => "add-on" %>
+          <%= f.input_field :cellphone, :placeholder => '填写您的手机号码', :value => @user.cellphone %>
+        <% end %>
+        <%= f.input :qq do %>
+          <%= content_tag :span, content_tag(:i, '', :class=>'icon-comments'), :class => "add-on" %>
+          <%= f.input_field :qq, :placeholder => 'QQ号码', :value => @user.qq %>
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.submit "保存", :class => "btn btn-primary btn-large", 'data-disable-with' => "请稍后..."%>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+    $('#edit_account_form').enableClientSideValidations();
+  </script>
+<% end %>
