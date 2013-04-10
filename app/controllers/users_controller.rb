@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
   private
   def get_create_params
-    params[:user].slice(:username,:password, :password_confirmation)
+    params[:user].slice(:username,:password, :password_confirmation, :email)
   end
 
   def get_update_password_params

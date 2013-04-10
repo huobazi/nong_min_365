@@ -117,7 +117,6 @@ class User < ActiveRecord::Base
   end
 
   def email_required?
-    #true
     false
   end
 end

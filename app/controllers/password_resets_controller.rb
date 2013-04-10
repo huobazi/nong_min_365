@@ -8,12 +8,12 @@ class PasswordResetsController < ApplicationController
   def create
     @page_title = "找回密码"
     drop_breadcrumb(@page_title, new_password_reset_path)
-    user = User.find_by_username(params[:password_reset][:username])
+    user = User.find_by_email(params[:password_reset][:email])
     if user
       user.send_password_resets
       redirect_to signin_path, notice: '密码重置邮件已经发往您的邮箱，请您登陆您的邮箱按照提示操作。'
     else
-      redirect_to new_password_reset_path
+      redirect_to new_password_reset_path, :notice => '没有该邮件登记信息。'
     end
   end
 
