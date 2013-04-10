@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   before_filter :require_login, :only => [:my_items, :change_password, :update_password]
 
   def new
+    @user = User.new
     @page_title = '用户注册'
     drop_breadcrumb(@page_title, signup_path)
-    @user = User.new
 
     fresh_when 
     expires_in 10.minutes
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_url, :notice => "注册成功！" 
     else
-      render 'new' 
+      render 'new'
     end
   end
 
@@ -37,17 +37,13 @@ class UsersController < ApplicationController
   end
 
   def change_password
+    @user = User.new
     @page_title = '修改密码'
     drop_breadcrumb(@page_title, change_password_users_path)
 
-    @user = User.new
-
-    fresh_when 
-    expires_in 10.minutes
-
     respond_to do |wants|
-      wants.html{ render :layout => 'my' } 
-      wants.mobile 
+      wants.html{ render :layout => 'my' }
+      wants.mobile
     end
   end
 
@@ -63,13 +59,13 @@ class UsersController < ApplicationController
       if @user.update_attributes(post_params)
         @user.generate_token(:remember_token)
         sign_out
-        redirect_to root_path, :notice => '您已经修改了密码,请使用新密码重新登录!'
+        redirect_to signin_path, :alert => '您已经修改了密码,请使用新密码重新登录!'
       else
-        render "change_password", :layout => 'my' 
+        render "change_password", {:layout => 'my', :notice => '修改密码不成功，请重试。'}
       end
     else
       @user.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-      render "change_password" ,{:layout => 'my', :notice => '当前密码输入错误!'}
+      render "change_password", {:layout => 'my', :notice => '当前密码输入错误!'}
     end
   end
 

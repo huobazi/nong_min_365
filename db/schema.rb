@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324095028) do
+ActiveRecord::Schema.define(:version => 20130410030452) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20130324095028) do
     t.text     "body"
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "city_code"
     t.string   "county_code"
     t.string   "town_code"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20130324095028) do
     t.string   "slug"
     t.integer  "publis_status", :default => 0
     t.string   "source"
-    t.integer  "refresh_at",    :default => 0 
+    t.integer  "refresh_at",    :default => 0
   end
 
   add_index "items", ["category_id", "refresh_at", "user_id", "province_code", "city_code", "county_code", "town_code", "village_code", "xtype"], :name => "index_on_items"
@@ -106,10 +106,12 @@ ActiveRecord::Schema.define(:version => 20130324095028) do
     t.string   "password_digest"
     t.string   "cellphone"
     t.string   "qq"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "remember_token"
-    t.integer  "items_count",     :default => 0
+    t.integer  "items_count",            :default => 0
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["id"], :name => "index_users_on_id"

@@ -79,8 +79,10 @@ def require_admin_or_founder
       end
     end
   end
+
   def set_remember_me
     cookies.signed[:_remember_token] = {
+      :httponly => true,
       :value => @current_user.remember_token,
       :expires => 2.weeks.from_now
     }

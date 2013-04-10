@@ -1,20 +1,22 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  username        :string(255)
-#  email           :string(255)
-#  password_digest :string(255)
-#  cellphone       :string(255)
-#  qq              :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  remember_token  :string(255)
-#  items_count     :integer          default(0)
+#  id                     :integer          not null, primary key
+#  username               :string(255)
+#  email                  :string(255)
+#  password_digest        :string(255)
+#  cellphone              :string(255)
+#  qq                     :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  remember_token         :string(255)
+#  items_count            :integer          default(0)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
 #
 
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   # extends ...................................................................
   has_secure_password
@@ -25,32 +27,30 @@ class User < ActiveRecord::Base
   attr_accessible  :username, :email, :qq, :cellphone, :password, :password_confirmation, :current_password
 
   # relationships .............................................................
-  has_many :items, :order => 'id desc'
+  has_many :items, :order => ' id desc '
 
   # validations ...............................................................
-  validates :username, 
-    :presence => true ,
+  validates :username,
     :uniqueness => { :case_sensitive => false },
     :length => { :in => 6..20 }
-  validates :password, 
-    :presence => true, 
-    :length => { :in => 6..36 },
-    :confirmation => true 
-  validates :password_confirmation, :presence => true
-  validates :current_password, :presence => true, :on => :change_password
-  validates :current_password, :presence => true, :on => :update_password
-  validates :email, 
-    :uniqueness => { :case_sensitive => false },
-    :length => { :in => 3..254 },
-    :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i },
-    :allow_blank => true
+  validates_presence_of :username, :on => :create
+
+  validates :password, :length => { :in => 6..36 }, :if => :password_required?
+  validates_presence_of :password, :if => :password_required?
+  validates_confirmation_of :password, :if => :password_required?
+
+  validates_presence_of   :email, :if => :email_required?
+  validates_uniqueness_of :email, :allow_blank => true, :if => :email_changed?
+  validates_format_of     :email, :with  => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, :allow_blank => true, :if => :email_changed?
+
   validates :cellphone,
     :uniqueness => true,
     :length => { :is => 11 },
     :numericality => { :only_integer => true },
     :allow_blank => true
+
   validates :qq,
-    :length => { :in => 5..20 }, 
+    :length => { :in => 5..20 },
     :numericality => { :only_integer => true },
     :allow_blank => true
 
@@ -74,6 +74,13 @@ class User < ActiveRecord::Base
   end
 
   # public instance methods ...................................................
+  def send_password_resets
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    self.save!
+    NotificationsMailer.password_reset_mail(self).deliver
+  end
+
   def has_role?(role)
     case role
     when :founder then founder?
@@ -84,24 +91,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  #def update_with_password(params, *options)
-  #params.delete(:current_password)
-  #super(params)
-  #end
-
-  #def update_without_password(params={})
-  #params.delete(:current_password)
-  #super(params)
-  #end
-
-  # protected instance methods ................................................
-  protected
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
   end
 
+  # protected instance methods ................................................
   # private instance methods ..................................................
   private
   def founder?
@@ -116,4 +112,12 @@ class User < ActiveRecord::Base
     self.id > 0
   end
 
+  def password_required? # copy from devise
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  def email_required?
+    #true
+    false
+  end
 end

@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="span8">
+    <%= simple_form_for :password_reset,
+      :url => password_resets_path,
+      :wrapper => :prepend, 
+      :html => {:id => 'new_password_reset_form'}  do |f| %>
+      <%= render "error_messages", :target => nil %>
+      <fieldset>
+        <legend>找回密码</legend>
+        <%= f.input :username, :label => '用户名', :placeholder => '请填写您在本站的用户名' %>
+        <div class="form-actions">
+          <%= f.submit "提交", 
+            :id => 'btnSubmit',
+            :class => "btn btn-primary btn-large",
+            'data-disable-with' => "请稍后..."
+          %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+<div class="span4">
+  <div class="hero-unit bg-white">
+    <p>已有本站账号？</p>
+    <p>
+      <%= link_to  '点这里去登录', signin_path, :class=>"btn btn-primary btn-large" %>
+    </p>
+  </div>
+</div>
+</div>

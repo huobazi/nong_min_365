@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+
+require 'item'
 class ItemsCell < Cell::Rails
   helper ActsAsTaggableOn::TagsHelper
 
@@ -23,7 +25,6 @@ class ItemsCell < Cell::Rails
     category_id = args[:category_id]
     row_count   = args[:row_count]
     categories  = args[:categories] || Category.get_cached_all
-
     @category = categories.find{|x| x.id == category_id}
     @items = Rails.cache.fetch("global/homepage/latest/items_#{category_id}_#{row_count}",expires_in: 20.minutes) do
       Item.latest.where(:category_id => category_id).limit(row_count).all

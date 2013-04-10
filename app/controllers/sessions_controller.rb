@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 
     user = User.authenticate_by_username(login, password)
 
-    if user 
+    if user
       sign_in_as user
       if remember_me
         set_remember_me

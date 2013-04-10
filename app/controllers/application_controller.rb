@@ -12,11 +12,12 @@ class ApplicationController < ActionController::Base
     render_403 exception
   end
 
-  rescue_from Exception,                            :with => :render_500
+  #rescue_from Exception,                            :with => :render_500
   rescue_from ActiveRecord::RecordNotFound,         :with => :render_404
   rescue_from ActionController::RoutingError,       :with => :render_404
   rescue_from ActionController::UnknownController,  :with => :render_404
   rescue_from ActionController::UnknownAction,      :with => :render_404
+  rescue_from ActionView::MissingTemplate,          :with => :render_404
 
   #mobilette config
   mobylette_config do |config|
@@ -76,41 +77,47 @@ class ApplicationController < ActionController::Base
   end
 
   def render_optional_error_file(status_code, exception)
-    status = status_code.to_s
-    if ["404","403", "422", "500"].include?(status)
-      respond_to do |format|
-        format.html do
-          render :template => "/pages/errors/#{status}", :status => status, :layout => "errors"
-        end
-        format.any  do
-          method = "to_#{request_format}"
-          text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
-          render :text => text, :status => status
-        end
-      end
-    else
-      respond_to do |format|
-        format.html do
-          render :template => "/pages/errors/unknown", :handler => [:erb], :status => status, :layout => "errors"
-        end
-        format.any  do
-          method = "to_#{request_format}"
-          text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
-          render :text => text, :status => status
-        end
-      end
+    if defined?(RAILS_ENV) and RAILS_ENV == 'development'
+      return
     end
-  end
-end
+      status = status_code.to_s
+      logger.error(exception)
+      newrelic_notice_error(exception) if respond_to?(:newrelic_notice_error)
 
-module BootstrapHelper
-  module Breadcrumb
-    module InstanceMethods
-      protected
-      def set_breadcrumbs
-        @breadcrumbs = ["<a href='/'><i class = 'icon-home'></i>首页</a>".html_safe]
+      if ["404","403", "422", "500"].include?(status)
+        respond_to do |format|
+          format.html do
+            render :template => "/pages/errors/#{status}", :status => status, :layout => "errors"
+          end
+          format.any  do
+            method = "to_#{request_format}"
+            text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
+            render :text => text, :status => status
+          end
+        end
+      else
+        respond_to do |format|
+          format.html do
+            render :template => "/pages/errors/unknown", :handler => [:erb], :status => status, :layout => "errors"
+          end
+          format.any  do
+            method = "to_#{request_format}"
+            text = {}.respond_to?(method) ? {:error => 'server error'}.send(method) : ""
+            render :text => text, :status => status
+          end
+        end
       end
     end
   end
-end
+
+  module BootstrapHelper
+    module Breadcrumb
+      module InstanceMethods
+        protected
+        def set_breadcrumbs
+          @breadcrumbs = ["<a href='/'><i class = 'icon-home'></i>首页</a>".html_safe]
+        end
+      end
+    end
+  end
 

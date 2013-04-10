@@ -7,6 +7,10 @@ NongMin365::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.action_mailer.delivery_method     = :postmark
+  config.action_mailer.postmark_settings   = { :api_key =>'e3f0b960-3ce9-45d9-ae26-113876d01ba7'}
+  config.action_mailer.default_url_options = { :host    => "nong_min_365.dev" }
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -36,7 +40,7 @@ NongMin365::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-# Disable delivery errors, bad email addresses will be ignored
+  # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true 
 
 end
