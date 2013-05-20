@@ -20,6 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 #
 
+
 every 1.day, :at => '04:44' do
   command 'RAILS_ENV=production backup perform -t nm365_backup --config_file config/backup/config.rb --log-path log --tmp-path tmp'
 end
