@@ -70,6 +70,8 @@ gem "high_voltage", "~> 1.2.1"
 # Use unicorn as the app server
 gem "unicorn", "~> 4.6.2"
 
+gem 'whenever', '~> 0.8.2', :require => false
+
 group :development do
   # Deploy with Mina 
   gem "mina", "~> 0.2.1"

@@ -36,15 +36,17 @@ namespace :backup do
 
   desc "Backup the web"
   task :web do
+    db
   end
 
   desc "Backup the database"
   task :db do
+    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=production bundle exec rake db:backup"
   end
 end
 
 namespace :remote_rake do
-  desc "Run a task on remote servers, ex: cap remote_rake:invoke task=cache:clear"
+  desc "Run a task on remote servers, ex: cap remote_rake:invoke task=cache:clear" 
   task :invoke do
     queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=#{rails_env} bundle exec rake #{ENV['task']}"
   end
