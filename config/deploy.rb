@@ -4,6 +4,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
+require 'mina/whenever'
 
 require 'mina/defaults'
 require 'mina/extras'
