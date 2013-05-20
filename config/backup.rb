@@ -80,20 +80,20 @@ Backup::Model.new(:nm365_backup, 'NongMin365 Backup') do
   # See the Wiki for other delivery options.
   # https://github.com/meskyanichi/backup/wiki/Notifiers
   #
-  #notify_by Mail do |mail|
-    #mail.on_success           = true
-    #mail.on_warning           = true
-    #mail.on_failure           = true
+  notify_by Mail do |mail|
+    mail.on_success           = true
+    mail.on_warning           = true
+    mail.on_failure           = true
 
-    #mail.from                 = "sender@email.com"
-    #mail.to                   = "receiver@email.com"
-    #mail.address              = "smtp.gmail.com"
-    #mail.port                 = 587
-    #mail.domain               = "your.host.name"
-    #mail.user_name            = "sender@email.com"
-    #mail.password             = "my_password"
-    #mail.authentication       = "plain"
-    #mail.encryption           = :starttls
-  #end
+    mail.from                 = "webmaster@nongmin365.com"
+    mail.to                   = "huobazi@gmail.com"
+    mail.address              = "smtp.postmarkapp.com"
+    mail.port                 = 2525
+    mail.domain               = "nongmin365.com"
+    mail.user_name            = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
+    mail.password             = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
+    mail.authentication       = "plain"
+    mail.encryption           = :starttls
+  end
 
 end
