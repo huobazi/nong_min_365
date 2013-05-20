@@ -6,7 +6,7 @@
 #
 
 
-database_yml = File.expand_path('../config/database.yml',  __FILE__)
+database_yml = File.expand_path('database.yml',  __FILE__)
 RAILS_ENV    = ENV['RAILS_ENV'] || 'production'
 
 require 'yaml'
