@@ -23,7 +23,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
-gem "nokogiri", "~> 1.5.6"
+gem "nokogiri", "~> 1.5.9"
 gem 'jquery-rails', '~> 2.2.1'
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'
@@ -71,6 +71,7 @@ gem "high_voltage", "~> 1.2.1"
 gem "unicorn", "~> 4.6.2"
 
 gem 'whenever', '~> 0.8.2', :require => false
+gem 'backup', :require => false
 
 group :development do
   # Deploy with Mina 

@@ -30,7 +30,7 @@ end
 namespace :backup do
   desc "Backup the web and database"
   task :default do
-    web
+    #web
     db
   end
 
@@ -41,7 +41,7 @@ namespace :backup do
 
   desc "Backup the database"
   task :db do
-    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=production bundle exec rake db:backup"
+    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=production bundle exec rake site:backup"
   end
 end
 
