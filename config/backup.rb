@@ -5,9 +5,9 @@
 # $ backup perform -t my_backup [-c <path_to_configuration_file>]
 #
 
-RAILS_ENV    = ENV['RAILS_ENV'] || 'production'
+RAILS_ENV = ENV['RAILS_ENV'] || 'production'
 
-database_yml = Rails.root.join("config","database.yml")
+database_yml = "database.yml"
 
 require 'yaml'
 config = YAML.load_file(database_yml)

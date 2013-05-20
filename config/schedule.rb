@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 #
-every 1.day, :at => '02:34' do
-  rake 'site:backup'
+every 1.day, :at => '03:34' do
+  command 'backup perform --trigger nm365_backup --config_file config/backup.rb --data-path db --log-path log --tmp-path tmp'
 end
