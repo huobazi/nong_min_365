@@ -71,6 +71,7 @@ gem "high_voltage", "~> 1.2.1"
 gem "unicorn", "~> 4.6.2"
 
 gem 'whenever', '~> 0.8.2', :require => false
+gem 'backup', :require => false
 
 group :development do
   # Deploy with Mina 
