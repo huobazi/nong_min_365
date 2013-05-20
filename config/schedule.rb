@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 #
 every 1.day, :at => '03:33' do
-  rake 'db:backup'
+  rake 'site:backup'
 end
