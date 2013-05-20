@@ -1,13 +1,18 @@
 God::Contacts::Email.defaults do |d|
-  d.from_email = 'god@vagrant'
+  d.from_email = 'webmaster@nongmin365.com'
   d.from_name = 'God'
-  d.delivery_method = :sendmail
+  d.delivery_method = :smtp
+  d.server_host = 'smtp.postmarkapp.com'
+  d.server_port = 2525
+  d.server_domain = 'nongmin365.com'
+  d.server_user = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
+  d.server_password = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
 end
 
 God.contact(:email) do |c|
-  c.name = 'Alfuken'
+  c.name = 'Huobazi'
   c.group = 'me'
-  c.to_email = 'alfuken@gmail.com'
+  c.to_email = 'huobazi@gmail.com'
 end
 
 # God::Contacts::Jabber.defaults do |d|
