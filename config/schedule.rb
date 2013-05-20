@@ -21,7 +21,9 @@
 #
 
 
+set :output, {:error => 'log/cron_error.log', :standard => '/dev/null'}
+job_type :command, "cd :path && :environment_variable=:environment :task :output"
+
 every 1.day, :at => '05:50' do
-  #command 'RAILS_ENV=production backup perform -t nm365_backup --config_file config/backup/config.rb --log-path log --tmp-path tmp'
-  rake "site:backup"
+  command 'RAILS_ENV=production backup perform -t nm365_backup --config_file config/backup/config.rb --data-path db --log-path log --tmp-path tmp'
 end
