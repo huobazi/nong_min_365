@@ -36,7 +36,6 @@ namespace :backup do
 
   desc "Backup the web"
   task :web do
-    db
   end
 
   desc "Backup the database"
