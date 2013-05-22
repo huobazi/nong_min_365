@@ -30,7 +30,7 @@ end
 namespace :backup do
   desc "Backup the web and database"
   task :default do
-    #web
+    web
     db
   end
 
@@ -41,7 +41,7 @@ namespace :backup do
 
   desc "Backup the database"
   task :db do
-    queue echo_cmd "cd #{deploy_to}/#{current_path}; RAILS_ENV=#{rails_env} bundle exec rake site:backup"
+    queue echo_cmd "/bin/bash -l -c 'cd #{deploy_to}/#{current_path}; RAILS_ENV=#{rails_env} backup perform -t nm365_backup --config_file config/backup/config.rb --data-path db --log-path log --tmp-path tmp >> /dev/null 2>> log/cron_error.log'"
   end
 end
 
