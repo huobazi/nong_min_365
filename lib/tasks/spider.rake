@@ -71,7 +71,7 @@ namespace :spider do
         local_categories = Category.all
         html = crawl_get($nx28_host)
         doc = Nokogiri::HTML(html)
-        doc.css('div.link_quanzi').css('a').each do |link|
+        doc.css('div.link_quanzi_index').css('a').each do |link|
           name =  link.content.gsub(/[\r\n\t\s\b\B]*/,'')
           link  =  link[:href].split('=')[1]
           category = local_categories.find{|x| x.name == name }
@@ -87,6 +87,8 @@ namespace :spider do
         # always executed
       end
 
+      puts "Get #{dest_categories.size} categories OK."
+      
       dest_categories
     end
 
@@ -94,12 +96,14 @@ namespace :spider do
       items_link_list = []
 
       begin
-        url = "http://#{$nx28_host}/info_list.php?s_r=#{xtype}&info_classes=#{short_name}"
+        url = "http://#{$nx28_host}/info_list_gongxu.php?s_r=#{xtype}&info_classes=#{short_name}"
+        puts url
         html = crawl_get(url)
         doc = Nokogiri::HTML(html)
         doc.css('div.middle_mian_l_content table tr>td:nth-child(2)>a').each do |link|
           name =  link.content.gsub(/[\r\n\t\s\b\B]*/,'')
           link  =  link[:href].gsub('../','http://nx28.com/')
+          puts "Push #{link}.....populate_items_link_by_category"
           items_link_list.push({:link => link, :category_id => category_id, :xtype => xtype })
         end
       rescue Exception => e
@@ -117,6 +121,8 @@ namespace :spider do
       item = {}
       begin
         url = url.gsub(/[\r\n\t\s\b\B]*/,'') 
+        puts "Begin crawl #{url}....populate_item"
+
         item[:exists] = 0
         tmp = Item.find_by_source(url)
         if tmp and tmp.id > 0 and tmp.user_id == $user_id
