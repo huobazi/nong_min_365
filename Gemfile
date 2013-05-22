@@ -63,19 +63,12 @@ gem 'cells', '~> 3.8.8'
 # For mobile devise
 gem 'mobylette', '~> 3.3.2'
 
-
 # For stack pages
 gem "high_voltage", "~> 1.2.1"
-
-# Use unicorn as the app server
-gem "unicorn", "~> 4.6.2"
-
-gem 'whenever', '~> 0.8.2', :require => false
 
 group :development do
   # Deploy with Mina 
   gem "mina", "~> 0.2.1"
-  gem "god", "~> 0.13.1"
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
   gem 'magic_encoding', '~> 0.0.2'
@@ -97,4 +90,7 @@ group :test do
   gem 'simplecov', require: false
 end
 
-
+# Use unicorn as the app server
+gem "unicorn", "~> 4.6.2"
+gem "god", "~> 0.13.2"
+gem 'whenever', '~> 0.8.2', :require => false

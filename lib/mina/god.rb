@@ -18,6 +18,8 @@ namespace :god do
     invoke :sudo
     queue 'echo "-----> Relocate god script file"'
     queue echo_cmd %{sudo cp "#{config_path}/god.sh" "#{god_script}" && sudo chown #{god_user}:#{god_group} #{god_script} && sudo chmod u+x #{god_script}}
+    queue echo_cmd "sudo update-rc.d -f #{god_service_name} remove"
+    queue echo_cmd "sudo update-rc.d -f #{god_service_name} defaults"
     queue check_ownership god_user, god_group, god_script
   end
 

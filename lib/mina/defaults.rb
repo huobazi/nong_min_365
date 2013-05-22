@@ -17,10 +17,11 @@ task :defaults do
   set_default :config_templates_path, "lib/mina/templates"
   set_default :config_path,     "#{deploy_to}/#{shared_path}/config"
   
-  set_default :god_script,      "#{services_path!}/god"
   set_default :god_global,      "#{config_path}/global.god"
   set_default :god_unicorn,     "#{config_path}/god/unicorn.god"
   set_default :god_bin,         "#{deploy_to}/#{current_path}/bin/god"
+  set_default :god_service_name,  "god-#{app!}"
+  set_default :god_script,     "#{services_path!}/#{god_service_name}"
   set_default :god_user,        user
   set_default :god_group,       user
   

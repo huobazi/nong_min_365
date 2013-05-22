@@ -1,12 +1,17 @@
 God::Contacts::Email.defaults do |d|
   d.from_email = 'webmaster@nongmin365.com'
-  d.from_name = 'God'
+  d.from_name = 'NongMin365 God'
   d.delivery_method = :smtp
-  d.server_host = 'smtp.postmarkapp.com'
+  
+  #=== SMTP Options (when delivery_method = :smtp) ===
+  d.server_host = 'smtp.postmarkapp.com',
   d.server_port = 2525
-  d.server_domain = 'nongmin365.com'
-  d.server_user = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
-  d.server_password = "e3f0b960-3ce9-45d9-ae26-113876d01ba7"
+  d.server_auth = true
+
+  #=== SMTP Auth Options (when server_auth = true) ===
+  d.server_domain = 'NongMin365.com'
+  d.server_user = 'e3f0b960-3ce9-45d9-ae26-113876d01ba7'
+  d.server_password = 'e3f0b960-3ce9-45d9-ae26-113876d01ba7'
 end
 
 God.contact(:email) do |c|
