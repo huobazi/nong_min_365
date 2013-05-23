@@ -1,18 +1,21 @@
 # -*- encoding : utf-8 -*-
 
-class ItemPictureUploader < CarrierWave::Uploader::Base
+class PictureUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :qiniu
   self.qiniu_access_key    = SiteSettings.qiniu_access_key
   self.qiniu_secret_key    = SiteSettings.qiniu_secret_key
-  self.qiniu_bucket        = "avatars"
-  self.qiniu_bucket_domain = "avatars.files.example.com"
-  self.qiniu_bucket_domain = "carrierwave-qiniu-example.aspxboy.com"
+  self.qiniu_bucket        = "nongmin365"
+  self.qiniu_bucket_domain = "nongmin365.qiniudn.com"
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  #
+  # This works for the file storage as well as Amazon S3 and Rackspace Cloud Files.
+  # Define store_dir as nil if you'd like to store files at the root level.
+  # Do not change the store_dir
   def store_dir
-    "uploads/item/pictures/#{model.id}"
+    nil
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -21,9 +24,10 @@ class ItemPictureUploader < CarrierWave::Uploader::Base
      %w(jpg jpeg gif png)
    end
 
-   # end
+  # Do not change the filename
    def filename
-     "#{secure_token(10)}.#{file.extension}" if original_filename.present?
+     # 不能出现model.id,因为保存图片时model.id未必生成
+     "uploads/#{model.imageable.class.to_s.pluralize.underscore}/#{model.imageable.id}/pictures/#{secure_token(10)}.#{file.extension.downcase}" if original_filename.present?
    end
 
    protected

@@ -1,16 +1,44 @@
-<div id="item_gallery">
-  <% for picture in @pictures %>
-    <div class="picture">
-      <%= image_tag picture.image_url if not picture.image.blank? %>
-      <div class="actions">
-        <%= link_to "remove", item_picture_path(@item,picture), 'data-confirm' => 'Are you sure?', :method => :delete %>
+<div class="row-fluid">
+  <div class="span9">
+    <div class="box">
+      <div id="item_gallery">
+        <% for picture in @pictures %>
+          <div class="picture">
+            <%= image_tag picture.image_url if not picture.image.blank? %>
+            <div class="actions">
+              <%= link_to "remove", item_picture_path(@item,picture), 'data-confirm' => 'Are you sure?', :method => :delete %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+      <div id="item_gallery_form">
+        <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
+          <%= render :partial => "form", :locals => {:f => f} %>
+        <%end %>
       </div>
     </div>
-  <% end %>
-  <div class="clear"></div>
+  </div>
+  <div class="span3">
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
+    </div>
+    <%= render 'items/sidebar_for_items' %>
+  </div>
 </div>
-<div id="item_gallery_form">
-  <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
-    <%= render :partial => "form", :locals => {:f => f} %>
-  <%end %>
-</div>
+<% content_for :javascripts do %>
+  <script>
+    $(function(){
+      $('#item_gallery').masonry({
+        // options
+        itemSelector : '.item',
+        columnWidth : 210
+      });
+    });
+  </script>
+<% end %>

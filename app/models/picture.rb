@@ -12,9 +12,11 @@
 #
 
 class Picture < ActiveRecord::Base
-  attr_accessible :image
+
+  attr_accessible :image, :image_cache
 
   belongs_to :imageable, :polymorphic => true
 
-  mount_uploader :image, ItemPictureUploader
+  mount_uploader :image, PictureUploader
+
 end

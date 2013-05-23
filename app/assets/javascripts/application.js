@@ -15,10 +15,11 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require masonry/jquery.masonry
 //
-//= require plugin 
+//= require plugin
 //
 //= require front
-//= require items 
+//= require items
 
 

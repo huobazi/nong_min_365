@@ -9,9 +9,11 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 1.3.0'
 end
+
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem "font-awesome-sass-rails", "~> 3.0.2.2"
 gem 'jquery_mobile_rails', '1.3.0'
+gem "masonry-rails", "~> 0.2.0"
 
 gem "json", "~> 1.7.7"
 
@@ -69,10 +71,10 @@ gem "high_voltage", "~> 1.2.1"
 # Store files to qiniu
 gem "qiniu-rs", "~> 3.4.2"
 gem "carrierwave", "~> 0.8.0"
-gem "carrierwave-qiniu", "~> 0.0.4"
+gem "carrierwave-qiniu", "~> 0.0.5"
 
 group :development do
-  # Deploy with Mina 
+  # Deploy with Mina
   gem "mina", "~> 0.2.1"
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
