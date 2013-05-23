@@ -1,6 +1,18 @@
 <div class="row-fluid">
   <div class="span9">
-    <%= render 'form' %>
+    <ul class="nav nav-tabs" id="editTab">
+      <li class="active">
+        <a href="#">编辑基本信息</a>
+      </li>
+      <li>
+        <%= link_to '编辑图片', item_pictures_path(@item)%>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
   <div class="span3">
     <div id="tag_cloud">

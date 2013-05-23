@@ -198,19 +198,37 @@
         margin-bottom:10px
       }
       div.body{
-        padding: 6px 6px;
+        padding: 6px 0px;
         line-height: 160%;
         pre{
           font-size: 16px;
           margin: 0;
         }
       }
+      div.gallery-back{
+        background-color: #f7f7f7;
+      }
+      div#item_gallery{
+        padding: 0 10px 10px 10px;
+        div.picture {
+          background-color: #fff;
+          margin: 10px 0 0 0;
+          padding: 10px;
+          width: 187px;
+          float: left;
+          div.actions{
+            margin: 10px 0 0 0;
+            text-align:center;
+          }
+        }
+      }
       div.opts{
+        margin: 10px 0;
         text-align:right;
         a{
           i{
             margin-right: 3px;
-          } 
+          }
         }
       }
     }

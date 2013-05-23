@@ -24,9 +24,38 @@
         </li>
       </ul>
       <div id="line"></div>
-      <div class="body">
-        <pre><%= @item.body %></pre>
+      <div class="body radius">
+        <pre class="radius"><%= @item.body %></pre>
     </div>
+    <% if @item.pictures.size > 0 %>
+    <div class="box gallery-back radius">
+      <div id="item_gallery">
+        <% for picture in @item.pictures %>
+          <div class="picture">
+            <%= image_tag picture.image_url if not picture.image.blank? %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% content_for :javascripts do %>
+      <script type="text/javascript">
+        $(function(){
+          var $container = $('#item_gallery');
+          $container.imagesLoaded( function(){
+            $container.masonry({
+              itemSelector: '.picture',
+              gutterWidth: 10,
+              isFitWidth: true,
+              animationOptions: {
+                duration: 400
+              }
+            });
+          });
+
+        });
+      </script>
+      <% end %>
+    <% end %>
     <div class="opts">
       <%= link_to raw('<i class="icon-refresh"></i>刷新'), refresh_item_path(@item), :method => :put, :class => 'btn btn-small btn-success' %>
       <% if can? :edit, @item %> 
@@ -66,10 +95,10 @@
     $(document).ready(function(){
       $.ajax({
         url: '<%= show_hits_item_path %>',
-      type: "GET",
-      success: function(data, textStatus, jqXHR) {
-        $('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
-      }
+        type: "GET",
+        success: function(data, textStatus, jqXHR) {
+          $('#item-visit-counts').text(jqXHR.getResponseHeader('X-NM365-Item-Hits'));
+        }
       });
     });
   </script>

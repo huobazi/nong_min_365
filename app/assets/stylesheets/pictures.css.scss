@@ -4,10 +4,21 @@
 
 
 .pictures-controller {
-  .picture{
-    /*width: 325px;*/
-    width: 210px;
-    margin: 10px;
-    float: left;
+  div.gallery-back{
+    background-color: #f7f7f7;
+  }
+  div#item_gallery{
+    padding: 0 10px 10px 10px;
+    div.picture {
+      background-color: #fff;
+      margin: 10px 0 0 0;
+      padding: 10px;
+      width: 197px;
+      float: left;
+      div.actions{
+        margin: 10px 0 0 0;
+        text-align:center;
+      }
+    }
   }
 }

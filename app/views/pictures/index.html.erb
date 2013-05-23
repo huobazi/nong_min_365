@@ -1,21 +1,35 @@
 <div class="row-fluid">
   <div class="span9">
-    <div class="box">
-      <div id="item_gallery">
-        <% for picture in @pictures %>
-          <div class="picture">
-            <%= image_tag picture.image_url if not picture.image.blank? %>
-            <div class="actions">
-              <%= link_to "remove", item_picture_path(@item,picture), 'data-confirm' => 'Are you sure?', :method => :delete %>
-            </div>
+    <ul class="nav nav-tabs" id="editTab">
+      <li>
+        <%= link_to '编辑基本信息', edit_item_path(@item)%>
+      </li>
+      <li class="active">
+        <a href="#">编辑图片</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+        <div class="box gallery-back">
+          <div id="item_gallery">
+            <% for picture in @pictures %>
+              <div class="picture box">
+                <%= image_tag picture.image_url if not picture.image.blank? %>
+                <% if can? :destroy, @item %> 
+                  <div class="actions">
+                    <%= link_to raw('<i class="icon-trash"></i>删除'), item_picture_path(@item, picture), :method => :delete, :confirm => "确定删除这张照片？",:class => 'btn btn-small btn-danger' %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="clear"></div>
-      <div id="item_gallery_form">
-        <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
-          <%= render :partial => "form", :locals => {:f => f} %>
-        <%end %>
+          <div class="clear"></div>
+          <div id="item_gallery_form">
+            <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
+              <%= render :partial => "form", :locals => {:f => f} %>
+            <%end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,13 +46,20 @@
   </div>
 </div>
 <% content_for :javascripts do %>
-  <script>
+  <script type="text/javascript">
     $(function(){
-      $('#item_gallery').masonry({
-        // options
-        itemSelector : '.item',
-        columnWidth : 210
+      var $container = $('#item_gallery');
+      $container.imagesLoaded( function(){
+        $container.masonry({
+          itemSelector: '.picture',
+          gutterWidth: 10,
+          isFitWidth: true,
+          animationOptions: {
+            duration: 400
+          }
+        });
       });
+
     });
   </script>
 <% end %>

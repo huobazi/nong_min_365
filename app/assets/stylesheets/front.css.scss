@@ -1,5 +1,9 @@
-.clear{clear:both;}
 div.bg-white{background-color: $white;}
+.radius{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
 fieldset { margin-bottom: 0;}
 fieldset legend { font-size: 16px; font-weight: bold;}
 .pagination { margin: 0; margin-top: 10px; }
