@@ -12,6 +12,7 @@ namespace :unicorn do
     invoke :sudo
     queue 'echo "-----> Relocate unicorn script file"'
     queue echo_cmd %{sudo cp "#{config_path}/unicorn.sh" "#{unicorn_script}" && sudo chown #{unicorn_user}:#{unicorn_group} #{unicorn_script} && sudo chmod u+x #{unicorn_script}}
+    queue echo_cmd "sudo update-rc.d -f #{unicorn_service_name} remove"
     queue echo_cmd "sudo update-rc.d -f #{unicorn_service_name} defaults"
     queue check_ownership unicorn_user, unicorn_group, unicorn_script
   end
