@@ -38,6 +38,8 @@ zh-CN:
         town: '所在乡/镇/街道'
         village: '所在村/社区'
         tag_list: '标签'
+      item_picture:
+        image: '图片'
       mail_message:
         name: '姓名'
         email: '邮件'

@@ -54,6 +54,8 @@ class Item < ActiveRecord::Base
   belongs_to :town     , :class_name => 'ChineseRegion' , :foreign_key => 'town_code'     , :inverse_of => :town_items     , :counter_cache => 'town_items_count'
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
+  has_many :pictures, :as => :imageable
+
   # validations ...............................................................
   validates :title, :presence => true, :length => { :in => 4..30 }
   validates :amount, :presence => true

@@ -9,3 +9,5 @@ SiteSettings.save_default(:google_search_uniq_id, '016513491848168237899:swsyxn_
 SiteSettings.save_default(:google_api_key, 'N/A')
 SiteSettings.save_default(:smsbao_uname, 'N/A')
 SiteSettings.save_default(:smsbao_pwd, 'N/A')
+SiteSettings.save_default(:qiniu_access_key, 'N/A')
+SiteSettings.save_default(:qiniu_secret_key, 'N/A')

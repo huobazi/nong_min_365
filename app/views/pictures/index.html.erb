@@ -1,0 +1,16 @@
+<div id="item_gallery">
+  <% for picture in @pictures %>
+    <div class="picture">
+      <%= image_tag picture.image_url if not picture.image.blank? %>
+      <div class="actions">
+        <%= link_to "remove", item_picture_path(@item,picture), 'data-confirm' => 'Are you sure?', :method => :delete %>
+      </div>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+<div id="item_gallery_form">
+  <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
+    <%= render :partial => "form", :locals => {:f => f} %>
+  <%end %>
+</div>

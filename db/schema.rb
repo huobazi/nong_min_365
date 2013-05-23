@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410030452) do
+ActiveRecord::Schema.define(:version => 20130523084021) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(:version => 20130410030452) do
   end
 
   add_index "items", ["category_id", "refresh_at", "user_id", "province_code", "city_code", "county_code", "town_code", "village_code", "xtype"], :name => "index_on_items"
+
+  create_table "pictures", :force => true do |t|
+    t.string   "image"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "pictures", ["imageable_id", "imageable_type"], :name => "index_pictures_on_imageable_id_and_imageable_type"
 
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false

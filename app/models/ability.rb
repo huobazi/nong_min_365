@@ -12,12 +12,11 @@ class Ability
       # admin or founder
       can :manage, :all
     elsif user.has_role?(:member)
-      # Item 
-      can :create, Item 
+      # Item
+      can :create, Item
       can :update, Item do |item|
         (item.user_id == user.id)
       end
-      
       #can :destroy, Item do ||
         #(item.user_id == user.id)
       #end
@@ -34,7 +33,7 @@ class Ability
   def anonymous_basic_access
     can :read, Item
     can :create, Item
-    can :tags, Item 
+    can :tags, Item
     can :show_hits, Item
   end
 end
