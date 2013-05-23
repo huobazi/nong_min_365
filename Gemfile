@@ -66,6 +66,11 @@ gem 'mobylette', '~> 3.3.2'
 # For stack pages
 gem "high_voltage", "~> 1.2.1"
 
+# Store files to qiniu
+gem "qiniu-rs", "~> 3.4.2"
+gem "carrierwave", "~> 0.8.0"
+gem "carrierwave-qiniu", "~> 0.0.4"
+
 group :development do
   # Deploy with Mina 
   gem "mina", "~> 0.2.1"
