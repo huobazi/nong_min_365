@@ -20,29 +20,29 @@ namespace :spider do
     $nx28_host = 'nx28.com'
     $user_id = -1
 
-    $qiniu_acc_key = SiteSettings.qiniu_access_key
-    $qiniu_sec_key = SiteSettings.qiniu_secret_key
-    $qiniu_bucket  = 'nongmin365'
+    #$qiniu_acc_key = SiteSettings.qiniu_access_key
+    #$qiniu_sec_key = SiteSettings.qiniu_secret_key
+    #$qiniu_bucket  = 'nongmin365'
 
-    ::Qiniu::RS.establish_connection! :access_key => $qiniu_acc_key,
-      :secret_key => $qiniu_sec_key,
-      :block_size => 4*1024*1024
+    #::Qiniu::RS.establish_connection! :access_key => $qiniu_acc_key,
+      #:secret_key => $qiniu_sec_key,
+      #:block_size => 4*1024*1024
 
-    def store_to_qiniu(local_file_path, key)
-      token_opts = {
-        :scope => $qiniu_bucket, :expires_in => 3600 # https://github.com/qiniu/ruby-sdk/pull/15
-      }
-      uptoken = ::Qiniu::RS.generate_upload_token(token_opts)
-      opts = {
-        :uptoken            => uptoken,
-        :file               => local_file_path,
-        :key                => key,
-        :bucket             => $qiniu_bucket,
-        :enable_crc32_check => true
-      }
+    #def store_to_qiniu(local_file_path, key)
+      #token_opts = {
+        #:scope => $qiniu_bucket, :expires_in => 3600 # https://github.com/qiniu/ruby-sdk/pull/15
+      #}
+      #uptoken = ::Qiniu::RS.generate_upload_token(token_opts)
+      #opts = {
+        #:uptoken            => uptoken,
+        #:file               => local_file_path,
+        #:key                => key,
+        #:bucket             => $qiniu_bucket,
+        #:enable_crc32_check => true
+      #}
 
-      ::Qiniu::RS.upload_file opts
-    end
+      #::Qiniu::RS.upload_file opts
+    #end
 
     # Converts string encoding
     def encode_string(str, src, dst)
@@ -229,6 +229,11 @@ namespace :spider do
           return
         end
 
+        if(hash[:image] and hash[:image].gsub(' ','').length == 0)
+          puts "No images"
+          #return
+        end
+
         item               = Item.new
         item.user_id       = $user_id
         item.title         = hash[:title]
@@ -252,24 +257,25 @@ namespace :spider do
         if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
           image_src = hash[:image].gsub("'", "").gsub(' ','')
           image_url = "http://#{$nx28_host}#{image_src}"
-          image_name = image_src.gsub('/uploads/','')
-          local_dir = "tmp/nx28"
-          local_file_path = "#{local_dir}/#{image_name}"
+          #image_name = image_src.gsub('/uploads/','')
+          #local_dir = "tmp/nx28"
+          #local_file_path = "#{local_dir}/#{image_name}"
 
-          FileUtils.mkdir_p local_dir
-          puts "Download image  #{image_url}"
-          file_data = crawl_get(image_url)
+          #FileUtils.mkdir_p local_dir
+          #puts "Download image  #{image_url}"
+          #file_data = crawl_get(image_url)
 
-          file = File.new(local_file_path, "wb")
-          file.write(file_data)
-          file.close
+          #file = File.new(local_file_path, "wb")
+          #file.write(file_data)
+          #file.close
 
-          file_key_to_qiniu = "uploads/items/#{item.id}/pictures/#{image_name}"
-          puts "Store to qiniu #{file_key_to_qiniu}"
-          store_to_qiniu(local_file_path, file_key_to_qiniu)
+          #file_key_to_qiniu = "uploads/items/#{item.id}/pictures/#{image_name}"
+          #puts "Store to qiniu #{file_key_to_qiniu}"
+          #store_to_qiniu(local_file_path, file_key_to_qiniu)
 
           pic = Picture.new
-          pic.image = file_key_to_qiniu
+          #pic.image = file_key_to_qiniu
+          pic.remote_image_url = image_url
           pic.imageable_id = item.id
           pic.imageable_type = 'Item'
           pic.save!
