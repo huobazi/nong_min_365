@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
-  caches_action :index, :expires_in => 10.minutes, :layout => false
   caches_action :desktop, :expires_in => 10.minutes, :layout => false
   caches_action :search, :expires_in => 60.minutes, :layout => false
 
