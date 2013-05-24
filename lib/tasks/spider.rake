@@ -20,30 +20,6 @@ namespace :spider do
     $nx28_host = 'nx28.com'
     $user_id = -1
 
-    #$qiniu_acc_key = SiteSettings.qiniu_access_key
-    #$qiniu_sec_key = SiteSettings.qiniu_secret_key
-    #$qiniu_bucket  = 'nongmin365'
-
-    #::Qiniu::RS.establish_connection! :access_key => $qiniu_acc_key,
-      #:secret_key => $qiniu_sec_key,
-      #:block_size => 4*1024*1024
-
-    #def store_to_qiniu(local_file_path, key)
-      #token_opts = {
-        #:scope => $qiniu_bucket, :expires_in => 3600 # https://github.com/qiniu/ruby-sdk/pull/15
-      #}
-      #uptoken = ::Qiniu::RS.generate_upload_token(token_opts)
-      #opts = {
-        #:uptoken            => uptoken,
-        #:file               => local_file_path,
-        #:key                => key,
-        #:bucket             => $qiniu_bucket,
-        #:enable_crc32_check => true
-      #}
-
-      #::Qiniu::RS.upload_file opts
-    #end
-
     # Converts string encoding
     def encode_string(str, src, dst)
       if str.respond_to?(:encode)
@@ -146,7 +122,8 @@ namespace :spider do
         # always executed
       end
 
-      items_link_list.slice 0,22
+      #items_link_list.slice 0,22
+      items_link_list.slice
     end
 
     def get_item_pic(body)
@@ -231,7 +208,7 @@ namespace :spider do
 
         if(hash[:image] and hash[:image].gsub(' ','').length == 0)
           puts "No images"
-          #return
+         #return
         end
 
         item               = Item.new
