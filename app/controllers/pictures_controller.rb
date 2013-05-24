@@ -6,19 +6,27 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = @item.pictures
-    @picture = Picture.new
 
     respond_to do |wants|
       wants.html # index.html.erb
-      wants.xml  { render :xml => @pictures }
+    end
+  end
+
+  def new
+    @pictures = @item.pictures
+    #@picture = @item.pictures.build
+    @picture = Picture.new
+
+    respond_to do |wants|
+      wants.html # new.html.erb
     end
   end
 
   def create
     if @item.pictures.size >= 6
       respond_to do |wants|
-        flash[:error] = '每条信息最多允许上传六张图,如果您想更新某图片，可将其先删除。'
-        wants.html { redirect_to item_pictures_path(@item) }
+        flash[:error] = '每条信息最多允许上传六张图,如果您想更新某图片，可将其先删除,然后再上传新图片。'
+        wants.html { redirect_to new_item_picture_path(@item) }
       end
       return
     end
@@ -28,7 +36,7 @@ class PicturesController < ApplicationController
     respond_to do |wants|
       if @picture.save
         flash[:notice] = '图片上传成功'
-        wants.html { redirect_to item_pictures_path(@item) }
+        wants.html { redirect_to new_item_picture_path(@item) }
       else
         @pictures = Picture.where({:imageable_id => @item.id, :imageable_type => 'Item'})
         wants.html { render :action => "index" }

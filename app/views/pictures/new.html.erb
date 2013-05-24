@@ -15,7 +15,7 @@
             <% for picture in @pictures %>
               <div class="picture box">
                 <%= image_tag picture.image_url if not picture.image.blank? %>
-                <% if can? :destroy, @item %> 
+                <% if can? :destroy, picture %>
                   <div class="actions">
                     <%= link_to raw('<i class="icon-trash"></i>删除'), item_picture_path(@item, picture), :method => :delete, :confirm => "确定删除这张照片？",:class => 'btn btn-small btn-danger' %>
                   <% end %>
@@ -24,11 +24,13 @@
             <% end %>
           </div>
           <div class="clear"></div>
-          <div id="item_gallery_form">
-            <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
-              <%= render :partial => "form", :locals => {:f => f} %>
-            <%end %>
-          </div>
+          <% if can? :create, @item.pictures.build %>
+            <div id="item_gallery_form">
+              <%= simple_form_for [@item, @picture], :html => {:multipart => true} do |f| %>
+                <%= render :partial => "form", :locals => {:f => f} %>
+              <%end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -55,7 +57,7 @@
           gutterWidth: 10,
           isFitWidth: true,
           animationOptions: {
-            duration: 400
+          duration: 400
           }
         });
       });
@@ -63,3 +65,4 @@
     });
   </script>
 <% end %>
+            <div id="item_gallery_form">

@@ -7,6 +7,7 @@ NongMin365::Application.routes.draw do
 
   root :to => 'home#index'
   get 'search' => 'home#search', :as => :search
+  get 'desktop' => 'home#desktop', :as => :desktop
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
@@ -26,7 +27,7 @@ NongMin365::Application.routes.draw do
   get 'tags/:tag' => 'items#tags', :as => :items_tags
   resources :sessions, :only =>[:create]
   resources :items do
-    resources :pictures, :only => [:index, :create, :destroy]
+    resources :pictures, :only => [:new, :create, :destroy]
     collection do
       get '(c:category)/(t:xtype)/(a:area)/(p:page)', :action => :index, :as => :condition_list
     end
