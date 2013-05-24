@@ -10,7 +10,7 @@ group :assets do
   gem 'uglifier', '~> 1.3.0'
 end
 
-gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'bootstrap-sass', '~> 2.3.1.2'
 gem "font-awesome-sass-rails", "~> 3.0.2.2"
 gem 'jquery_mobile_rails', '1.3.0'
 gem "masonry-rails", "~> 0.2.0"
