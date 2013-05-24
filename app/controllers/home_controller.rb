@@ -4,8 +4,9 @@ class HomeController < ApplicationController
   caches_action :desktop, :expires_in => 10.minutes, :layout => false
   caches_action :search, :expires_in => 60.minutes, :layout => false
 
-  def index
-    @page_tiele = '首页'
+  def desktop
+    @page_tiele = '广场'
+    drop_breadcrumb(@page_tiele, desktop_path)
 
     respond_to do |format|
       format.html { }
@@ -15,18 +16,19 @@ class HomeController < ApplicationController
     end
   end
 
-  def desktop
-    @page_tiele = '图片广场'
-    drop_breadcrumb(@page_tiele, desktop_path)
+  def index
+    @page_tiele = '首页'
+    page_size   = 9
+    page_index  = params[:page]
 
-    @pictures = Picture.where({:imageable_type => 'Item'}).order( 'id desc' )
+    @items = Item.includes(:primary_picture).where('primary_picture_id > 0').order(' id desc ').page(page_index).per(page_size)
 
     respond_to do |wants|
       wants.html # index.html.erb
     end
   end
 
-  def search 
+  def search
     @page_title = '产品搜索'
     drop_breadcrumb('产品搜索', search_path)
 

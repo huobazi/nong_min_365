@@ -27,6 +27,7 @@ gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
 gem "nokogiri", "~> 1.5.9"
 gem 'jquery-rails', '~> 2.2.1'
+gem "jquery-migrate-rails", "~> 1.1.1"
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'
 gem 'simple_form', '~> 2.0.4'

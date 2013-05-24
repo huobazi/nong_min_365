@@ -11,11 +11,15 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-migrate-min
 //= require jquery_ujs
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
+//
 //= require masonry/jquery.masonry
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min
 //
 //= require plugin
 //
