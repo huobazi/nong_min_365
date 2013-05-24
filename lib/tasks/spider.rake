@@ -123,7 +123,7 @@ namespace :spider do
       end
 
       #items_link_list.slice 0,22
-      items_link_list.slice
+      items_link_list
     end
 
     def get_item_pic(body)
