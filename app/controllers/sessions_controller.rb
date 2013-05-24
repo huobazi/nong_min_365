@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
 
   def new
     @page_title = '用户登录'
-    fresh_when 
-    #expires_in 10.minutes
+    fresh_when
+    expires_in 10.minutes
   end
 
   # POST /sessions
