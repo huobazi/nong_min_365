@@ -1,16 +1,48 @@
 # -*- encoding : utf-8 -*-
 require 'typhoeus'
-begin 
+begin
   require 'iconv'
 rescue ::LoadError
 end
+begin
+  require 'qiniu-rs'
+rescue LoadError
+  raise "You dot't have the 'qiniu-rs' gem installed"
+end
+
+require 'fileutils'
+
 
 namespace :spider do
-  desc 'Crawl nx28 items' 
+  desc 'Crawl nx28 items'
   task :nx28 => [:environment] do
 
     $nx28_host = 'nx28.com'
     $user_id = -1
+
+    $qiniu_acc_key = SiteSettings.qiniu_access_key
+    $qiniu_sec_key = SiteSettings.qiniu_secret_key
+    $qiniu_bucket  = 'nongmin365'
+
+    ::Qiniu::RS.establish_connection! :access_key => $qiniu_acc_key,
+      :secret_key => $qiniu_sec_key,
+      :block_size => 4*1024*1024
+
+    def store_to_qiniu(local_file_path, key)
+      token_opts = {
+        :scope => $qiniu_bucket, :expires_in => 3600 # https://github.com/qiniu/ruby-sdk/pull/15
+      }
+      uptoken = ::Qiniu::RS.generate_upload_token(token_opts)
+      opts = {
+        :uptoken            => uptoken,
+        :file               => local_file_path,
+        :key                => key,
+        :bucket             => $qiniu_bucket,
+        :enable_crc32_check => true
+      }
+
+      ::Qiniu::RS.upload_file opts
+    end
 
     # Converts string encoding
     def encode_string(str, src, dst)
@@ -22,7 +54,7 @@ namespace :spider do
         rescue
           raise ::RuntimeError, "Your installation does not support iconv (needed for utf8 conversion)"
         end
-      end      
+      end
     end
 
     def encode_text(input)
@@ -42,12 +74,12 @@ namespace :spider do
             "User-Agent"      => "Mozilla/5.0 (Windows NT 5.1; rv:6.0) Gecko/20100101 Firefox/6.0",
             "Referer"         => "http://#{$nx28_host}",
           "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "Accept-Charset"  => "utf-8;q=0.7,*;q=0.7",
-          "Connection"      => "keep-alive",
-          "Accept-Language" => "zh-cn,zh;q=0.5",
-          "Pragma "         => "no-cache",
-          "Cache-Control  " => "no-cache",
-          "Cookie"          => cookie_text
+            "Accept-Charset"  => "utf-8;q=0.7,*;q=0.7",
+            "Connection"      => "keep-alive",
+            "Accept-Language" => "zh-cn,zh;q=0.5",
+            "Pragma "         => "no-cache",
+            "Cache-Control  " => "no-cache",
+            "Cookie"          => cookie_text
           },
           :timeout => 20000, # milliseconds
           #:params => {:field1 => "a field"}
@@ -88,7 +120,7 @@ namespace :spider do
       end
 
       puts "Get #{dest_categories.size} categories OK."
-      
+
       dest_categories
     end
 
@@ -117,6 +149,14 @@ namespace :spider do
       items_link_list.slice 0,22
     end
 
+    def get_item_pic(body)
+      resunt = ''
+      #flag_text = "var imagesSrc = '/uploads/m_1366343466.jpeg ';"
+      result = body.scan(/\/uploads\/[\w\W]*\s/)[0].split(';')[0]
+
+      result
+    end
+
     def populate_item(url, category_id, xtype)
       item = {}
       begin
@@ -132,6 +172,8 @@ namespace :spider do
 
         html = crawl_get(url)
         doc = Nokogiri::HTML(html,nil,'gbk')
+
+        item[:image]         = get_item_pic(doc.to_s)
 
         title = doc.css('title')[0].content.gsub('-农享网','')
         amount = doc.css('font[color="#FF0000"]')[0].content
@@ -167,6 +209,7 @@ namespace :spider do
         item[:county_code]   = (ChineseRegion.find_by_name item[:xian]).code
         item[:town_code]     = (ChineseRegion.find_by_name item[:xiang]).code
         item[:village_code]  = (ChineseRegion.find_by_name item[:cun]).code
+
 
       rescue Exception => e
         # exception
@@ -205,6 +248,32 @@ namespace :spider do
         item.tag_list      = hash[:sheng]
 
         item.save!
+
+        if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
+          image_src = hash[:image].gsub("'", "").gsub(' ','')
+          image_url = "http://#{$nx28_host}#{image_src}"
+          image_name = image_src.gsub('/uploads/','')
+          local_dir = "tmp/nx28"
+          local_file_path = "#{local_dir}/#{image_name}"
+
+          FileUtils.mkdir_p local_dir
+          puts "Download image  #{image_url}"
+          file_data = crawl_get(image_url)
+
+          file = File.new(local_file_path, "wb")
+          file.write(file_data)
+          file.close
+
+          file_key_to_qiniu = "uploads/items/#{item.id}/pictures/#{image_name}"
+          puts "Store to qiniu #{file_key_to_qiniu}"
+          store_to_qiniu(local_file_path, file_key_to_qiniu)
+
+          pic = Picture.new
+          pic.image = file_key_to_qiniu
+          pic.imageable_id = item.id
+          pic.imageable_type = 'Item'
+          pic.save!
+        end
 
       rescue Exception => e
         #exception

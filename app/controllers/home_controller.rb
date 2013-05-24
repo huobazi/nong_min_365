@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     @page_tiele = '图片广场'
     drop_breadcrumb(@page_tiele, desktop_path)
 
-    @pictures = Picture.where({:imageable_type => 'Item'}).order( 'imageable_id desc' )
+    @pictures = Picture.where({:imageable_type => 'Item'}).order( 'id desc' )
 
     respond_to do |wants|
       wants.html # index.html.erb
