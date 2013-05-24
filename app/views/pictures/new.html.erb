@@ -17,9 +17,20 @@
                 <%= image_tag picture.image_url if not picture.image.blank? %>
                 <% if can? :destroy, picture %>
                   <div class="actions">
-                    <%= link_to raw('<i class="icon-trash"></i>删除'), item_picture_path(@item, picture), :method => :delete, :confirm => "确定删除这张照片？",:class => 'btn btn-small btn-danger' %>
-                  <% end %>
-                </div>
+                    <%= link_to '', set_to_priamary_item_picture_path(@item, picture),
+                      :method => :put,
+                      :title =>'设为主图片',
+                      :class => 'button ta' %>
+                    <%= link_to '', item_picture_path(@item, picture),
+                      :method => :delete,
+                      :confirm => "确定删除这张照片？",
+                      :title =>'删除',
+                      :class => 'button tb' %>
+                  </div>
+                <% end %>
+                <% if picture.priamary? %>
+                  <div title='这副图片是主图片' class="cover">封</div>
+                <%end %>
               </div>
             <% end %>
           </div>
@@ -50,19 +61,21 @@
 <% content_for :javascripts do %>
   <script type="text/javascript">
     $(function(){
+      $('.picture').on('mouseover',function(){$(this).addClass('on');})
+      $('.picture').on('mouseout',function(){$(this).removeClass('on');})
       var $container = $('#item_gallery');
-      $container.imagesLoaded( function(){
-        $container.masonry({
-          itemSelector: '.picture',
-          gutterWidth: 10,
-          isFitWidth: true,
-          animationOptions: {
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector: '.picture',
+        gutterWidth: 10,
+        isFitWidth: true,
+        animationOptions: {
           duration: 400
-          }
-        });
+        }
       });
+    });
 
     });
   </script>
 <% end %>
-            <div id="item_gallery_form">
+<div id="item_gallery_form">

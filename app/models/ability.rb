@@ -19,13 +19,12 @@ class Ability
         (item.user_id == user.id)
       end
 
-      can [:create, :destroy], Picture, :imageable => { :user_id => user.id }
+      can [:create, :set_to_priamary, :destroy], Picture, :imageable => { :user_id => user.id }
 
     else
       # banned or unknown situation
       cannot :manage, :all
     end
-
 
     anonymous_basic_access
   end

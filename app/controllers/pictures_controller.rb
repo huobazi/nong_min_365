@@ -33,14 +33,11 @@ class PicturesController < ApplicationController
 
     @picture = @item.pictures.build(params[:picture])
 
-    respond_to do |wants|
-      if @picture.save
-        flash[:notice] = '图片上传成功'
-        wants.html { redirect_to new_item_picture_path(@item) }
-      else
-        @pictures = Picture.where({:imageable_id => @item.id, :imageable_type => 'Item'})
-        wants.html { render :action => "index" }
-      end
+    if @picture.save
+      flash[:notice] = '图片上传成功'
+      redirect_to new_item_picture_path(@item)
+    else
+      @pictures = Picture.where({:imageable_id => @item.id, :imageable_type => 'Item'})
     end
   end
 
@@ -48,9 +45,18 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     @picture.destroy
 
-    respond_to do |wants|
-      wants.html { redirect_to item_pictures_path(@item) }
-    end
+    flash[:notice] = '删除图片成功'
+    redirect_to new_item_picture_path(@item)
+
+  end
+
+  def set_to_priamary
+    @picture = Picture.find(params[:id])
+    @picture.set_to_priamary
+
+    flash[:notice] = '设置主图片成功'
+    redirect_to new_item_picture_path(@item)
+
   end
 
   private

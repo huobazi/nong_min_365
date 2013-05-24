@@ -27,7 +27,11 @@ NongMin365::Application.routes.draw do
   get 'tags/:tag' => 'items#tags', :as => :items_tags
   resources :sessions, :only =>[:create]
   resources :items do
-    resources :pictures, :only => [:new, :create, :destroy]
+    resources :pictures, :only => [:new, :create, :destroy] do
+      member do
+        put :set_to_priamary
+      end
+    end
     collection do
       get '(c:category)/(t:xtype)/(a:area)/(p:page)', :action => :index, :as => :condition_list
     end

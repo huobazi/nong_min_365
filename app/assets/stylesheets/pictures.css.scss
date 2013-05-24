@@ -16,8 +16,46 @@
       width: 197px;
       float: left;
       div.actions{
+        display: none;
         margin: 10px 0 0 0;
         text-align:center;
+        position: absolute;
+        top: 9px;
+        right: 9px;
+        width: 60px;
+        background: #000;
+        z-index: 7;
+        a.button{
+          float: left;
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          background: url("http://r.ph.126.net/photo/image/album/icon-btn.png") no-repeat 0 0;
+          &:hover{
+            background-color: #25a7ed;
+          }
+        }
+        a.ta{
+          background-position: -56px -41px;
+        }
+        a.tb{
+          background-position: -25px -41px;
+        }
+      }
+      div.cover{
+        left: -2px;
+        position: absolute;
+        top: -2px;
+        width: 60px;
+        height: 60px;
+        background: url("http://r.ph.126.net/photo/image/album/icon-btn.png") no-repeat -34px -104px;
+        text-indent: -9999px;
+        z-index: 6;
+      }
+    }
+    div.on{
+      div.actions{
+        display: block;
       }
     }
   }

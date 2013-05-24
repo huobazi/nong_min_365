@@ -55,6 +55,7 @@ class Item < ActiveRecord::Base
   belongs_to :village  , :class_name => 'ChineseRegion' , :foreign_key => 'village_code'  , :inverse_of => :village_items  , :counter_cache => 'village_items_count'
 
   has_many :pictures, :as => :imageable
+  has_one  :primary_picture, :class_name => 'Picture', :primary_key => 'primary_picture_id', :foreign_key => 'id'
 
   # validations ...............................................................
   validates :title, :presence => true, :length => { :in => 4..30 }
@@ -80,8 +81,11 @@ class Item < ActiveRecord::Base
   scope :latest, order(' refresh_at DESC , id DESC ')
 
   # additional config .........................................................
+
   # class methods .............................................................
+
   # public instance methods ...................................................
+
   def to_param
     "#{id} #{slug}".parameterize
   end
