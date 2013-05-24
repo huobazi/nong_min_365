@@ -58,7 +58,7 @@ class Item < ActiveRecord::Base
   has_one  :primary_picture, :class_name => 'Picture', :primary_key => 'primary_picture_id', :foreign_key => 'id'
 
   # validations ...............................................................
-  validates :title, :presence => true, :length => { :in => 4..30 }
+  validates :title, :presence => true, :length => { :in => 3..30 }
   validates :amount, :presence => true
   validates :category_id, :presence => { :message => '必须选择' }
   #validates :xtype, :presence => { :message => '必须选择' }
