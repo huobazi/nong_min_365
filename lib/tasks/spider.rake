@@ -123,7 +123,7 @@ namespace :spider do
       end
 
       #items_link_list.slice 0,22
-      items_link_list
+      items_link_list.slice 0,50
     end
 
     def get_item_pic(body)
@@ -207,8 +207,8 @@ namespace :spider do
         end
 
         if(hash[:image] and hash[:image].gsub(' ','').length == 0)
-          puts "No images"
-         #return
+          puts "木有图片....."
+          #return
         end
 
         item               = Item.new

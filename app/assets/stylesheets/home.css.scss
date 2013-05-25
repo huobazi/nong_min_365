@@ -197,23 +197,6 @@
         padding: 10px;
         width: 197px;
         float: left;
-        /*阴影 不兼容IE9以下版本*/
-        -webkit-box-shadow:0 1px 5px rgba(34,25,25,0.4);
-        -moz-box-shadow:0 1px 5px rgba(34,25,25,0.4);
-        -ms-box-shadow:0 1px 5px rgba(34,25,25,0.4);
-        -o-box-shadow:0 1px 5px rgba(34,25,25,0.4);
-        box-shadow:0 1px 5px rgba(34,25,25,0.4);
-
-        /*圆角 不兼容IE9以下版本*/
-        -webkit-border-radius:2px;
-        -moz-border-radius:2px;
-        -ms-border-radius:2px;
-        -o-border-radius:2px;
-        border-radius:2px;
-        div.actions{
-          margin: 10px 0 0 0;
-          text-align:center;
-        }
       }
     }
   }
