@@ -6,6 +6,7 @@
  *= require jquery.mobile
  */
 
+.ui-mobile img {max-width: 100%;}
 
 .text-align-center {
   text-align: center;
@@ -121,5 +122,19 @@ div#show-content{
     div.body{
 
     }
+  }
+}
+
+div.gallery-back{
+  background-color: #f7f7f7;
+}
+div#item_gallery{
+  padding: 0 10px 10px 10px;
+  div.picture {
+    background-color: #fff;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    width: 197px;
+    float: left;
   }
 }

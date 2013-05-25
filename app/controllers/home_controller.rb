@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     drop_breadcrumb(@page_tiele, desktop_path)
 
     respond_to do |format|
-      format.html { }
+      format.html
       format.mobile {
         @categories = Category.get_cached_all
       }
@@ -20,10 +20,14 @@ class HomeController < ApplicationController
     page_size   = 9
     page_index  = params[:page]
 
-    @items = Item.includes(:primary_picture).where('primary_picture_id > 0').order(' id desc ').page(page_index).per(page_size)
 
-    respond_to do |wants|
-      wants.html # index.html.erb
+    respond_to do |format|
+      format.html{
+        @items = Item.includes(:primary_picture).where('primary_picture_id > 0').order(' id desc ').page(page_index).per(page_size)
+      }
+      format.mobile {
+        redirect_to desktop_path
+      }
     end
   end
 

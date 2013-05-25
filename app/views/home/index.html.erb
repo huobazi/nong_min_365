@@ -23,7 +23,7 @@
         <% end %>
       </div>
       <div class="clear"></div>
-      <div class="hide">
+      <div class="center">
         <%= paginate @items %>
       </div>
     </div>
@@ -55,13 +55,13 @@
         }
       },
       function( newElements ) {
-        var $newElems = $( newElements ).css({ opacity: 0 });
+        var $newElems = $( newElements ).css({ opacity: 0.4 });
         $newElems.imagesLoaded(function(){
           $newElems.animate({ opacity: 1 });
           $container.masonry( 'appended', $newElems, true );
           $('a.tips').tooltip({
             animation: true,
-            delay: { show: 500, hide: 200 }
+            delay: { show: 300, hide: 200 }
           });
         });
 

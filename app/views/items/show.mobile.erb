@@ -15,7 +15,7 @@
     <% end %>
   </div>
   <div id="show-content" data-role="content">
-    <div class="box content">
+    <div class="box content" id="content">
       <ul class="prop">
         <li class="left">
           <label> 发布时间：</label>
@@ -60,6 +60,29 @@
       <div class="body">
         <%= @item.body %>
       </div>
+      <% if @item.pictures.size > 0 %>
+        <div class="box gallery-back radius">
+          <div id="item_gallery">
+            <% for picture in @item.pictures %>
+              <div class="picture">
+                <%= image_tag picture.image_url if not picture.image.blank? %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+
+
+  <% content_for :javascripts do %>
+    <script >
+      $(document).ready(function() {
+        $width = $('#content').width();
+        $('#content img').css({
+          'max-width' : $width , 'height' : 'auto'
+        });
+      });
+    </script>>
+  <% end %>

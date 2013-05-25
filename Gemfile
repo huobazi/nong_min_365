@@ -72,7 +72,7 @@ gem "high_voltage", "~> 1.2.1"
 # Store files to qiniu
 gem "qiniu-rs", "~> 3.4.2"
 gem "carrierwave", "~> 0.8.0"
-gem "carrierwave-qiniu", "~> 0.0.5"
+gem "carrierwave-qiniu", "~> 0.0.6"
 
 group :development do
   # Deploy with Mina

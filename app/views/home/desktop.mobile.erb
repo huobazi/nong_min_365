@@ -1,0 +1,21 @@
+<div id="page" data-role="page">
+  <div id="header-bar" data-role="header" data-theme="b" data-position="fixed">
+    <% unless signed_in? %>
+      <%= link_to '注册', signup_path, "class" => "ui-btn-left" %>
+    <% end %>
+    <h1><%= @page_title || @title || 'NongMing365' %></h1>
+    <% unless signed_in? %>
+      <%= link_to '登录', signin_path, "class" => "ui-btn-right" %>
+    <% else %>
+      <%= link_to "退出", signout_path, method: "delete", "class" => "ui-btn-right" %>
+    <% end %>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="false" data-icon="star">
+      <%#<li data-role="list-divider">分类</li>%>
+      <%= content_tag_for(:li,@categories) do |c| %>
+        <a data-transition="slide" href="<%= condition_list_items_path(:category => c.id)%>"><%= c.name %><span class="ui-li-count"><%= c.items_count %></span></a>
+      <%end%>
+    </ul>
+  </div>
+</div
