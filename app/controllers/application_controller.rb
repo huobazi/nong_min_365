@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     opts[:etag] << SiteSettings.google_api_key
     opts[:etag] << flash.notice
     opts[:etag] << Rails.application.assets.find_asset('application.js').digest_path
-    opts[:etag] << Rails.application.assets.find_asset('application.css').digest_path
+    #opts[:etag] << Rails.application.assets.find_asset('application.css').digest_path
 
     # 加入通知数量
     #opts[:etag] << unread_notify_count
