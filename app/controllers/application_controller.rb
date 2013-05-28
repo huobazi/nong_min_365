@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
     opts[:etag] << SiteSettings.google_api_key
     opts[:etag] << flash.notice
     opts[:etag] << Rails.application.assets.find_asset('application.js').digest_path
+    #font-awasome.eot?iefix 这个路径会导致下面定有问题，等gem升级
     #opts[:etag] << Rails.application.assets.find_asset('application.css').digest_path
 
     # 加入通知数量
