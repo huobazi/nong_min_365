@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :adjust_mobilejs_format_for_mobile_devise
 
   rescue_from CanCan::AccessDenied do |exception|
-    render_403 exception
+    require_login
   end
 
   #rescue_from Exception,                            :with => :render_500
