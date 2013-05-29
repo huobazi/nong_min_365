@@ -29,6 +29,6 @@ every 1.day, :at => '03:33' do
   command 'backup perform -t nm365_backup --config_file config/backup/config.rb --data-path db --log-path log --tmp-path tmp'
 end
 
-every 1.day, :at => '04:14' do
+every 1.day, :at => '05:33' do
    rake "spider:nx28"
 end
