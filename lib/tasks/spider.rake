@@ -234,24 +234,7 @@ namespace :spider do
         if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
           image_src = hash[:image].gsub("'", "").gsub(' ','')
           image_url = "http://#{$nx28_host}#{image_src}"
-          #image_name = image_src.gsub('/uploads/','')
-          #local_dir = "tmp/nx28"
-          #local_file_path = "#{local_dir}/#{image_name}"
-
-          #FileUtils.mkdir_p local_dir
-          #puts "Download image  #{image_url}"
-          #file_data = crawl_get(image_url)
-
-          #file = File.new(local_file_path, "wb")
-          #file.write(file_data)
-          #file.close
-
-          #file_key_to_qiniu = "uploads/items/#{item.id}/pictures/#{image_name}"
-          #puts "Store to qiniu #{file_key_to_qiniu}"
-          #store_to_qiniu(local_file_path, file_key_to_qiniu)
-
           pic = Picture.new
-          #pic.image = file_key_to_qiniu
           pic.remote_image_url = image_url
           pic.imageable_id = item.id
           pic.imageable_type = 'Item'
