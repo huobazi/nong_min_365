@@ -12,11 +12,8 @@ end
 
 gem 'bootstrap-sass', '~> 2.3.1.2'
 gem "font-awesome-sass-rails", "~> 3.0.2.2"
-gem 'jquery_mobile_rails', '1.3.0'
-gem "masonry-rails", "~> 0.2.0"
 
 gem "json", "~> 1.8.0"
-
 
 # Sidekiq
 gem "sidekiq", "~> 2.8.0"
@@ -26,8 +23,13 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem "rest-client", "~> 1.6.7"
 gem "typhoeus", "~> 0.5.4"
 gem "nokogiri", "~> 1.5.9"
+
 gem 'jquery-rails', '~> 2.2.1'
 gem "jquery-migrate-rails", "~> 1.1.1"
+gem "turbolinks", "~> 1.2.0"
+gem 'jquery_mobile_rails', '1.3.0'
+gem "masonry-rails", "~> 0.2.0"
+
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'
 gem 'simple_form', '~> 2.0.4'
@@ -83,6 +85,7 @@ group :development do
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
   gem "rails-erd", "~> 1.1.0"
   gem 'meta_request' # for chrome rails_panel
+  gem "better_errors", "~> 0.9.0"
 end
 
 group :development, :test do
