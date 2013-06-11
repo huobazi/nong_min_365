@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery-migrate-min
 //= require jquery_ujs
+//= require turbolinks
+
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form

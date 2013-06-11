@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def render_body_tag
-    class_attribute = ["#{action_name}-action"].join(" ")
+    class_attribute = ["#{controller_name}-controller"].join(" ")
     id_attribute = (@body_id)? " id=\"#{@body_id}\"" : " id=\"#{controller_name}-controller-#{action_name}-action\"" 
 
     raw(%Q|<!--[if lt IE 7 ]>

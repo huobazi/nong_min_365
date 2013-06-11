@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<%= html_tag :class => "no-js " +  controller_name + "-controller" , :lang => "zh-CN" %>
+<%= html_tag :class => "no-js ", :lang => "zh-CN" %>
 <%= render "head" %>
 <%= render_body_tag %>
 <%= render "top_navbar" %>
-<div class="container">
+<div class='container <%="#{action_name}-action"%>'>
   <%= render "header" %>
   <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
     <%= render_breadcrumb %>
