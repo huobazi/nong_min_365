@@ -42,7 +42,7 @@ gem "postmark-rails", "~> 0.4.1"
 gem "garelic", "~> 0.2.1"
 
 # Newrelic Analytics 
-gem "newrelic_rpm", "~> 3.5.8.72"
+gem "newrelic_rpm", "~> 3.6.4.122"
 
 gem "rails-settings-cached", "~> 0.2.4"
 
