@@ -133,3 +133,44 @@ server {
   client_max_body_size 50M;
   keepalive_timeout 10;
 }
+
+# <%= app %> RS Server
+server {
+  listen 80<%= ' default' if address_is_ip %>; # default; # Tells nginx which site to load if host is not found. For example when using IP: http://192.168.1.54
+  server_name rs-local.nongmin365.com;
+  root <%= deploy_to %>/<%= current_path %>/public;
+  gzip on;
+  access_log  <%= nginx_log_path %>/access.log;
+  error_log   <%= nginx_log_path %>/error.log info;
+
+  # TODO: enable cache for all non-static content
+  location ~ \.[\w]+$ { # Files with extension, .css, .png, etc.
+    access_log off;
+    error_log /dev/null;
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+    add_header Last-Modified "";
+    add_header ETag "";
+  }
+
+  location = /favicon.ico {
+    try_files $uri =204;
+    access_log off;
+    log_not_found off;
+    break;
+  }
+
+  location ~ ^/(assets)/  {
+    access_log off;
+    error_log /dev/null;
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+    add_header Last-Modified "";
+    add_header ETag "";
+  }
+}
+
+
+
