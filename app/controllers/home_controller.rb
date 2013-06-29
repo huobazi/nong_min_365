@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
-  #caches_action :index, :expires_in => 10.minutes, :layout => false, :if => Proc.new { params[:page].nil? }
   caches_action :desktop, :expires_in => 10.minutes, :layout => false
   caches_action :search, :expires_in => 60.minutes, :layout => false
 
@@ -10,9 +9,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.mobile {
-        @categories = Category.get_cached_all
-      }
+      format.mobile{@categories = Category.get_cached_all}
     end
   end
 
@@ -26,12 +23,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.html{
-        #@items = Rails.cache.fetch("global/homepage/items_pages_#{page_size}_#{page_index}", expires_in: 20.minutes) do
-        #Item.latest.includes(:primary_picture).where('primary_picture_id > 0').page(page_index).per(page_size)
-        #end
-
         @items = Item.latest.includes(:primary_picture).where('primary_picture_id > 0').page(page_index).per(page_size)
-
       }
       format.mobile {
         redirect_to desktop_path

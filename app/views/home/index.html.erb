@@ -72,17 +72,5 @@
 
     });
 
-    window.resizeMap = function(){
-      var map = $('.map-section');
-      map.children().each(function(){
-        $(this).css('width' , (map.innerWidth() - 3 * 7) / 7 );
-      });
-    }
-    $(function(){
-      $(window).bind('scroll  resize', function() {
-        window.resizeMap();
-      });
-      window.resizeMap();
-    });
   </script>
 <% end %>
