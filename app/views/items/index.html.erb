@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="span9">
+  <div class="span3">
+    <%= render_cell :items, :homepage_categories_navbar, {:categories => @categories} %> 
+  </div>
+  <div class="span7">
     <%= render "condition_list" %>
     <div id="items-list" class="box">
       <ul class="items">
@@ -31,7 +34,7 @@
   <%= paginate @items %>
 </div>
   </div>
-  <div class="span3">
+  <div class="span2">
     <div id="tag_cloud">
       <div class="box-header">
         热门标签

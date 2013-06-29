@@ -8,11 +8,10 @@
   .index-action, .desktop-action{
     .map-section {
       border-top: 2px solid #70A50F;
-      margin: 0 auto;
       text-align:center;
       width: 100%;
+      margin: 0;
       dl {
-        width: 97px;
         color: #000;
         float: left;
         margin-right: 2px;
@@ -55,6 +54,7 @@
         }
       }
       dl.huadong {
+        margin-left: 0px;
         background-color: #FFF7EC;
         dt {
           background-color: #F4E2CA;
@@ -84,7 +84,7 @@
         }
         dd {
           height: 50px;
-          line-height:50px; 
+          line-height:50px;
         }
       }
       dl.xibei {
@@ -111,13 +111,14 @@
       }
       dl.dongbei {
         background-color: #F0F2FE;
+        margin-right: 0px;
         dt {
           background-color: #D5DCF6;
           background-position: 0 -180px;
         }
         dd {
           height: 50px;
-          line-height:50px; 
+          line-height:50px;
         }
       }
     }
@@ -191,11 +192,12 @@
     }
     div#item_gallery{
       padding: 0 10px 10px 10px;
+      margin: 0 auto;
       div.picture {
         background-color: #fff;
-        margin: 10px 0 0 0;
+        margin: 10px 0 0 0 ;
         padding: 10px;
-        width: 197px;
+        /*width: 197px;*/
         float: left;
       }
     }

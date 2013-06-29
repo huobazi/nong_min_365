@@ -18,7 +18,7 @@
 //-----------------------------------------
 // For mobile device
 //-----------------------------------------
-/*@import "bootstrap-responsive";*/
+@import "bootstrap-responsive";
 
 //-----------------------------------------
 // Import application base theme 
@@ -32,6 +32,7 @@
 @import 'font-awesome';
 @import 'font-awesome-ie7.min';
 
+@import "masonry/infinitescroll";
 //-----------------------------------------
 // Imports biz
 //-----------------------------------------
@@ -39,4 +40,5 @@
 @import "users";
 @import "items";
 @import "pictures";
+
 @import "pages";

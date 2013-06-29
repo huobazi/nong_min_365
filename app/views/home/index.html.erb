@@ -15,7 +15,7 @@
     <div class="box gallery-back">
       <div id="item_gallery">
         <% for item in @items %>
-          <div class="picture box">
+          <div class="picture box span2">
             <a class="tips" href="<%= item_path(item) %>" title="<%= item.body %>">
               <%= image_tag item.primary_picture.image_url %>
             </a>
@@ -39,8 +39,11 @@
           gutterWidth  : 10,
           isFitWidth   : true,
           isAnimated   : true,
+          columnWidth: function( containerWidth ) {
+            return (containerWidth - 4 * 2 * 10 - 3 * 10) / 4;
+          },
           animationOptions: {
-            duration: 333
+            duration: 250
           }
         });
       });
@@ -51,7 +54,7 @@
         itemSelector : '.picture',
         loading: {
           finishedMsg: '我已经很努力的把所有带图片定信息全都显示啦.',
-          img: '<%= asset_path("icons/loading.gif") %>'
+        img: '<%= asset_path("icons/loading.gif") %>'
         }
       },
       function( newElements ) {
