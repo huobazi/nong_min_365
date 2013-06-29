@@ -54,19 +54,18 @@
 </div>
 <% content_for :javascripts do %>
   <script type="text/javascript">
-    $(function(){
-      var resize_map = function(){
-        var map = $('.map-section');
-        map.children().each(function(){
-          $(this).css('width' , (map.innerWidth() - 3 * 7  + 1 + 2) / 7 );
-        });
-      }
-
-      $(window).bind('scroll  resize', function() {
-        resize_map();
+    window.resizeMap = function(){
+      var map = $('.map-section');
+      map.children().each(function(){
+        $(this).css('width' , (map.innerWidth() - 3 * 7) / 7 );
       });
-
-      resize_map();
+    }
+    $(function(){
+      $(window).bind('scroll  resize', function() {
+        window.resizeMap();
+      });
+      window.resizeMap();
     });
+    window.resizeMap();
   </script>
 <% end %>
