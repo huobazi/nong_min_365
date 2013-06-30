@@ -38,7 +38,7 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 gem "postmark-rails", "~> 0.5.0"
 
 # Google Analytics performance 
-gem "garelic", "~> 0.2.1"
+gem "garelic", "0.2.0"
 
 # Newrelic Analytics 
 gem "newrelic_rpm", "~> 3.6.4.122"
