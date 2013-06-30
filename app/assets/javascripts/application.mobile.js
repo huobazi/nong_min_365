@@ -8,10 +8,12 @@
 //= require jquery_ujs
 //= require jquery.mobile
 //
-//= require plugin 
+//= require plugin
 //
-//= require items 
+//= require items
 //
+//
+//= require google-analytics-turbolinks
 //
 //= require_self
 

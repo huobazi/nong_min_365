@@ -29,8 +29,8 @@
 //
 //= require front
 //= require items
+//
 //= require google-analytics-turbolinks
-
 
 
 
