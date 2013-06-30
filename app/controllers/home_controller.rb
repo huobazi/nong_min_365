@@ -15,7 +15,7 @@ class HomeController < ApplicationController
 
   def index
     @page_tiele = '首页'
-    page_size   = 12
+    page_size   = 16
     page_index  = params[:page]
 
     require 'item'
