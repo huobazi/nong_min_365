@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="span3">
+    <%= render_cell :items, :homepage_categories_navbar, {:categories => @categories} %>
+  </div>
+  <div class="span9">
+    <div id="tag_cloud">
+      <div class="box-header">
+        热门标签
+      </div>
+      <div class="box">
+        <%= render_cell :items, :tag_cloud %> 
+      </div>
+    </div>
+  </div>
+</div>

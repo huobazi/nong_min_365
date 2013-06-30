@@ -169,7 +169,7 @@ class ItemsController < ApplicationController
     redirect_to items_url 
   end
 
-  def tags
+  def tag
     if params[:tag]
       tag         = params[:tag]
       page_index  = params[:page]
@@ -186,6 +186,10 @@ class ItemsController < ApplicationController
     else
       redirect_to items_path and return
     end
+  end
+
+  def tag_cloud
+
   end
 
   def show_hits

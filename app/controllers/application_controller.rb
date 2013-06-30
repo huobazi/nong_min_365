@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
 
     # 所有 etag 保持一天
     opts[:etag] << Date.current
+    opts[:etag] << Time.now if not Rails.env.production?
     super(opts)
   end
 

@@ -1,8 +1,8 @@
-source 'https://rubygems.org'
-#source 'http://ruby.taobao.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
-gem 'rails', '~> 3.2.12'
-gem 'pg', '~> 0.14.1'
+gem 'rails', '~> 3.2.13'
+gem 'pg', '~> 0.15.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
@@ -28,7 +28,6 @@ gem 'jquery-rails', '~> 2.2.1'
 gem "jquery-migrate-rails", "~> 1.1.1"
 gem "turbolinks", "~> 1.2.0"
 gem 'jquery_mobile_rails', '1.3.0'
-#gem "masonry-rails", "~> 0.2.0"
 
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'
@@ -36,7 +35,7 @@ gem 'simple_form', '~> 2.0.4'
 gem 'client_side_validations-simple_form', '~> 2.0.1'
 
 # mail service
-gem "postmark-rails", "~> 0.4.1"
+gem "postmark-rails", "~> 0.5.0"
 
 # Google Analytics performance 
 gem "garelic", "~> 0.2.1"
@@ -86,6 +85,7 @@ group :development do
   gem "rails-erd", "~> 1.1.0"
   gem 'meta_request' # for chrome rails_panel
   gem "better_errors", "~> 0.9.0"
+  gem 'quiet_assets'
 end
 
 group :development, :test do

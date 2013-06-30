@@ -33,7 +33,8 @@ class Ability
   def anonymous_basic_access
     can :read, Item
     can :read, Picture
-    can :tags, Item
+    can :tag, Item
+    can :tag_cloud, Item
     can :show_hits, Item
   end
 end

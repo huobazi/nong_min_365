@@ -24,7 +24,8 @@ NongMin365::Application.routes.draw do
     end
   end
 
-  get 'tags/:tag' => 'items#tags', :as => :items_tags
+  get 'tags' => 'items#tag_cloud', :as => :items_tag_cloud
+  get 'tags/:tag' => 'items#tag', :as => :items_tags
   resources :sessions, :only =>[:create]
   resources :items do
     resources :pictures, :only => [:new, :create, :destroy] do

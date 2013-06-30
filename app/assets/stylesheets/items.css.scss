@@ -112,7 +112,7 @@
     } 
   }
 
-  .index-action, .tags-action{
+  .index-action, .tag-action{
     div#items-list{
       margin-top: 10px;
       padding: 5px 6px;
@@ -177,8 +177,8 @@
             width: 70px;
           }
         }
-        li.left{width: 220px;}
-        li.right{width: 440px;}
+        li.left{width: 35%;}
+        li.right{width: 65%;}
         li.from{ width: 100%; }
         li.tags{ width: 100%;
           a{
