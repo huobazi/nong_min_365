@@ -50,5 +50,18 @@
   <script type="text/javascript">
     $('#new_item_form').enableClientSideValidations();
     $('#item_title').focus();
-    </script>
+    $('#item_tag_list').tagsInput({
+      'height':'80px',
+      'width':'270px',
+      'interactive': true,
+      'defaultText': '',
+      'onAddTag': function(){},
+      'onRemoveTag': function(){},
+      'onChange' : function(){},
+      'removeWithBackspace' : true,
+      'minChars' : 2,
+      'maxChars' : 6, //if not provided there is no limit
+      'placeholderColor' : '#666666'
+    });
+  </script>
 <% end %>

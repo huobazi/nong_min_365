@@ -23,9 +23,14 @@
 //= require vendor/imagesloaded.pkgd
 //= require vendor/jquery.infinitescroll
 //
+//= require vendor/jquery.tagsinput
+//
 //= require plugin
 //
 //= require front
 //= require items
+//= require google-analytics-turbolinks
+
+
 
 
