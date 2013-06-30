@@ -25,4 +25,19 @@
     s.parentNode.insertBefore(hm, s);
   })(document,'script');
 </script>
-<%= Garelic.monitoring SiteSettings.google_account_id if !SiteSettings.google_account_id.blank? %>
+<% if !SiteSettings.google_account_id.blank? %>
+  <script>
+    //<![CDATA[
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<%= SiteSettings.google_account_id %>']);
+  _gaq.push(['_setDomainName', '<%= SiteSettings.domain_name %>']);
+  _gaq.push(['_setSiteSpeedSampleRate', 100]);
+  _gaq.push(['_trackPageview']);
+  <%= Garelic::Timing %>
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+   s.parentNode.insertBefore(g,s)}(document,'script'));
+  //]]>
+  </script>
+<% end %>
+

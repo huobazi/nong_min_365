@@ -14,33 +14,35 @@
     <%= stylesheet_link_tag "application.mobile.css" %>
     <%= javascript_include_tag "application.mobile.js" %>
     <%= csrf_meta_tags %>
-    <% if !SiteSettings.google_account_id.blank? %>
-      <script>
-        //<![CDATA[
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<%= SiteSettings.google_account_id %>']);
-      _gaq.push(['_setDomainName', '<%= SiteSettings.domain_name %>']);
-      _gaq.push(['_setSiteSpeedSampleRate', 100]);
-      _gaq.push(['_trackPageview']);
-      <%= Garelic::Timing %>
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-       s.parentNode.insertBefore(g,s)}(document,'script'));
-      //]]>
-      </script>
-    <% end %>
-    <script>
-      var _hmt = _hmt || [];
-      (function(d,t) {
-        var hm = d.createElement(t);
-        hm.src = "//hm.baidu.com/hm.js?99afb9d23a016a55498acd21c8f7219a";
-        var s = d.getElementsByTagName(t)[0]; 
-        s.parentNode.insertBefore(hm, s);
-      })(document,'script');
-    </script>
   </head>
   <body>
     <%= yield %>
+
     <%= yield :javascripts %><%# Append your own using content_for :javascripts %>
+  <% if !SiteSettings.google_account_id.blank? %>
+    <script>
+      //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<%= SiteSettings.google_account_id %>']);
+    _gaq.push(['_setDomainName', '<%= SiteSettings.domain_name %>']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    <%= Garelic::Timing %>
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+     s.parentNode.insertBefore(g,s)}(document,'script'));
+    //]]>
+    </script>
+  <% end %>
+  <script>
+    var _hmt = _hmt || [];
+    (function(d,t) {
+      var hm = d.createElement(t);
+      hm.src = "//hm.baidu.com/hm.js?99afb9d23a016a55498acd21c8f7219a";
+      var s = d.getElementsByTagName(t)[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })(document,'script');
+
+  </script>
   </body>
 </html>
