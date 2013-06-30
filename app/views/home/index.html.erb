@@ -13,7 +13,7 @@
   <div class="span9">
     <%= render "area_map" %>
     <div class="box gallery-back">
-      <div id="item_gallery">
+      <div id="item_gallery" class="center">
         <% for item in @items %>
           <div class="picture box span2">
             <a class="tips" href="<%= item_path(item) %>" title="<%= item.body %>">
@@ -23,7 +23,7 @@
         <% end %>
       </div>
       <div class="clear"></div>
-      <div class="center">
+      <div class="center" id="item-gallery-pagination">
         <%= paginate @items %>
       </div>
     </div>
@@ -35,30 +35,24 @@
       var $container = $('#item_gallery');
       $container.imagesLoaded( function(){
         $container.masonry({
-          itemSelector : '.picture',
+          itemSelector : 'div.picture',
           gutterWidth  : 10,
-          isFitWidth   : true,
-          isAnimated   : true,
-          columnWidth: function( containerWidth ) {
-            return (containerWidth - 4 * 2 * 10 - 3 * 10) / 4;
-          },
-          animationOptions: {
-            duration: 250
-          }
+          isAnimated   : true
         });
       });
 
       $container.infinitescroll({
-        navSelector  : '.pagination',
-        nextSelector : '.pagination a.next',
-        itemSelector : '.picture',
+        navSelector  : '#item-gallery-pagination div.pagination',
+        nextSelector : '#item-gallery-pagination div.pagination a.next',
+        itemSelector : 'div.picture',
         loading: {
+          msgText: '正在加载...',
           finishedMsg: '我已经很努力的把所有带图片定信息全都显示啦.',
-        img: '<%= asset_path("icons/loading.gif") %>'
+          img: '<%= asset_path("icons/loading.gif") %>'
         }
       },
       function( newElements ) {
-        var $newElems = $( newElements ).css({ opacity: 0.4 });
+        var $newElems = $( newElements ).css({ opacity: 1 });
         $newElems.imagesLoaded(function(){
           $newElems.animate({ opacity: 1 });
           $container.masonry( 'appended', $newElems, true );

@@ -28,7 +28,7 @@ gem 'jquery-rails', '~> 2.2.1'
 gem "jquery-migrate-rails", "~> 1.1.1"
 gem "turbolinks", "~> 1.2.0"
 gem 'jquery_mobile_rails', '1.3.0'
-gem "masonry-rails", "~> 0.2.0"
+#gem "masonry-rails", "~> 0.2.0"
 
 gem 'bootstrap_helper', '~> 2.1.2'
 gem 'client_side_validations', '~> 3.2.1'

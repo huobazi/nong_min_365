@@ -19,9 +19,9 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //
-//= require masonry/jquery.masonry
-//= require masonry/jquery.imagesloaded.min
-//= require masonry/jquery.infinitescroll.min
+//= require vendor/masonry.pkgd
+//= require vendor/imagesloaded.pkgd
+//= require vendor/jquery.infinitescroll
 //
 //= require plugin
 //
