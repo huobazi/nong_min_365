@@ -29,7 +29,10 @@ module SessionsHelper
   def require_login
     if !signed_in?
       respond_to do |format|
-        format.html { redirect_to main_app.signin_path }
+        format.html {
+        flash[:alert] = '您需要先登陆，才能进行下一步操作。'
+          redirect_to main_app.signin_path
+        }
         format.mobile { redirect_to main_app.signin_path }
         format.json { head(:unauthorized) }
       end
