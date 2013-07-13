@@ -224,7 +224,9 @@
       }
       div.opts{
         margin: 10px 0;
-        text-align:right;
+        div.social-share-button{
+          float:right;
+        }
         a{
           i{
             margin-right: 3px;

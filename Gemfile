@@ -34,6 +34,9 @@ gem 'client_side_validations', '~> 3.2.1'
 gem 'simple_form', '~> 2.0.4'
 gem 'client_side_validations-simple_form', '~> 2.0.1'
 
+
+gem "social-share-button", "~> 0.1.4"
+
 # mail service
 gem "postmark-rails", "~> 0.5.0"
 

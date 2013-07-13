@@ -27,6 +27,8 @@
 //
 //= require plugin
 //
+//= require social-share-button
+//
 //= require front
 //= require items
 //
