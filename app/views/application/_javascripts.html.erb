@@ -1,21 +1,4 @@
 <%= yield :javascripts %>
-<script type="text/javascript">
-  window.resizeMap = function(){
-    var map = $('.map-section');
-    if(map){
-      map.children().each(function(){
-        $(this).css('width' , (map.innerWidth() - 3 * 7) / 7 );
-      });
-    }
-  }
-  $(function(){
-    window.resizeMap();
-    $(window).bind('scroll  resize', function() {
-      window.resizeMap();
-    });
-  });
-  window.resizeMap();
-</script>
 <script>
   var _hmt = _hmt || [];
   (function(d,t) {

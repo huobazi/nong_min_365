@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span3">
-    <%= render_cell :items, :homepage_categories_navbar, {:categories => @categories} %> 
+    <%= render_cell :items, :homepage_categories_navbar, {:categories => @categories} %>
   </div>
-  <div class="span7">
+  <div class="span9">
     <%= render "condition_list" %>
     <div id="items-list" class="box">
       <ul class="items">
@@ -20,31 +20,19 @@
             <%= link_to item.title , item_path(item) %>
             &nbsp;<%= item.amount %>
           &nbsp;<%= item.xtype == 1 ? '供应' : '求购' %>
-      </span>
-      <span class="contact">
-        【<%= item.contact_name %>】
-      </span>
-      <span class="created">
-        <%#= item.created_at.strftime('%Y-%m-%d') %>
-        <%#= Time.at(@item.refresh_at).strftime('%Y-%m-%d %H:%M') %>
-        <%= Time.at(item.refresh_at).strftime('%Y-%m-%d') %>
-      </span>
-    <% end %>
-  </ul>
-  <div class="center">
-    <%= paginate @items %>
-  </div>
-</div>
-  </div>
-  <div class="span2">
-    <div id="tag_cloud">
-      <div class="box-header">
-        热门标签
-      </div>
-      <div class="box">
-        <%= render_cell :items, :tag_cloud %> 
-      </div>
+          </span>
+          <span class="contact">
+            【<%= item.contact_name %>】
+          </span>
+          <span class="created">
+            <%#= item.created_at.strftime('%Y-%m-%d') %>
+            <%#= Time.at(@item.refresh_at).strftime('%Y-%m-%d %H:%M') %>
+            <%= Time.at(item.refresh_at).strftime('%Y-%m-%d') %>
+          </span>
+        <% end %>
+    </ul>
+    <div class="center">
+      <%= paginate @items %>
     </div>
-    <%= render 'sidebar_for_items' %>
   </div>
 </div>
