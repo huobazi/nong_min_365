@@ -118,7 +118,7 @@ def get_dest_items_url_list_by_category(category_url)
   dest_list = []
   html = crawl_get(category_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
-  url = doc.css('div.listTable table tr td.td1').each do |td|
+  doc.css('div.listTable table tr td.td1').each do |td|
     link = td.css('a')[0]
     link  =  "http://#{$nx28_host}" + link[:href]
     puts "Push #{link} --- populate_dest_items_link_by_category"
@@ -134,7 +134,7 @@ def populate_item(item_url_info)
   item[:category_id] = item_url_info[:category_id]
   item[:xtype] = item_url_info[:xtype]
   item_url = item_url_info[:url]
-  item_url = item_url.gsub(/[\r\n\t\s\b\B]*/,'')
+  item_url = item_url.gsub(/[\s\b]*/,'')
   puts "Begin crawl ====> #{item_url}"
 
   item[:exists] = 0
