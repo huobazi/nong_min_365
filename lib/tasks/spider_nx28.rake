@@ -134,6 +134,8 @@ def populate_item(item_url_info)
   item[:xtype] = item_url_info[:xtype]
   item_url = item_url_info[:url]
   item_url = item_url.gsub(/[\s\b]*/,'')
+  item[:src] = item_url
+
   puts "Begin crawl ====> #{item_url}"
 
   item[:exists] = 0
