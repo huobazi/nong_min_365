@@ -65,7 +65,7 @@ def crawl_get(url)
         "Host"            => $nx28_host,
         "User-Agent"      => "Mozilla/5.0 (Windows NT 5.1; rv:6.0) Gecko/20100101 Firefox/6.0",
         "Referer"         => "http://#{$nx28_host}",
-        "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Charset"  => "utf-8;q=0.7,*;q=0.7",
         "Connection"      => "keep-alive",
         "Accept-Language" => "zh-cn,zh;q=0.5",
@@ -107,7 +107,6 @@ def get_dest_items_url_list(category_list)
     items_in_the_category.each do |item|
       dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url]}
     end
-    return dest_list
   end
   dest_list
 end
