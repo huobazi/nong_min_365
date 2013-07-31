@@ -31,9 +31,9 @@ def encode_text(input)
   encode_string(input,'GBK','UTF-8')
 end
 
-$nx28_host = 'nx28.com'
+$nx28_host = 'www.nx28.com'
 $user_id = -1
-$cookie_text = ''
+$cookie_text = 'PHPSESSID=2e420997dd2d3091ced8229523026be3; bdshare_firstime=1374656542333; Hm_lvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1374652221; Hm_lpvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1375250174; __utma=266646609.213124975.1374655648.1375006184.1375246848.6; __utmb=266646609.15.10.1375246848; __utmc=266646609; __utmz=266646609.1374655648.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
 $dest_local_categories = [
   {:local_id => 1  , :name => '水产渔业' , :dest_id => 5 },
   {:local_id => 2  , :name => '特种养殖' , :dest_id => 6 },
@@ -62,7 +62,7 @@ def crawl_get(url)
     response = Typhoeus::Request.get(
       url,
       :headers => {
-        "Host"            => "nx28.com",
+        "Host"            => $nx28_host,
         "User-Agent"      => "Mozilla/5.0 (Windows NT 5.1; rv:6.0) Gecko/20100101 Firefox/6.0",
         "Referer"         => "http://#{$nx28_host}",
         "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -87,14 +87,15 @@ def crawl_get(url)
   end
 
   result
+
 end
 
 
 def get_dest_categories_url_list
   dest_list = []
   $dest_local_categories.each do |category|
-    dest_list << {:xtype => 1, :local_id => category[:local_id], :url => "http://www.nx28.com/category/0-0-0-0-0-#{category[:dest_id]}-0-1-0-0.html"}
-    dest_list << {:xtype => 2, :local_id => category[:local_id], :url => "http://www.nx28.com/category/0-0-0-0-0-#{category[:dest_id]}-0-2-0-0.html"}
+    dest_list << {:xtype => 1, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-1-0-0.html"}
+    dest_list << {:xtype => 2, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-2-0-0.html"}
   end
   dest_list
 end
@@ -106,24 +107,67 @@ def get_dest_items_url_list(category_list)
     items_in_the_category.each do |item|
       dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url]}
     end
+    return dest_list
   end
   dest_list
 end
 
 def get_dest_items_url_list_by_category(category_url)
+
+  puts "Get items link from #{category_url}"
   dest_list = []
-  dest_list << { item_id => 123, :url => '' }
+  html = crawl_get(category_url)
+  doc = Nokogiri::HTML(html,nil,'utf-8')
+  url = doc.css('div.listTable table tr td.td1').each do |td|
+    link = td.css('a')[0]
+    link  =  "http://#{$nx28_host}" + link[:href]
+    puts "Push #{link} --- populate_dest_items_link_by_category"
+    dest_list << { :url => link }
+  end
+
   dest_list
 end
 
 def populate_item(item_url_info)
 
   item = {}
+  item[:category_id] = item_url_info[:category_id]
+  item[:xtype] = item_url_info[:xtype]
+  item_url = item_url_info[:url]
+  item_url = item_url.gsub(/[\r\n\t\s\b\B]*/,'')
+  puts "Begin crawl ====> #{item_url}"
+
   item[:exists] = 0
-  tmp = Item.find_by_source(item_url_info[:url])
+  tmp = Item.find_by_source(item_url)
   if tmp and tmp.id > 0 and tmp.user_id == $user_id
     item[:exists] = 1
     return item
+  end
+
+  html = crawl_get(item_url)
+  doc = Nokogiri::HTML(html,nil,'utf-8')
+
+  item[:title] = doc.css('div.detail h1.detailH11')[0].content
+  item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
+
+  params_zone = doc.css('div.detail div.flashText.detailBox p')
+  item[:name] = params_zone[0].content.gsub('产品：','')
+  item[:amount] = params_zone[1].content.gsub('供应量：','').gsub('[','').gsub(']','')
+  item[:contact_name] = params_zone[4].content
+  item[:contact_phone] = params_zone.css('span.contact-mobile')[0].content
+
+  area_zone = doc.css('div.detail div.detailBox.mt10 p.fgreen1.b.mt10')
+  item[:ip] = area_zone[1].content
+  area_ary = area_zone.css('a')[4][:href].to_s.gsub('/category/','').gsub('-0-0-0-0-0-0.html','').split('-')
+  item[:province_code] = area_ary[0]
+  item[:city_code] = area_ary[1]
+  item[:county_code] = area_ary[2]
+  item[:town_code] = area_ary[3]
+  item[:village_code] = area_ary[4]
+
+  image_zone = doc.css('div.detail div.flashBox div.zoombox div.zoompic img')
+  if image_zone and image_zone[0]
+    item[:image] = image_zone[0][:src]
   end
 
   item
@@ -133,12 +177,12 @@ end
 def save_item(hash)
   begin
     if hash[:exists] == 1
-      puts '===  #{item[:title]} was already exists.'
+      puts '===>  #{item[:title]} was already exists.'
       return
     end
 
     if(hash[:image] and hash[:image].gsub(' ','').length == 0)
-      puts "木有图片....."
+      puts "====> NO images ....."
     end
 
     item               = Item.new
@@ -157,18 +201,23 @@ def save_item(hash)
     item.village_code  = hash[:village_code]
     item.source        = hash[:src]
     item.contact_qq    = '000000'
-    item.tag_list      = hash[:sheng]
+    item.tag_list      = hash[:name]
 
-    item.save!
+    if(item.save!)
+      puts "===> #{item[:title]} save ok"
+    end
 
     if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
-      image_src = hash[:image].gsub("'", "").gsub(' ','')
-      image_url = "http://#{$nx28_host}#{image_src}"
+      image_url = hash[:image].gsub("'", "").gsub(' ','')
       pic = Picture.new
       pic.remote_image_url = image_url
       pic.imageable_id = item.id
       pic.imageable_type = 'Item'
-      pic.save!
+
+      if(pic.save!)
+        puts "====> #{item[:title]} image save ok"
+      end
+
     end
 
   rescue Exception => e
@@ -185,16 +234,20 @@ end
 
 namespace :spider do
   desc 'Crawl nx28 items'
-  task :nx29 => [:environment] do
+  task :nx28 => [:environment] do
     category_list = get_dest_categories_url_list
     puts "====> Get #{ category_list.size } categorie's url"
 
     items_url_list = get_dest_items_url_list(category_list)
-    puts "====> Get #{ items_list.size } items' url"
+    puts "====> Get #{ items_url_list.size } items' url"
 
+    index = 0
+    size = items_url_list.size
     items_url_list.each do |item_url|
+      index += 1
       item = populate_item(item_url)
       save_item item
+      puts "====>Processed #{index}/#{size}"
     end
 
   end

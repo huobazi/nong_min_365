@@ -15,7 +15,7 @@ require 'fileutils'
 
 namespace :spider do
   desc 'Crawl nx28 items'
-  task :nx28 => [:environment] do
+  task :nx28_old => [:environment] do
 
     $nx28_host = 'nx28.com'
     $user_id = -1
