@@ -32,25 +32,9 @@
       </div>
       <div class="radius">
         <table style="width:100%; border:none;" border="0">
-          <td style="width:50%;">
-            <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-              style="display:inline-block;width:250px;height:250px"
-              data-ad-client="ca-pub-0893236326612531"
-              data-ad-slot="7789246118"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+          <td style="width:50%;" id="gg1">
           </td>
-          <td>
-            <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-              style="display:inline-block;width:250px;height:250px"
-              data-ad-client="ca-pub-0893236326612531"
-              data-ad-slot="7789246118"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+          <td id="gg2">
           </td>
         </table>
       </div>
@@ -65,6 +49,18 @@
           </div>
         </div>
         <% content_for :javascripts do %>
+          <script>
+            window.MyAdSense.newAd(document.getElementById('gg1'), {
+              'ad_slot': "7789246118",
+            'ad_width': 250,
+            'ad_height': 250
+            });
+          window.MyAdSense.newAd(document.getElementById('gg2'), {
+            'ad_slot': "7789246118",
+            'ad_width': 250,
+            'ad_height': 250
+          });
+          </script>
           <script type="text/javascript">
             $(function(){
               var $container = $('#item_gallery');
