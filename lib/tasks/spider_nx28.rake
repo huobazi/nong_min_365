@@ -154,7 +154,7 @@ def populate_item(item_url_info)
   params_zone = doc.css('div.detail div.flashText.detailBox p')
   item[:name] = params_zone[0].content.gsub('产品：','')
   item[:amount] = params_zone[1].content.gsub('供应量：','').gsub('[','').gsub(']','')
-  item[:contact_name] = params_zone[4].content
+  item[:contact_name] = params_zone[4].content.gsub('发布人：','')
   item[:contact_phone] = params_zone.css('span.contact-mobile')[0].content
 
   area_zone = doc.css('div.detail div.detailBox.mt10 p.fgreen1.b.mt10')
