@@ -66,7 +66,9 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    carrierwave-qiniu (0.0.6)
+    carrierwave-qiniu (0.0.8)
+      carrierwave
+      qiniu-rs (~> 3.4.2)
     cells (3.8.8)
       actionpack (>= 3.0)
       railties (>= 3.0)
@@ -313,7 +315,7 @@ DEPENDENCIES
   cancan (~> 1.6.8)
   capybara
   carrierwave (~> 0.8.0)
-  carrierwave-qiniu (~> 0.0.6)
+  carrierwave-qiniu (~> 0.0.8)
   cells (~> 3.8.8)
   client_side_validations (~> 3.2.1)
   client_side_validations-simple_form (~> 2.0.1)
