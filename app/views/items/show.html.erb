@@ -30,14 +30,6 @@
       <div class="body radius">
         <pre class="radius"><%= @item.body %></pre>
       </div>
-      <div class="radius">
-        <table style="width:100%; border:none;" border="0">
-          <td style="width:50%;" id="gg1">
-          </td>
-          <td id="gg2">
-          </td>
-        </table>
-      </div>
       <% if @item.pictures.size > 0 %>
         <div class="box gallery-back radius">
           <div id="item_gallery">
@@ -48,22 +40,31 @@
             <% end %>
           </div>
         </div>
-        <% content_for :javascripts do %>
-          <script>
-            window.MyAdSense.newAd(document.getElementById('gg1'), {
-              'ad_slot': "7789246118",
+      <% end %>
+      <div class="radius">
+        <table style="width:100%; border:none;" border="0">
+          <td style="width:50%;" id="gg1">
+          </td>
+          <td id="gg2">
+          </td>
+        </table>
+      </div>
+      <% content_for :javascripts do %>
+        <script>
+          window.MyAdSense.newAd(document.getElementById('gg1'), {
+            'ad_slot': "7789246118",
             'ad_width': 250,
             'ad_height': 250
-            });
+          });
           window.MyAdSense.newAd(document.getElementById('gg2'), {
             'ad_slot': "7789246118",
             'ad_width': 250,
             'ad_height': 250
           });
-          </script>
-          <script type="text/javascript">
-            $(function(){
-              var $container = $('#item_gallery');
+        </script>
+        <script type="text/javascript">
+          $(function(){
+            var $container = $('#item_gallery');
               $container.imagesLoaded( function(){
                 $container.masonry({
                   itemSelector: '.picture',
@@ -75,9 +76,8 @@
                 });
               });
 
-            });
-          </script>
-        <% end %>
+          });
+        </script>
       <% end %>
       <div class="opts">
         <% if @item.pictures.size > 0 %>

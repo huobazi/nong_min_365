@@ -118,7 +118,7 @@ def get_dest_items_url_list_by_category(category_url)
   html = crawl_get(category_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
   doc.css('div.listTable table tr td.td1').each do |td|
-    link = td.css('a')[0]
+    link = td.css('a.flink1')[0]
     link  =  "http://#{$nx28_host}" + link[:href]
     puts "Push #{link} --- populate_dest_items_link_by_category"
     dest_list << { :url => link }
@@ -148,7 +148,7 @@ def populate_item(item_url_info)
   html = crawl_get(item_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
 
-  item[:title] = doc.css('div.detail h1.detailH11')[0].content
+  item[:title] = doc.css('div.detail h1.detailH11')[0].content.gsub(/浏览:\d*/,"")
   item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
 
   params_zone = doc.css('div.detail div.flashText.detailBox p')
@@ -178,7 +178,7 @@ end
 def save_item(hash)
   begin
     if hash[:exists] == 1
-      puts '===>  #{item[:title]} was already exists.'
+      puts "===>  #{hash[:title]} was already exists."
       return
     end
 

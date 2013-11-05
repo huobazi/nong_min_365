@@ -59,11 +59,12 @@ class ItemsController < ApplicationController
   # GET /items/1
   def show
     @item = Item.find(params[:id])
-    @page_title = @item.title
+    xtype_text = @item.xtype == 1 ? '供应':'求购'
+    @page_title = "#{@item.province_name}#{@item.city_name}#{@item.county_name}的#{@item.contact_name}#{xtype_text}#{@item.title}#{@item.amount}"
 
     drop_breadcrumb('产品', items_path)
     drop_breadcrumb(@item.category.name, condition_list_items_path(:category => @item.category_id, :xtype => nil, :area => nil) )
-    drop_breadcrumb(@item.xtype == 1 ? '供应':'求购', condition_list_items_path(:category => @item.category_id, :xtype => @item.xtype, :area => nil) )
+    drop_breadcrumb(xtype_text, condition_list_items_path(:category => @item.category_id, :xtype => @item.xtype, :area => nil) )
     drop_breadcrumb(@item.province_name, condition_list_items_path(:area => @item.province_code, :category => @item.category_id, :xtype => @item.xtype) )
     drop_breadcrumb(@item.city_name, condition_list_items_path(:area => @item.city_code, :category => @item.category_id, :xtype => @item.xtype) )
     drop_breadcrumb(@item.county_name, condition_list_items_path(:area => @item.county_code, :category => @item.category_id, :xtype => @item.xtype) )
