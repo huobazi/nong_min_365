@@ -24,7 +24,7 @@ class Admincp::SmsController < Admincp::ApplicationController
     content = params[:sms][:content]
     categories = Category.all
     categories.each do |category|
-      items = Item.select('contact_phone, created_at').limit(15).offset(22).where(:category_id => category.id, :user_id => -1).order('id desc')
+      items = Item.select('contact_phone, created_at').limit(35).offset(22).where(:category_id => category.id, :user_id => -1).order('id desc')
       items.each do |item|
         #phone_ary.push(item.contact_phone.strip) if(item.created_at.day == Time.now.day and item.contact_phone.to_s.strip.size == 11)
         phone_ary.push(item.contact_phone.strip) if( item.contact_phone.to_s.strip.size == 11)

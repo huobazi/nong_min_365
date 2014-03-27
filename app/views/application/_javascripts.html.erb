@@ -1,12 +1,7 @@
 <%= yield :javascripts %>
 <script>
-  var _hmt = _hmt || [];
-  (function(d,t) {
-    var hm = d.createElement(t);
-    hm.src = "//hm.baidu.com/hm.js?99afb9d23a016a55498acd21c8f7219a";
-    var s = d.getElementsByTagName(t)[0];
-    s.parentNode.insertBefore(hm, s);
-  })(document,'script');
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F99afb9d23a016a55498acd21c8f7219a' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <% if !SiteSettings.google_account_id.blank? %>
   <script>
