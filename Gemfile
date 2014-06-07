@@ -26,8 +26,7 @@ gem "nokogiri", "~> 1.5.9"
 
 gem 'jquery-rails', '~> 2.2.1'
 gem "jquery-migrate-rails", "~> 1.1.1"
-gem "turbolinks", "~> 1.2.0"
-gem "jquery-turbolinks", "~> 1.0.0"
+
 gem 'jquery_mobile_rails', '1.3.0'
 
 gem 'bootstrap_helper', '~> 2.1.2'
