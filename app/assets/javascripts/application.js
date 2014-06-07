@@ -32,7 +32,6 @@
 //= require items
 //
 //= require google-analytics-turbolinks
-//= require google-ad
 
 
 
