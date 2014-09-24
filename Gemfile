@@ -1,7 +1,7 @@
+#source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
-source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
+gem 'rails', '~> 3.2.19'
 gem 'pg', '~> 0.15.1'
 
 group :assets do
@@ -74,7 +74,7 @@ gem 'mobylette', '~> 3.3.2'
 gem "high_voltage", "~> 1.2.1"
 
 # Store files to qiniu
-gem "carrierwave-qiniu", "~> 0.0.8"
+gem "carrierwave-qiniu", "~> 0.1.3"
 
 group :development do
   # Deploy with Mina
