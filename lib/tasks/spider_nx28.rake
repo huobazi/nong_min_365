@@ -5,9 +5,9 @@ begin
 rescue ::LoadError
 end
 begin
-  require 'qiniu-rs'
+  require 'qiniu'
 rescue LoadError
-  raise "You dot't have the 'qiniu-rs' gem installed"
+  raise "You dot't have the 'qiniu' gem installed"
 end
 
 require 'fileutils'
@@ -253,4 +253,3 @@ namespace :spider do
 
   end
 end
-

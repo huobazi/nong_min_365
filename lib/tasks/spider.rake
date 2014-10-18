@@ -5,7 +5,7 @@ begin
 rescue ::LoadError
 end
 begin
-  require 'qiniu-rs'
+  require 'qiniu'
 rescue LoadError
   raise "You dot't have the 'qiniu-rs' gem installed"
 end
@@ -34,7 +34,7 @@ namespace :spider do
     end
 
     def encode_text(input)
-      #Iconv.iconv("UTF-8",  "GBK",input)  
+      #Iconv.iconv("UTF-8",  "GBK",input)
       encode_string(input,'GBK','UTF-8')
     end
 
@@ -137,7 +137,7 @@ namespace :spider do
     def populate_item(url, category_id, xtype)
       item = {}
       begin
-        url = url.gsub(/[\r\n\t\s\b\B]*/,'') 
+        url = url.gsub(/[\r\n\t\s\b\B]*/,'')
         puts "Begin crawl #{url}....populate_item"
 
         item[:exists] = 0
@@ -272,4 +272,3 @@ namespace :spider do
 
   end
 end
-

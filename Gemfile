@@ -2,7 +2,7 @@
 source 'http://ruby.taobao.org'
 
 gem 'rails', '~> 3.2.19'
-gem 'pg', '~> 0.15.1'
+gem 'pg', '~> 0.17.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
@@ -38,12 +38,12 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 gem "social-share-button", "~> 0.1.4"
 
 # mail service
-gem "postmark-rails", "~> 0.5.0"
+gem "postmark-rails", "~> 0.5.1"
 
-# Google Analytics performance 
+# Google Analytics performance
 gem "garelic", "~> 0.2.1"
 
-# Newrelic Analytics 
+# Newrelic Analytics
 gem "newrelic_rpm", "~> 3.6.4.122"
 
 gem "rails-settings-cached", "~> 0.2.4"
@@ -82,7 +82,7 @@ group :development do
   gem 'pry', '~> 0.9.10'
   gem 'annotate', '~> 2.5.0'
   gem 'magic_encoding', '~> 0.0.2'
-  gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git' 
+  gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git'
   gem "rails-erd", "~> 1.1.0"
   gem 'meta_request' # for chrome rails_panel
   gem "better_errors", "~> 0.9.0"
