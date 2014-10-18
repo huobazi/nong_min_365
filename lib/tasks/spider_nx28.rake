@@ -210,15 +210,16 @@ def save_item(hash)
 
     if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
       image_url = hash[:image].gsub("'", "").gsub(' ','')
-      pic = Picture.new
-      pic.remote_image_url = image_url
-      pic.imageable_id = item.id
-      pic.imageable_type = 'Item'
+      if(!image_url.end_with?('images/imagesbg.png'))
+        pic = Picture.new
+        pic.remote_image_url = image_url
+        pic.imageable_id = item.id
+        pic.imageable_type = 'Item'
 
-      if(pic.save!)
-        puts "====> #{item[:title]} image save ok"
+        if(pic.save!)
+          puts "====> #{item[:title]} image save ok"
+        end
       end
-
     end
 
   rescue Exception => e

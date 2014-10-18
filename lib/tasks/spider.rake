@@ -234,11 +234,13 @@ namespace :spider do
         if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
           image_src = hash[:image].gsub("'", "").gsub(' ','')
           image_url = "http://#{$nx28_host}#{image_src}"
-          pic = Picture.new
-          pic.remote_image_url = image_url
-          pic.imageable_id = item.id
-          pic.imageable_type = 'Item'
-          pic.save!
+          if(!image_url.end_with?('images/imagesbg.png'))
+            pic = Picture.new
+            pic.remote_image_url = image_url
+            pic.imageable_id = item.id
+            pic.imageable_type = 'Item'
+            pic.save!
+          end
         end
 
       rescue Exception => e
