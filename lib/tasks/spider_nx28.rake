@@ -148,7 +148,7 @@ def populate_item(item_url_info)
   html = crawl_get(item_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
 
-  item[:title] = doc.css('div.detail h1.detailH11')[0].content.gsub(/浏览:\d*/,"")
+  item[:title] = doc.css('div.detail h1.detailH11')[0].content.gsub(/浏览:\d*/,"").gsub(/付费推广/,"")
   item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
 
   params_zone = doc.css('div.detail div.flashText.detailBox p')
