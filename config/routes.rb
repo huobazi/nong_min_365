@@ -3,7 +3,7 @@ require 'sidekiq/web'
 require "admin_constraint"
 
 
-NongMin365::Application.routes.draw do
+Rails::Application.routes.draw do
 
   root :to => 'home#index'
   get 'search' => 'home#search', :as => :search
