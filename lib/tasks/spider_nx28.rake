@@ -105,7 +105,7 @@ def get_dest_items_url_list(category_list)
   category_list.each do |category|
     items_in_the_category = get_dest_items_url_list_by_category(category[:url])
     items_in_the_category.each do |item|
-      dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url]}
+      dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url], :title => item[:title]}
     end
   end
   dest_list
@@ -119,9 +119,10 @@ def get_dest_items_url_list_by_category(category_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
   doc.css('div.listTable table tr td.td1').each do |td|
     link = td.css('a.flink1')[0]
-    link  =  "http://#{$nx28_host}" + link[:href]
+    item_link  =  "http://#{$nx28_host}" + link[:href].to_s
+    item_title = link.content.to_s
     puts "Push #{link} --- populate_dest_items_link_by_category"
-    dest_list << { :url => link }
+    dest_list << { :url => item_link, :title => item_title }
   end
 
   dest_list
@@ -135,6 +136,7 @@ def populate_item(item_url_info)
   item_url = item_url_info[:url]
   item_url = item_url.gsub(/[\s\b]*/,'')
   item[:src] = item_url
+  item[:title] = item_url_info[:title].gsub(/[\s\b]*/,'')
 
   puts "Begin crawl ====> #{item_url}"
 
@@ -148,7 +150,6 @@ def populate_item(item_url_info)
   html = crawl_get(item_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
 
-  item[:title] = doc.css('div.detail h1.detailH11')[0].content.gsub(/浏览:\d*/,"").gsub(/付费推广/,"")
   item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
 
   params_zone = doc.css('div.detail div.flashText.detailBox p')
