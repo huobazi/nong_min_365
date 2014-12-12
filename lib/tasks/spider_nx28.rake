@@ -94,8 +94,10 @@ end
 def get_dest_categories_url_list
   dest_list = []
   $dest_local_categories.each do |category|
-    dest_list << {:xtype => 1, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-1-0-0.html"}
-    dest_list << {:xtype => 2, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-2-0-0.html"}
+    dest_list << {:xtype => 1, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-1-0-0/1.html"}
+    dest_list << {:xtype => 1, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-1-0-0/2.html"}
+    dest_list << {:xtype => 2, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-2-0-0/1.html"}
+    dest_list << {:xtype => 2, :local_id => category[:local_id], :url => "http://#{$nx28_host}/category/0-0-0-0-0-#{category[:dest_id]}-0-2-0-0/2.html"}
   end
   dest_list
 end
@@ -117,7 +119,10 @@ def get_dest_items_url_list_by_category(category_url)
   dest_list = []
   html = crawl_get(category_url)
   doc = Nokogiri::HTML(html,nil,'utf-8')
+  index = 0;
   doc.css('div.listTable table tr td.td1').each do |td|
+    index += 1
+    next if index <= 10
     link = td.css('a.flink1')[0]
     item_link  =  "http://#{$nx28_host}" + link[:href].to_s
     item_title = link.content.to_s
