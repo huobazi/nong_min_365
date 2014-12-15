@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '~> 3.2.19'
+gem 'rails', '~> 3.2.21'
 gem 'pg', '~> 0.17.1'
 
 group :assets do
