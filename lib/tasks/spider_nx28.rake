@@ -147,7 +147,7 @@ def populate_item(item_url_info)
 
   item[:exists] = 0
   tmp = Item.find_by_source(item_url)
-  if !tmp.nil?
+  if tmp
     item[:exists] = 1
     return item
   end
