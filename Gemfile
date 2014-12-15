@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '~> 3.2.21'
+gem 'rails', '~> 3.2.19'
 gem 'pg', '~> 0.17.1'
 
 group :assets do
@@ -38,7 +38,7 @@ gem 'client_side_validations-simple_form', '~> 2.0.1'
 gem "social-share-button", "~> 0.1.4"
 
 # mail service
-gem "postmark-rails", "~> 0.5.1"
+gem "postmark-rails", "~> 0.9.0"
 
 # Google Analytics performance
 gem "garelic", "~> 0.2.1"
