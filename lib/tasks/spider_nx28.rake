@@ -210,22 +210,29 @@ def save_item(hash)
     item.contact_qq    = '000000'
     item.tag_list      = hash[:name]
 
-    if(item.save!)
-      puts "===> #{item[:title]} save ok"
-    end
+    tmp_item = Item.find_by_source(item.source)
+    if tmp_item
+      puts "===>  #{tmp_item.title} was already exists..."
+      return
+    else
+      if(item.save!)
+        puts "===> #{item[:title]} save ok"
+      end   
 
-    if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
-      image_url = hash[:image].gsub("'", "").gsub(' ','')
-      if(!image_url.end_with?('images/imagesbg.png'))
-        pic = Picture.new
-        pic.remote_image_url = image_url
-        pic.imageable_id = item.id
-        pic.imageable_type = 'Item'
+      if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
+        image_url = hash[:image].gsub("'", "").gsub(' ','')
+        if(!image_url.end_with?('images/imagesbg.png'))
+          pic = Picture.new
+          pic.remote_image_url = image_url
+          pic.imageable_id = item.id
+          pic.imageable_type = 'Item'
 
-        if(pic.save!)
-          puts "====> #{item[:title]} image save ok"
+          if(pic.save!)
+            puts "====> #{item[:title]} image save ok"
+          end
         end
       end
+      
     end
 
   rescue Exception => e
