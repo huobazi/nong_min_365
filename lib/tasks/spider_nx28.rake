@@ -35,24 +35,24 @@ $nx28_host = 'www.nx28.com'
 $user_id = -1
 $cookie_text = 'PHPSESSID=2e420997dd2d3091ced8229523026be3; bdshare_firstime=1374656542333; Hm_lvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1374652221; Hm_lpvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1375250174; __utma=266646609.213124975.1374655648.1375006184.1375246848.6; __utmb=266646609.15.10.1375246848; __utmc=266646609; __utmz=266646609.1374655648.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
 $dest_local_categories = [
-  {:local_id => 1  , :name => '水产渔业' , :dest_id => 5 },
-  {:local_id => 2  , :name => '特种养殖' , :dest_id => 6 },
-  {:local_id => 3  , :name => '地方特产' , :dest_id => 7 },
-  {:local_id => 4  , :name => '茶叶副食' , :dest_id => 8 },
-  {:local_id => 5  , :name => '花卉药材' , :dest_id => 9 },
-  {:local_id => 6  , :name => '农机物资' , :dest_id => 10},
-  {:local_id => 7  , :name => '纤维作物' , :dest_id => 11},
-  {:local_id => 8  , :name => '化肥农药' , :dest_id => 12},
-  {:local_id => 9  , :name => '物流运输' , :dest_id => 13},
-  {:local_id => 10 , :name => '民间工艺' , :dest_id => 14},
-  {:local_id => 11 , :name => '有机食品' , :dest_id => 15},
-  {:local_id => 12 , :name => '生产加工' , :dest_id => 16},
-  {:local_id => 13 , :name => '水果蔬菜' , :dest_id => 2 },
-  {:local_id => 14 , :name => '种子苗木' , :dest_id => 4 },
-  {:local_id => 15 , :name => '肉禽蛋奶' , :dest_id => 3 },
-  {:local_id => 16 , :name => '五谷粮油' , :dest_id => 1 },
-  {:local_id => 17 , :name => '土地租赁' , :dest_id => 17},
-  {:local_id => 18 , :name => '其它类别' , :dest_id => 18}
+  {:local_id => 1  , :name => '姘翠骇娓斾笟' , :dest_id => 5 },
+  {:local_id => 2  , :name => '鐗圭鍏绘畺' , :dest_id => 6 },
+  {:local_id => 3  , :name => '鍦版柟鐗逛骇' , :dest_id => 7 },
+  {:local_id => 4  , :name => '鑼跺彾鍓' , :dest_id => 8 },
+  {:local_id => 5  , :name => '鑺卞崏鑽潗' , :dest_id => 9 },
+  {:local_id => 6  , :name => '鍐滄満鐗╄祫' , :dest_id => 10},
+  {:local_id => 7  , :name => '绾ょ淮浣滅墿' , :dest_id => 11},
+  {:local_id => 8  , :name => '鍖栬偉鍐滆嵂' , :dest_id => 12},
+  {:local_id => 9  , :name => '鐗╂祦杩愯緭' , :dest_id => 13},
+  {:local_id => 10 , :name => '姘戦棿宸ヨ壓' , :dest_id => 14},
+  {:local_id => 11 , :name => '鏈夋満椋熷搧' , :dest_id => 15},
+  {:local_id => 12 , :name => '鐢熶骇鍔犲伐' , :dest_id => 16},
+  {:local_id => 13 , :name => '姘存灉钄彍' , :dest_id => 2 },
+  {:local_id => 14 , :name => '绉嶅瓙鑻楁湪' , :dest_id => 4 },
+  {:local_id => 15 , :name => '鑲夌铔嬪ザ' , :dest_id => 3 },
+  {:local_id => 16 , :name => '浜旇胺绮补' , :dest_id => 1 },
+  {:local_id => 17 , :name => '鍦熷湴绉熻祦' , :dest_id => 17},
+  {:local_id => 18 , :name => '鍏跺畠绫诲埆' , :dest_id => 18}
 ]
 
 def crawl_get(url)
@@ -158,9 +158,9 @@ def populate_item(item_url_info)
   item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
 
   params_zone = doc.css('div.detail div.flashText.detailBox p')
-  item[:name] = params_zone[0].content.gsub('产品：','')
-  item[:amount] = params_zone[1].content.gsub('供应量：','').gsub('[','').gsub(']','')
-  item[:contact_name] = params_zone[4].content.gsub('发布人：','')
+  item[:name] = params_zone[0].content.gsub('浜у搧锛�','')
+  item[:amount] = params_zone[1].content.gsub('渚涘簲閲忥細','').gsub('[','').gsub(']','')
+  item[:contact_name] = params_zone[4].content.gsub('鍙戝竷浜猴細','')
   item[:contact_phone] = params_zone.css('span.contact-mobile')[0].content
 
   area_zone = doc.css('div.detail div.detailBox.mt10 p.fgreen1.b.mt10')
@@ -188,6 +188,8 @@ def save_item(hash)
       return
     end
 
+
+
     if(hash[:image] and hash[:image].gsub(' ','').length == 0)
       puts "====> NO images ....."
     end
@@ -210,24 +212,30 @@ def save_item(hash)
     item.contact_qq    = '000000'
     item.tag_list      = hash[:name]
 
-    if(item.save!)
-      puts "===> #{item[:title]} save ok"
-    end
+    tmp_item = Item.find_by_source(item.source)
+    if tmp_item
+      puts "===>  #{tmp_item.title} was already exists..."
+      return
+    else
+      if(item.save!)
+        puts "===> #{item[:title]} save ok"
+      end   
 
-    if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
-      image_url = hash[:image].gsub("'", "").gsub(' ','')
-      if(!image_url.end_with?('images/imagesbg.png'))
-        pic = Picture.new
-        pic.remote_image_url = image_url
-        pic.imageable_id = item.id
-        pic.imageable_type = 'Item'
+      if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
+        image_url = hash[:image].gsub("'", "").gsub(' ','')
+        if(!image_url.end_with?('images/imagesbg.png'))
+          pic = Picture.new
+          pic.remote_image_url = image_url
+          pic.imageable_id = item.id
+          pic.imageable_type = 'Item'
 
-        if(pic.save!)
-          puts "====> #{item[:title]} image save ok"
+          if(pic.save!)
+            puts "====> #{item[:title]} image save ok"
+          end
         end
       end
+      
     end
-
   rescue Exception => e
     #exception
     puts e.message
