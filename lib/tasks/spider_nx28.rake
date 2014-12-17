@@ -146,8 +146,7 @@ def populate_item(item_url_info)
   puts "Begin crawl ====> #{item_url}"
 
   item[:exists] = 0
-  tmp = Item.find_by_source(item_url)
-  if tmp
+  if Item.exists?(:source => item[:src])
     item[:exists] = 1
     return item
   end
@@ -210,8 +209,7 @@ def save_item(hash)
     item.contact_qq    = '000000'
     item.tag_list      = hash[:name]
 
-    tmp_item = Item.find_by_source(item.source)
-    if tmp_item
+    if Item.exists?(:source => item.source)
       puts "===>  #{tmp_item.title} was already exists..."
       return
     else
