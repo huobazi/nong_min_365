@@ -31,6 +31,8 @@ def encode_text(input)
   encode_string(input,'GBK','UTF-8')
 end
 
+$already_save_items = []
+
 $nx28_host = 'www.nx28.com'
 $user_id = -1
 $cookie_text = 'PHPSESSID=2e420997dd2d3091ced8229523026be3; bdshare_firstime=1374656542333; Hm_lvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1374652221; Hm_lpvt_78a188c0c24fb2a2a9d799a6e43f2e9d=1375250174; __utma=266646609.213124975.1374655648.1375006184.1375246848.6; __utmb=266646609.15.10.1375246848; __utmc=266646609; __utmz=266646609.1374655648.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
@@ -65,7 +67,7 @@ def crawl_get(url)
         "Host"            => $nx28_host,
         "User-Agent"      => "Mozilla/5.0 (Windows NT 5.1; rv:6.0) Gecko/20100101 Firefox/6.0",
         "Referer"         => "http://#{$nx28_host}",
-      "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept"          => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Charset"  => "utf-8;q=0.7,*;q=0.7",
         "Connection"      => "keep-alive",
         "Accept-Language" => "zh-cn,zh;q=0.5",
@@ -146,7 +148,7 @@ def populate_item(item_url_info)
   puts "Begin crawl ====> #{item_url}"
 
   item[:exists] = 0
-  if Item.exists?(:source => item[:src])
+  if $already_save_items.include?(item[:src]) or Item.exists?(:source => item[:src])
     item[:exists] = 1
     return item
   end
@@ -209,28 +211,28 @@ def save_item(hash)
     item.contact_qq    = '000000'
     item.tag_list      = hash[:name]
 
-    if Item.exists?(:source => item.source)
+    if $already_save_items.include?(item.source) or Item.exists?(:source => item.source)
       puts "===>  #{tmp_item.title} was already exists..."
       return
     else
       if(item.save!)
+        $already_save_items.push item.source
         puts "===> #{item[:title]} save ok"
-      end   
 
-      if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
-        image_url = hash[:image].gsub("'", "").gsub(' ','')
-        if(!image_url.end_with?('images/imagesbg.png'))
-          pic = Picture.new
-          pic.remote_image_url = image_url
-          pic.imageable_id = item.id
-          pic.imageable_type = 'Item'
+        if(hash[:image] and hash[:image].gsub(' ','').length > 0 and item.id > 0)
+          image_url = hash[:image].gsub("'", "").gsub(' ','')
+          if(!image_url.end_with?('images/imagesbg.png'))
+            pic = Picture.new
+            pic.remote_image_url = image_url
+            pic.imageable_id = item.id
+            pic.imageable_type = 'Item'
 
-          if(pic.save!)
-            puts "====> #{item[:title]} image save ok"
+            if(pic.save!)
+              puts "====> #{item[:title]} image save ok"
+            end
           end
         end
       end
-      
     end
 
   rescue Exception => e
@@ -244,24 +246,27 @@ def save_item(hash)
 
 end
 
+def run_spider
+  category_list = get_dest_categories_url_list
+  puts "====> Get #{ category_list.size } categorie's url"
+
+  items_url_list = get_dest_items_url_list(category_list)
+  puts "====> Get #{ items_url_list.size } items' url"
+
+  index = 0
+  size = items_url_list.size
+
+  items_url_list.each do |item_url|
+    index += 1
+    item = populate_item(item_url)
+    save_item item
+    puts "====>Processed #{index}/#{size}"
+  end
+end
 
 namespace :spider do
   desc 'Crawl nx28 items'
   task :nx28 => [:environment] do
-    category_list = get_dest_categories_url_list
-    puts "====> Get #{ category_list.size } categorie's url"
-
-    items_url_list = get_dest_items_url_list(category_list)
-    puts "====> Get #{ items_url_list.size } items' url"
-
-    index = 0
-    size = items_url_list.size
-    items_url_list.each do |item_url|
-      index += 1
-      item = populate_item(item_url)
-      save_item item
-      puts "====>Processed #{index}/#{size}"
-    end
-
+    run_spider
   end
 end
