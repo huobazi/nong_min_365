@@ -24,6 +24,8 @@ module NongMin365
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib/utils)
+    config.autoload_paths += Dir[ Rails.root.join('app', 'models', "concerns", '**/') ]
+    config.autoload_paths += Dir[ Rails.root.join('app', 'controllers', "concerns", '**/') ] 
 
 
     # Only load the plugins named here, in the order given (default is alphabetical).

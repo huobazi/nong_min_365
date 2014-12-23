@@ -35,12 +35,13 @@
 
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
+  include SnowFlakeAutoGenerateId
   # extends ...................................................................
   acts_as_taggable_on :tags
 
   # includes ..................................................................
   # security (i.e. attr_accessible) ...........................................
-  attr_accessible :category_id, :amount, :body, :contact_name, 
+  attr_accessible :category_id, :amount, :body, :contact_name,
     :contact_phone, :contact_qq, :title, :xtype,
     :province_code, :city_code, :county_code, :town_code, :village_code,
     :tag_list, :refresh_at
@@ -91,11 +92,11 @@ class Item < ActiveRecord::Base
   end
 
   def region_name
-    [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')  
+    [self.province_name, self.city_name, self.county_name, self.town_name, self.village_name].join(' | ')
   end
 
   # protected instance methods ................................................
-  # private instance methods .................................................. 
+  # private instance methods ..................................................
   private
   def populate_region_name
     self.province_name = self.province.name
@@ -104,7 +105,7 @@ class Item < ActiveRecord::Base
     self.town_name     = self.town.name
     self.village_name  = self.village.name
   end
-  def fix_tags_name 
+  def fix_tags_name
     # 全角逗号的处理
     self.tag_list = self.tag_list.join(',').gsub(/，/,',')
 
@@ -117,7 +118,7 @@ class Item < ActiveRecord::Base
     end
   end
   def fix_refresh_at
-    self.refresh_at = Time.now.to_i 
+    self.refresh_at = Time.now.to_i
   end
 
 end
