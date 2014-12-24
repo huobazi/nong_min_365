@@ -1,5 +1,5 @@
 =begin
-Pure ruby independent ID generator like the SnowFlake
+Pure ruby independent ID generator like the twitter's SnowFlake
 @see https://github.com/twitter/snowflake
 @example Genenate ID
  generator_id = 1
@@ -12,13 +12,19 @@ Pure ruby independent ID generator like the SnowFlake
 @example Get time in the Flaked ID
  SnowFlake.parse(522167874144443932)
  => 2014-10-15 08:31:37 +0900
+
+@example Max value
+  puts SnowFlake.parse((1<<63) - 1)
+  puts SnowFlake.time((1<<63) - 1)
 =end
 
 class SnowFlake
   attr_reader :seq
 
-  # Offset value of the timestamp computation caluculation
-  OFFSET_TS_W_MILLIS = 1419337282968
+  # Offset epoch value of the timestamp computation caluculation
+  # Start at 2014-12-24 01:57:26 +0000
+  OFFSET_EPOCH_TS_W_MILLIS = 1419386246911
+  
   # structure
   TS_WIDTH = 41
   GEN_ID_WIDTH = 10
@@ -29,7 +35,8 @@ class SnowFlake
     @last_ts = now_w_millis
     @generator_id = generator_id
     @seq = init_seq
-    SnowFlake @last_ts, @generator_id, @seq # run once for parameter check
+    
+    flake @last_ts, @generator_id, @seq # run once for parameter check
   end
 
   # Generate to the Flake ID
@@ -40,7 +47,8 @@ class SnowFlake
     raise InvalidSystemClockError, "Last timestamp was bigger than now" if ts < @last_ts
     @last_ts = ts
     @seq = (@seq + 1) % (1 << SEQ_WIDTH) # prevention of overflow
-    SnowFlake ts, @generator_id, @seq
+    
+    flake ts, @generator_id, @seq
   end
 
   # Parse for the Flaked ID
@@ -62,14 +70,14 @@ class SnowFlake
   # @example
   #  SnowFlake.time(521994635925667840)
   def self.time(flake_id)
-    ts = (self.parse(flake_id)[:ts_w_millis] + OFFSET_TS_W_MILLIS) / 1000.0
+    ts = (self.parse(flake_id)[:ts_w_millis] + OFFSET_EPOCH_TS_W_MILLIS) / 1000.0
     Time.at(ts)
   end
 
   private
-  def SnowFlake(ts_w_millis, generator_id, sequence)
-    raise OverflowError, "Timestamp limit is 2080-07-11 02:30:30.999 +0900"  if ts_w_millis > (1 << TS_WIDTH) - 1
-    t = (ts_w_millis - OFFSET_TS_W_MILLIS) << (GEN_ID_WIDTH + SEQ_WIDTH)
+  def flake(ts_w_millis, generator_id, sequence)
+    raise OverflowError, "Timestamp limit is 2084-08-29 17:45:02 +0000"  if ts_w_millis > (1 << TS_WIDTH) - 1
+    t = (ts_w_millis - OFFSET_EPOCH_TS_W_MILLIS) << (GEN_ID_WIDTH + SEQ_WIDTH)
     raise OverflowError, "Generator ID limit is between 0 and 1023" if generator_id > (1 << GEN_ID_WIDTH) - 1
     m = generator_id << SEQ_WIDTH
     s = sequence % (1 << SEQ_WIDTH)
