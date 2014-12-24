@@ -3,10 +3,12 @@ module SnowFlakeAutoGenerateId
 
   included do |base|
     base.send :before_validation, :generate_id, :on => :create
+    base.send :before_create, :generate_id
   end
 
   private
   def generate_id
+    return if self.id and self.id > 0
     if respond_to?(:attributes_protected_by_default)
       def self.attributes_protected_by_default
         super - ['id']
@@ -38,6 +40,7 @@ end
 #   module InstanceMethods
 #     private
 #     def generate_id
+#       return if self.id and self.id > 0
 #       self.id = ::WebSiteSnowFlakeGenerator.generate
 #     end
 #   end
