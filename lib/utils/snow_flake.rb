@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 =begin
 Pure ruby independent ID generator like the twitter's SnowFlake
 @see https://github.com/twitter/snowflake

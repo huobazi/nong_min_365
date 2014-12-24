@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 ::CarrierWave.configure do |config|
   #config.storage             = :qiniu
   #config.qiniu_access_key    = "your qiniu access_key"

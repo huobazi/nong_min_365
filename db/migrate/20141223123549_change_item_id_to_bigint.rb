@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeItemIdToBigint < ActiveRecord::Migration
   def up
     change_column :items, :id, :integer, limit: 8

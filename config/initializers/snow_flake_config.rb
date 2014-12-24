@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'snow_flake'
 
 snow_flake_server_id = 0
