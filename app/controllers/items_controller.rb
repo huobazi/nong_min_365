@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if params[:id] != @item.to_param
       headers["Status"] = "301 Moved Permanently"
-      redirect_to item_url(@item)
+      redirect_to item_url(@item), :status => 301
     end
     xtype_text = @item.xtype == 1 ? '供应':'求购'
     @page_title = "#{@item.province_name}#{@item.city_name}#{@item.county_name}的#{@item.contact_name}#{xtype_text}#{@item.title}#{@item.amount}"
