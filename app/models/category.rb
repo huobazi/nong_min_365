@@ -10,6 +10,8 @@
 #  updated_at  :datetime         not null
 #  items_count :integer          default(0)
 #  sort        :integer          default(0)
+#  nid         :integer          default(0)
+#  parent_id   :integer
 #
 
 # -*- encoding : utf-8 -*-
