@@ -80,7 +80,7 @@ group :development do
   # Deploy with Mina
   gem "mina", "~> 0.2.1"
   gem 'pry', '~> 0.9.10'
-  gem 'annotate', '~> 2.5.0'
+  gem 'annotate', '~> 2.6.5'
   gem 'magic_encoding', '~> 0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git'
   gem "rails-erd", "~> 1.1.0"

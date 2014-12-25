@@ -39,8 +39,9 @@ GEM
     acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
     addressable (2.3.2)
-    annotate (2.5.0)
-      rake
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (3.0.3)
     bcrypt-ruby (3.0.1)
     better_errors (0.9.0)
@@ -115,7 +116,7 @@ GEM
     god (0.13.2)
     high_voltage (1.2.1)
     hike (1.2.3)
-    i18n (0.6.11)
+    i18n (0.7.0)
     journey (1.0.4)
     jquery-migrate-rails (1.1.1)
     jquery-rails (2.2.1)
@@ -302,7 +303,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 2.3.3)
-  annotate (~> 2.5.0)
+  annotate (~> 2.6.5)
   bcrypt-ruby (~> 3.0.1)
   better_errors (~> 0.9.0)
   bootstrap-sass (~> 2.3.1.2)
