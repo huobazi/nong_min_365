@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141223123549) do
+ActiveRecord::Schema.define(:version => 20141225122034) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,10 +20,21 @@ ActiveRecord::Schema.define(:version => 20141223123549) do
     t.datetime "updated_at",                 :null => false
     t.integer  "items_count", :default => 0
     t.integer  "sort",        :default => 0
+    t.integer  "nid",         :default => 0
+    t.integer  "parent_id"
   end
 
   add_index "categories", ["id"], :name => "index_categories_on_id"
   add_index "categories", ["sort"], :name => "index_categories_on_sort"
+
+  create_table "category_hierarchies", :id => false, :force => true do |t|
+    t.integer "ancestor_id",   :null => false
+    t.integer "descendant_id", :null => false
+    t.integer "generations",   :null => false
+  end
+
+  add_index "category_hierarchies", ["ancestor_id", "descendant_id", "generations"], :name => "category_anc_desc_idx", :unique => true
+  add_index "category_hierarchies", ["descendant_id"], :name => "category_desc_idx"
 
   create_table "chinese_regions", :force => true do |t|
     t.string   "code"

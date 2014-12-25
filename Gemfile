@@ -55,6 +55,9 @@ gem 'kaminari-bootstrap', '0.1.3'
 gem 'cancan', '~> 1.6.8'
 gem 'rails-i18n', '~> 0.7.2'
 
+# Nesting
+gem 'closure_tree', '~> 5.2.0'
+
 # Tagging
 gem 'acts-as-taggable-on', '~> 2.3.3'
 
