@@ -1,9 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Admincp::CategoriesController < Admincp::ApplicationController
+
   # GET /admincp/categories
   # GET /admincp/categories.json
   def index
-    @categories = ::Category.all
+    @categories = ::Category.roots
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +27,7 @@ class Admincp::CategoriesController < Admincp::ApplicationController
   # GET /admincp/categories/new.json
   def new
     @category = ::Category.new
+    @category.parent = ::Category.find(params[:pid]) if params[:pid]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -82,14 +84,15 @@ class Admincp::CategoriesController < Admincp::ApplicationController
     end
   end
 
-  def sort_up 
+  def sort_up
     @category = ::Category.find(params[:id])
     @category.sort -= 1;
     @category.save
 
-    respond_to do |format|
-      format.html { redirect_to admincp_categories_url }
-      format.json { head :no_content }
+    if @category.parent_id
+      redirect_to admincp_category_url(@category.parent)
+    else
+      redirect_to admincp_categories_url if @category.parent_id
     end
   end
 
@@ -98,9 +101,10 @@ class Admincp::CategoriesController < Admincp::ApplicationController
     @category.sort += 1;
     @category.save
 
-    respond_to do |format|
-      format.html { redirect_to admincp_categories_url }
-      format.json { head :no_content }
+    if @category.parent_id
+      redirect_to admincp_category_url(@category.parent)
+    else
+      redirect_to admincp_categories_url if @category.parent_id
     end
   end
 

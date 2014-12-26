@@ -89,6 +89,7 @@ group :development do
   gem "rails-erd", "~> 1.1.0"
   gem 'meta_request' # for chrome rails_panel
   gem "better_errors", "~> 0.9.0"
+  gem 'binding_of_caller'
   gem 'quiet_assets'
 end
 
