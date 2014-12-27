@@ -54,8 +54,11 @@ describe Item do
     it {should validate_presence_of :contact_phone}
     it {should validate_presence_of :contact_qq}
     it {should validate_presence_of :body}
-    
+    it {should validate_presence_of :category_id}
+    it {should validate_presence_of :category2_id}
+
     it {should belong_to :category}
+    it {should belong_to :category2}
     it {should belong_to :user}
     it {should belong_to :province}
     it {should belong_to :city}
