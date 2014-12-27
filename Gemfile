@@ -79,6 +79,7 @@ gem "high_voltage", "~> 1.2.1"
 # Store files to qiniu
 gem "carrierwave-qiniu", "~> 0.1.3"
 
+gem 'counter_culture', '~> 0.1.29'
 group :development do
   # Deploy with Mina
   gem "mina", "~> 0.2.1"

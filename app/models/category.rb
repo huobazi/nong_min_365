@@ -22,9 +22,6 @@ class Category < ActiveRecord::Base
   # security (i.e. attr_accessible) ...........................................
   attr_accessible :name
 
-  # relationships .............................................................
-  has_many :items
-
   # validations ...............................................................
   validates :name,
     :presence => true,
@@ -33,11 +30,8 @@ class Category < ActiveRecord::Base
   # callbacks .................................................................
   before_save { |category| category.slug = ::PinYin.permlink( category.name ) }
 
-  # scopes ....................................................................
-  # The closure_tree has order field
-  #default_scope order('sort ASC')
 
-  # additional config .........................................................
+
   # class methods .............................................................
   def self.get_cached_all
     categories = Rails.cache.fetch("global/categories/all}", expires_in: 60.minutes) do
@@ -45,7 +39,16 @@ class Category < ActiveRecord::Base
     end
     categories
   end
+
+
   # public instance methods ...................................................
+  def items
+    Item.where('category_id = :category_id or category2_id = :category2_id',
+               {category_id: self.id, category2_id: self.id}
+              )
+  end
+
+
   # protected instance methods ................................................
   # private instance methods ..................................................
 

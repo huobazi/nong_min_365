@@ -13,7 +13,13 @@ class ItemsController < ApplicationController
     category_id = params[:category].to_i
 
     items_scope = Item.latest
-    items_scope = items_scope.where(:category_id => category_id) if category_id > 0 
+    if category_id > 0
+      items_scope = items_scope.where('category_id = :category_id or category2_id = :category2_id',
+                                      {category_id: category_id, category2_id: category_id}
+                                     )
+
+      category = Category.find category_id
+    end
     items_scope = items_scope.where(:xtype => xtype) if xtype > 0 
 
     if not area_code.empty?
@@ -22,7 +28,11 @@ class ItemsController < ApplicationController
       items_scope = items_scope.where(" #{code_name_ary[code_level - 1]} = ?", area_code)
     end
 
-    prepare_items_condition_list(category_id, area_code, xtype)
+    if category
+      prepare_items_condition_list(category_id, area_code, xtype)
+    else
+      prepare_items_condition_list(nil, area_code, xtype)
+    end
 
     @items = items_scope.page(page_index).per(page_size)
 
@@ -76,7 +86,12 @@ class ItemsController < ApplicationController
     drop_breadcrumb(@item.village_name, condition_list_items_path(:area => @item.village_code, :category => @item.category_id, :xtype => @item.xtype ) )
     drop_breadcrumb(@item.title, item_path(@item) )
 
-    prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
+    if @item.category2_id
+      prepare_items_condition_list(@item.category2_id, @item.village_code, @item.xtype)
+    else
+      prepare_items_condition_list(@item.category_id, @item.village_code, @item.xtype)
+    end
+
     Item.increment_counter(:visit_count , @item.id) if ! params[:recall]
 
     fresh_when(:etag => [@item], :last_modified => @item.updated_at)
@@ -89,6 +104,7 @@ class ItemsController < ApplicationController
 
     @item = Item.new
     @provinces = ChineseRegion.provinces
+    @categories = Category.roots
 
     fresh_when
   end
@@ -117,6 +133,9 @@ class ItemsController < ApplicationController
     children_level, @counties = ChineseRegion.children(@item.city_code)
     children_level, @towns    = ChineseRegion.children(@item.county_code)
     children_level, @villages = ChineseRegion.children(@item.town_code)
+
+
+    @categories = Category.roots
   end
 
   # POST /items
@@ -218,19 +237,31 @@ class ItemsController < ApplicationController
     end
   end
 
-  private 
+  private
   def prepare_items_condition_list(category_id, area_code, xtype)
     @current_params = {}
     @current_params[:area]     = area_code
     @current_params[:xtype]    = xtype
-    @current_params[:category] = category_id 
 
-    @categories = Category.get_cached_all
+    @all_categories = Category.get_cached_all
+    @categories = Category.roots
+    @category = @all_categories.find{|x| x.id == category_id}
 
     @current_category_name = ''
-    if category_id > 0
-      @current_category = @categories.find{|x| x.id == category_id}
+    @current_category2_name = ''
+    if @category
+      if @category.root?
+        @current_category = @category
+        @current_params[:category] = @category.id
+      else
+        @current_category = @category.parent
+        @current_category2 = @category
+        @current_category2_name = @current_category2.name
+        @current_params[:category] = @current_category.id
+        @current_params[:category2] = @current_category2.id
+      end
       @current_category_name = @current_category.name
+      @category2_list = @current_category.children
     end
 
     @current_xtype_name = ''
@@ -239,7 +270,7 @@ class ItemsController < ApplicationController
     end
 
     if area_code.empty?
-      @regions = ChineseRegion.get_cached_all_province 
+      @regions = ChineseRegion.get_cached_all_province
     else
       temp_level, @regions = ChineseRegion.children(area_code)
       @current_areas       = ChineseRegion.get_parents(area_code)

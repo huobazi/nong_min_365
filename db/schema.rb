@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141225122034) do
+ActiveRecord::Schema.define(:version => 20141227041343) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -80,9 +80,10 @@ ActiveRecord::Schema.define(:version => 20141225122034) do
     t.string   "source"
     t.integer  "refresh_at",         :default => 0
     t.integer  "primary_picture_id"
+    t.integer  "category2_id"
   end
 
-  add_index "items", ["category_id", "refresh_at", "user_id", "province_code", "city_code", "county_code", "town_code", "village_code", "xtype"], :name => "index_on_items"
+  add_index "items", ["category_id", "category2_id", "xtype", "refresh_at", "province_code", "city_code", "county_code", "town_code", "village_code", "user_id"], :name => "index_on_items"
 
   create_table "pictures", :force => true do |t|
     t.string   "image"
