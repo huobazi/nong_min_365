@@ -111,6 +111,7 @@ def get_dest_items_url_list(category_list)
     items_in_the_category.each do |item|
       dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url], :title => item[:title]}
     end
+    break # for local test
   end
   dest_list
 end
@@ -173,6 +174,15 @@ def populate_item(item_url_info)
   item[:town_code] = area_ary[3]
   item[:village_code] = area_ary[4]
 
+  category2_zone = doc.css('body > div.daohang1 > a:nth-child(4)')
+  category2_link_array = category2_zone[0][:href].to_s.gsub('/category/','').gsub('-0-0-0.html','').split('-')
+  if(category2_link_array.size > 0)
+    dest_category2_id = category2_link_array[6]
+    local_category2 = ::Category.find_by_nid(dest_category2_id.to_i)
+    item[:category2_id] = local_category2.id
+    puts 'category2:----' + item[:category2_id].to_s
+  end
+
   image_zone = doc.css('div.detail div.flashBox div.zoombox div.zoompic img')
   if image_zone and image_zone[0]
     item[:image] = image_zone[0][:src]
@@ -197,6 +207,7 @@ def save_item(hash)
     item.user_id       = $user_id
     item.title         = hash[:title]
     item.category_id   = hash[:category_id]
+    item.category2_id  = hash[:category2_id]
     item.amount        = hash[:amount]
     item.contact_phone = hash[:contact_phone]
     item.body          = hash[:body]
@@ -210,6 +221,7 @@ def save_item(hash)
     item.source        = hash[:src]
     item.contact_qq    = '000000'
     item.tag_list      = hash[:name]
+
 
     if $already_save_items.include?(item.source) or Item.exists?(:source => item.source)
       puts "===>  #{tmp_item.title} was already exists..."
@@ -266,7 +278,7 @@ end
 
 namespace :spider do
   desc 'Crawl nx28 items'
-  task :nx28 => [:environment] do
+  task :nx28 => :environment do
     run_spider
   end
 end
