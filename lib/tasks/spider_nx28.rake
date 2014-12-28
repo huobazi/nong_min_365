@@ -111,7 +111,7 @@ def get_dest_items_url_list(category_list)
     items_in_the_category.each do |item|
       dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url], :title => item[:title]}
     end
-    break # for local test
+    #break # for local test
   end
   dest_list
 end
