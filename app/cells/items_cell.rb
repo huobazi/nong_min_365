@@ -12,22 +12,22 @@ class ItemsCell < Cell::Rails
   cache :tag_cloud, :expires_in => 20.minutes
 
   def homepage_categories_navbar(args={})
-    @categories = args[:categories] || Category.get_cached_all
+    @categories = args[:categories] || Category.roots
     render
   end
 
   def homepage_latest_items_wrapper(args={})
-    @categories = args[:categories] || Category.get_cached_all
+    @categories = args[:categories] || Category.roots
     render
   end
 
   def homepage_latest_items(args={})
     category_id = args[:category_id]
     row_count   = args[:row_count]
-    categories  = args[:categories] || Category.get_cached_all
+    categories  = args[:categories] || Category.roots
     @category = categories.find{|x| x.id == category_id}
     @items = Rails.cache.fetch("global/homepage/latest/items_#{category_id}_#{row_count}",expires_in: 20.minutes) do
-      Item.latest.where(:category_id => category_id).limit(row_count).all
+      @category.items.latest.limit(row_count).all
     end
     render
   end

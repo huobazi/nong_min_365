@@ -1,0 +1,38 @@
+<table class="table">
+  <tr>
+    <th class="first">ID</th>
+    <th>
+      <%= t("activerecord.attributes.category.name", :default => t("activerecord.labels.name", :default => "Name")) %>
+    </th>
+    <th>
+      <%= t("activerecord.attributes.category.slug", :default => t("activerecord.labels.slug", :default => "Slug")) %></th>
+    <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+    <th>信息数量</th>
+    <th class="last">&nbsp;</th>
+  </tr>
+  <% categories.each do |category| -%>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td>
+        <%= category.id %>
+      </td>
+      <td>
+        <%= link_to category.name, admincp_category_path(category) %>
+      </td>
+      <td>
+        <%= category.slug %>
+      </td>
+      <td>
+        <%= l category.created_at ,:format => :short %>
+      </td>
+      <td><%= category.items_count %></td>
+      <td class="last">
+        <%= link_to "#{t("web-app-theme.sort_up", :default => "Up")}", sort_up_admincp_category_path(category), :method => :put %> | 
+        <%= link_to "#{t("web-app-theme.sort_down", :default => "Down")}", sort_down_admincp_category_path(category), :method => :put %> |
+        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", admincp_category_path(category) %> |
+        <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_admincp_category_path(category) %> |
+        <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", admincp_category_path(category), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+

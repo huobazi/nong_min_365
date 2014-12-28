@@ -7,15 +7,19 @@
     <%= f.input :title, :autofocus => true %>
     <%= f.input :amount, 
       :hint => "例:30亩,10000斤,500头,30吨，...(夸张数字将被判定为虚假信息)" %>
-    <%= f.association :category, 
-      :hint => '请选择正确分类，否则有可能被视作违规信息而删除',
-      :input_html => {:class => 'chosen'},
-      :prompt => '请选择一个分类'  %>
+
     <%= f.input :xtype, :collection => [['1','供应'], ['2','求购']], 
       :label_method => :last, 
       :value_method => :first, 
       :as => :radio_buttons, 
       :item_wrapper_class => 'inline'%>
+
+    <%= f.input :category_id  do %>
+      <%= collection_select(:item, :category_id, @categories, :id, :name, options = {:prompt => '请选择分类'},:class => 'chosen categories' ,'data-level' => '1', 'data-url' => categories_ajax_path, :value => @item.category_id)%>
+      <% if !@item.new_record? %>
+        <%= collection_select(:item, :category2_id, @item.category.children, :id, :name, options = {:prompt => '请选择二级分类'},:class => 'chosen categories' ,'data-level' => '2', 'data-url' => categories_ajax_path, :value => @item.category2_id)%>
+      <% end %>
+    <% end %>
     <%= f.input :province_code do %>
       <%= collection_select(:item, :province_code, @provinces, :code, :name, options = {:prompt => '所在省份'},:class => 'province regions' ,'data-level' => '1', 'data-url' => regions_ajax_path, :value => @item.province_code )%>
       <% if @cities  %>

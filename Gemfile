@@ -55,6 +55,9 @@ gem 'kaminari-bootstrap', '0.1.3'
 gem 'cancan', '~> 1.6.8'
 gem 'rails-i18n', '~> 0.7.2'
 
+# Nesting
+gem 'closure_tree', '~> 5.2.0'
+
 # Tagging
 gem 'acts-as-taggable-on', '~> 2.3.3'
 
@@ -76,16 +79,18 @@ gem "high_voltage", "~> 1.2.1"
 # Store files to qiniu
 gem "carrierwave-qiniu", "~> 0.1.3"
 
+gem 'counter_culture', '~> 0.1.29'
 group :development do
   # Deploy with Mina
   gem "mina", "~> 0.2.1"
   gem 'pry', '~> 0.9.10'
-  gem 'annotate', '~> 2.5.0'
+  gem 'annotate', '~> 2.6.5'
   gem 'magic_encoding', '~> 0.0.2'
   gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git'
   gem "rails-erd", "~> 1.1.0"
   gem 'meta_request' # for chrome rails_panel
   gem "better_errors", "~> 0.9.0"
+  gem 'binding_of_caller'
   gem 'quiet_assets'
 end
 

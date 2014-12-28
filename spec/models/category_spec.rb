@@ -10,6 +10,8 @@
 #  updated_at  :datetime         not null
 #  items_count :integer          default(0)
 #  sort        :integer          default(0)
+#  nid         :integer          default(0)
+#  parent_id   :integer
 #
 
 # -*- encoding : utf-8 -*-
@@ -23,7 +25,5 @@ describe Category do
 
     it {should validate_presence_of :name}
 
-    it {should have_many(:items)}
-
-  end 
+  end
 end

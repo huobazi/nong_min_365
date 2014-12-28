@@ -12,6 +12,7 @@ NongMin365::Application.routes.draw do
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
   post 'ajax/regions' => 'ajax#regions', :as => :regions_ajax
+  post 'ajax/categories' => 'ajax#categories', :as => :categories_ajax
 
   resources :password_resets, :only => [:new, :show, :create, :update]
   resources :users, :only => [:create], :path => 'account' do

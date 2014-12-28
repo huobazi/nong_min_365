@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class FixDbIndexSettings < ActiveRecord::Migration
-  def change 
-    
+  def change
+
     execute <<-SQL
     DROP INDEX index_on_items;
     CREATE INDEX index_on_items

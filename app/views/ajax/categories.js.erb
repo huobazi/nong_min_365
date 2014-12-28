@@ -1,0 +1,8 @@
+<%
+category_options = "<option value=\"\">请选择二级分类</option>"
+@categories.each  do |c|
+  category_options << "<option value=\"#{c.id}\">#{c.name}</option>"
+end %>
+
+$('#<%= @parent_id %>').nextAll().remove();
+$('#<%= @parent_id %>').after('<select id="<%= @client_element_id %>" name ="<%= @client_element_name %>" class="<%= @parent_css %>" data-level="<%= @children_level %>" data-url="<%= categories_ajax_path %>" ><%= raw category_options %></select>');
