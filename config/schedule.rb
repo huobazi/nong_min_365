@@ -31,5 +31,8 @@ end
 
 every 1.day, :at => '04:33' do
    rake "spider:nx28"
+end
+
+every 1.day, :at => '06:33' do
    rake "cache:clear"
 end
