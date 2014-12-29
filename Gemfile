@@ -111,3 +111,7 @@ end
 gem "unicorn", "~> 4.6.2"
 gem "god", "~> 0.13.2"
 gem 'whenever', '~> 0.8.2', :require => false
+# Slack api 封装
+gem 'slack-notifier'
+# 异常监控
+gem 'exception_notification'
