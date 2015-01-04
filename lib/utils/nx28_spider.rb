@@ -98,7 +98,7 @@ class Nx28Spider
       items_in_the_category.each do |item|
         dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url], :title => item[:title]}
       end
-      #break # for local test
+      break # for local test
     end
     dest_list
   end
@@ -144,7 +144,7 @@ class Nx28Spider
     html = crawl_get(item_url)
     doc = Nokogiri::HTML(html,nil,'utf-8')
 
-    item[:body] = doc.css('div.detail div.detailBox.mt10 p.gray9')[0].content
+    item[:body] = doc.css('div.detail div.detailBox.mt10 p.infofize')[0].content
 
     params_zone = doc.css('div.detail div.flashText.detailBox p')
     item[:name] = params_zone[0].content.gsub('产品：','')
@@ -168,6 +168,11 @@ class Nx28Spider
       local_category2 = ::Category.find_by_nid(dest_category2_id.to_i)
       if !local_category2.nil?
         item[:category2_id] = local_category2.id
+      else
+        item_category = ::Category.find item[:category2_id]
+        if item_category
+          item[:category2_id] = item_category.children[0]
+        end
       end
       puts 'category2:----' + item[:category2_id].to_s
     end
