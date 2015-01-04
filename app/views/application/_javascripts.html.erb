@@ -4,18 +4,5 @@ var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " 
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F99afb9d23a016a55498acd21c8f7219a' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <% if !SiteSettings.google_account_id.blank? %>
-  <script>
-    //<![CDATA[
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= SiteSettings.google_account_id %>']);
-  _gaq.push(['_setDomainName', '<%= SiteSettings.domain_name %>']);
-  _gaq.push(['_setSiteSpeedSampleRate', 100]);
-  _gaq.push(['_trackPageview']);
-  <%= Garelic::Timing %>
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-   s.parentNode.insertBefore(g,s)}(document,'script'));
-  //]]>
-  </script>
+  <%#= render :partial => 'ga' %>
 <% end %>
-
