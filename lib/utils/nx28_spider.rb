@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 require 'typhoeus'
-require 'iconv'
 require 'qiniu'
 require 'fileutils'
 
@@ -12,16 +11,11 @@ class Nx28Spider
     if str.respond_to?(:encode)
       str.encode(dst, { :invalid => :replace, :undef => :replace, :replace => '' })
     else
-      begin
-        Iconv.conv(dst, src, str)
-      rescue
         raise ::RuntimeError, "Your installation does not support iconv (needed for utf8 conversion)"
-      end
     end
   end
 
   def encode_text(input)
-    #Iconv.iconv("UTF-8",  "GBK",input)
     encode_string(input,'GBK','UTF-8')
   end
 
