@@ -123,7 +123,7 @@ class Item < ActiveRecord::Base
   end
   def fix_tags_name
     # 全角逗号的处理
-    self.tag_list = self.tag_list.join(',').gsub(/，/,',')
+    self.tag_list = self.tag_list.join(',').gsub(/，/,',').gsub('.','')
 
     # 全角顿号的处理
     self.tag_list = self.tag_list.join(',').gsub(/、/,',')
