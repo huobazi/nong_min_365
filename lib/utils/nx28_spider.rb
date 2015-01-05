@@ -169,7 +169,7 @@ class Nx28Spider
       if !local_category2.nil?
         item[:category2_id] = local_category2.id
       else
-        item_category = ::Category.find item[:category2_id]
+        item_category = ::Category.find item[:category_id]
         if item_category
           item[:category2_id] = item_category.children[0]
         end

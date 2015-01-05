@@ -115,4 +115,4 @@ gem 'whenever', '~> 0.8.2', :require => false
 gem 'slack-notifier'
 # 异常监控
 gem 'exception_notification'
-
+gem 'slack-notifier', '~> 1.0.0'
