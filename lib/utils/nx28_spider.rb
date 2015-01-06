@@ -166,7 +166,7 @@ class Nx28Spider
     if(category2_link_array.size > 0)
       dest_category2_id = category2_link_array[6]
       local_category2 = ::Category.find_by_nid(dest_category2_id.to_i)
-      if !local_category2.nil?
+      if local_category2
         item[:category2_id] = local_category2.id
       else
         item_category = ::Category.find_by_id(item[:category_id])
@@ -220,7 +220,7 @@ class Nx28Spider
         puts "===>  #{tmp_item.title} was already exists..."
         return
       else
-        if(item.save!)
+        if item.save(validate: false)
           $already_save_items.push item.source
           puts "===> #{item[:title]} save ok"
 
@@ -232,7 +232,7 @@ class Nx28Spider
               pic.imageable_id = item.id
               pic.imageable_type = 'Item'
 
-              if(pic.save!)
+              if pic.save
                 puts "====> #{item[:title]} image save ok"
               end
             end
@@ -243,7 +243,7 @@ class Nx28Spider
     rescue Exception => exception
       #exception
       puts exception.message
-      message = "------------------------------------------------------------------------------------------\n"
+      title = 'Nx28Spider-SaveItem-Exception'
       message += "*Project:* #{Rails.application.class.parent_name}\n"
       message += "*Environment:* #{Rails.env}\n"
       message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
