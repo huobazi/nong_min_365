@@ -115,11 +115,11 @@ class Item < ActiveRecord::Base
   # private instance methods ..................................................
   private
   def populate_region_name
-    self.province_name = self.province.name
-    self.city_name     = self.city.name
-    self.county_name   = self.county.name
-    self.town_name     = self.town.name
-    self.village_name  = self.village.name
+    self.province_name = self.province.name if self.province
+    self.city_name     = self.city.name if self.city
+    self.county_name   = self.county.name if self.county
+    self.town_name     = self.town.name if self.town
+    self.village_name  = self.village.name if self.village
   end
   def fix_tags_name
     # 全角逗号的处理

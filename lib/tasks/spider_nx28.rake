@@ -8,8 +8,6 @@ namespace :spider do
       ::Nx28Spider.new.run_spider
     rescue => exception
       title = 'Nx28Spider Exception'
-      message += "*Project:* #{Rails.application.class.parent_name}\n"
-      message += "*Environment:* #{Rails.env}\n"
       message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
       message += "*Exception:* `#{exception.message}`\n"
 

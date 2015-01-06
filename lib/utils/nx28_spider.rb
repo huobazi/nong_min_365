@@ -244,8 +244,6 @@ class Nx28Spider
       #exception
       puts exception.message
       title = 'Nx28Spider-SaveItem-Exception'
-      message += "*Project:* #{Rails.application.class.parent_name}\n"
-      message += "*Environment:* #{Rails.env}\n"
       message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
       message += "*Exception:* `#{exception.message}`\n"
 
