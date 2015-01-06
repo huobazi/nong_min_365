@@ -18,9 +18,16 @@ namespace :spider do
 
       webhook_url = 'https://hooks.slack.com/services/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'
       notifier = Slack::Notifier.new webhook_url, channel: '#nm365_prd',
-        username: 'nx28_spider'
+        username: 'nx28_spider',
+        attachments: [{
+          color: 'danger',
+          title: title,
+          text: message,
+          mrkdwn_in: %w(text title fallback)
+        }]
 
-      notifier.ping message
+
+        notifier.ping ''
     end
   end
 end
