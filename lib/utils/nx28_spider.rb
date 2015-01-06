@@ -98,7 +98,7 @@ class Nx28Spider
       items_in_the_category.each do |item|
         dest_list << {:xtype => category[:xtype], :category_id => category[:local_id], :url => item[:url], :title => item[:title]}
       end
-      break # for local test
+      #break # for local test
     end
     dest_list
   end
@@ -169,7 +169,7 @@ class Nx28Spider
       if !local_category2.nil?
         item[:category2_id] = local_category2.id
       else
-        item_category = ::Category.find item[:category_id]
+        item_category = ::Category.find_by_id(item[:category_id])
         if item_category
           item[:category2_id] = item_category.children[0]
         end
@@ -243,6 +243,20 @@ class Nx28Spider
     rescue Exception => e
       #exception
       puts e.message
+      message = "------------------------------------------------------------------------------------------\n"
+      message += "*Project:* #{Rails.application.class.parent_name}\n"
+      message += "*Environment:* #{Rails.env}\n"
+      message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
+      message += "*Exception:* `#{exception.message}`\n"
+
+      message += "*Backtrace*: \n"
+      message += "`#{exception.backtrace.first}`"
+
+      webhook_url = 'https://hooks.slack.com/services/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'
+      notifier = Slack::Notifier.new webhook_url, channel: '#nm365_prd',
+        username: 'nx28_spider'
+
+      notifier.ping message
     else
       #other exception
     ensure
