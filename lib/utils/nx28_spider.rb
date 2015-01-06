@@ -240,9 +240,9 @@ class Nx28Spider
         end
       end
 
-    rescue Exception => e
+    rescue Exception => exception
       #exception
-      puts e.message
+      puts exception.message
       message = "------------------------------------------------------------------------------------------\n"
       message += "*Project:* #{Rails.application.class.parent_name}\n"
       message += "*Environment:* #{Rails.env}\n"
