@@ -171,7 +171,7 @@ class Nx28Spider
       else
         item_category = ::Category.find_by_id(item[:category_id])
         if item_category
-          item[:category2_id] = item_category.children[0]
+          item[:category2_id] = item_category.children[0].id
         end
       end
       puts 'category2:----' + item[:category2_id].to_s
