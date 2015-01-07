@@ -11,7 +11,7 @@ class Nx28Spider
     if str.respond_to?(:encode)
       str.encode(dst, { :invalid => :replace, :undef => :replace, :replace => '' })
     else
-        raise ::RuntimeError, "Your installation does not support iconv (needed for utf8 conversion)"
+      raise ::RuntimeError, "Your installation does not support iconv (needed for utf8 conversion)"
     end
   end
 
@@ -220,7 +220,7 @@ class Nx28Spider
         puts "===>  #{tmp_item.title} was already exists..."
         return
       else
-        if item.save(validate: false)
+        if item.save
           $already_save_items.push item.source
           puts "===> #{item[:title]} save ok"
 
@@ -240,28 +240,8 @@ class Nx28Spider
         end
       end
 
-    rescue Exception => exception
+    rescue #Exception => exception
       #exception
-      puts exception.message
-      title = 'Nx28Spider-SaveItem-Exception'
-      message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
-      message += "*Exception:* `#{exception.message}`\n"
-
-      message += "*Backtrace*: \n"
-      message += "`#{exception.backtrace.first}`"
-
-      webhook_url = 'https://hooks.slack.com/services/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'
-      notifier = Slack::Notifier.new webhook_url, channel: '#nm365_prd',
-        username: 'nx28_spider',
-        attachments: [{
-          color: 'danger',
-          title: title,
-          text: message,
-          mrkdwn_in: %w(text title fallback)
-        }]
-
-
-        notifier.ping ''
     else
       #other exception
     ensure
@@ -281,12 +261,38 @@ class Nx28Spider
     size = items_url_list.size
 
     items_url_list.each do |item_url|
-      index += 1
-      item = populate_item(item_url)
-      save_item item
-      puts "====>Processed #{index}/#{size}"
+      begin
+        index += 1
+        item = populate_item(item_url)
+        save_item item
+        puts "====>Processed #{index}/#{size}"
+      rescue Exception => e
+        puts e.message
+
+        title = 'Nx28Spider-Exception'
+        message = "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
+        message += "*Exception:* `#{exception.message}`\n"
+        message += "*Backtrace*: \n"
+        message += "`#{exception.backtrace.first}`"
+
+        webhook_url = 'https://hooks.slack.com/services/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'
+        notifier = Slack::Notifier.new webhook_url, channel: '#nm365_prd',
+          username: 'nx28_spider',
+          attachments: [{
+            color: 'danger',
+            title: title,
+            text: message,
+            mrkdwn_in: %w(text title fallback)
+          }]
+
+          notifier.ping ''
+      else
+        # other exception
+      ensure
+        # always executed
+      end
+
     end
   end
-
 
 end

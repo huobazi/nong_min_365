@@ -8,7 +8,7 @@ namespace :spider do
       ::Nx28Spider.new.run_spider
     rescue => exception
       title = 'Nx28Spider Exception'
-      message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
+      message = "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
       message += "*Exception:* `#{exception.message}`\n"
 
       message += "*Backtrace*: \n"
