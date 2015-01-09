@@ -265,11 +265,11 @@ class ItemsController < ApplicationController
     end
 
     @current_xtype_name = ''
-    if xtype > 0
+    if xtype && xtype > 0
       @current_xtype_name = xtype == 1 ? "供应" : "求购"
     end
 
-    if area_code.empty?
+    if area_code && area_code.empty?
       @regions = ChineseRegion.get_cached_all_province
     else
       temp_level, @regions = ChineseRegion.children(area_code)
