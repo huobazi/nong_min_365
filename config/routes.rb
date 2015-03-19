@@ -5,9 +5,11 @@ require "admin_constraint"
 
 NongMin365::Application.routes.draw do
 
-  root :to => 'home#index'
+  #root :to => 'home#index'
+  root :to => 'items#index'
   get 'search' => 'home#search', :as => :search
-  get 'desktop' => 'home#desktop', :as => :desktop
+  #get 'desktop' => 'home#desktop', :as => :desktop
+  get 'desktop' => 'items#index', :as => :desktop
   get 'signup' => 'users#new', :as => :signup
   get 'signin' => 'sessions#new', :as => :signin
   delete 'signout' => 'sessions#destroy', :as => :signout
