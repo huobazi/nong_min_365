@@ -34,7 +34,7 @@ class ItemsCell < Cell::Rails
 
   def tag_cloud(args={})
     @tags = Rails.cache.fetch("Items.tag_counts_on:tags", expires_in: 30.minutes) do
-      Item.tag_counts_on(:tags).all
+      Item.tag_counts_on(:tags).limit(300).all
     end
     render
   end
