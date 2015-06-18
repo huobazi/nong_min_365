@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '~> 3.2.21'
+gem 'rails', '~> 3.2.22'
 gem 'pg', '~> 0.17.1'
 
 group :assets do
@@ -108,7 +108,7 @@ group :test do
 end
 
 # Use unicorn as the app server
-gem "unicorn", "~> 4.6.2"
+gem "unicorn", "~> 4.6.3"
 gem "god", "~> 0.13.2"
 gem 'whenever', '~> 0.8.2', :require => false
 # Slack api 封装
