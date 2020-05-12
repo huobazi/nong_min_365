@@ -1,9 +1,9 @@
 # NongMin365
 
-早期一个分类信息网站
+这是早期做的一个分类信息网站,在 linode 上 run 了两年,爬了十几万条数据,没啥流量,躺尸了
 
-## 生成后台
 ```
+# 生成后台
 rails g scaffold_controller admincp/models
 rails g web_app_theme:themed admincp/models --layout=admincp 
 ```
